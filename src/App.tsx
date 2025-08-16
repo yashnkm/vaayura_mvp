@@ -1,46 +1,55 @@
 import { useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import Lenis from 'lenis'
-import { Hero } from './components/sections/Hero'
-import { About } from './components/sections/About'
-import { Problem } from './components/sections/Problem'
-import { ProductHighlights } from './components/sections/ProductHighlights'
-import { WhyChoose } from './components/sections/WhyChoose'
-// import { VaayuraFoundationDemo } from './components/demo'
+import { HomePage } from './pages/HomePage'
+import { LoginPage } from './pages/LoginPage'
+import { SignupPage } from './pages/SignupPage'
+
+function LenisScrollProvider({ children }: { children: React.ReactNode }) {
+  const location = useLocation()
+
+  useEffect(() => {
+    // Only initialize Lenis on homepage to avoid conflicts with auth pages
+    if (location.pathname === '/') {
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+      })
+
+      function raf(time: number) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+      }
+
+      requestAnimationFrame(raf)
+
+      return () => {
+        lenis.destroy()
+      }
+    }
+  }, [location.pathname])
+
+  return <>{children}</>
+}
 
 function App() {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    })
-
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-
-    requestAnimationFrame(raf)
-
-    return () => {
-      lenis.destroy()
-    }
-  }, [])
-
   return (
-    <>
-      <Hero />
-      <About />
-      <Problem />
-      <ProductHighlights />
-      <WhyChoose />
-    </>
+    <Router>
+      <LenisScrollProvider>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+        </Routes>
+      </LenisScrollProvider>
+    </Router>
   )
 }
 

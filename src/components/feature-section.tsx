@@ -106,7 +106,6 @@ export function FeatureSteps({
                         alt={feature.step}
                         className="w-full h-full object-cover transition-transform transform"
                       />
-                      <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-slate-50 via-slate-50/50 to-transparent" />
                     </motion.div>
                   ),
               )}

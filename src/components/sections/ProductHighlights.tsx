@@ -1,144 +1,127 @@
-import { Button } from "@/components/ui/legacy-button"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Wifi, Smartphone, Home, Building2, ArrowRight } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Home, Building2 } from "lucide-react";
 
-export function ProductHighlights() {
-  const products = [
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+
+interface TabContent {
+  badge: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+interface Tab {
+  value: string;
+  icon: React.ReactNode;
+  label: string;
+  content: TabContent;
+}
+
+interface ProductHighlightsProps {
+  badge?: string;
+  heading?: string;
+  description?: string;
+  tabs?: Tab[];
+}
+
+const ProductHighlights = ({
+  badge = "Vaayura Products",
+  heading = "Product Highlights",
+  description = "Discover our flagship air purifiers designed to meet every need, from personal spaces to large environments.",
+  tabs = [
     {
-      name: "Vaayura Mini",
-      tagline: "Compact power for personal spaces",
-      description: "Perfect for bedrooms, offices, and small spaces. Advanced HEPA filtration in a sleek, portable design.",
-      features: ["HEPA-13 Filter", "Whisper Quiet", "Touch Controls", "LED Indicators"],
-      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop&crop=center",
-      price: "₹12,999",
-      coverage: "Up to 300 sq ft",
-      icon: <Home className="w-6 h-6" />,
-      badge: "Best Seller"
+      value: "mini",
+      icon: <Home className="h-auto w-4 shrink-0" />,
+      label: "Vaayura Mini",
+      content: {
+        badge: "Compact Power",
+        title: "Compact power for personal spaces.",
+        description:
+          "Perfect for bedrooms, offices, and small spaces. Advanced HEPA filtration in a sleek, portable design that delivers powerful air purification.",
+        buttonText: "Learn More",
+        imageSrc:
+          "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=500&h=400&fit=crop&crop=center",
+        imageAlt: "Vaayura Mini Air Purifier",
+      },
     },
     {
-      name: "Vaayura Zen",
-      tagline: "Smart, app-connected purification for larger spaces",
-      description: "AI-powered air purification with real-time monitoring and smartphone control for living rooms and large spaces.",
-      features: ["Wi-Fi Connected", "App Control", "Air Quality Monitor", "Auto Mode"],
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&crop=center",
-      price: "₹24,999",
-      coverage: "Up to 800 sq ft",
-      icon: <Building2 className="w-6 h-6" />,
-      badge: "Smart Choice"
-    }
-  ]
-
+      value: "zen",
+      icon: <Building2 className="h-auto w-4 shrink-0" />,
+      label: "Vaayura Zen",
+      content: {
+        badge: "Smart Technology",
+        title: "Smart, app-connected purification for larger spaces.",
+        description:
+          "AI-powered air purification with real-time monitoring and smartphone control for living rooms and large spaces. Advanced features for ultimate convenience.",
+        buttonText: "Explore Features",
+        imageSrc:
+          "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=400&fit=crop&crop=center",
+        imageAlt: "Vaayura Zen Air Purifier",
+      },
+    },
+  ],
+}: ProductHighlightsProps) => {
   return (
-    <section className="bg-slate-50 py-20">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Section Header */}
-        <div className="text-center space-y-6 mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-brand-grey-green leading-tight">
-            Product{" "}
-            <span className="text-brand-pastel-green">Highlights</span>
+    <section className="py-20 bg-slate-50">
+      <div className="container mx-auto">
+        <div className="text-center space-y-4 mb-6 px-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+            Vaayura{" "}
+            <span className="text-brand-pastel-green">Products</span>
           </h2>
-          <div className="w-24 h-1 bg-brand-pastel-green mx-auto rounded-full"></div>
-          <p className="text-xl md:text-2xl text-brand-dark-grey font-body max-w-3xl mx-auto leading-relaxed">
+          <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full"></div>
+          <p className="text-lg md:text-xl text-brand-dark-grey font-body max-w-2xl mx-auto">
             Discover our flagship air purifiers designed to meet every need, from personal spaces to large environments.
           </p>
         </div>
-
-        {/* Product Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {products.map((product, index) => (
-            <Card key={product.name} variant="brand-elevated" className="overflow-hidden bg-white group hover:shadow-2xl transition-all duration-300">
-              
-              {/* Product Badge */}
-              <div className="relative">
-                <Badge className="absolute top-4 left-4 z-10 bg-brand-grey-green text-white">
-                  {product.badge}
-                </Badge>
-                
-                {/* Product Image */}
-                <div className="relative h-80 overflow-hidden">
-                  <img 
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                </div>
-              </div>
-
-              {/* Product Content */}
-              <div className="p-8 space-y-6">
-                
-                {/* Header */}
-                <div className="flex items-start justify-between">
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-brand-pastel-green/20 rounded-full flex items-center justify-center text-brand-grey-green">
-                        {product.icon}
-                      </div>
-                      <h3 className="text-2xl md:text-3xl font-heading text-brand-grey-green">
-                        {product.name}
-                      </h3>
-                    </div>
-                    <p className="text-lg text-brand-pastel-green font-subheading">
-                      {product.tagline}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-heading text-brand-grey-green">
-                      {product.price}
-                    </p>
-                    <p className="text-sm text-brand-dark-grey">
-                      {product.coverage}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-brand-dark-grey font-body leading-relaxed">
-                  {product.description}
-                </p>
-
-                {/* Features */}
-                <div className="space-y-3">
-                  <h4 className="text-sm font-heading text-brand-grey-green uppercase tracking-wide">
-                    Key Features
-                  </h4>
-                  <div className="grid grid-cols-2 gap-2">
-                    {product.features.map((feature) => (
-                      <div key={feature} className="flex items-center space-x-2">
-                        <div className="w-1.5 h-1.5 bg-brand-pastel-green rounded-full"></div>
-                        <span className="text-sm text-brand-dark-grey font-body">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                  <Button variant="brand-primary" className="flex-1 group">
-                    Learn More
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                  <Button variant="brand-outline" className="flex-1">
-                    View Specs
+        <Tabs defaultValue={tabs[0].value} className="mt-6">
+          <TabsList className="container flex flex-col items-center justify-center gap-3 sm:flex-row md:gap-6 bg-transparent">
+            {tabs.map((tab) => (
+              <TabsTrigger
+                key={tab.value}
+                value={tab.value}
+                className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-brand-dark-grey data-[state=active]:bg-brand-pastel-green/10 data-[state=active]:text-brand-grey-green data-[state=active]:border-brand-pastel-green border border-transparent hover:bg-brand-pastel-green/5"
+              >
+                {tab.icon} {tab.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          <div className="mx-auto mt-6 max-w-screen-xl rounded-2xl bg-white/50 p-6 lg:p-12">
+            {tabs.map((tab) => (
+              <TabsContent
+                key={tab.value}
+                value={tab.value}
+                className="grid place-items-center gap-12 lg:grid-cols-2 lg:gap-8"
+              >
+                <div className="flex flex-col gap-4">
+                  <Badge variant="outline" className="w-fit bg-white border-brand-pastel-green text-brand-grey-green">
+                    {tab.content.badge}
+                  </Badge>
+                  <h3 className="text-3xl font-semibold lg:text-5xl text-brand-grey-green font-display">
+                    {tab.content.title}
+                  </h3>
+                  <p className="text-brand-dark-grey lg:text-lg font-body">
+                    {tab.content.description}
+                  </p>
+                  <Button className="mt-1 w-fit gap-2 bg-brand-grey-green hover:bg-brand-grey-green/90 text-white" size="lg">
+                    {tab.content.buttonText}
                   </Button>
                 </div>
-
-              </div>
-            </Card>
-          ))}
-        </div>
-
-        {/* View All Products CTA */}
-        <div className="text-center mt-16">
-          <Button variant="brand-primary" size="brand-default" className="px-12">
-            View All Products
-          </Button>
-        </div>
-
+                <img
+                  src={tab.content.imageSrc}
+                  alt={tab.content.imageAlt}
+                  className="rounded-xl shadow-lg"
+                />
+              </TabsContent>
+            ))}
+          </div>
+        </Tabs>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export { ProductHighlights };

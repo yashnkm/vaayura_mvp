@@ -10,14 +10,14 @@ export function Problem() {
     <section className="min-h-screen bg-slate-50 flex flex-col items-center justify-center px-6 py-20">
       <div className="max-w-4xl mx-auto text-center space-y-16">
         
-        {/* Section Header - matching Hero/About pattern */}
-        <div className="space-y-6">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-brand-grey-green leading-tight">
+        {/* Section Header - matching About section pattern */}
+        <div className="text-center space-y-4 mb-6 px-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
             What You Can't See,{" "}
-            <span className="text-red-600">You Still Breathe</span>
+            <span className="text-brand-pastel-green">You Still Breathe</span>
           </h2>
-          <div className="w-24 h-1 bg-brand-pastel-green mx-auto rounded-full"></div>
-          <p className="text-xl md:text-2xl text-brand-dark-grey font-body max-w-3xl mx-auto leading-relaxed">
+          <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full"></div>
+          <p className="text-lg md:text-xl text-brand-dark-grey font-body max-w-2xl mx-auto">
             Every breath you take in India carries more than just oxygen—it carries dust, smoke, industrial particles, and invisible toxins.
           </p>
         </div>

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Menu, MoveRight, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import logoImage from "@/assets/logo_2.png";
 
 function Header1() {
@@ -122,18 +123,20 @@ function Header1() {
                     </NavigationMenu>
                 </div>
                 <div className="flex lg:justify-center">
-                    <img src={logoImage} alt="Vaayura" className="h-10" />
+                    <Link to="/">
+                        <img src={logoImage} alt="Vaayura" className="h-10" />
+                    </Link>
                 </div>
                 <div className="flex justify-end w-full gap-4">
                     <Button variant="ghost" className="hidden md:inline text-brand-dark-grey hover:text-brand-grey-green p-2">
                         <ShoppingCart className="w-5 h-5" />
                     </Button>
                     <div className="border-r hidden md:inline"></div>
-                    <Button variant="outline" className="border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10 hover:border-brand-pastel-green bg-white hover:text-brand-grey-green">
-                        Login
+                    <Button variant="outline" className="border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10 hover:border-brand-pastel-green bg-white hover:text-brand-grey-green" asChild>
+                        <Link to="/login">Login</Link>
                     </Button>
-                    <Button className="bg-brand-grey-green hover:bg-brand-grey-green/90 text-white">
-                        Sign Up
+                    <Button className="bg-brand-grey-green hover:bg-brand-grey-green/90 text-white" asChild>
+                        <Link to="/signup">Sign Up</Link>
                     </Button>
                 </div>
                 <div className="flex w-12 shrink lg:hidden items-end justify-end">
