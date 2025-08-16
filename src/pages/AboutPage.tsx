@@ -1,11 +1,10 @@
-import { AboutVaayura } from '@/components/sections/AboutVaayura'
-import { Header1 } from '@/components/ui/header'
+import { AboutVaayura } from '@/components/about/AboutVaayura'
+import { Layout } from '@/components/layout/Layout'
 
 export function AboutPage() {
   return (
-    <>
-      <Header1 />
+    <Layout>
       <AboutVaayura />
-    </>
+    </Layout>
   )
 }

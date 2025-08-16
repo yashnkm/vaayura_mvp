@@ -21,44 +21,18 @@ function Header1() {
             description: "Discover our range of advanced air purification solutions.",
             items: [
                 {
-                    title: "Home Air Purifiers",
-                    href: "/products/home",
+                    title: "Storm",
+                    href: "/products/storm",
                 },
                 {
-                    title: "Commercial Solutions",
-                    href: "/products/commercial",
-                },
-                {
-                    title: "Replacement Filters",
-                    href: "/products/filters",
-                },
-                {
-                    title: "Accessories",
-                    href: "/products/accessories",
+                    title: "Nest",
+                    href: "/products/nest",
                 },
             ],
         },
         {
-            title: "Company",
-            description: "Learn about our mission to provide clean air for everyone.",
-            items: [
-                {
-                    title: "About Vaayura",
-                    href: "/about",
-                },
-                {
-                    title: "Our Technology",
-                    href: "/technology",
-                },
-                {
-                    title: "Support Center",
-                    href: "/support",
-                },
-                {
-                    title: "Contact Us",
-                    href: "/contact",
-                },
-            ],
+            title: "About",
+            href: "/about",
         },
     ];
 
@@ -74,9 +48,9 @@ function Header1() {
                                     {item.href ? (
                                         <>
                                             <NavigationMenuLink asChild>
-                                                <a href={item.href}>
-                                                    <Button variant="ghost">{item.title}</Button>
-                                                </a>
+                                                <Link to={item.href!}>
+                                                    <Button variant="ghost" className="text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors">{item.title}</Button>
+                                                </Link>
                                             </NavigationMenuLink>
                                         </>
                                     ) : (
@@ -93,23 +67,25 @@ function Header1() {
                                                                 {item.description}
                                                             </p>
                                                         </div>
-                                                        <Button size="sm" className="mt-10 bg-brand-grey-green hover:bg-brand-grey-green/90 text-white">
-                                                            Explore Range
-                                                        </Button>
+                                                        <Link to="/products">
+                                                            <Button size="sm" className="mt-10 bg-brand-grey-green hover:bg-brand-grey-green/90 text-white">
+                                                                View Products
+                                                            </Button>
+                                                        </Link>
                                                     </div>
-                                                    <div className="flex flex-col text-sm h-full justify-end">
+                                                    <div className="flex flex-col text-sm h-full justify-start">
                                                         {item.items?.map((subItem) => (
                                                             <NavigationMenuLink
                                                                 key={subItem.title}
                                                                 asChild
                                                             >
-                                                                <a
-                                                                    href={subItem.href}
+                                                                <Link
+                                                                    to={subItem.href}
                                                                     className="flex flex-row justify-between items-center hover:bg-muted py-2 px-4 rounded"
                                                                 >
                                                                     <span>{subItem.title}</span>
                                                                     <MoveRight className="w-4 h-4 text-muted-foreground" />
-                                                                </a>
+                                                                </Link>
                                                             </NavigationMenuLink>
                                                         ))}
                                                     </div>
@@ -128,15 +104,14 @@ function Header1() {
                     </Link>
                 </div>
                 <div className="flex justify-end w-full gap-4">
-                    <Button variant="ghost" className="hidden md:inline text-brand-dark-grey hover:text-brand-grey-green p-2">
+                    <Button variant="ghost" className="hidden md:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
+                        <Link to="/blog">Blog</Link>
+                    </Button>
+                    <Button variant="ghost" className="hidden md:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
+                        <Link to="/contact">Contact</Link>
+                    </Button>
+                    <Button variant="ghost" className="text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors p-2">
                         <ShoppingCart className="w-5 h-5" />
-                    </Button>
-                    <div className="border-r hidden md:inline"></div>
-                    <Button variant="outline" className="border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10 hover:border-brand-pastel-green bg-white hover:text-brand-grey-green" asChild>
-                        <Link to="/login">Login</Link>
-                    </Button>
-                    <Button className="bg-brand-grey-green hover:bg-brand-grey-green/90 text-white" asChild>
-                        <Link to="/signup">Sign Up</Link>
                     </Button>
                 </div>
                 <div className="flex w-12 shrink lg:hidden items-end justify-end">
@@ -149,28 +124,28 @@ function Header1() {
                                 <div key={item.title}>
                                     <div className="flex flex-col gap-2">
                                         {item.href ? (
-                                            <a
-                                                href={item.href}
+                                            <Link
+                                                to={item.href!}
                                                 className="flex justify-between items-center"
                                             >
                                                 <span className="text-lg">{item.title}</span>
                                                 <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
-                                            </a>
+                                            </Link>
                                         ) : (
                                             <p className="text-lg">{item.title}</p>
                                         )}
                                         {item.items &&
                                             item.items.map((subItem) => (
-                                                <a
+                                                <Link
                                                     key={subItem.title}
-                                                    href={subItem.href}
+                                                    to={subItem.href}
                                                     className="flex justify-between items-center"
                                                 >
                                                     <span className="text-muted-foreground">
                                                         {subItem.title}
                                                     </span>
                                                     <MoveRight className="w-4 h-4 stroke-1" />
-                                                </a>
+                                                </Link>
                                             ))}
                                     </div>
                                 </div>

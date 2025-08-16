@@ -1,20 +1,14 @@
 // Export all UI components for easy importing
-// Keep legacy button as default export for backwards compatibility
-export { Button, buttonVariants, type ButtonProps } from "./legacy-button"
-// Export new button separately for new navbar
-export { Button as NewButton, buttonVariants as newButtonVariants } from "./button"
+export { Button, buttonVariants, type ButtonProps } from "./button"
 export { 
   Card, 
   CardHeader, 
   CardFooter, 
   CardTitle, 
   CardDescription, 
-  CardContent,
-  cardVariants,
-  type CardProps 
+  CardContent 
 } from "./card"
-export { Badge, type BadgeProps } from "./badge"
-export { Separator } from "./separator"
+export { Badge } from "./badge"
 export { 
   Accordion, 
   AccordionItem, 
@@ -28,7 +22,9 @@ export {
   NavigationMenuContent,
   NavigationMenuTrigger,
   NavigationMenuLink,
-  NavigationMenuIndicator,
-  NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from "./navigation-menu"
+export { Input } from "./input"
+export { Label } from "./label"
+export { Checkbox } from "./checkbox"
+export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/legacy-button";
+import { Button } from "@/components/ui/button";
 
 interface AboutVaayuraProps {
   title?: string;

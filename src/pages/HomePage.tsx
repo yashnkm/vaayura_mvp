@@ -1,15 +1,13 @@
-import { Hero } from '@/components/sections/Hero'
-// import { Problem } from '@/components/sections/Problem'
-import { WhyChoose } from '@/components/sections/WhyChoose'
-import { ProductHighlights } from '@/components/sections/ProductHighlights'
-import { ProofTrust } from '@/components/sections/ProofTrust'
-import { Footer } from '@/components/sections/Footer'
+import { Hero } from '@/components/homepage/Hero'
+import { WhyChoose } from '@/components/homepage/WhyChoose'
+import { ProductHighlights } from '@/components/homepage/ProductHighlights'
+import { ProofTrust } from '@/components/homepage/ProofTrust'
+import { Footer } from '@/components/shared/Footer'
 
 export function HomePage() {
   return (
     <>
       <Hero />
-      {/* <Problem /> */}
       <WhyChoose />
       <ProductHighlights />
       <ProofTrust />

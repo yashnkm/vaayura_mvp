@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/legacy-button"
+import { Button } from "@/components/ui/button"
 import { Header1 } from "@/components/ui/header"
 import heroProductImage from "@/assets/HERO V2.PNG"
 
