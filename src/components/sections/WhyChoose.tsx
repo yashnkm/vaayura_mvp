@@ -63,7 +63,7 @@ export function WhyChoose({ features = defaultFeatures }: WhyChooseProps) {
   const [activeImage, setActiveImage] = useState(features[0].image);
 
   return (
-    <section className="py-32 bg-white">
+    <section className="py-32 bg-slate-50">
       <div className="container mx-auto">
         {/* Section Header - matching About section pattern */}
         <div className="text-center space-y-4 mb-12 px-6">

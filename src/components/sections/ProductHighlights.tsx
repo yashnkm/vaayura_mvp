@@ -65,7 +65,7 @@ const ProductHighlights = ({
   ],
 }: ProductHighlightsProps) => {
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="py-20 bg-white">
       <div className="container mx-auto">
         <div className="text-center space-y-4 mb-6 px-6">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
