@@ -9,6 +9,7 @@ import { BlogPage } from './pages/BlogPage'
 import { BlogPostPage } from './pages/BlogPostPage'
 import { LoginPage } from './pages/LoginPage'
 import { SignupPage } from './pages/SignupPage'
+import { AdminPage } from './pages/AdminPage'
 
 function LenisScrollProvider({ children }: { children: React.ReactNode }) {
   const location = useLocation()
@@ -54,6 +55,7 @@ function App() {
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </LenisScrollProvider>
     </Router>
