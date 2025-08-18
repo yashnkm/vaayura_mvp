@@ -16,6 +16,7 @@ export const database = {
     getAll: () => supabase.from('products').select('*').eq('published', true).order('created_at', { ascending: false }),
     getPublished: () => supabase.from('products').select('*').eq('published', true).order('created_at', { ascending: false }),
     getById: (id: string) => supabase.from('products').select('*').eq('id', id).single(),
+    getBySlug: (slug: string) => supabase.from('products').select('*').eq('slug', slug).eq('published', true).single(),
     create: (product: any) => supabase.from('products').insert([product]).select(),
     update: (id: string, updates: any) => supabase.from('products').update(updates).eq('id', id).select(),
     delete: (id: string) => supabase.from('products').delete().eq('id', id),
