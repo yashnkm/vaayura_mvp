@@ -5,14 +5,26 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Link } from "react-router-dom"
 import logoImage from "@/assets/logo_2.png"
+import backgroundImage from "@/assets/background.png"
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white rounded-2xl shadow-lg p-8">
+    <div 
+      className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Light blur overlay with dark edges */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/10 to-black/30 backdrop-blur-sm"></div>
+      
+      <div className="max-w-md w-full space-y-8 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-8 relative z-10 scale-105">
         <div className="text-center">
           <Link to="/">
             <img
