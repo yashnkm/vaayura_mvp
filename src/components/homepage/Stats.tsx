@@ -25,11 +25,7 @@ export function Stats() {
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
-          <div className="inline-flex items-center space-x-2 text-sm mb-4">
-            <span className="w-2 h-2 bg-brand-pastel-green rounded-full"></span>
-            <span className="text-emerald-100 font-medium">Proof</span>
-          </div>
-          <h3 className="text-4xl md:text-5xl font-bold text-white mb-8">
+          <h3 className="text-2xl md:text-3xl font-display text-white mb-8">
             Trusted by Thousands, Engineered for Excellence
           </h3>
         </motion.div>
@@ -41,8 +37,8 @@ export function Stats() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-center"
           >
-            <div className="text-5xl font-bold text-white mb-2">99%+ Users Solid</div>
-            <div className="text-emerald-100">Air purification efficiency rated by our customers</div>
+            <div className="text-3xl font-heading font-bold text-white mb-2">99%+ Users Solid</div>
+            <div className="text-emerald-100 font-body">Air purification efficiency rated by our customers</div>
           </motion.div>
 
           <motion.div
@@ -51,8 +47,8 @@ export function Stats() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center"
           >
-            <div className="text-5xl font-bold text-white mb-2">4.9/5 Average Rating</div>
-            <div className="text-emerald-100">Thousands of verified customer reviews</div>
+            <div className="text-3xl font-heading font-bold text-white mb-2">4.9/5 Average Rating</div>
+            <div className="text-emerald-100 font-body">Thousands of verified customer reviews</div>
           </motion.div>
 
           <motion.div
@@ -61,8 +57,8 @@ export function Stats() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-center"
           >
-            <div className="text-5xl font-bold text-white mb-2">100% Coverage</div>
-            <div className="text-emerald-100">Complete room air purification guaranteed</div>
+            <div className="text-3xl font-heading font-bold text-white mb-2">100% Coverage</div>
+            <div className="text-emerald-100 font-body">Complete room air purification guaranteed</div>
           </motion.div>
         </div>
       </motion.div>

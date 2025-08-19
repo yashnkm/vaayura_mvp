@@ -4,42 +4,33 @@ import ScrollExpandMedia from "@/components/ui/scroll-expand-media"
 import mainImage from "@/assets/background.png"
 import backgroundImage from "@/assets/main.jpg"
 
-const HeroContent = () => {
+const HeroContent = ({ showContent }: { showContent?: boolean }) => {
   return (
-    <div className='max-w-5xl mx-auto text-white'>
-      {/* Main Headline */}
-      <div className="text-center mb-12">
-        <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight'>
-          Life Begins with <span className="text-emerald-300">Clean Air</span>
+    <div 
+      className={`absolute inset-0 flex items-center justify-center z-50 p-8 transition-all duration-700 ${
+        showContent ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
+      {/* Dark green card with blended borders - increased transparency */}
+      <div className='bg-brand-grey-green/35 backdrop-blur-sm rounded-3xl shadow-2xl border border-brand-grey-green/20 p-8 md:p-12 max-w-4xl mx-auto'>
+        {/* Main Headline */}
+        <h1 className='text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight text-brand-white text-center'>
+          Life Begins with <span className="text-brand-pastel-green">Clean Air</span>
         </h1>
-        <p className='text-lg md:text-xl mb-8 opacity-90 max-w-3xl mx-auto leading-relaxed'>
+        
+        {/* Subheadline */}
+        <p className='text-lg md:text-xl font-body mb-10 text-brand-white/90 max-w-3xl mx-auto leading-relaxed text-center'>
           Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.
         </p>
 
         {/* Call to Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-          <button className="bg-white text-emerald-900 hover:bg-emerald-50 px-8 py-4 text-lg font-semibold rounded-2xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <button className="bg-brand-pastel-green text-brand-grey-green hover:bg-brand-white hover:text-brand-grey-green px-8 py-4 text-lg font-subheading font-semibold rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 min-w-[180px]">
             Explore Products
           </button>
-          <button className="border-2 border-emerald-300 text-emerald-100 hover:bg-emerald-300 hover:text-emerald-900 px-8 py-4 text-lg font-semibold rounded-2xl transition-all duration-300">
+          <button className="border-2 border-brand-pastel-green text-brand-pastel-green hover:bg-brand-pastel-green hover:text-brand-grey-green px-8 py-4 text-lg font-subheading font-semibold rounded-2xl transition-all duration-300 min-w-[180px]">
             Book a Demo
           </button>
-        </div>
-      </div>
-
-      {/* Technical Specs */}
-      <div className="grid md:grid-cols-3 gap-8 pt-8 border-t border-emerald-300/20">
-        <div className="text-center">
-          <div className="text-2xl font-bold text-emerald-300 mb-2">99.97%</div>
-          <div className="text-sm opacity-80">HEPA Efficiency</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-emerald-300 mb-2">≤20dB</div>
-          <div className="text-sm opacity-80">Ultra Quiet</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-emerald-300 mb-2">800+</div>
-          <div className="text-sm opacity-80">Sq Ft Coverage</div>
         </div>
       </div>
     </div>
@@ -86,14 +77,11 @@ export function Hero() {
       </div>
       
       {/* ScrollExpandMedia Hero Section */}
-      <div className='min-h-screen'>
+      <div className='h-screen overflow-hidden'>
         <ScrollExpandMedia
           mediaType="image"
           mediaSrc={mainImage}
           bgImageSrc={backgroundImage}
-          title="Vaayura Clean Air"
-          date="Premium Air Purifiers"
-          scrollToExpand="Scroll to Expand"
         >
           <HeroContent />
         </ScrollExpandMedia>

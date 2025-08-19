@@ -1,12 +1,13 @@
-import {
+import React, {
   useEffect,
   useRef,
   useState,
+  useCallback,
   ReactNode,
   TouchEvent,
   WheelEvent,
 } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
 
 interface ScrollExpandMediaProps {
   mediaType?: 'video' | 'image';
@@ -31,19 +32,26 @@ const ScrollExpandMedia = ({
   textBlend,
   children,
 }: ScrollExpandMediaProps) => {
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [showContent, setShowContent] = useState<boolean>(false);
   const [mediaFullyExpanded, setMediaFullyExpanded] = useState<boolean>(false);
   const [touchStartY, setTouchStartY] = useState<number>(0);
   const [isMobileState, setIsMobileState] = useState<boolean>(false);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  
+  // Use Framer Motion's spring for smooth animations - 50% faster total
+  const scrollProgress = useMotionValue(0);
+  const smoothProgress = useSpring(scrollProgress, {
+    stiffness: 500,
+    damping: 20,
+    mass: 0.5
+  });
 
   useEffect(() => {
-    setScrollProgress(0);
+    scrollProgress.set(0);
     setShowContent(false);
     setMediaFullyExpanded(false);
-  }, [mediaType]);
+  }, [mediaType, scrollProgress]);
 
   // Control body overflow and position to prevent background scrolling
   useEffect(() => {
@@ -73,43 +81,45 @@ const ScrollExpandMedia = ({
     };
   }, [mediaFullyExpanded]);
 
+  // Smooth progress tracking
+  const updateProgress = useCallback((delta: number) => {
+    const current = scrollProgress.get();
+    const newProgress = Math.min(Math.max(current + delta, 0), 1);
+    scrollProgress.set(newProgress);
+
+    if (newProgress >= 0.99 && !mediaFullyExpanded) {
+      // Use RAF for smooth transition to fully expanded
+      requestAnimationFrame(() => {
+        setMediaFullyExpanded(true);
+        setShowContent(true);
+        // Dispatch event for nav to appear and allow normal scrolling
+        setTimeout(() => {
+          const contentShowEvent = new Event('heroContentShown');
+          window.dispatchEvent(contentShowEvent);
+          // Allow normal scrolling to next sections
+          document.body.style.overflow = 'auto';
+          document.body.style.position = 'static';
+        }, 200);
+      });
+    } else if (newProgress < 0.75 && showContent) {
+      setShowContent(false);
+    }
+  }, [scrollProgress, mediaFullyExpanded, showContent]);
+
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      if (mediaFullyExpanded) {
+        // Allow normal scrolling when fully expanded
+        return;
+      }
+      
       e.preventDefault();
       
-      if (mediaFullyExpanded && e.deltaY < 0) {
-        // Only allow scrolling back when scrolled to top
-        if (window.scrollY <= 10) {
-          setMediaFullyExpanded(false);
-          setShowContent(false);
-          setScrollProgress(0.95); // Start slightly before full to smooth transition
-          // Hide nav when going back to expansion mode
-          const contentHideEvent = new Event('heroContentHidden');
-          window.dispatchEvent(contentHideEvent);
-        }
-      } else if (!mediaFullyExpanded) {
-        // Smoother scroll delta calculation
-        const scrollDelta = e.deltaY * 0.0012;
-        const newProgress = Math.min(
-          Math.max(scrollProgress + scrollDelta, 0),
-          1
-        );
-        setScrollProgress(newProgress);
-
-        if (newProgress >= 1) {
-          // Add a small delay before setting fully expanded for smoother transition
-          setTimeout(() => {
-            setMediaFullyExpanded(true);
-          }, 150);
-          setShowContent(true);
-          // Dispatch event for nav to appear after a short delay
-          setTimeout(() => {
-            const contentShowEvent = new Event('heroContentShown');
-            window.dispatchEvent(contentShowEvent);
-          }, 400);
-        } else if (newProgress < 0.8) {
-          setShowContent(false);
-        }
+      if (!mediaFullyExpanded) {
+        // Much smoother scroll delta with momentum consideration - 50% faster total
+        const normalizedDelta = Math.max(-10, Math.min(10, e.deltaY));
+        const scrollDelta = (normalizedDelta / 10) * 0.015;
+        updateProgress(scrollDelta);
       }
     };
 
@@ -119,47 +129,18 @@ const ScrollExpandMedia = ({
 
     const handleTouchMove = (e: TouchEvent) => {
       if (!touchStartY) return;
+      if (mediaFullyExpanded) return; // Allow normal touch scrolling when expanded
 
       const touchY = e.touches[0].clientY;
       const deltaY = touchStartY - touchY;
 
       e.preventDefault();
 
-      if (mediaFullyExpanded && deltaY < -30) {
-        // Only allow scrolling back when scrolled to top
-        if (window.scrollY <= 10) {
-          setMediaFullyExpanded(false);
-          setShowContent(false);
-          setScrollProgress(0.95);
-          // Hide nav when going back to expansion mode
-          const contentHideEvent = new Event('heroContentHidden');
-          window.dispatchEvent(contentHideEvent);
-        }
-      } else if (!mediaFullyExpanded) {
-        // Smoother touch sensitivity
-        const scrollFactor = deltaY < 0 ? 0.006 : 0.004;
-        const scrollDelta = deltaY * scrollFactor;
-        const newProgress = Math.min(
-          Math.max(scrollProgress + scrollDelta, 0),
-          1
-        );
-        setScrollProgress(newProgress);
-
-        if (newProgress >= 1) {
-          // Add a small delay before setting fully expanded for smoother transition
-          setTimeout(() => {
-            setMediaFullyExpanded(true);
-          }, 150);
-          setShowContent(true);
-          // Dispatch event for nav to appear after a short delay
-          setTimeout(() => {
-            const contentShowEvent = new Event('heroContentShown');
-            window.dispatchEvent(contentShowEvent);
-          }, 400);
-        } else if (newProgress < 0.8) {
-          setShowContent(false);
-        }
-
+      if (!mediaFullyExpanded) {
+        // Much smoother touch handling with momentum - 50% faster total
+        const normalizedDelta = Math.max(-50, Math.min(50, deltaY));
+        const touchDelta = (normalizedDelta / 50) * 0.022;
+        updateProgress(touchDelta);
         setTouchStartY(touchY);
       }
     };
@@ -185,33 +166,36 @@ const ScrollExpandMedia = ({
     };
 
     const handleReset = () => {
-      setScrollProgress(0);
+      scrollProgress.set(0);
       setShowContent(false);
       setMediaFullyExpanded(false);
     };
 
-    // Add multiple event listeners to ensure no scrolling during expansion
+    // Add event listeners only during expansion phase
     const scrollElement = sectionRef.current;
     
-    window.addEventListener('wheel', handleWheel as unknown as EventListener, {
-      passive: false,
-    });
-    window.addEventListener('scroll', handleScroll as EventListener, { passive: false });
-    window.addEventListener(
-      'touchstart',
-      handleTouchStart as unknown as EventListener,
-      { passive: false }
-    );
-    window.addEventListener(
-      'touchmove',
-      handleTouchMove as unknown as EventListener,
-      { passive: false }
-    );
-    window.addEventListener('touchend', handleTouchEnd as EventListener);
+    if (!mediaFullyExpanded) {
+      window.addEventListener('wheel', handleWheel as unknown as EventListener, {
+        passive: false,
+      });
+      window.addEventListener('scroll', handleScroll as EventListener, { passive: false });
+      window.addEventListener(
+        'touchstart',
+        handleTouchStart as unknown as EventListener,
+        { passive: false }
+      );
+      window.addEventListener(
+        'touchmove',
+        handleTouchMove as unknown as EventListener,
+        { passive: false }
+      );
+      window.addEventListener('touchend', handleTouchEnd as EventListener);
+    }
+    
     window.addEventListener('resetSection', handleReset as EventListener);
     
-    // Also prevent scrolling on the document itself
-    if (scrollElement) {
+    // Also prevent scrolling on the element itself during expansion
+    if (scrollElement && !mediaFullyExpanded) {
       scrollElement.addEventListener('wheel', handleWheel as unknown as EventListener, {
         passive: false,
       });
@@ -244,7 +228,7 @@ const ScrollExpandMedia = ({
         scrollElement.removeEventListener('scroll', handleScroll as EventListener);
       }
     };
-  }, [scrollProgress, mediaFullyExpanded, touchStartY]);
+  }, [mediaFullyExpanded, touchStartY, updateProgress, scrollProgress]);
 
   useEffect(() => {
     const checkIfMobile = (): void => {
@@ -257,23 +241,23 @@ const ScrollExpandMedia = ({
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
 
-  // Smoother easing function for animations with gentler end
-  const easeOutQuart = (t: number): number => {
-    if (t >= 0.95) {
-      // Slow down significantly near the end for smoother final transition
-      const endProgress = (t - 0.95) / 0.05;
-      return 0.95 + (endProgress * endProgress * 0.05);
-    }
-    return 1 - Math.pow(1 - t, 4);
+  // Much smoother easing with continuous curve
+  const easeOutCubic = (t: number): number => {
+    return 1 - Math.pow(1 - t, 3);
   };
-  const easedProgress = easeOutQuart(scrollProgress);
-  
-  const mediaWidth = 300 + easedProgress * (isMobileState ? 650 : 1250);
-  const mediaHeight = 400 + easedProgress * (isMobileState ? 200 : 400);
-  const textTranslateX = easedProgress * (isMobileState ? 180 : 150);
 
-  const firstWord = title ? title.split(' ')[0] : '';
-  const restOfTitle = title ? title.split(' ').slice(1).join(' ') : '';
+  // Transform the smooth progress using easing
+  const easedProgress = useTransform(smoothProgress, [0, 1], [0, 1], {
+    ease: easeOutCubic
+  });
+  
+  // Animated values derived from the eased progress - original dimensions
+  const mediaWidth = useTransform(easedProgress, [0, 1], [300, isMobileState ? 950 : 1550]);
+  const mediaHeight = useTransform(easedProgress, [0, 1], [400, isMobileState ? 600 : 800]);
+  const textTranslateX = useTransform(easedProgress, [0, 1], [0, isMobileState ? 180 : 150]);
+  const backgroundOpacity = useTransform(smoothProgress, [0, 1], [1, 0]);
+
+  // Keep title as one line instead of splitting
 
   return (
     <div
@@ -284,7 +268,7 @@ const ScrollExpandMedia = ({
         top: 0,
         left: 0,
         width: '100%',
-        height: '100vh',
+        height: mediaFullyExpanded ? 'auto' : '100vh',
         zIndex: mediaFullyExpanded ? 'auto' : 9999,
       }}
     >
@@ -292,9 +276,7 @@ const ScrollExpandMedia = ({
         <div className='relative w-full flex flex-col items-center min-h-[100dvh]'>
           <motion.div
             className='absolute inset-0 z-0 h-full'
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 - scrollProgress }}
-            transition={{ duration: 0.1 }}
+            style={{ opacity: backgroundOpacity }}
           >
             <img
               src={bgImageSrc}
@@ -309,17 +291,14 @@ const ScrollExpandMedia = ({
 
           <div className='container mx-auto flex flex-col items-center justify-start relative z-10'>
             <div className='flex flex-col items-center justify-center w-full h-[100dvh] relative'>
-              <div
+              <motion.div
                 className='absolute z-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl'
                 style={{
-                  width: `${mediaWidth}px`,
-                  height: `${mediaHeight}px`,
+                  width: mediaWidth,
+                  height: mediaHeight,
                   maxWidth: '95vw',
                   maxHeight: '85vh',
                   boxShadow: '0px 0px 50px rgba(0, 0, 0, 0.3)',
-                  transition: scrollProgress >= 0.95 
-                    ? 'width 0.3s ease-out, height 0.3s ease-out, box-shadow 0.3s ease-out' 
-                    : 'width 0.1s ease-out, height 0.1s ease-out',
                 }}
               >
                 {mediaType === 'video' ? (
@@ -342,9 +321,7 @@ const ScrollExpandMedia = ({
 
                     <motion.div
                       className='absolute inset-0 bg-black/30 rounded-xl'
-                      initial={{ opacity: 0.7 }}
-                      animate={{ opacity: 0.5 - scrollProgress * 0.3 }}
-                      transition={{ duration: 0.2 }}
+                      style={{ opacity: useTransform(smoothProgress, [0, 1], [0.7, 0.2]) }}
                     />
                   </div>
                 ) : (
@@ -357,66 +334,51 @@ const ScrollExpandMedia = ({
 
                     <motion.div
                       className='absolute inset-0 bg-black/50 rounded-xl'
-                      initial={{ opacity: 0.7 }}
-                      animate={{ opacity: 0.7 - scrollProgress * 0.3 }}
-                      transition={{ duration: 0.2 }}
+                      style={{ opacity: useTransform(smoothProgress, [0, 1], [0.7, 0.4]) }}
                     />
                   </div>
                 )}
 
-                <div className='flex flex-col items-center text-center relative z-10 mt-4 transition-none'>
+                <div className='flex flex-col items-center text-center relative z-10 mt-4'>
                   {date && (
-                    <p
+                    <motion.p
                       className='text-2xl text-blue-200'
-                      style={{ transform: `translateX(-${textTranslateX}vw)` }}
+                      style={{ x: useTransform(textTranslateX, (x) => `-${x}vw`) }}
                     >
                       {date}
-                    </p>
+                    </motion.p>
                   )}
                   {scrollToExpand && (
-                    <p
+                    <motion.p
                       className='text-blue-200 font-medium text-center'
-                      style={{ transform: `translateX(${textTranslateX}vw)` }}
+                      style={{ x: useTransform(textTranslateX, (x) => `${x}vw`) }}
                     >
                       {scrollToExpand}
-                    </p>
+                    </motion.p>
                   )}
                 </div>
-              </div>
+              </motion.div>
 
               <div
-                className={`flex items-center justify-center text-center gap-4 w-full relative z-10 flex-col ${
+                className={`flex items-center justify-center text-center w-full relative z-10 ${
                   textBlend ? 'mix-blend-difference' : 'mix-blend-normal'
                 }`}
               >
                 <motion.h2
-                  className='text-4xl md:text-5xl lg:text-6xl font-bold text-white'
-                  style={{ 
-                    transform: `translateX(-${textTranslateX}vw)`,
-                    transition: 'transform 0.1s ease-out'
-                  }}
+                  className='text-4xl md:text-5xl lg:text-6xl font-bold text-white whitespace-nowrap'
+                  style={{ opacity: useTransform(easedProgress, [0, 0.3], [1, 0]) }}
                 >
-                  {firstWord}
-                </motion.h2>
-                <motion.h2
-                  className='text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white'
-                  style={{ 
-                    transform: `translateX(${textTranslateX}vw)`,
-                    transition: 'transform 0.1s ease-out'
-                  }}
-                >
-                  {restOfTitle}
+                  {title}
                 </motion.h2>
               </div>
             </div>
 
             <motion.section
-              className='flex flex-col w-full px-8 py-10 md:px-16 lg:py-20'
-              initial={{ opacity: 0 }}
-              animate={{ opacity: showContent ? 1 : 0 }}
-              transition={{ duration: 0.7 }}
+              className='absolute inset-0 w-full h-full'
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
             >
-              {children}
+              {React.isValidElement(children) ? React.cloneElement(children as React.ReactElement<any>, { showContent }) : children}
             </motion.section>
           </div>
         </div>
