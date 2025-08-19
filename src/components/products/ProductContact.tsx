@@ -1,4 +1,4 @@
-import { Phone, Mail, MessageCircle } from "lucide-react";
+import { Phone, Mail, MessageCircle, Calendar } from "lucide-react";
 
 interface ContactMethod {
   icon: React.ReactNode;
@@ -10,21 +10,27 @@ interface ContactMethod {
 const contactMethods: ContactMethod[] = [
   {
     icon: <Phone className="h-12 w-12" />,
-    title: "You can call us",
-    subtitle: "1-800-258-6688",
-    action: "tel:+18002586688"
+    title: "Call us",
+    subtitle: "+91-XXXX-XXXX",
+    action: "tel:+91XXXXXXXXXX"
   },
   {
     icon: <Mail className="h-12 w-12" />,
-    title: "Email us at",
-    subtitle: "ask@dyson.in",
-    action: "mailto:ask@dyson.in"
+    title: "Email us",
+    subtitle: "info@vaayura.com",
+    action: "mailto:info@vaayura.com"
   },
   {
     icon: <MessageCircle className="h-12 w-12" />,
-    title: "Start a WhatsApp conversation",
-    subtitle: "",
-    action: "https://wa.me/your-whatsapp-number"
+    title: "WhatsApp us",
+    subtitle: "Chat instantly",
+    action: "https://wa.me/91XXXXXXXXXX"
+  },
+  {
+    icon: <Calendar className="h-12 w-12" />,
+    title: "Book a demo",
+    subtitle: "Schedule now",
+    action: "/book-demo"
   },
 ];
 
@@ -36,7 +42,7 @@ export function ProductContact() {
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight mb-4">
-              Talking to us is <span className="text-brand-pastel-green">easy</span>.
+              Ready to improve your <span className="text-brand-pastel-green">air quality</span>?
             </h2>
             <p className="text-lg text-brand-dark-grey font-body max-w-2xl mx-auto">
               Get in touch with our air quality experts. We're here to help you breathe easier.
@@ -44,7 +50,7 @@ export function ProductContact() {
           </div>
 
           {/* Contact Methods */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
             {contactMethods.map((method, index) => (
               <div 
                 key={index}
@@ -75,31 +81,6 @@ export function ProductContact() {
             ))}
           </div>
 
-          {/* Bottom CTA */}
-          <div className="text-center mt-16">
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
-              <h3 className="text-2xl font-semibold text-brand-grey-green mb-4 font-subheading">
-                Ready to improve your air quality?
-              </h3>
-              <p className="text-brand-dark-grey font-body mb-6 max-w-xl mx-auto">
-                Our team of air quality specialists is standing by to help you find the perfect solution for your space.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button 
-                  className="bg-brand-pastel-green hover:bg-brand-pastel-green/90 text-brand-grey-green px-8 py-3 rounded-full font-medium transition-colors"
-                  onClick={() => window.open('tel:+18002586688', '_self')}
-                >
-                  Call Now
-                </button>
-                <button 
-                  className="border border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10 px-8 py-3 rounded-full font-medium transition-colors"
-                  onClick={() => window.open('/contact', '_self')}
-                >
-                  Schedule Consultation
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
