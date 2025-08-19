@@ -6,15 +6,27 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 
-// Local Product type
+// Define types locally to avoid import issues
+interface ProductFeature {
+  title: string
+  description: string
+  icon: string
+}
+
+interface ProductSpecifications {
+  [key: string]: string
+}
+
 interface Product {
   id: string
   name: string
   description: string
   price: number
   images: string[]
-  features: Record<string, any>
+  features: ProductFeature[]
+  specifications: ProductSpecifications
   published: boolean
+  slug: string
   created_at: string
 }
 
@@ -29,13 +41,31 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
     description: product?.description || '',
     price: product?.price || 0,
     images: product?.images || [],
-    features: product?.features || {},
+    features: product?.features || [],
+    specifications: product?.specifications || {},
+    slug: product?.slug || '',
     published: product?.published || false
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   const { createProduct, updateProduct } = useProducts()
+
+  // Auto-generate slug from name
+  const generateSlug = (name: string) => {
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '')
+  }
+
+  const handleNameChange = (name: string) => {
+    setFormData(prev => ({
+      ...prev,
+      name,
+      slug: prev.slug || generateSlug(name)
+    }))
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -82,28 +112,48 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
   }
 
   const handleFeatureAdd = () => {
-    const key = prompt('Feature name:')
-    const value = prompt('Feature value:')
-    if (key && value) {
+    const title = prompt('Feature title:')
+    const description = prompt('Feature description:')
+    const icon = prompt('Icon name (e.g., shield, zap, leaf):') || 'shield'
+    
+    if (title && description) {
       setFormData(prev => ({
         ...prev,
-        features: { ...prev.features, [key]: value }
+        features: [...prev.features, { title, description, icon }]
       }))
     }
   }
 
-  const handleFeatureRemove = (key: string) => {
+  const handleFeatureRemove = (index: number) => {
     setFormData(prev => ({
       ...prev,
-      features: Object.fromEntries(
-        Object.entries(prev.features).filter(([k]) => k !== key)
+      features: prev.features.filter((_, i) => i !== index)
+    }))
+  }
+
+  const handleSpecificationAdd = () => {
+    const key = prompt('Specification name:')
+    const value = prompt('Specification value:')
+    if (key && value) {
+      setFormData(prev => ({
+        ...prev,
+        specifications: { ...prev.specifications, [key]: value }
+      }))
+    }
+  }
+
+  const handleSpecificationRemove = (key: string) => {
+    setFormData(prev => ({
+      ...prev,
+      specifications: Object.fromEntries(
+        Object.entries(prev.specifications).filter(([k]) => k !== key)
       )
     }))
   }
 
   return (
     <div className="min-h-screen bg-slate-50 p-6">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <Card className="bg-white border-slate-200">
           <CardHeader>
             <div className="flex justify-between items-center">
@@ -116,7 +166,7 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
             </div>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-8">
               {error && (
                 <div className="p-3 bg-red-50 border border-red-200 rounded-md">
                   <p className="text-red-700 text-sm">{error}</p>
@@ -125,15 +175,29 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
 
               {/* Basic Info */}
               <div className="space-y-4">
-                <div>
-                  <Label htmlFor="name">Product Name</Label>
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    placeholder="e.g., Storm"
-                    required
-                  />
+                <h3 className="text-lg font-semibold text-brand-grey-green">Basic Information</h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="name">Product Name</Label>
+                    <Input
+                      id="name"
+                      value={formData.name}
+                      onChange={(e) => handleNameChange(e.target.value)}
+                      placeholder="e.g., Storm Air Purifier"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="slug">URL Slug</Label>
+                    <Input
+                      id="slug"
+                      value={formData.slug}
+                      onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                      placeholder="e.g., storm-air-purifier"
+                      required
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -163,13 +227,13 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
               {/* Images */}
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <Label>Product Images</Label>
+                  <h3 className="text-lg font-semibold text-brand-grey-green">Product Images</h3>
                   <Button type="button" variant="outline" onClick={handleImageUrlAdd} className="bg-white border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10">
                     Add Image URL
                   </Button>
                 </div>
                 {formData.images.length > 0 && (
-                  <div className="space-y-2">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {formData.images.map((url, index) => (
                       <div key={index} className="flex gap-2 items-center">
                         <Input value={url} readOnly className="flex-1" />
@@ -190,21 +254,56 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
               {/* Features */}
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <Label>Product Features</Label>
+                  <h3 className="text-lg font-semibold text-brand-grey-green">Product Features</h3>
                   <Button type="button" variant="outline" onClick={handleFeatureAdd} className="bg-white border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10">
                     Add Feature
                   </Button>
                 </div>
-                {Object.entries(formData.features).length > 0 && (
-                  <div className="space-y-2">
-                    {Object.entries(formData.features).map(([key, value]) => (
+                {formData.features.length > 0 && (
+                  <div className="space-y-3">
+                    {formData.features.map((feature, index) => (
+                      <div key={index} className="p-4 border rounded-lg bg-slate-50">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-brand-grey-green">{feature.title}</h4>
+                            <p className="text-brand-dark-grey text-sm mt-1">{feature.description}</p>
+                            <p className="text-brand-dark-grey text-xs mt-1">Icon: {feature.icon}</p>
+                          </div>
+                          <Button 
+                            type="button" 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => handleFeatureRemove(index)}
+                            className="bg-white border-red-300 text-red-600 hover:bg-red-50"
+                          >
+                            Remove
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Specifications */}
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-semibold text-brand-grey-green">Specifications</h3>
+                  <Button type="button" variant="outline" onClick={handleSpecificationAdd} className="bg-white border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10">
+                    Add Specification
+                  </Button>
+                </div>
+                {Object.entries(formData.specifications).length > 0 && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {Object.entries(formData.specifications).map(([key, value]) => (
                       <div key={key} className="flex gap-2 items-center">
-                        <span className="w-1/3 text-sm font-medium">{key}:</span>
-                        <span className="flex-1">{value}</span>
+                        <span className="w-1/3 text-sm font-medium text-brand-grey-green">{key}:</span>
+                        <span className="flex-1 text-brand-dark-grey">{value}</span>
                         <Button 
                           type="button" 
                           variant="outline" 
-                          onClick={() => handleFeatureRemove(key)}
+                          size="sm"
+                          onClick={() => handleSpecificationRemove(key)}
                           className="bg-white border-red-300 text-red-600 hover:bg-red-50"
                         >
                           Remove

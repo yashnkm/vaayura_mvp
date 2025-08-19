@@ -3,15 +3,27 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
-// Local Product type
+// Define types locally to avoid import issues
+interface ProductFeature {
+  title: string
+  description: string
+  icon: string
+}
+
+interface ProductSpecifications {
+  [key: string]: string
+}
+
 interface Product {
   id: string
   name: string
   description: string
   price: number
   images: string[]
-  features: Record<string, any>
+  features: ProductFeature[]
+  specifications: ProductSpecifications
   published: boolean
+  slug: string
   created_at: string
 }
 
@@ -93,56 +105,88 @@ export function ProductList({ products, loading, onEdit }: ProductListProps) {
             </div>
           </CardHeader>
           
-          {(product.images.length > 0 || Object.keys(product.features).length > 0) && (
+          {(product.images.length > 0 || product.features.length > 0 || Object.keys(product.specifications).length > 0) && (
             <CardContent>
-              {/* Images */}
-              {product.images.length > 0 && (
-                <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-brand-grey-green mb-2">
-                    Images ({product.images.length})
-                  </h4>
-                  <div className="flex gap-2 overflow-x-auto">
-                    {product.images.slice(0, 3).map((image, index) => (
-                      <img
-                        key={index}
-                        src={image}
-                        alt={`${product.name} ${index + 1}`}
-                        className="w-16 h-16 object-cover rounded border"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement
-                          target.src = 'https://via.placeholder.com/64x64?text=No+Image'
-                        }}
-                      />
-                    ))}
-                    {product.images.length > 3 && (
-                      <div className="w-16 h-16 bg-slate-100 rounded border flex items-center justify-center text-xs text-brand-dark-grey">
-                        +{product.images.length - 3}
-                      </div>
+              <div className="space-y-4">
+                {/* Slug */}
+                {product.slug && (
+                  <div>
+                    <h4 className="text-sm font-semibold text-brand-grey-green mb-1">URL Slug</h4>
+                    <p className="text-xs text-brand-dark-grey">/products/{product.slug}</p>
+                  </div>
+                )}
+
+                {/* Images */}
+                {product.images.length > 0 && (
+                  <div>
+                    <h4 className="text-sm font-semibold text-brand-grey-green mb-2">
+                      Images ({product.images.length})
+                    </h4>
+                    <div className="flex gap-2 overflow-x-auto">
+                      {product.images.slice(0, 3).map((image, index) => (
+                        <img
+                          key={index}
+                          src={image}
+                          alt={`${product.name} ${index + 1}`}
+                          className="w-16 h-16 object-cover rounded border"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement
+                            target.src = 'https://via.placeholder.com/64x64?text=No+Image'
+                          }}
+                        />
+                      ))}
+                      {product.images.length > 3 && (
+                        <div className="w-16 h-16 bg-slate-100 rounded border flex items-center justify-center text-xs text-brand-dark-grey">
+                          +{product.images.length - 3}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Features */}
+                {product.features.length > 0 && (
+                  <div>
+                    <h4 className="text-sm font-semibold text-brand-grey-green mb-2">
+                      Features ({product.features.length})
+                    </h4>
+                    <div className="space-y-1">
+                      {product.features.slice(0, 3).map((feature, index) => (
+                        <div key={index} className="bg-slate-50 p-2 rounded text-xs">
+                          <span className="font-medium">{feature.title}</span>
+                          <p className="text-brand-dark-grey mt-1">{feature.description}</p>
+                        </div>
+                      ))}
+                      {product.features.length > 3 && (
+                        <p className="text-xs text-brand-dark-grey">
+                          +{product.features.length - 3} more features
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Specifications */}
+                {Object.keys(product.specifications).length > 0 && (
+                  <div>
+                    <h4 className="text-sm font-semibold text-brand-grey-green mb-2">
+                      Specifications ({Object.keys(product.specifications).length})
+                    </h4>
+                    <div className="grid grid-cols-2 gap-1 text-xs">
+                      {Object.entries(product.specifications).slice(0, 4).map(([key, value]) => (
+                        <div key={key} className="bg-slate-50 p-2 rounded">
+                          <span className="font-medium">{key}:</span> {value}
+                        </div>
+                      ))}
+                    </div>
+                    {Object.keys(product.specifications).length > 4 && (
+                      <p className="text-xs text-brand-dark-grey mt-2">
+                        +{Object.keys(product.specifications).length - 4} more specs
+                      </p>
                     )}
                   </div>
-                </div>
-              )}
-
-              {/* Features */}
-              {Object.keys(product.features).length > 0 && (
-                <div>
-                  <h4 className="text-sm font-semibold text-brand-grey-green mb-2">
-                    Features
-                  </h4>
-                  <div className="grid grid-cols-2 gap-2 text-xs">
-                    {Object.entries(product.features).slice(0, 4).map(([key, value]) => (
-                      <div key={key} className="bg-slate-50 p-2 rounded">
-                        <span className="font-medium">{key}:</span> {value}
-                      </div>
-                    ))}
-                  </div>
-                  {Object.keys(product.features).length > 4 && (
-                    <p className="text-xs text-brand-dark-grey mt-2">
-                      +{Object.keys(product.features).length - 4} more features
-                    </p>
-                  )}
-                </div>
-              )}
+                )}
+              </div>
             </CardContent>
           )}
         </Card>

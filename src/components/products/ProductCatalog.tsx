@@ -1,20 +1,34 @@
 import { usePublishedProducts } from '@/hooks/useProducts'
 import { Button } from "@/components/ui/button"
+import { useNavigate } from 'react-router-dom'
 
-// Local Product type
+// Define types locally to avoid import issues
+interface ProductFeature {
+  title: string
+  description: string
+  icon: string
+}
+
+interface ProductSpecifications {
+  [key: string]: string
+}
+
 interface Product {
   id: string
   name: string
   description: string
   price: number
   images: string[]
-  features: Record<string, any>
+  features: ProductFeature[]
+  specifications: ProductSpecifications
   published: boolean
+  slug: string
   created_at: string
 }
 
 export function ProductCatalog() {
   const { products, loading, error } = usePublishedProducts()
+  const navigate = useNavigate()
 
   if (loading) {
     return (
@@ -101,6 +115,7 @@ export function ProductCatalog() {
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button 
                     className="bg-brand-pastel-green hover:bg-brand-pastel-green/90 text-brand-grey-green px-8 py-3 rounded-full font-medium"
+                    onClick={() => navigate(`/products/${product.slug || product.id}`)}
                   >
                     Shop {product.name}
                   </Button>

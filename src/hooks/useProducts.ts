@@ -2,14 +2,26 @@ import { useState, useEffect } from 'react'
 import { database } from '@/lib/supabase'
 
 // Define types locally to avoid import issues
+interface ProductFeature {
+  title: string
+  description: string
+  icon: string
+}
+
+interface ProductSpecifications {
+  [key: string]: string
+}
+
 interface Product {
   id: string
   name: string
   description: string
   price: number
   images: string[]
-  features: Record<string, any>
+  features: ProductFeature[]
+  specifications: ProductSpecifications
   published: boolean
+  slug: string
   created_at: string
 }
 
@@ -18,7 +30,9 @@ interface ProductFormData {
   description: string
   price: number
   images: string[]
-  features: Record<string, any>
+  features: ProductFeature[]
+  specifications: ProductSpecifications
+  slug: string
   published: boolean
 }
 
