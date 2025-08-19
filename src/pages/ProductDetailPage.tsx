@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Layout } from '@/components/layout/Layout';
+import Lenis from 'lenis';
 import { ProductDetailHero } from '@/components/product-detail/ProductDetailHero';
-import { ProductDetailFeatures } from '@/components/product-detail/ProductDetailFeatures';
+import { ProductFeatures } from '@/components/products/ProductFeatures';
 import { ProductDetailSpecifications } from '@/components/product-detail/ProductDetailSpecifications';
 import { ProductClients } from '@/components/products/ProductClients';
 import { ProductContact } from '@/components/products/ProductContact';
@@ -79,6 +80,26 @@ export function ProductDetailPage() {
     fetchProduct();
   }, [slug]);
 
+  // Initialize Lenis smooth scrolling
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   if (loading) {
     return (
       <Layout>
@@ -116,7 +137,7 @@ export function ProductDetailPage() {
   return (
     <Layout>
       <ProductDetailHero product={product} />
-      <ProductDetailFeatures product={product} />
+      <ProductFeatures />
       <ProductDetailSpecifications product={product} />
       <ProductClients />
       <ProductContact />

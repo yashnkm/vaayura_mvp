@@ -131,19 +131,6 @@ export function ProductFeatures() {
             ))}
           </div>
 
-          {/* Bottom Section */}
-          <div className="text-center pt-8 border-t border-slate-200">
-            <h3 className="text-xl font-subheading text-brand-grey-green mb-4">
-              Experience the Complete Vaayura Difference
-            </h3>
-            <p className="text-brand-dark-grey font-body mb-8 max-w-2xl mx-auto">
-              Each feature works in harmony to deliver the purest air quality experience, 
-              combining advanced technology with effortless operation.
-            </p>
-            <button className="bg-brand-grey-green text-white px-8 py-3 rounded-full font-medium hover:bg-brand-grey-green/90 transition-colors duration-300">
-              View Technical Documentation
-            </button>
-          </div>
 
         </div>
       </div>

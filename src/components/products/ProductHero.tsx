@@ -29,50 +29,63 @@ const features: Feature[] = [
 
 export function ProductHero() {
   return (
-    <section className="py-32 bg-slate-50">
-      <div className="container overflow-hidden">
-        <div className="mb-8 flex flex-col items-center gap-6 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-brand-grey-green leading-tight">
-            Pure Air, Pure Life
-          </h1>
-        </div>
-        <div className="relative mx-auto max-w-6xl">
+    <>
+      {/* Full-screen Hero Section */}
+      <section className="relative min-h-screen flex items-start overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
           <img
             src={heroSectionImg}
             alt="Vaayura Air Purifier in Clean Interior Space"
-            className="aspect-video max-h-[600px] w-full rounded-xl object-cover"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-          <div className="absolute -top-28 -right-28 -z-10 aspect-video h-72 w-96 [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_20%,transparent_100%)] [background-size:12px_12px] opacity-40 sm:bg-[radial-gradient(hsl(var(--muted-foreground))_1px,transparent_1px)]"></div>
-          <div className="absolute -top-28 -left-28 -z-10 aspect-video h-72 w-96 [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_20%,transparent_100%)] [background-size:12px_12px] opacity-40 sm:bg-[radial-gradient(hsl(var(--muted-foreground))_1px,transparent_1px)]"></div>
+          {/* Multiple Fade Effects */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-black/10"></div>
         </div>
-        <div className="mx-auto mt-10 flex max-w-5xl flex-col md:flex-row">
-          {features.map((feature, index) => (
-            <React.Fragment key={feature.title}>
-              {index > 0 && (
-                <Separator
-                  orientation="vertical"
-                  className="mx-6 hidden h-auto w-[2px] bg-gradient-to-b from-muted via-transparent to-muted md:block"
-                />
-              )}
-              <div
-                key={index}
-                className="flex grow basis-0 flex-col rounded-md bg-background p-4"
-              >
-                <div className="mb-6 flex size-10 items-center justify-center rounded-full bg-brand-pastel-green/10 drop-shadow-lg">
-                  <div className="text-brand-grey-green">
-                    {feature.icon}
+
+        {/* Text Content at Top */}
+        <div className="container mx-auto relative z-10 pt-52">
+          <div className="flex justify-center items-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-brand-pastel-green leading-tight text-center">
+              Pure Air, Pure Life
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto">
+          <div className="mx-auto flex max-w-5xl flex-col md:flex-row">
+            {features.map((feature, index) => (
+              <React.Fragment key={feature.title}>
+                {index > 0 && (
+                  <Separator
+                    orientation="vertical"
+                    className="mx-6 hidden h-auto w-[2px] bg-gradient-to-b from-muted via-transparent to-muted md:block"
+                  />
+                )}
+                <div
+                  key={index}
+                  className="flex grow basis-0 flex-col rounded-md bg-background p-4"
+                >
+                  <div className="mb-6 flex size-10 items-center justify-center rounded-full bg-brand-pastel-green/10 drop-shadow-lg">
+                    <div className="text-brand-grey-green">
+                      {feature.icon}
+                    </div>
                   </div>
+                  <h3 className="mb-2 font-subheading font-semibold text-brand-grey-green">{feature.title}</h3>
+                  <p className="text-sm text-brand-dark-grey/70 font-body leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
-                <h3 className="mb-2 font-subheading font-semibold text-brand-grey-green">{feature.title}</h3>
-                <p className="text-sm text-brand-dark-grey/70 font-body leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            </React.Fragment>
-          ))}
+              </React.Fragment>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

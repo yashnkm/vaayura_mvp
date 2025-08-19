@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "framer-motion"
 interface Logo {
   name: string
   id: number
-  img: React.ComponentType<React.SVGProps<SVGSVGElement>>
+  img: React.ComponentType<React.SVGProps<SVGSVGElement>> | string
 }
 
 interface LogoColumnProps {
@@ -54,7 +54,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
     const columnDelay = index * 200
     const adjustedTime = (currentTime + columnDelay) % (cycleInterval * logos.length)
     const currentIndex = Math.floor(adjustedTime / cycleInterval)
-    const CurrentLogo = useMemo(() => logos[currentIndex].img, [logos, currentIndex])
+    const currentLogo = useMemo(() => logos[currentIndex], [logos, currentIndex])
 
     return (
       <motion.div
@@ -96,7 +96,15 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
               },
             }}
           >
-            <CurrentLogo className="h-20 w-20 max-h-[80%] max-w-[80%] object-contain md:h-32 md:w-32" />
+            {typeof currentLogo.img === 'string' ? (
+              <img 
+                src={currentLogo.img} 
+                alt={currentLogo.name}
+                className="h-20 w-20 max-h-[80%] max-w-[80%] object-contain md:h-32 md:w-32"
+              />
+            ) : (
+              <currentLogo.img className="h-20 w-20 max-h-[80%] max-w-[80%] object-contain md:h-32 md:w-32" />
+            )}
           </motion.div>
         </AnimatePresence>
       </motion.div>
