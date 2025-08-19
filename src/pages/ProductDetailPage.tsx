@@ -4,6 +4,7 @@ import { Layout } from '@/components/layout/Layout';
 import { ProductDetailHero } from '@/components/product-detail/ProductDetailHero';
 import { ProductDetailFeatures } from '@/components/product-detail/ProductDetailFeatures';
 import { ProductDetailSpecifications } from '@/components/product-detail/ProductDetailSpecifications';
+import { ProductClients } from '@/components/products/ProductClients';
 import { ProductContact } from '@/components/products/ProductContact';
 import { database } from '@/lib/supabase';
 
@@ -117,6 +118,7 @@ export function ProductDetailPage() {
       <ProductDetailHero product={product} />
       <ProductDetailFeatures product={product} />
       <ProductDetailSpecifications product={product} />
+      <ProductClients />
       <ProductContact />
     </Layout>
   );

@@ -1,6 +1,7 @@
 import { Shield, Zap, Leaf } from "lucide-react";
 import React from "react";
 import { Separator } from "@/components/ui/separator";
+import heroSectionImg from "@/assets/herosection_product.png";
 
 interface Feature {
   icon: React.ReactNode;
@@ -37,8 +38,8 @@ export function ProductHero() {
         </div>
         <div className="relative mx-auto max-w-6xl">
           <img
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
-            alt="Vaayura Air Purifier Collection"
+            src={heroSectionImg}
+            alt="Vaayura Air Purifier in Clean Interior Space"
             className="aspect-video max-h-[600px] w-full rounded-xl object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>

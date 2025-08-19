@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 export function AdminDashboard() {
   const { user, signOut } = useAuth()
-  const { products, loading } = useAdminProducts()
+  const { products, loading, refetch } = useAdminProducts()
   const [showProductForm, setShowProductForm] = useState(false)
   const [editingProduct, setEditingProduct] = useState(null)
 
@@ -29,6 +29,8 @@ export function AdminDashboard() {
   const handleCloseForm = () => {
     setShowProductForm(false)
     setEditingProduct(null)
+    // Refresh the product list when form closes
+    refetch()
   }
 
   if (showProductForm) {

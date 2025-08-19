@@ -70,13 +70,17 @@ export function useProducts() {
 
   const updateProduct = async (id: string, updates: Partial<ProductFormData>) => {
     try {
+      console.log('Database update - ID:', id, 'Updates:', updates)
       const { data, error } = await database.products.update(id, updates)
+      console.log('Database response - Data:', data, 'Error:', error)
+      
       if (error) throw error
       
       // Refresh products list
       await fetchProducts()
       return { data, error: null }
     } catch (err: any) {
+      console.error('Database update error:', err)
       return { data: null, error: err.message }
     }
   }
@@ -114,23 +118,24 @@ export function useAdminProducts() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchAdminProducts = async () => {
-      try {
-        const { data, error } = await database.admin.getAllProducts()
-        if (error) throw error
-        setProducts(data || [])
-      } catch (err) {
-        console.error('Error fetching admin products:', err)
-      } finally {
-        setLoading(false)
-      }
+  const fetchAdminProducts = async () => {
+    try {
+      setLoading(true)
+      const { data, error } = await database.admin.getAllProducts()
+      if (error) throw error
+      setProducts(data || [])
+    } catch (err) {
+      console.error('Error fetching admin products:', err)
+    } finally {
+      setLoading(false)
     }
+  }
 
+  useEffect(() => {
     fetchAdminProducts()
   }, [])
 
-  return { products, loading, refetch: () => setLoading(true) }
+  return { products, loading, refetch: fetchAdminProducts }
 }
 
 // Hook for public product display (only published products)

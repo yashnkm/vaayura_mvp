@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
+import { uploadToCloudinary, validateImageFile } from '@/lib/cloudinary'
 
 // Define types locally to avoid import issues
 interface ProductFeature {
@@ -48,6 +49,7 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [uploadingImage, setUploadingImage] = useState(false)
 
   const { createProduct, updateProduct } = useProducts()
 
@@ -76,18 +78,25 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
       let result
       if (product) {
         // Update existing product
+        console.log('Updating product with data:', formData)
         result = await updateProduct(product.id, formData)
+        console.log('Update result:', result)
       } else {
         // Create new product
+        console.log('Creating product with data:', formData)
         result = await createProduct(formData)
+        console.log('Create result:', result)
       }
 
       if (result.error) {
+        console.error('Operation failed:', result.error)
         setError(result.error)
       } else {
+        console.log('Operation successful')
         onClose()
       }
     } catch (err: any) {
+      console.error('Exception during operation:', err)
       setError(err.message)
     }
 
@@ -102,6 +111,40 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
         images: [...prev.images, url]
       }))
     }
+  }
+
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    // Validate file
+    const validation = validateImageFile(file)
+    if (!validation.valid) {
+      setError(validation.error || 'Invalid file')
+      return
+    }
+
+    setUploadingImage(true)
+    setError('')
+
+    try {
+      const result = await uploadToCloudinary(file, 'vaayura/products')
+      
+      if (result.error) {
+        setError(result.error)
+      } else if (result.url) {
+        setFormData(prev => ({
+          ...prev,
+          images: [...prev.images, result.url]
+        }))
+      }
+    } catch (err: any) {
+      setError(err.message || 'Upload failed')
+    }
+
+    setUploadingImage(false)
+    // Reset file input
+    event.target.value = ''
   }
 
   const handleImageRemove = (index: number) => {
@@ -228,9 +271,31 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <h3 className="text-lg font-semibold text-brand-grey-green">Product Images</h3>
-                  <Button type="button" variant="outline" onClick={handleImageUrlAdd} className="bg-white border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10">
-                    Add Image URL
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button type="button" variant="outline" onClick={handleImageUrlAdd} className="bg-white border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10">
+                      Add Image URL
+                    </Button>
+                    <label className="cursor-pointer">
+                      <Button 
+                        type="button" 
+                        variant="outline" 
+                        disabled={uploadingImage}
+                        className="bg-white border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10"
+                        asChild
+                      >
+                        <span>
+                          {uploadingImage ? 'Uploading...' : 'Upload Image'}
+                        </span>
+                      </Button>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                        disabled={uploadingImage}
+                      />
+                    </label>
+                  </div>
                 </div>
                 {formData.images.length > 0 && (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">

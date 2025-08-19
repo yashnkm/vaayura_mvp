@@ -27,139 +27,101 @@ interface ProductDetailSpecificationsProps {
 }
 
 export function ProductDetailSpecifications({ product }: ProductDetailSpecificationsProps) {
-  // Fallback specifications if none provided
+  // Fallback specifications if none provided - limited to 8 specs max
   const defaultSpecifications = {
-    "Coverage Area": "Up to 500 sq ft",
-    "Noise Level": "< 40 dB (Sleep Mode)",
-    "Power Consumption": "45W",
-    "Dimensions": "15 × 8 × 20 inches",
-    "Weight": "12 lbs",
-    "Filter Life": "12 months",
-    "Filtration Stages": "4-layer system",
-    "HEPA Grade": "True HEPA 13",
-    "Air Changes": "5x per hour",
-    "Warranty": "2 years comprehensive",
-    "Connectivity": "Wi-Fi, Smart Life App",
-    "Color Options": "Arctic White, Space Grey"
+    "Width": "220 mm", 
+    "Height": "1050 mm",
+    "Length": "220 mm",
+    "Weight": "4.65kg",
+    "Cord length": "1.8m",
+    "Oscillation/Angle": "350°",
+    "Room coverage": "81m² (according to POLAR)",
+    "Sound level": "59.8dB"
   };
 
-  const specifications = (product.specifications && Object.keys(product.specifications).length > 0) 
+  let specifications = (product.specifications && Object.keys(product.specifications).length > 0) 
     ? product.specifications 
     : defaultSpecifications;
 
+  // Get all specification entries
   const specEntries = Object.entries(specifications);
-  const midPoint = Math.ceil(specEntries.length / 2);
-  const leftColumn = specEntries.slice(0, midPoint);
-  const rightColumn = specEntries.slice(midPoint);
 
   return (
-    <section className="py-32 bg-slate-50">
-      <div className="container mx-auto">
-        <div className="max-w-7xl mx-auto">
+    <section className="py-20 lg:py-32 bg-white">
+      <div className="container mx-auto max-w-7xl">
+        
+        {/* Section Header */}
+        <div className="mb-16">
+          <h2 className="text-3xl md:text-4xl font-display text-brand-grey-green mb-4">
+            Specifications
+          </h2>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           
-          {/* Section Header */}
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
-              Technical <span className="text-brand-pastel-green">Specifications</span>
-            </h2>
-            <p className="text-lg text-brand-dark-grey font-body max-w-3xl mx-auto">
-              Detailed specifications for {product.name} - engineered for optimal performance 
-              and reliability in every environment.
-            </p>
+          {/* Left - Product Image */}
+          <div className="flex justify-center lg:justify-start">
+            <div className="w-80 h-96 bg-gradient-to-b from-slate-100 to-slate-200 rounded-2xl overflow-hidden shadow-lg">
+              <img
+                src={product.images[0] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"}
+                alt={`${product.name}`}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement
+                  target.src = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+                }}
+              />
+            </div>
           </div>
 
-          {/* Specifications Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Right - Specifications in single column */}
+          <div className="space-y-6">
+            {specEntries.map(([key, value], index) => (
+              <div key={index} className="space-y-1">
+                <div className="text-brand-grey-green font-semibold font-subheading text-base md:text-lg">
+                  {key}::
+                </div>
+                <div className="text-brand-dark-grey font-body text-base md:text-lg">
+                  {value}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Useful Documents Section */}
+        <div className="mt-24">
+          <h3 className="text-2xl md:text-3xl font-display text-brand-grey-green mb-12">
+            Useful documents
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <div className="bg-slate-50 hover:bg-slate-100 transition-colors duration-200 p-6 rounded-xl cursor-pointer">
+                <h4 className="text-brand-grey-green font-semibold font-subheading mb-2">
+                  Operating manual, PDF, 7.5MB
+                </h4>
+                <p className="text-brand-dark-grey font-body text-sm">
+                  Complete guide for setup, operation, and maintenance
+                </p>
+              </div>
+            </div>
             
-            {/* Left Column */}
-            <div className="space-y-1">
-              {leftColumn.map(([key, value], index) => (
-                <div 
-                  key={index}
-                  className="flex justify-between items-center py-4 border-b border-slate-200 hover:bg-white/50 transition-colors duration-200 px-4 rounded-lg"
-                >
-                  <span className="font-semibold text-brand-grey-green font-subheading">
-                    {key}
-                  </span>
-                  <span className="text-brand-dark-grey font-body text-right max-w-xs">
-                    {value}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Right Column */}
-            <div className="space-y-1">
-              {rightColumn.map(([key, value], index) => (
-                <div 
-                  key={index}
-                  className="flex justify-between items-center py-4 border-b border-slate-200 hover:bg-white/50 transition-colors duration-200 px-4 rounded-lg"
-                >
-                  <span className="font-semibold text-brand-grey-green font-subheading">
-                    {key}
-                  </span>
-                  <span className="text-brand-dark-grey font-body text-right max-w-xs">
-                    {value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Key Highlights */}
-          <div className="mt-20">
-            <div className="bg-white rounded-3xl p-12 shadow-sm border border-slate-100">
-              <h3 className="text-2xl font-semibold text-brand-grey-green mb-8 font-subheading text-center">
-                What Makes {product.name} Special
-              </h3>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="text-center space-y-3">
-                  <div className="w-12 h-12 bg-brand-pastel-green/10 rounded-xl flex items-center justify-center mx-auto">
-                    <span className="text-2xl font-bold text-brand-grey-green">99.97%</span>
-                  </div>
-                  <h4 className="font-semibold text-brand-grey-green font-subheading">Filtration Efficiency</h4>
-                  <p className="text-brand-dark-grey font-body text-sm">Removes particles as small as 0.3 microns</p>
-                </div>
-                
-                <div className="text-center space-y-3">
-                  <div className="w-12 h-12 bg-brand-pastel-green/10 rounded-xl flex items-center justify-center mx-auto">
-                    <span className="text-2xl font-bold text-brand-grey-green">500</span>
-                  </div>
-                  <h4 className="font-semibold text-brand-grey-green font-subheading">Coverage Area</h4>
-                  <p className="text-brand-dark-grey font-body text-sm">Square feet of purified air</p>
-                </div>
-                
-                <div className="text-center space-y-3">
-                  <div className="w-12 h-12 bg-brand-pastel-green/10 rounded-xl flex items-center justify-center mx-auto">
-                    <span className="text-2xl font-bold text-brand-grey-green">2</span>
-                  </div>
-                  <h4 className="font-semibold text-brand-grey-green font-subheading">Year Warranty</h4>
-                  <p className="text-brand-dark-grey font-body text-sm">Comprehensive coverage included</p>
-                </div>
+            <div className="space-y-4">
+              <div className="bg-slate-50 hover:bg-slate-100 transition-colors duration-200 p-6 rounded-xl cursor-pointer">
+                <h4 className="text-brand-grey-green font-semibold font-subheading mb-2">
+                  Technical specification, PDF, 8MB
+                </h4>
+                <p className="text-brand-dark-grey font-body text-sm">
+                  Detailed technical specifications and performance data
+                </p>
               </div>
             </div>
           </div>
-
-          {/* Download Resources */}
-          <div className="text-center mt-16">
-            <h3 className="text-xl font-semibold text-brand-grey-green mb-6 font-subheading">
-              Need More Information?
-            </h3>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="border border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10 px-6 py-3 rounded-full font-medium transition-colors">
-                Download Datasheet
-              </button>
-              <button className="border border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10 px-6 py-3 rounded-full font-medium transition-colors">
-                Installation Guide
-              </button>
-              <button className="border border-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/10 px-6 py-3 rounded-full font-medium transition-colors">
-                User Manual
-              </button>
-            </div>
-          </div>
-
         </div>
+
+
       </div>
     </section>
   );

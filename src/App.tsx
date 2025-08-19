@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import Lenis from 'lenis'
 import { HomePage } from './pages/HomePage'
+import { Home2Page } from './pages/Home2Page'
 import { AboutPage } from './pages/AboutPage'
 import { ProductsPage } from './pages/ProductsPage'
 import { ProductDetailPage } from './pages/ProductDetailPage'
@@ -17,7 +18,7 @@ function LenisScrollProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Initialize Lenis on main content pages, not auth pages
-    const contentPages = ['/', '/about', '/products', '/contact', '/blog']
+    const contentPages = ['/', '/home2', '/about', '/products', '/contact', '/blog']
     const isContentPage = contentPages.includes(location.pathname) || location.pathname.startsWith('/blog/')
     
     if (isContentPage) {
@@ -49,6 +50,7 @@ function App() {
       <LenisScrollProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/home2" element={<Home2Page />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:slug" element={<ProductDetailPage />} />

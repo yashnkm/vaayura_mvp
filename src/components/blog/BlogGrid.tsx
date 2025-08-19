@@ -2,83 +2,109 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Link } from 'react-router-dom'
 
-// Mock blog data - this would come from a CMS or API in production
+// Blog data based on available documents
 const blogPosts = [
   {
     id: 1,
-    slug: 'benefits-of-clean-air',
-    title: 'The Health Benefits of Clean Indoor Air',
-    excerpt: 'Discover how clean indoor air can significantly improve your health, productivity, and overall well-being.',
+    slug: 'hidden-dangers-indoor-air-pollution',
+    title: 'Hidden Dangers of Indoor Air Pollution',
+    excerpt: 'Uncover the invisible threats lurking in your home and learn how to protect your family from harmful indoor pollutants that affect your daily health.',
     category: 'Health',
-    date: '2024-01-15',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop&crop=center'
+    date: '2024-12-15',
+    readTime: '7 min read',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=center',
+    featured: true
   },
   {
     id: 2,
-    slug: 'choosing-right-air-purifier',
-    title: 'How to Choose the Right Air Purifier for Your Home',
-    excerpt: 'A comprehensive guide to selecting the perfect air purifier based on your room size, needs, and budget.',
-    category: 'Guide',
-    date: '2024-01-10',
-    readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=250&fit=crop&crop=center'
-  },
-  {
-    id: 3,
-    slug: 'air-quality-myths-debunked',
-    title: 'Common Air Quality Myths Debunked',
-    excerpt: 'Separating fact from fiction when it comes to indoor air quality and air purification technology.',
-    category: 'Education',
-    date: '2024-01-05',
-    readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop&crop=center'
+    slug: 'multi-layer-air-purifier-delhi',
+    title: 'Multi-Layer Air Purifier Solutions in Delhi',
+    excerpt: 'Discover how advanced multi-layer filtration technology tackles Delhi\'s unique air quality challenges with intelligent purification systems.',
+    category: 'Technology',
+    date: '2024-12-10',
+    readTime: '9 min read',
+    image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=600&fit=crop&crop=center',
+    featured: true
   }
 ]
 
 export function BlogGrid() {
   return (
-    <section className="py-20 px-6 bg-slate-50">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post) => (
-            <Link key={post.id} to={`/blog/${post.slug}`}>
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer">
-                <div className="aspect-video overflow-hidden rounded-t-lg">
+    <section className="pb-32 bg-white">
+      <div className="container mx-auto">
+        {/* Featured Articles Grid - Inspired by About section layout */}
+        <div className="grid gap-7 lg:grid-cols-2">
+          {blogPosts.map((post, index) => (
+            <Link key={post.id} to={`/blog/${post.slug}`} className="group">
+              <div className="relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 h-full">
+                <div className="aspect-[4/3] overflow-hidden">
                   <img 
                     src={post.image} 
                     alt={post.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <CardHeader>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="secondary" className="text-xs">
+                <div className="p-8">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Badge 
+                      variant={post.category === 'Health' ? 'default' : 'secondary'} 
+                      className="text-sm font-medium bg-brand-pastel-green/20 text-brand-grey-green hover:bg-brand-pastel-green/30"
+                    >
                       {post.category}
                     </Badge>
-                    <span className="text-xs text-brand-dark-grey font-body">
+                    <span className="text-sm text-brand-dark-grey/70 font-body">
                       {post.readTime}
                     </span>
                   </div>
-                  <CardTitle className="text-xl font-heading text-brand-grey-green leading-tight">
+                  
+                  <h3 className="text-2xl font-semibold font-heading text-brand-grey-green mb-4 leading-tight group-hover:text-brand-pastel-green transition-colors duration-300">
                     {post.title}
-                  </CardTitle>
-                  <CardDescription className="text-brand-dark-grey font-body">
+                  </h3>
+                  
+                  <p className="text-brand-dark-grey font-body mb-6 leading-relaxed">
                     {post.excerpt}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-brand-dark-grey font-body">
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
                   </p>
-                </CardContent>
-              </Card>
+                  
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm text-brand-dark-grey/70 font-body">
+                      {new Date(post.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </p>
+                    <span className="text-brand-pastel-green font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
+                      Read Article →
+                    </span>
+                  </div>
+                </div>
+              </div>
             </Link>
           ))}
+        </div>
+
+        {/* Coming Soon Section */}
+        <div className="mt-20 text-center">
+          <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand-grey-green/5 to-brand-pastel-green/10 p-16 border border-brand-pastel-green/20">
+            <h3 className="text-3xl font-semibold font-heading text-brand-grey-green mb-4">
+              More Insights Coming Soon
+            </h3>
+            <p className="text-brand-dark-grey font-body max-w-2xl mx-auto mb-8 leading-relaxed">
+              We're constantly researching and sharing the latest insights on air quality, health, and clean living. 
+              Subscribe to our newsletter to stay updated with our latest articles and expert tips.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <input 
+                type="email" 
+                placeholder="Enter your email address" 
+                className="px-6 py-3 rounded-full border border-brand-grey-green/20 focus:outline-none focus:ring-2 focus:ring-brand-pastel-green text-brand-dark-grey font-body min-w-[300px]"
+              />
+              <button className="bg-brand-grey-green text-white px-8 py-3 rounded-full font-semibold hover:bg-brand-grey-green/90 transition-colors duration-300">
+                Subscribe
+              </button>
+            </div>
+            <div className="pointer-events-none absolute -top-1 right-1 z-10 hidden h-full w-full bg-[linear-gradient(to_right,hsl(var(--brand-pastel-green))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--brand-pastel-green))_1px,transparent_1px)] bg-[size:80px_80px] opacity-15 [mask-image:linear-gradient(to_bottom_right,#000,transparent,transparent)] md:block"></div>
+          </div>
         </div>
       </div>
     </section>

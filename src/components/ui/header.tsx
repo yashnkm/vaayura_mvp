@@ -25,8 +25,8 @@ function Header1() {
                     href: "/products/storm",
                 },
                 {
-                    title: "Nest",
-                    href: "/products/nest",
+                    title: "Zest",
+                    href: "/products/zest",
                 },
             ],
         },
