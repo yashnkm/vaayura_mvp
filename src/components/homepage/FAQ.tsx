@@ -77,12 +77,12 @@ export function FAQ() {
         className="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-start"
       >
         <motion.div variants={fadeInUp}>
-          <p className="text-sm text-emerald-800 uppercase font-semibold tracking-wide">FAQ</p>
-          <h3 className="text-4xl md:text-5xl font-bold mt-2 mb-6">
+          <p className="text-sm text-gray-800 uppercase font-semibold tracking-wide">FAQ</p>
+          <h3 className="text-4xl md:text-5xl font-bold mt-2 mb-6 text-gray-800">
             Everything You Need to Know About Our{' '}
-            <span className="text-emerald-800">Purifiers</span>
+            <span className="text-gray-800">Purifiers</span>
           </h3>
-          <p className="text-gray-600 text-lg leading-relaxed">
+          <p className="text-gray-700 text-lg leading-relaxed">
             Have questions about our air purifiers? We've got answers. 
             Find everything you need to know about performance, maintenance, 
             and features.
@@ -100,7 +100,7 @@ export function FAQ() {
             >
               <motion.button
                 onClick={() => toggleFAQ(index)}
-                className="flex justify-between items-center w-full text-left font-semibold text-lg hover:text-emerald-800 transition-colors duration-200"
+                className="flex justify-between items-center w-full text-left font-semibold text-lg text-gray-800 hover:text-gray-600 transition-colors duration-200"
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.2 }}
               >
@@ -119,7 +119,7 @@ export function FAQ() {
                     strokeWidth="1.5" 
                     viewBox="0 0 24 24" 
                     width="24"
-                    className="text-emerald-800"
+                    className="text-gray-800"
                   >
                     <path d="M6 9l6 6 6-6"></path>
                   </svg>
@@ -140,7 +140,7 @@ export function FAQ() {
                       animate={{ y: 0, opacity: 1 }}
                       exit={{ y: -10, opacity: 0 }}
                       transition={{ duration: 0.2, delay: 0.1 }}
-                      className="text-gray-600 mt-3 text-base leading-relaxed"
+                      className="text-gray-700 mt-3 text-base leading-relaxed"
                     >
                       {faq.answer}
                     </motion.p>
@@ -152,22 +152,20 @@ export function FAQ() {
         </motion.div>
       </motion.div>
 
-      {/* Contact Support CTA */}
-      <div className="container mx-auto px-6 mt-16">
-        <div className="text-center">
-          <div className="bg-emerald-900 rounded-2xl p-8 text-white max-w-4xl mx-auto">
-            <h3 className="text-xl font-bold mb-2">Still have questions?</h3>
-            <p className="text-emerald-100 mb-6">
-              Our air quality experts are available 24/7 to help you choose the perfect purifier for your needs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-emerald-900 hover:bg-emerald-50 px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
-                Contact Support
-              </button>
-              <button className="border border-emerald-300 text-emerald-100 hover:bg-emerald-800 px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
-                Schedule Consultation
-              </button>
-            </div>
+      {/* Contact Support CTA - Full Width */}
+      <div className="w-full mt-16 bg-emerald-900">
+        <div className="container mx-auto px-6 py-12 text-center text-white">
+          <h3 className="text-xl font-bold mb-2 text-white">Still have questions?</h3>
+          <p className="text-white mb-6">
+            Our air quality experts are available 24/7 to help you choose the perfect purifier for your needs.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-white text-emerald-900 hover:bg-emerald-50 px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
+              Contact Support
+            </button>
+            <button className="border border-emerald-300 text-emerald-100 hover:bg-emerald-800 px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
+              Schedule Consultation
+            </button>
           </div>
         </div>
       </div>
