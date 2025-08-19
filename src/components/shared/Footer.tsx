@@ -96,13 +96,13 @@ export const Footer = ({
                 Vaayura
               </motion.h2>
             </motion.div>
-            <p className="text-emerald-200 text-lg mb-6">{description}</p>
+            <p className="text-white text-lg mb-6">{description}</p>
             
             {/* Social Media Icons */}
             <div className="flex space-x-4">
               <motion.a
                 href="#"
-                className="text-emerald-300 hover:text-white transition-colors duration-200"
+                className="text-white hover:text-white transition-colors duration-200"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2 }}
               >
@@ -113,7 +113,7 @@ export const Footer = ({
               
               <motion.a
                 href="#"
-                className="text-emerald-300 hover:text-white transition-colors duration-200"
+                className="text-white hover:text-white transition-colors duration-200"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2 }}
               >
@@ -124,7 +124,7 @@ export const Footer = ({
               
               <motion.a
                 href="#"
-                className="text-emerald-300 hover:text-white transition-colors duration-200"
+                className="text-white hover:text-white transition-colors duration-200"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2 }}
               >
@@ -143,7 +143,7 @@ export const Footer = ({
                   <motion.li key={item.name}>
                     <motion.a
                       href={item.href}
-                      className="text-emerald-200 hover:text-white transition-colors duration-200"
+                      className="text-white hover:text-white transition-colors duration-200"
                       whileHover={{ x: 4 }}
                       transition={{ duration: 0.2 }}
                     >
@@ -161,7 +161,7 @@ export const Footer = ({
           className="border-t border-emerald-700 mt-8 pt-8 text-center"
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-emerald-300 text-sm">
+            <p className="text-white text-sm">
               {copyright}
             </p>
             
@@ -170,7 +170,7 @@ export const Footer = ({
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  className="text-emerald-300 hover:text-white transition-colors duration-200"
+                  className="text-white hover:text-white transition-colors duration-200"
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.2 }}
                 >

@@ -1,11 +1,11 @@
 import { Layout } from '@/components/layout/Layout'
-import { ContactHero } from '@/components/contact/ContactHero'
+import { ContactSupport } from '@/components/contact/ContactSupport'
 import { ContactForm } from '@/components/contact/ContactForm'
 
 export function ContactPage() {
   return (
     <Layout>
-      <ContactHero />
+      <ContactSupport />
       <ContactForm />
     </Layout>
   )

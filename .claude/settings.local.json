@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(npm install:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "WebFetch(domain:molekule.com)",
+      "Bash(git restore:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }
