@@ -26,7 +26,7 @@ const HeroContent = ({ showContent }: { showContent?: boolean }) => {
         {/* Call to Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button className="bg-brand-pastel-green text-brand-grey-green hover:bg-brand-white hover:text-brand-grey-green px-8 py-4 text-lg font-subheading font-semibold rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 min-w-[180px]">
-            Explore Products
+            Shop Now
           </button>
           <button className="border-2 border-brand-pastel-green text-brand-pastel-green hover:bg-brand-pastel-green hover:text-brand-grey-green px-8 py-4 text-lg font-subheading font-semibold rounded-2xl transition-all duration-300 min-w-[180px]">
             Book a Demo

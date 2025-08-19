@@ -137,7 +137,7 @@ export function Hero2() {
                 size="brand-default"
                 className="text-lg font-semibold"
               >
-                Explore Products
+                Shop Now
               </Button>
               <Button 
                 variant="brand-outline" 

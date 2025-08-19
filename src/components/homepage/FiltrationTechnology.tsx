@@ -7,23 +7,12 @@ export function FiltrationTechnology() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-emerald-900 mb-6">
-            Advanced Filtration Technology
+            Filtration Technology
           </h2>
         </div>
 
-        {/* Main Filtration Process Image */}
-        <div className="relative max-w-6xl mx-auto">
-          <div className="aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl">
-            <img 
-              src={filterationImage} 
-              alt="Advanced Filtration Technology Process" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-
         {/* Key Features Summary */}
-        <div className="mt-16 grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+        <div className="mb-16 grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
           <div className="text-center">
             <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,6 +53,15 @@ export function FiltrationTechnology() {
             <p className="text-sm text-gray-600">Virus elimination</p>
           </div>
         </div>
+      </div>
+
+      {/* Main Filtration Process Image - Full Width */}
+      <div className="relative w-screen h-[80vh] overflow-hidden -mx-6">
+        <img 
+          src={filterationImage} 
+          alt="Filtration Technology Process" 
+          className="w-full h-full object-contain"
+        />
       </div>
     </section>
   )

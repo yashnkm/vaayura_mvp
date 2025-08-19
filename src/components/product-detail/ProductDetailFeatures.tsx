@@ -136,9 +136,9 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
           <img 
             src={featureImage} 
             alt={feature.title}
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-85 transition-all duration-300 group-hover:blur-sm"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-pastel-green/30 to-brand-pastel-green/50" />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-pastel-green/5 to-brand-pastel-green/10" />
         </div>
       ),
       // Assign different grid positions for varied layout matching the reference

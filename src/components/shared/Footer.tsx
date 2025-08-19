@@ -17,21 +17,18 @@ interface FooterProps {
 
 const defaultSections = [
   {
-    title: "Products",
+    title: "Company",
     links: [
-      { name: "Vaayura Mini", href: "#" },
-      { name: "Vaayura Zen", href: "#" },
-      { name: "Replacement Filters", href: "#" },
-      { name: "Compare Models", href: "#" },
+      { name: "About Us", href: "/about" },
+      { name: "Blog", href: "/blog" },
     ],
   },
   {
-    title: "Company",
+    title: "Products",
     links: [
-      { name: "About Us", href: "#" },
-      { name: "Our Story", href: "#" },
-      { name: "Careers", href: "#" },
-      { name: "Press", href: "#" },
+      { name: "All Products", href: "/products" },
+      { name: "Storm", href: "/products" },
+      { name: "Nest", href: "/products" },
     ],
   },
   {
@@ -80,21 +77,14 @@ export const Footer = ({
         variants={staggerContainer}
         className="container mx-auto py-12 px-8"
       >
-        <div className="grid md:grid-cols-4 gap-8">
-          <motion.div variants={fadeInUp} className="col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-7 gap-8">
+          <motion.div variants={fadeInUp} className="col-span-1 md:col-span-3">
             <motion.div 
               className="mb-6"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
               <img src={logoImage} alt="Vaayura" className="h-10 filter brightness-0 invert mb-4" />
-              <motion.h2 
-                className="text-2xl font-bold mb-2"
-                whileHover={{ color: "#10b981" }}
-                transition={{ duration: 0.3 }}
-              >
-                Vaayura
-              </motion.h2>
             </motion.div>
             <p className="text-white text-lg mb-6">{description}</p>
             
@@ -136,7 +126,7 @@ export const Footer = ({
           </motion.div>
           
           {sections.map((section, sectionIdx) => (
-            <motion.div key={sectionIdx} variants={fadeInUp}>
+            <motion.div key={sectionIdx} variants={fadeInUp} className="col-span-1">
               <h5 className="font-semibold mb-4 text-lg text-white">{section.title}</h5>
               <ul className="space-y-3">
                 {section.links.map((item) => (

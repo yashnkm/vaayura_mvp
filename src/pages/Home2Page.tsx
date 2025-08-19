@@ -10,6 +10,14 @@ export function Home2Page() {
   return (
     <>
       <Hero />
+      {/* About Us Section */}
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-xl md:text-2xl text-brand-dark-grey font-body leading-relaxed">
+            Breathe clean, live healthy. Vaayura's advanced air purification technology ensures your home has the cleanest air possible.
+          </p>
+        </div>
+      </section>
       <FiltrationTechnology />
       <ProductHighlights />
       <Specifications />
