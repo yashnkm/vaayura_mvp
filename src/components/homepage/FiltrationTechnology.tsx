@@ -1,4 +1,4 @@
-import filterationImage from "@/ref_images/filterationimage-03.png";
+import fullwidthImage from "@/assets/fullwidth2.png";
 
 export function FiltrationTechnology() {
   return (
@@ -56,11 +56,11 @@ export function FiltrationTechnology() {
       </div>
 
       {/* Main Filtration Process Image - Full Width */}
-      <div className="relative w-screen h-[80vh] overflow-hidden -mx-6">
+      <div className="relative w-screen h-auto overflow-hidden" style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
         <img 
-          src={filterationImage} 
+          src={fullwidthImage} 
           alt="Filtration Technology Process" 
-          className="w-full h-full object-contain"
+          className="w-full h-auto object-contain"
         />
       </div>
     </section>

@@ -59,7 +59,7 @@ export function ProductContact() {
               >
                 {/* Icon */}
                 <div className="mb-6 flex justify-center">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-lg group-hover:shadow-xl transition-shadow duration-300 group-hover:scale-105 transition-transform">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full group-hover:scale-105 transition-transform">
                     <div className="text-brand-grey-green group-hover:text-brand-pastel-green transition-colors duration-300">
                       {method.icon}
                     </div>

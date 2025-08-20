@@ -27,8 +27,8 @@ const defaultSections = [
     title: "Products",
     links: [
       { name: "All Products", href: "/products" },
-      { name: "Storm", href: "/products" },
-      { name: "Nest", href: "/products" },
+      { name: "Vaayura Storm", href: "/products" },
+      { name: "Vaayura Nest", href: "/products" },
     ],
   },
   {

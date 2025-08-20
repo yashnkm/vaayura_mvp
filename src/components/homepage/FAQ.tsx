@@ -151,24 +151,6 @@ export function FAQ() {
           ))}
         </motion.div>
       </motion.div>
-
-      {/* Contact Support CTA - Full Width */}
-      <div className="w-full mt-16 bg-emerald-900">
-        <div className="container mx-auto px-6 py-12 text-center text-white">
-          <h3 className="text-xl font-bold mb-2 text-white">Still have questions?</h3>
-          <p className="text-white mb-6">
-            Our air quality experts are available 24/7 to help you choose the perfect purifier for your needs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-emerald-900 hover:bg-emerald-50 px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
-              Contact Support
-            </button>
-            <button className="border border-emerald-300 text-emerald-100 hover:bg-emerald-800 px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
-              Schedule Consultation
-            </button>
-          </div>
-        </div>
-      </div>
     </section>
   )
 }

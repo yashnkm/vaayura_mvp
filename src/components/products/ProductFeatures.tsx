@@ -75,7 +75,7 @@ export function ProductFeatures() {
               >
                 {/* Feature Image */}
                 <div className="flex-1 relative max-w-lg">
-                  <div className="relative rounded-2xl bg-slate-50 shadow-lg p-4">
+                  <div className="relative">
                     <div className="aspect-[4/3] w-full">
                       <img 
                         src={feature.image} 
@@ -83,7 +83,6 @@ export function ProductFeatures() {
                         className="w-full h-full object-contain rounded-xl"
                       />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-grey-green/5 to-transparent rounded-2xl" />
                   </div>
                 </div>
 

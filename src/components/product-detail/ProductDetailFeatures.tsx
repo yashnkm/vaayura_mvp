@@ -1,5 +1,12 @@
 import { Shield, Zap, Leaf, Moon, Sparkles, Wifi, Wind, Heart, Timer, Volume2 } from "lucide-react";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
+import natureImg from "@/assets/main.jpg";
+import filtrationImg from "@/assets/4 layer filter.jpg";
+import smartTechImg from "@/assets/int_sensor.jpg";
+import smartAutoImg from "@/assets/gg v1.png";
+import advancedFiltrationImg from "@/assets/advance filteration .png";
+import stormImg from "@/assets/storm.png";
+import aromaImg from "@/assets/aroma.jpg";
 
 // Define types locally to avoid import issues
 interface ProductFeature {
@@ -85,37 +92,37 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
   // Limit to 5 features for the bento grid
   features = features.slice(0, 5);
 
-  // Feature-specific background images using Unsplash URLs for air purifier features
+  // Feature-specific background images using local assets and nature images
   const getFeatureImage = (title: string, index: number) => {
-    // Match features to relevant air purifier/technology images
+    // Match features to relevant images - using local assets where appropriate
     if (title.toLowerCase().includes('hepa') || title.toLowerCase().includes('filtration')) {
-      return "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=60";
+      return advancedFiltrationImg; // Use our advanced filtration cutaway image
     }
     if (title.toLowerCase().includes('smart') || title.toLowerCase().includes('auto') || title.toLowerCase().includes('sensor')) {
-      return "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&auto=format&fit=crop&q=60";
+      return smartAutoImg; // Use our new Vaayura air purifier image
     }
     if (title.toLowerCase().includes('ambient') || title.toLowerCase().includes('light') || title.toLowerCase().includes('display')) {
-      return "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=60";
+      return "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&auto=format&fit=crop&q=60"; // Nature with light
     }
     if (title.toLowerCase().includes('aroma') || title.toLowerCase().includes('essential')) {
-      return "https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=800&auto=format&fit=crop&q=60";
+      return aromaImg; // Use the beautiful aromatherapy diffuser image
     }
     if (title.toLowerCase().includes('silent') || title.toLowerCase().includes('sleep') || title.toLowerCase().includes('quiet')) {
-      return "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&auto=format&fit=crop&q=60";
+      return natureImg; // Use our beautiful forest/nature image for peaceful sleep
     }
     if (title.toLowerCase().includes('wifi') || title.toLowerCase().includes('app') || title.toLowerCase().includes('connect')) {
-      return "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&auto=format&fit=crop&q=60";
+      return "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&auto=format&fit=crop&q=60";
     }
     if (title.toLowerCase().includes('timer') || title.toLowerCase().includes('schedule')) {
-      return "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=800&auto=format&fit=crop&q=60";
+      return "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop&q=60"; // Misty forest
     }
-    // Default air purifier images for other features
+    // Default nature and air purifier images
     const defaultImages = [
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=60",
-      "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&auto=format&fit=crop&q=60",
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=60",
-      "https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=800&auto=format&fit=crop&q=60",
-      "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&auto=format&fit=crop&q=60"
+      advancedFiltrationImg,
+      smartAutoImg, 
+      aromaImg,
+      natureImg,
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&auto=format&fit=crop&q=60"
     ];
     return defaultImages[index % defaultImages.length];
   };
@@ -131,6 +138,7 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
       description: feature.description,
       href: "#",
       cta: "Learn more",
+      whiteText: true, // Make text white for all cards
       background: (
         <div className="absolute inset-0">
           <img 
@@ -138,7 +146,7 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
             alt={feature.title}
             className="absolute inset-0 w-full h-full object-cover object-center opacity-85 transition-all duration-300 group-hover:blur-sm"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-pastel-green/5 to-brand-pastel-green/10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-black/50" />
         </div>
       ),
       // Assign different grid positions for varied layout matching the reference
@@ -165,7 +173,7 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
               Advanced <span className="text-brand-pastel-green">Features</span>
             </h2>
             <p className="text-lg text-brand-dark-grey font-body max-w-3xl mx-auto leading-relaxed">
-              Every feature in {product.name} is engineered to provide you with the cleanest, healthiest air while maintaining 
+              Every feature in {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`} is engineered to provide you with the cleanest, healthiest air while maintaining 
               the perfect balance of performance and tranquility.
             </p>
           </div>

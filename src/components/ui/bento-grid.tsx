@@ -30,6 +30,7 @@ const BentoCard = ({
   description,
   href,
   cta,
+  whiteText = false,
 }: {
   name: string;
   className: string;
@@ -38,6 +39,7 @@ const BentoCard = ({
   description: string;
   href: string;
   cta: string;
+  whiteText?: boolean;
 }) => (
   <div
     key={name}
@@ -51,12 +53,14 @@ const BentoCard = ({
     )}
   >
     <div>{background}</div>
-    <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-10">
-      <Icon className="h-12 w-12 origin-left transform-gpu text-brand-grey-green transition-all duration-300 ease-in-out group-hover:scale-75" />
-      <h3 className="text-xl font-semibold text-brand-grey-green font-subheading">
+    <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 pt-8 transition-all duration-300 group-hover:-translate-y-10">
+      <div className="flex items-center justify-start w-16 h-16 mb-2">
+        <Icon className={`h-12 w-12 origin-center transform-gpu transition-all duration-300 ease-in-out group-hover:scale-75 ${whiteText ? 'text-white' : 'text-brand-grey-green'}`} />
+      </div>
+      <h3 className={`text-xl font-semibold font-subheading ${whiteText ? 'text-white' : 'text-brand-grey-green'}`}>
         {name}
       </h3>
-      <p className="max-w-lg text-brand-dark-grey font-body leading-relaxed">{description}</p>
+      <p className={`max-w-lg font-body leading-relaxed ${whiteText ? 'text-gray-200' : 'text-brand-dark-grey'}`}>{description}</p>
     </div>
 
     <div

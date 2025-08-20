@@ -1,7 +1,19 @@
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { useNavigate } from 'react-router-dom'
+import stormImg from "@/assets/storm.png"
+import nestImg from "@/assets/nest.png"
 
 export function ContactSupport() {
+  const navigate = useNavigate()
+
+  const handleStormClick = () => {
+    navigate('/products/storm')
+  }
+
+  const handleNestClick = () => {
+    navigate('/products/nest')
+  }
   return (
     <div className="bg-white">
       {/* Hero Section - From image.png */}
@@ -16,9 +28,7 @@ export function ContactSupport() {
             and reach out through chat to talk to us 24/7
           </p>
           <Button 
-            variant="brand-primary" 
-            size="brand-default"
-            className="bg-brand-pastel-green hover:bg-brand-pastel-green/90 text-white px-8 py-3 rounded-full text-lg font-semibold"
+            className="bg-green-800 hover:bg-green-900 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-200 hover:scale-105"
           >
             Chat with us
           </Button>
@@ -30,8 +40,8 @@ export function ContactSupport() {
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Track Order Card */}
-            <Card className="p-8 bg-white border-0 hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-2xl font-heading text-brand-grey-green mb-4">
+            <Card className="p-8 bg-white border-0 hover:shadow-lg transition-shadow duration-300 rounded-3xl">
+              <h3 className="text-2xl font-display text-brand-grey-green mb-4">
                 Track your order
               </h3>
               <p className="text-brand-dark-grey font-body mb-6 leading-relaxed">
@@ -40,16 +50,15 @@ export function ContactSupport() {
                 for your order.
               </p>
               <Button 
-                variant="outline" 
-                className="text-brand-pastel-green border-brand-pastel-green hover:bg-brand-pastel-green hover:text-white"
+                className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105"
               >
                 Track your order →
               </Button>
             </Card>
 
             {/* Manage Subscription Card */}
-            <Card className="p-8 bg-white border-0 hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-2xl font-heading text-brand-grey-green mb-4">
+            <Card className="p-8 bg-white border-0 hover:shadow-lg transition-shadow duration-300 rounded-3xl">
+              <h3 className="text-2xl font-display text-brand-grey-green mb-4">
                 Need to manage your
                 <br />
                 subscription?
@@ -58,8 +67,7 @@ export function ContactSupport() {
                 Log in to your account portal.
               </p>
               <Button 
-                variant="outline" 
-                className="text-brand-pastel-green border-brand-pastel-green hover:bg-brand-pastel-green hover:text-white"
+                className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105"
               >
                 Manage subscription →
               </Button>
@@ -78,53 +86,50 @@ export function ContactSupport() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {/* Product issues */}
-              <Card className="p-8 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-heading text-brand-grey-green mb-6 text-center">
+              <Card className="p-8 bg-white border-0 rounded-3xl hover:shadow-lg transition-shadow duration-300">
+                <h3 className="text-xl font-display text-brand-grey-green mb-6 text-center">
                   Product issues
                 </h3>
                 <div className="text-center">
-                  <a 
-                    href="/support/product-issues" 
-                    className="text-brand-pastel-green hover:text-brand-pastel-green/80 font-medium inline-flex items-center"
+                  <Button
+                    className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105"
                   >
                     Learn more →
-                  </a>
+                  </Button>
                 </div>
               </Card>
 
               {/* App connectivity */}
-              <Card className="p-8 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-heading text-brand-grey-green mb-6 text-center">
+              <Card className="p-8 bg-white border-0 rounded-3xl hover:shadow-lg transition-shadow duration-300">
+                <h3 className="text-xl font-display text-brand-grey-green mb-6 text-center">
                   App connectivity
                 </h3>
                 <div className="text-center">
-                  <a 
-                    href="/support/app-connectivity" 
-                    className="text-brand-pastel-green hover:text-brand-pastel-green/80 font-medium inline-flex items-center"
+                  <Button
+                    className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105"
                   >
                     Learn more →
-                  </a>
+                  </Button>
                 </div>
               </Card>
 
               {/* Warranty & returns */}
-              <Card className="p-8 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-heading text-brand-grey-green mb-6 text-center">
+              <Card className="p-8 bg-white border-0 rounded-3xl hover:shadow-lg transition-shadow duration-300">
+                <h3 className="text-xl font-display text-brand-grey-green mb-6 text-center">
                   Warranty & returns
                 </h3>
                 <div className="text-center">
-                  <a 
-                    href="/support/warranty-returns" 
-                    className="text-brand-pastel-green hover:text-brand-pastel-green/80 font-medium inline-flex items-center"
+                  <Button
+                    className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105"
                   >
                     Learn more →
-                  </a>
+                  </Button>
                 </div>
               </Card>
             </div>
           </div>
 
-          {/* Product information Section - From image2.png */}
+          {/* Product information Section */}
           <div className="text-center pt-8">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight mb-12">
@@ -132,28 +137,82 @@ export function ContactSupport() {
               </h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Vaayura Pro */}
-                <Card className="p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
-                  <div className="h-32 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
-                    <div className="w-16 h-24 bg-gray-300 rounded-lg"></div>
-                  </div>
-                  <h3 className="text-lg font-heading text-brand-grey-green text-center">
-                    Vaayura Pro
-                  </h3>
-                </Card>
-
-                {/* Replacement Filters */}
-                <Card className="p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
-                  <div className="h-32 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
-                    <div className="flex space-x-1">
-                      <div className="w-6 h-16 bg-gray-300 rounded"></div>
-                      <div className="w-6 h-16 bg-gray-400 rounded"></div>
-                      <div className="w-6 h-16 bg-gray-300 rounded"></div>
+                {/* Storm */}
+                <Card 
+                  className="p-6 bg-white border-0 rounded-3xl hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+                  onClick={handleStormClick}
+                >
+                  <div className="relative mb-6 w-full max-w-sm mx-auto">
+                    <div className="aspect-square rounded-3xl overflow-hidden">
+                      <img
+                        src={stormImg}
+                        alt="Vaayura Storm"
+                        className="w-full h-full object-contain p-8"
+                      />
                     </div>
                   </div>
-                  <h3 className="text-lg font-heading text-brand-grey-green text-center">
-                    Replacement Filters
+                  <h3 className="text-2xl font-display font-semibold text-brand-grey-green mb-4">
+                    Storm
                   </h3>
+                  <p className="text-brand-dark-grey font-body leading-relaxed mb-6">
+                    Powerful air purifier for living rooms, dining rooms, and kitchens
+                  </p>
+                  <div className="space-y-3">
+                    <Button
+                      className="bg-green-800 hover:bg-green-900 text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 w-full"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleStormClick()
+                      }}
+                    >
+                      Shop Storm
+                    </Button>
+                    <Button
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 w-full"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Bulk Order
+                    </Button>
+                  </div>
+                </Card>
+
+                {/* Nest */}
+                <Card 
+                  className="p-6 bg-white border-0 rounded-3xl hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+                  onClick={handleNestClick}
+                >
+                  <div className="relative mb-6 w-full max-w-sm mx-auto">
+                    <div className="aspect-square rounded-3xl overflow-hidden">
+                      <img
+                        src={nestImg}
+                        alt="Vaayura Nest"
+                        className="w-full h-full object-contain p-8"
+                      />
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-display font-semibold text-brand-grey-green mb-4">
+                    Nest
+                  </h3>
+                  <p className="text-brand-dark-grey font-body leading-relaxed mb-6">
+                    Compact air purifier great for bedrooms, home offices, or bathrooms
+                  </p>
+                  <div className="space-y-3">
+                    <Button
+                      className="bg-green-800 hover:bg-green-900 text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 w-full"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleNestClick()
+                      }}
+                    >
+                      Shop Nest
+                    </Button>
+                    <Button
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 w-full"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Bulk Order
+                    </Button>
+                  </div>
                 </Card>
               </div>
             </div>
@@ -168,9 +227,7 @@ export function ContactSupport() {
             Still have questions?
           </h2>
           <Button 
-            variant="brand-primary" 
-            size="brand-default"
-            className="bg-brand-pastel-green hover:bg-brand-pastel-green/90 text-white px-8 py-3 rounded-full text-lg font-semibold"
+            className="bg-green-800 hover:bg-green-900 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-200 hover:scale-105"
           >
             Visit help center
           </Button>

@@ -14,7 +14,31 @@ export const database = {
   // Products
   products: {
     getAll: () => supabase.from('products').select('*').eq('published', true).order('created_at', { ascending: false }),
-    getPublished: () => supabase.from('products').select('*').eq('published', true).order('created_at', { ascending: false }),
+    getPublished: () => supabase
+      .from('products')
+      .select('*')
+      .eq('published', true)
+      .order('name', { ascending: true })
+      .then(({ data, error }) => {
+        if (data) {
+          // Custom sort: Storm first, then Nest, then alphabetical
+          const sorted = data.sort((a, b) => {
+            const aIsStorm = a.name.toLowerCase().includes('storm');
+            const bIsStorm = b.name.toLowerCase().includes('storm');
+            const aIsNest = a.name.toLowerCase().includes('nest');
+            const bIsNest = b.name.toLowerCase().includes('nest');
+            
+            if (aIsStorm && !bIsStorm) return -1;
+            if (bIsStorm && !aIsStorm) return 1;
+            if (aIsNest && !bIsNest && !bIsStorm) return -1;
+            if (bIsNest && !aIsNest && !aIsStorm) return 1;
+            
+            return a.name.localeCompare(b.name);
+          });
+          return { data: sorted, error };
+        }
+        return { data, error };
+      }),
     getById: (id: string) => supabase.from('products').select('*').eq('id', id).single(),
     getBySlug: (slug: string) => supabase.from('products').select('*').eq('slug', slug).eq('published', true).single(),
     create: (product: any) => supabase.from('products').insert([product]).select(),

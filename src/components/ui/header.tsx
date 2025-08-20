@@ -21,12 +21,12 @@ function Header1() {
             description: "Discover our range of advanced air purification solutions.",
             items: [
                 {
-                    title: "Storm",
+                    title: "Vaayura Storm",
                     href: "/products/storm",
                 },
                 {
-                    title: "Zest",
-                    href: "/products/zest",
+                    title: "Vaayura Nest",
+                    href: "/products/nest",
                 },
             ],
         },

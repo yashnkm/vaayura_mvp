@@ -1,4 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { ProductClients } from "@/components/products/ProductClients";
+import { ProductContact } from "@/components/products/ProductContact";
+import heroImage from "@/assets/main.jpg";
+import productImage from "@/assets/background.png";
 
 interface AboutVaayuraProps {
   title?: string;
@@ -60,7 +64,7 @@ export const AboutVaayura = ({
   return (
     <>
       {/* Full-Screen Hero Section */}
-      <section className="min-h-screen bg-white flex items-center py-20 px-6">
+      <section className="min-h-screen bg-white flex items-center pt-24 pb-20 px-6">
         <div className="container mx-auto">
           <div className="grid gap-12 md:grid-cols-2 md:gap-16 items-center min-h-[80vh]">
             
@@ -126,19 +130,19 @@ export const AboutVaayura = ({
             <div className="relative">
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=800&fit=crop&crop=center"
-                  alt="Clean air technology and healthy living"
+                  src={heroImage}
+                  alt="Pure nature - representing clean air and environmental wellness"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-grey-green/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-grey-green/30 to-transparent"></div>
                 
                 {/* Floating Card */}
                 <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-brand-pastel-green/20">
                   <h4 className="text-lg font-semibold font-heading text-brand-grey-green mb-2">
-                    Clean Air, Healthy Lives
+                    Pure Air, Pure Nature
                   </h4>
                   <p className="text-sm text-brand-dark-grey font-body leading-relaxed">
-                    Our advanced air purification technology ensures every breath you take at home is clean, safe, and refreshing.
+                    Inspired by nature's own air purification systems, we bring you technology that works in harmony with the environment.
                   </p>
                 </div>
               </div>
@@ -149,31 +153,193 @@ export const AboutVaayura = ({
 
 
       {/* Our Philosophy Section */}
-      <section className="py-32 bg-white">
+      <section className="py-32 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-semibold font-display text-brand-grey-green mb-6">Our Philosophy</h2>
             <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full mb-8"></div>
-            <div className="max-w-4xl mx-auto space-y-6">
-              <div className="flex items-start gap-4 text-left">
-                <span className="text-brand-pastel-green text-xl">•</span>
-                <p className="text-lg text-brand-dark-grey font-body">Clean air should be a right, not a luxury.</p>
+            <div className="max-w-4xl mx-auto space-y-8">
+              <div className="flex items-start gap-6 text-left">
+                <span className="text-brand-pastel-green text-2xl">•</span>
+                <p className="text-xl text-brand-dark-grey font-body leading-relaxed">Clean air should be a right, not a luxury.</p>
               </div>
-              <div className="flex items-start gap-4 text-left">
-                <span className="text-brand-pastel-green text-xl">•</span>
-                <p className="text-lg text-brand-dark-grey font-body">Performance and beauty can coexist.</p>
+              <div className="flex items-start gap-6 text-left">
+                <span className="text-brand-pastel-green text-2xl">•</span>
+                <p className="text-xl text-brand-dark-grey font-body leading-relaxed">Performance and beauty can coexist.</p>
               </div>
-              <div className="flex items-start gap-4 text-left">
-                <span className="text-brand-pastel-green text-xl">•</span>
-                <p className="text-lg text-brand-dark-grey font-body">Technology should work silently in the background, while you live fully in the foreground.</p>
+              <div className="flex items-start gap-6 text-left">
+                <span className="text-brand-pastel-green text-2xl">•</span>
+                <p className="text-xl text-brand-dark-grey font-body leading-relaxed">Technology should work silently in the background, while you live fully in the foreground.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Achievements Section */}
-      <section className="py-32 bg-slate-50">
+      {/* The Problem We Solve Section */}
+      <section className="w-full py-16 lg:py-24 bg-white">
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="flex flex-col gap-12">
+            
+            {/* Section Header */}
+            <div className="text-center space-y-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+                The Problem We <span className="text-brand-pastel-green">Solve</span>
+              </h2>
+              <p className="text-lg text-brand-dark-grey font-body max-w-3xl mx-auto leading-relaxed">
+                "What You Can't See, You Still Breathe."
+              </p>
+            </div>
+
+            {/* Problem Content */}
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+              {/* Problem Image */}
+              <div className="flex-1 relative max-w-lg">
+                <div className="relative rounded-2xl bg-slate-50 shadow-lg p-4">
+                  <div className="aspect-[4/3] w-full">
+                    <img 
+                      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop&crop=center" 
+                      alt="Air pollution in urban India"
+                      className="w-full h-full object-contain rounded-xl"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-grey-green/5 to-transparent rounded-2xl" />
+                </div>
+              </div>
+
+              {/* Problem Content */}
+              <div className="flex-1 space-y-6">
+                {/* Problem Number */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-brand-pastel-green flex items-center justify-center">
+                    <span className="text-brand-grey-green font-bold text-lg">01</span>
+                  </div>
+                  <div className="h-px bg-brand-pastel-green/30 flex-1" />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-2xl md:text-3xl font-subheading text-brand-grey-green leading-tight">
+                  The Invisible Threat
+                </h3>
+
+                {/* Description */}
+                <p className="text-brand-dark-grey font-body leading-relaxed text-lg">
+                  Every breath you take in India carries more than just oxygen—it carries dust, smoke, industrial particles, and invisible toxins. The WHO estimates that nearly 18% of all deaths in India are linked to air pollution. Vaayura exists to change that—making clean air effortless, affordable, and accessible.
+                </p>
+
+                {/* Technical Specs */}
+                <div className="bg-slate-50 rounded-xl p-4 border-l-4 border-brand-pastel-green">
+                  <div className="text-sm font-medium text-brand-grey-green mb-1">
+                    Critical Statistics
+                  </div>
+                  <div className="text-brand-dark-grey font-mono text-sm">
+                    18% Deaths Linked to Air Pollution • PM2.5 Levels 10x WHO Limits • 1.7M Annual Deaths
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Vaayura Section */}
+      <section className="w-full py-16 lg:py-24 bg-gray-100">
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="flex flex-col gap-12">
+            
+            {/* Section Header */}
+            <div className="text-center space-y-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+                Why Choose <span className="text-brand-pastel-green">Vaayura</span>?
+              </h2>
+            </div>
+
+            {/* Features Content */}
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16">
+              {/* Features Image */}
+              <div className="flex-1 relative max-w-lg">
+                <div className="relative rounded-2xl bg-white shadow-lg p-8">
+                  <div className="aspect-[4/3] w-full">
+                    <img 
+                      src={productImage} 
+                      alt="Vaayura air purifier - premium design and technology"
+                      className="w-full h-full object-contain rounded-xl"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-grey-green/5 to-transparent rounded-2xl" />
+                </div>
+              </div>
+
+              {/* Features Content */}
+              <div className="flex-1 space-y-6">
+                {/* Features Number */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-brand-pastel-green flex items-center justify-center">
+                    <span className="text-brand-grey-green font-bold text-lg">02</span>
+                  </div>
+                  <div className="h-px bg-brand-pastel-green/30 flex-1" />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-2xl md:text-3xl font-subheading text-brand-grey-green leading-tight">
+                  Our Solution Advantage
+                </h3>
+
+                {/* Features List */}
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
+                    <p className="text-brand-dark-grey font-body leading-relaxed">
+                      <strong>World-class multi-layer filtration</strong> removing up to 99.97% of harmful airborne particles
+                    </p>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
+                    <p className="text-brand-dark-grey font-body leading-relaxed">
+                      <strong>Real-time air quality monitoring</strong> for complete control and transparency
+                    </p>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
+                    <p className="text-brand-dark-grey font-body leading-relaxed">
+                      <strong>Designed to complement your interiors</strong> – elegant, minimal, and timeless
+                    </p>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
+                    <p className="text-brand-dark-grey font-body leading-relaxed">
+                      <strong>Long-lasting performance</strong> with low maintenance needs and energy efficiency
+                    </p>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
+                    <p className="text-brand-dark-grey font-body leading-relaxed">
+                      <strong>Backed by exceptional after-sales support</strong> and comprehensive warranty coverage
+                    </p>
+                  </div>
+                </div>
+
+                {/* Technical Specs */}
+                <div className="bg-white rounded-xl p-4 border-l-4 border-brand-pastel-green shadow-sm">
+                  <div className="text-sm font-medium text-brand-grey-green mb-1">
+                    Performance Guarantee
+                  </div>
+                  <div className="text-brand-dark-grey font-mono text-sm">
+                    99.97% Filtration • Real-time Monitoring • 29+ Years Engineering Excellence
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Achievements Section - Our Promise in Numbers */}
+      <section className="py-32 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="relative overflow-hidden rounded-xl bg-white p-10 md:p-16 shadow-lg">
             <div className="flex flex-col gap-4 text-center md:text-left mb-10">
@@ -197,6 +363,12 @@ export const AboutVaayura = ({
           </div>
         </div>
       </section>
+
+      {/* Trusted by Industry Leaders Section */}
+      <ProductClients />
+
+      {/* Ready to Improve Your Air Quality Section */}
+      <ProductContact />
 
     </>
   );

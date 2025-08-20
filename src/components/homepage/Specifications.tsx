@@ -1,4 +1,4 @@
-import specifications9933 from "@/assets/9933_V4.png";
+import specifications9933 from "@/assets/storm.png";
 import ggV1 from "@/assets/gg v1.png";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -9,7 +9,7 @@ export function Specifications() {
   // Array of products with images and specifications
   const products = [
     {
-      name: "Storm",
+      name: "Vaayura Storm",
       image: { src: specifications9933, alt: "Vaayura Storm Air Purifier" },
       specifications: [
         { label: "Cord length:", value: "1.8m" },
@@ -25,7 +25,7 @@ export function Specifications() {
       ]
     },
     {
-      name: "Nest",
+      name: "Vaayura Nest",
       image: { src: ggV1, alt: "Vaayura Nest Air Purifier" },
       specifications: [
         { label: "Cord length:", value: "1.2m" },

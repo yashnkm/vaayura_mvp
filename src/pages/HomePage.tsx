@@ -6,6 +6,8 @@ import { FiltrationTechnology } from '@/components/homepage/FiltrationTechnology
 import { Specifications } from '@/components/homepage/Specifications'
 import { Stats } from '@/components/homepage/Stats'
 import { FAQ } from '@/components/homepage/FAQ'
+import { ProductClients } from '@/components/products/ProductClients'
+import { ProductContact } from '@/components/products/ProductContact'
 import { Footer } from '@/components/shared/Footer'
 
 export function HomePage() {
@@ -38,6 +40,8 @@ export function HomePage() {
       <Specifications />
       <Stats />
       <FAQ />
+      <ProductClients />
+      <ProductContact />
       <Footer />
     </>
   )

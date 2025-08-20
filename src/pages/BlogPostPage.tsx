@@ -13,32 +13,150 @@ const blogPosts = [
     title: 'Hidden Dangers of Indoor Air Pollution',
     excerpt: 'Uncover the invisible threats lurking in your home and learn how to protect your family from harmful indoor pollutants that affect your daily health.',
     content: `
-      <p>Your home should be your sanctuary, but did you know that the air inside your house could be up to 5 times more polluted than outdoor air? Indoor air pollution is a silent threat that affects millions of people daily, yet most remain unaware of its presence and impact on their health.</p>
+      <div class="blog-content">
+        <div class="intro-section">
+          <p>Your home should be your sanctuary, but did you know that the air inside your house could be <strong>up to 5 times more polluted</strong> than outdoor air? Indoor air pollution is a silent threat that affects millions of people daily, yet most remain unaware of its presence and impact on their health.</p>
+        </div>
+        
+        <hr class="section-divider" />
+        
+        <section class="content-section">
+          <h2>The Invisible Enemy in Your Home</h2>
+          <p>Indoor air pollution consists of various harmful particles and gases that accumulate in enclosed spaces. Unlike outdoor pollution, which is often visible, indoor pollutants are typically invisible, odorless, and tasteless, making them particularly dangerous as they go undetected for years.</p>
+          
+          <div class="highlight-callout">
+            <p><strong>Key Fact:</strong> The EPA ranks indoor air pollution among the top 5 environmental health risks, yet most people spend 90% of their time indoors.</p>
+          </div>
+        </section>
+        
+        <hr class="section-divider" />
+        
+        <section class="content-section">
+          <h2>Common Sources of Indoor Pollution</h2>
+          
+          <div class="source-grid">
+            <div class="source-card">
+              <h3>Volatile Organic Compounds (VOCs)</h3>
+              <p><strong>Sources:</strong> Furniture, carpets, paints, cleaning products, and building materials</p>
+              <p><strong>Health Effects:</strong> Headaches, dizziness, and long-term organ damage</p>
+            </div>
+            
+            <div class="source-card">
+              <h3>Biological Contaminants</h3>
+              <p><strong>Sources:</strong> Dust mites, pet dander, mold spores, and bacteria</p>
+              <p><strong>Health Effects:</strong> Allergies and respiratory problems, especially in humid environments</p>
+            </div>
+            
+            <div class="source-card">
+              <h3>Combustion Byproducts</h3>
+              <p><strong>Sources:</strong> Gas stoves, fireplaces, candles, and tobacco smoke</p>
+              <p><strong>Health Effects:</strong> Carbon monoxide poisoning, nitrogen oxide exposure, and particulate matter accumulation</p>
+            </div>
+          </div>
+        </section>
+        
+        <hr class="section-divider" />
+        
+        <section class="content-section">
+          <h2>Health Impacts You Can't Ignore</h2>
+          <p>Prolonged exposure to indoor air pollution can lead to serious health consequences across multiple body systems:</p>
+          
+          <div class="impact-categories">
+            <div class="category-block">
+              <h4>Respiratory System</h4>
+              <ul>
+                <li>Asthma and chronic cough</li>
+                <li>Reduced lung function</li>
+                <li>Bronchitis and pneumonia risk</li>
+                <li>Increased susceptibility to respiratory infections</li>
+              </ul>
+            </div>
+            
+            <div class="category-block">
+              <h4>Neurological Effects</h4>
+              <ul>
+                <li>Chronic fatigue and reduced cognitive function</li>
+                <li>Persistent headaches and sinus problems</li>
+                <li>Memory and concentration difficulties</li>
+                <li>Mood changes and irritability</li>
+              </ul>
+            </div>
+            
+            <div class="category-block">
+              <h4>Long-term Health Risks</h4>
+              <ul>
+                <li>Cardiovascular disease development</li>
+                <li>Chronic allergic reactions and skin conditions</li>
+                <li>Increased cancer risk from prolonged chemical exposure</li>
+                <li>Compromised immune system function</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        
+        <hr class="section-divider" />
+        
+        <section class="content-section">
+          <h2>Protecting Your Family: Actionable Solutions</h2>
+          
+          <div class="solution-list">
+            <div class="solution-item">
+              <h4>1. Improve Ventilation</h4>
+              <p>Open windows regularly, install exhaust fans in kitchens and bathrooms, and ensure proper air circulation throughout your home. Consider upgrading to energy-efficient ventilation systems that filter incoming air.</p>
+            </div>
+            
+            <div class="solution-item">
+              <h4>2. Choose Natural and Low-VOC Products</h4>
+              <p>Switch to natural cleaning products, low-VOC paints, and furniture made from sustainable materials. Read labels carefully and avoid products with strong chemical odors.</p>
+            </div>
+            
+            <div class="solution-item">
+              <h4>3. Control Indoor Humidity</h4>
+              <p>Maintain humidity levels between 30-50% using dehumidifiers or humidifiers as needed. This prevents mold growth and reduces dust mite populations that thrive in humid conditions.</p>
+            </div>
+            
+            <div class="solution-item">
+              <h4>4. Invest in Quality Air Purification</h4>
+              <p>HEPA air purifiers can remove 99.97% of airborne particles as small as 0.3 microns. Choose systems with activated carbon filters for comprehensive protection against both particles and gases.</p>
+            </div>
+          </div>
+          
+          <div class="conclusion-block">
+            <h3>Take Action Today</h3>
+            <p>Don't let invisible pollutants compromise your family's health. Start implementing these changes immediately and consider investing in advanced air purification technology to create the clean, healthy indoor environment your loved ones deserve.</p>
+          </div>
+        </section>
+      </div>
       
-      <h2>The Invisible Enemy in Your Home</h2>
-      <p>Indoor air pollution consists of various harmful particles and gases that accumulate in enclosed spaces. Unlike outdoor pollution, which is often visible, indoor pollutants are typically invisible, odorless, and tasteless, making them particularly dangerous as they go undetected for years.</p>
-      
-      <h2>Common Sources of Indoor Pollution</h2>
-      <p><strong>Volatile Organic Compounds (VOCs):</strong> Released by furniture, carpets, paints, cleaning products, and building materials. These chemicals can cause headaches, dizziness, and long-term health issues.</p>
-      
-      <p><strong>Biological Contaminants:</strong> Dust mites, pet dander, mold spores, and bacteria thrive in humid environments and can trigger allergies and respiratory problems.</p>
-      
-      <p><strong>Combustion Byproducts:</strong> From gas stoves, fireplaces, candles, and tobacco smoke, producing carbon monoxide, nitrogen oxides, and particulate matter.</p>
-      
-      <h2>Health Impacts You Can't Ignore</h2>
-      <p>Prolonged exposure to indoor air pollution can lead to:</p>
-      <ul>
-        <li>Respiratory issues including asthma and chronic cough</li>
-        <li>Allergic reactions and skin irritation</li>
-        <li>Fatigue and reduced cognitive function</li>
-        <li>Headaches and sinus problems</li>
-        <li>Long-term cardiovascular and lung diseases</li>
-      </ul>
-      
-      <h2>Protecting Your Family</h2>
-      <p>The good news is that indoor air pollution is preventable and treatable. Simple steps like improving ventilation, using natural cleaning products, maintaining optimal humidity levels, and investing in quality air purification systems can dramatically improve your indoor air quality.</p>
-      
-      <p>Don't let invisible pollutants compromise your family's health. Take action today to create the clean, healthy indoor environment your loved ones deserve.</p>
+      <style>
+        .blog-content { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; line-height: 1.7; color: #374151; }
+        .intro-section { font-size: 1.125rem; margin-bottom: 2.5rem; color: #4B5563; }
+        .content-section { margin: 2.5rem 0; }
+        .content-section h2 { font-size: 1.875rem; font-weight: 700; color: #111827; margin-bottom: 1.5rem; line-height: 1.3; }
+        .content-section h3 { font-size: 1.25rem; font-weight: 600; color: #1F2937; margin-bottom: 1rem; }
+        .content-section h4 { font-size: 1.125rem; font-weight: 600; color: #1F2937; margin-bottom: 0.75rem; }
+        .content-section p { margin-bottom: 1.25rem; }
+        .section-divider { border: none; height: 1px; background: #E5E7EB; margin: 3rem 0; }
+        .highlight-callout { background: #F9FAFB; border-left: 4px solid #6B7280; padding: 1.5rem; margin: 2rem 0; }
+        .source-grid { display: grid; gap: 1.5rem; margin: 2rem 0; }
+        .source-card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 8px; padding: 1.5rem; }
+        .impact-categories { display: grid; gap: 2rem; margin: 2rem 0; }
+        .category-block { }
+        .category-block ul { margin: 1rem 0; padding-left: 1.5rem; }
+        .category-block li { margin-bottom: 0.5rem; }
+        .solution-list { margin: 2rem 0; }
+        .solution-item { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid #F3F4F6; }
+        .solution-item:last-child { border-bottom: none; }
+        .conclusion-block { background: #F3F4F6; padding: 2rem; border-radius: 8px; margin-top: 2.5rem; }
+        .conclusion-block h3 { color: #111827; margin-bottom: 1rem; }
+        @media (min-width: 768px) {
+          .source-grid { grid-template-columns: 1fr; }
+          .impact-categories { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (min-width: 1024px) {
+          .source-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+      </style>
     `,
     category: 'Health',
     date: '2024-12-15',
@@ -52,46 +170,166 @@ const blogPosts = [
     title: 'Multi-Layer Air Purifier Solutions in Delhi',
     excerpt: 'Discover how advanced multi-layer filtration technology tackles Delhi\'s unique air quality challenges with intelligent purification systems.',
     content: `
-      <p>Delhi's air quality crisis demands more than conventional solutions. With PM2.5 levels often exceeding safe limits by 10x, residents need advanced multi-layer air purification technology that can handle the city's complex pollution profile.</p>
+      <div class="blog-content">
+        <div class="intro-section">
+          <p>Delhi's air quality crisis demands more than conventional solutions. With <strong>PM2.5 levels often exceeding safe limits by 10x</strong>, residents need advanced multi-layer air purification technology that can handle the city's complex pollution profile.</p>
+        </div>
+        
+        <hr class="section-divider" />
+        
+        <section class="content-section">
+          <h2>Understanding Delhi's Air Quality Challenge</h2>
+          <p>Delhi faces a unique combination of pollutants that create one of the world's most challenging urban air environments. The city's pollution sources include vehicular emissions, industrial discharge, construction dust, crop burning residue, and seasonal allergens.</p>
+          
+          <div class="highlight-callout">
+            <p><strong>Key Challenge:</strong> This complex mix requires sophisticated filtration technology that can address multiple types of contaminants simultaneously, something traditional single-filter systems simply cannot achieve.</p>
+          </div>
+        </section>
+        
+        <hr class="section-divider" />
+        
+        <section class="content-section">
+          <h2>The Multi-Layer Advantage</h2>
+          <p>Multi-layer air purifiers use a systematic approach to clean air, with each layer targeting specific pollutant types for comprehensive protection:</p>
+          
+          <div class="filter-layers">
+            <div class="layer-card">
+              <h3>Pre-Filter Layer</h3>
+              <p><strong>Function:</strong> Captures large particles like dust, hair, and lint</p>
+              <p><strong>Benefit:</strong> Extends the life of subsequent filters and reduces maintenance costs</p>
+            </div>
+            
+            <div class="layer-card">
+              <h3>True HEPA Filter</h3>
+              <p><strong>Function:</strong> Removes 99.97% of particles as small as 0.3 microns</p>
+              <p><strong>Benefit:</strong> Effectively captures PM2.5, pollen, and fine dust that plague Delhi's air</p>
+            </div>
+            
+            <div class="layer-card">
+              <h3>Activated Carbon Layer</h3>
+              <p><strong>Function:</strong> Absorbs odors, smoke, and harmful gases</p>
+              <p><strong>Benefit:</strong> Neutralizes pollutants from vehicular emissions and industrial activities</p>
+            </div>
+            
+            <div class="layer-card">
+              <h3>UV-C Sterilization</h3>
+              <p><strong>Function:</strong> Eliminates bacteria, viruses, and biological contaminants</p>
+              <p><strong>Benefit:</strong> Provides additional protection against pathogens that thrive in humid conditions</p>
+            </div>
+          </div>
+        </section>
+        
+        <hr class="section-divider" />
+        
+        <section class="content-section">
+          <h2>Smart Technology for Delhi's Conditions</h2>
+          <p>Modern multi-layer purifiers integrate intelligent features specifically designed for high-pollution environments:</p>
+          
+          <div class="technology-features">
+            <div class="feature-list">
+              <div class="feature-item">
+                <h4>Real-time Air Quality Monitoring</h4>
+                <p>Advanced PM2.5 sensors provide continuous air quality assessment and display current pollution levels</p>
+              </div>
+              
+              <div class="feature-item">
+                <h4>Automatic Speed Adjustment</h4>
+                <p>Smart algorithms automatically increase filtration power when pollution levels spike</p>
+              </div>
+              
+              <div class="feature-item">
+                <h4>Filter Replacement Indicators</h4>
+                <p>Built-in sensors monitor filter condition and alert users when replacement is needed</p>
+              </div>
+              
+              <div class="feature-item">
+                <h4>App Connectivity</h4>
+                <p>Remote monitoring and control capabilities allow users to manage air quality from anywhere</p>
+              </div>
+              
+              <div class="feature-item">
+                <h4>Energy-Efficient Operation</h4>
+                <p>Optimized for 24/7 use with minimal power consumption, essential for continuous protection</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <hr class="section-divider" />
+        
+        <section class="content-section">
+          <h2>Choosing the Right System for Delhi</h2>
+          <p>When selecting a multi-layer air purifier for Delhi's extreme conditions, consider these critical factors:</p>
+          
+          <div class="selection-criteria">
+            <div class="criteria-item">
+              <h4>Coverage Area</h4>
+              <p>Ensure the purifier's capacity matches your room size for effective air circulation and filtration</p>
+            </div>
+            
+            <div class="criteria-item">
+              <h4>CADR Rating</h4>
+              <p>Look for high Clean Air Delivery Rate (CADR) appropriate for Delhi's extreme pollution levels</p>
+            </div>
+            
+            <div class="criteria-item">
+              <h4>Filter Availability</h4>
+              <p>Consider ongoing filter replacement costs and local availability of replacement filters</p>
+            </div>
+            
+            <div class="criteria-item">
+              <h4>Noise Levels</h4>
+              <p>Choose systems with low noise output for comfortable continuous operation in living spaces</p>
+            </div>
+            
+            <div class="criteria-item">
+              <h4>Energy Efficiency</h4>
+              <p>Select energy-efficient models to minimize electricity costs during extended use periods</p>
+            </div>
+          </div>
+        </section>
+        
+        <hr class="section-divider" />
+        
+        <section class="content-section">
+          <h2>The Future of Clean Air in Delhi</h2>
+          <p>Multi-layer air purification technology represents a significant advancement in combating Delhi's air quality challenges. These systems offer residents the ability to create clean, healthy indoor environments regardless of outdoor conditions.</p>
+          
+          <div class="conclusion-block">
+            <h3>Your Health Investment</h3>
+            <p>Don't let Delhi's air quality compromise your family's health. Explore multi-layer air purification solutions designed specifically for the challenges of urban India. The investment in advanced filtration technology today protects your long-term health and quality of life.</p>
+          </div>
+        </section>
+      </div>
       
-      <h2>Understanding Delhi's Air Quality Challenge</h2>
-      <p>Delhi faces a unique combination of pollutants: vehicular emissions, industrial discharge, construction dust, crop burning residue, and seasonal allergens. This complex mix requires sophisticated filtration technology that can address multiple types of contaminants simultaneously.</p>
-      
-      <h2>The Multi-Layer Advantage</h2>
-      <p>Multi-layer air purifiers use a systematic approach to clean air, with each layer targeting specific pollutant types:</p>
-      
-      <p><strong>Pre-Filter Layer:</strong> Captures large particles like dust, hair, and lint, extending the life of subsequent filters.</p>
-      
-      <p><strong>HEPA Filter:</strong> Removes 99.97% of particles as small as 0.3 microns, including PM2.5, pollen, and fine dust that plague Delhi's air.</p>
-      
-      <p><strong>Activated Carbon Layer:</strong> Absorbs odors, smoke, and harmful gases from vehicular emissions and industrial activities.</p>
-      
-      <p><strong>UV-C Sterilization:</strong> Eliminates bacteria, viruses, and other biological contaminants that thrive in Delhi's humid conditions.</p>
-      
-      <h2>Smart Technology for Delhi's Conditions</h2>
-      <p>Modern multi-layer purifiers come equipped with:</p>
-      <ul>
-        <li>Real-time air quality monitoring with PM2.5 sensors</li>
-        <li>Automatic speed adjustment based on pollution levels</li>
-        <li>Filter replacement indicators</li>
-        <li>App connectivity for remote monitoring</li>
-        <li>Energy-efficient operation for 24/7 use</li>
-      </ul>
-      
-      <h2>Choosing the Right System for Delhi</h2>
-      <p>When selecting a multi-layer air purifier for Delhi conditions, consider:</p>
-      <ul>
-        <li>Coverage area matching your room size</li>
-        <li>CADR (Clean Air Delivery Rate) appropriate for high pollution levels</li>
-        <li>Filter availability and replacement costs</li>
-        <li>Noise levels for continuous operation</li>
-        <li>Energy efficiency ratings</li>
-      </ul>
-      
-      <h2>The Future of Clean Air in Delhi</h2>
-      <p>Multi-layer air purification technology represents a significant step forward in combating Delhi's air quality challenges. By investing in advanced filtration systems, residents can create clean, healthy indoor environments regardless of outdoor conditions.</p>
-      
-      <p>Don't let Delhi's air quality compromise your health. Explore multi-layer air purification solutions designed specifically for the challenges of urban India.</p>
+      <style>
+        .blog-content { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; line-height: 1.7; color: #374151; }
+        .intro-section { font-size: 1.125rem; margin-bottom: 2.5rem; color: #4B5563; }
+        .content-section { margin: 2.5rem 0; }
+        .content-section h2 { font-size: 1.875rem; font-weight: 700; color: #111827; margin-bottom: 1.5rem; line-height: 1.3; }
+        .content-section h3 { font-size: 1.25rem; font-weight: 600; color: #1F2937; margin-bottom: 1rem; }
+        .content-section h4 { font-size: 1.125rem; font-weight: 600; color: #1F2937; margin-bottom: 0.75rem; }
+        .content-section p { margin-bottom: 1.25rem; }
+        .section-divider { border: none; height: 1px; background: #E5E7EB; margin: 3rem 0; }
+        .highlight-callout { background: #F9FAFB; border-left: 4px solid #6B7280; padding: 1.5rem; margin: 2rem 0; }
+        .filter-layers { display: grid; gap: 1.5rem; margin: 2rem 0; }
+        .layer-card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 8px; padding: 1.5rem; }
+        .technology-features { margin: 2rem 0; }
+        .feature-list { display: grid; gap: 1.5rem; }
+        .feature-item { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #F3F4F6; }
+        .feature-item:last-child { border-bottom: none; }
+        .selection-criteria { display: grid; gap: 1.5rem; margin: 2rem 0; }
+        .criteria-item { margin-bottom: 1.5rem; }
+        .conclusion-block { background: #F3F4F6; padding: 2rem; border-radius: 8px; margin-top: 2.5rem; }
+        .conclusion-block h3 { color: #111827; margin-bottom: 1rem; }
+        @media (min-width: 768px) {
+          .filter-layers { grid-template-columns: repeat(2, 1fr); }
+          .selection-criteria { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+          .filter-layers { grid-template-columns: repeat(4, 1fr); }
+        }
+      </style>
     `,
     category: 'Technology',
     date: '2024-12-10',

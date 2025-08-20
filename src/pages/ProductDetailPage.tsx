@@ -5,7 +5,6 @@ import Lenis from 'lenis';
 import { ProductDetailHero } from '@/components/product-detail/ProductDetailHero';
 import { ProductFeatures } from '@/components/products/ProductFeatures';
 import { ProductDetailSpecifications } from '@/components/product-detail/ProductDetailSpecifications';
-import { ProductClients } from '@/components/products/ProductClients';
 import { ProductContact } from '@/components/products/ProductContact';
 import { database } from '@/lib/supabase';
 
@@ -137,9 +136,8 @@ export function ProductDetailPage() {
   return (
     <Layout>
       <ProductDetailHero product={product} />
-      <ProductFeatures />
       <ProductDetailSpecifications product={product} />
-      <ProductClients />
+      <ProductFeatures />
       <ProductContact />
     </Layout>
   );

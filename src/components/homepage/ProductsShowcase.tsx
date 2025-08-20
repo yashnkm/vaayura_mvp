@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
-import product1 from "@/assets/product_hero.png"
-import product2 from "@/ref_images/product1.png"
+import stormImg from "@/assets/storm.png"
+import nestImg from "@/assets/nest.png"
 
 export function ProductsShowcase() {
   return (
@@ -12,11 +12,11 @@ export function ProductsShowcase() {
           <div className="flex flex-col items-center text-center">
             {/* Product Image */}
             <div className="relative mb-8 w-full max-w-md">
-              <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl overflow-hidden shadow-sm">
+              <div className="aspect-square rounded-3xl overflow-hidden">
                 <img
-                  src={product1}
+                  src={stormImg}
                   alt="Storm"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain p-8"
                 />
               </div>
             </div>
@@ -24,19 +24,24 @@ export function ProductsShowcase() {
             {/* Product Info */}
             <div className="space-y-4 max-w-sm">
               <h3 className="text-2xl font-display font-semibold text-gray-900">
-                Storm
+                Vaayura Storm
               </h3>
               
               <p className="text-gray-600 font-body leading-relaxed">
                 Powerful air purifier for living rooms, dining rooms, and kitchens
               </p>
 
-              {/* CTA Button */}
-              <div className="pt-4">
+              {/* CTA Buttons */}
+              <div className="pt-4 flex gap-3">
                 <Button
-                  className="bg-green-800 hover:bg-green-900 text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105"
+                  className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex-1"
                 >
-                  Shop Storm
+                  Shop Vaayura Storm
+                </Button>
+                <Button
+                  className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex-1"
+                >
+                  Bulk Order
                 </Button>
               </div>
             </div>
@@ -46,11 +51,11 @@ export function ProductsShowcase() {
           <div className="flex flex-col items-center text-center">
             {/* Product Image */}
             <div className="relative mb-8 w-full max-w-md">
-              <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl overflow-hidden shadow-sm">
+              <div className="aspect-square rounded-3xl overflow-hidden">
                 <img
-                  src={product2}
+                  src={nestImg}
                   alt="Nest"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain p-8"
                 />
               </div>
             </div>
@@ -58,19 +63,24 @@ export function ProductsShowcase() {
             {/* Product Info */}
             <div className="space-y-4 max-w-sm">
               <h3 className="text-2xl font-display font-semibold text-gray-900">
-                Nest
+                Vaayura Nest
               </h3>
               
               <p className="text-gray-600 font-body leading-relaxed">
                 Compact air purifier great for bedrooms, home offices, or bathrooms
               </p>
 
-              {/* CTA Button */}
-              <div className="pt-6">
+              {/* CTA Buttons */}
+              <div className="pt-4 flex gap-3">
                 <Button
-                  className="bg-green-800 hover:bg-green-900 text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105"
+                  className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex-1"
                 >
-                  Shop Nest
+                  Shop Vaayura Nest
+                </Button>
+                <Button
+                  className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex-1"
+                >
+                  Bulk Order
                 </Button>
               </div>
             </div>
