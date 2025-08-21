@@ -12,13 +12,14 @@ import { BlogPostPage } from './pages/BlogPostPage'
 import { LoginPage } from './pages/LoginPage'
 import { SignupPage } from './pages/SignupPage'
 import { AdminPage } from './pages/AdminPage'
+import { ThreeDemoPage } from './pages/3DemoPage'
 
 function LenisScrollProvider({ children }: { children: React.ReactNode }) {
   const location = useLocation()
 
   useEffect(() => {
     // Initialize Lenis on main content pages, not auth pages
-    const contentPages = ['/', '/home2', '/about', '/products', '/contact', '/blog']
+    const contentPages = ['/', '/home2', '/about', '/products', '/contact', '/blog', '/3d-demo']
     const isContentPage = contentPages.includes(location.pathname) || location.pathname.startsWith('/blog/')
     
     if (isContentPage) {
@@ -60,6 +61,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/3d-demo" element={<ThreeDemoPage />} />
         </Routes>
       </LenisScrollProvider>
     </Router>
