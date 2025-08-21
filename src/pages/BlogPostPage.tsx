@@ -4,6 +4,8 @@ import { Layout } from '@/components/layout/Layout'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft } from 'lucide-react'
+import blog1Img from '@/assets/blog1.png'
+import blog2Img from '@/assets/blog2.png'
 
 // Blog data based on available documents
 const blogPosts = [
@@ -161,7 +163,7 @@ const blogPosts = [
     category: 'Health',
     date: '2024-12-15',
     readTime: '7 min read',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&fit=crop&crop=center',
+    image: blog1Img,
     author: 'Dr. Vaayura Health Team'
   },
   {
@@ -334,7 +336,7 @@ const blogPosts = [
     category: 'Technology',
     date: '2024-12-10',
     readTime: '9 min read',
-    image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=400&fit=crop&crop=center',
+    image: blog2Img,
     author: 'Vaayura Engineering Team'
   }
 ]

@@ -3,6 +3,7 @@ import { ProductClients } from "@/components/products/ProductClients";
 import { ProductContact } from "@/components/products/ProductContact";
 import heroImage from "@/assets/main.jpg";
 import productImage from "@/assets/background.png";
+import problemImage from "@/assets/problem_img.png";
 
 interface AboutVaayuraProps {
   title?: string;
@@ -195,15 +196,12 @@ export const AboutVaayura = ({
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
               {/* Problem Image */}
               <div className="flex-1 relative max-w-lg">
-                <div className="relative rounded-2xl bg-slate-50 shadow-lg p-4">
-                  <div className="aspect-[4/3] w-full">
-                    <img 
-                      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop&crop=center" 
-                      alt="Air pollution in urban India"
-                      className="w-full h-full object-contain rounded-xl"
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-grey-green/5 to-transparent rounded-2xl" />
+                <div className="aspect-[4/3] w-full">
+                  <img 
+                    src={problemImage} 
+                    alt="Air pollution in urban India - industrial emissions"
+                    className="w-full h-full object-cover rounded-xl"
+                  />
                 </div>
               </div>
 
@@ -258,15 +256,12 @@ export const AboutVaayura = ({
             <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16">
               {/* Features Image */}
               <div className="flex-1 relative max-w-lg">
-                <div className="relative rounded-2xl bg-white shadow-lg p-8">
-                  <div className="aspect-[4/3] w-full">
-                    <img 
-                      src={productImage} 
-                      alt="Vaayura air purifier - premium design and technology"
-                      className="w-full h-full object-contain rounded-xl"
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-grey-green/5 to-transparent rounded-2xl" />
+                <div className="aspect-[4/3] w-full">
+                  <img 
+                    src={productImage} 
+                    alt="Vaayura air purifier - premium design and technology"
+                    className="w-full h-full object-contain rounded-xl"
+                  />
                 </div>
               </div>
 
@@ -341,25 +336,22 @@ export const AboutVaayura = ({
       {/* Achievements Section - Our Promise in Numbers */}
       <section className="py-32 bg-gray-50">
         <div className="container mx-auto px-6">
-          <div className="relative overflow-hidden rounded-xl bg-white p-10 md:p-16 shadow-lg">
-            <div className="flex flex-col gap-4 text-center md:text-left mb-10">
-              <h2 className="text-4xl md:text-5xl font-semibold font-display text-brand-grey-green">{achievementsTitle}</h2>
-              <div className="w-16 h-0.5 bg-brand-pastel-green rounded-full md:mx-0 mx-auto"></div>
-              <p className="max-w-screen-sm text-lg text-brand-dark-grey font-body">
-                {achievementsDescription}
-              </p>
-            </div>
-            <div className="flex flex-wrap justify-between gap-10 text-center">
-              {achievements.map((item, idx) => (
-                <div className="flex flex-col gap-4" key={item.label + idx}>
-                  <p className="text-brand-dark-grey font-body">{item.label}</p>
-                  <span className="text-4xl font-semibold md:text-5xl font-display text-brand-grey-green">
-                    {item.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="pointer-events-none absolute -top-1 right-1 z-10 hidden h-full w-full bg-[linear-gradient(to_right,hsl(var(--brand-pastel-green))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--brand-pastel-green))_1px,transparent_1px)] bg-[size:80px_80px] opacity-15 [mask-image:linear-gradient(to_bottom_right,#000,transparent,transparent)] md:block"></div>
+          <div className="flex flex-col gap-4 text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-semibold font-display text-brand-grey-green">{achievementsTitle}</h2>
+            <div className="w-16 h-0.5 bg-brand-pastel-green rounded-full mx-auto"></div>
+            <p className="max-w-4xl mx-auto text-lg text-brand-dark-grey font-body">
+              {achievementsDescription}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-6xl mx-auto">
+            {achievements.map((item, idx) => (
+              <div className="flex flex-col gap-4" key={item.label + idx}>
+                <span className="text-3xl md:text-4xl lg:text-5xl font-semibold font-display text-brand-grey-green">
+                  {item.value}
+                </span>
+                <p className="text-brand-dark-grey font-body text-sm md:text-base">{item.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

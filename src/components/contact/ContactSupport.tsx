@@ -152,7 +152,7 @@ export function ContactSupport() {
                     </div>
                   </div>
                   <h3 className="text-2xl font-display font-semibold text-brand-grey-green mb-4">
-                    Storm
+                    Vaayura Storm
                   </h3>
                   <p className="text-brand-dark-grey font-body leading-relaxed mb-6">
                     Powerful air purifier for living rooms, dining rooms, and kitchens
@@ -191,7 +191,7 @@ export function ContactSupport() {
                     </div>
                   </div>
                   <h3 className="text-2xl font-display font-semibold text-brand-grey-green mb-4">
-                    Nest
+                    Vaayura Nest
                   </h3>
                   <p className="text-brand-dark-grey font-body leading-relaxed mb-6">
                     Compact air purifier great for bedrooms, home offices, or bathrooms

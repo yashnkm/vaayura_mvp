@@ -33,11 +33,13 @@ export function ProductsShowcase() {
 
               {/* CTA Buttons */}
               <div className="pt-4 flex gap-3">
-                <Button
-                  className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex-1"
-                >
-                  Shop Vaayura Storm
-                </Button>
+                <a href="/products/storm" className="flex-1">
+                  <Button
+                    className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 w-full"
+                  >
+                    Shop Vaayura Storm
+                  </Button>
+                </a>
                 <Button
                   className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex-1"
                 >
@@ -72,11 +74,13 @@ export function ProductsShowcase() {
 
               {/* CTA Buttons */}
               <div className="pt-4 flex gap-3">
-                <Button
-                  className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex-1"
-                >
-                  Shop Vaayura Nest
-                </Button>
+                <a href="/products/nest" className="flex-1">
+                  <Button
+                    className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 w-full"
+                  >
+                    Shop Vaayura Nest
+                  </Button>
+                </a>
                 <Button
                   className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex-1"
                 >

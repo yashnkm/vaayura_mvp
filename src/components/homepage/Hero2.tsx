@@ -132,11 +132,13 @@ export function Hero2() {
 
             {/* Call to Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                className="bg-green-800 hover:bg-green-900 text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105"
-              >
-                Shop Now
-              </Button>
+              <a href="/products">
+                <Button 
+                  className="bg-green-800 hover:bg-green-900 text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105"
+                >
+                  Shop Now
+                </Button>
+              </a>
               <Button 
                 className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-green-800 px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105"
               >

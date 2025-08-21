@@ -93,12 +93,14 @@ const ProductHeroComponent = memo(() => {
           />
         </div>
 
-        {/* Text Content at Top */}
-        <div className="container mx-auto relative z-10 pt-52">
-          <div className="flex flex-col justify-center items-center space-y-8">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-brand-pastel-green leading-tight text-center">
-              Pure Air, Pure Life
-            </h1>
+        {/* Text Content at Bottom */}
+        <div className="absolute bottom-16 left-0 right-0 z-20">
+          <div className="container mx-auto px-6">
+            <div className="flex flex-col justify-center items-center space-y-8">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white leading-tight text-center drop-shadow-lg">
+                Pure Air, Pure Life
+              </h1>
+            </div>
           </div>
         </div>
       </section>
