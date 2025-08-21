@@ -68,7 +68,7 @@ export function FAQ() {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gray-50 relative">
       <motion.div
         ref={ref}
         initial="hidden"
@@ -78,11 +78,11 @@ export function FAQ() {
       >
         <motion.div variants={fadeInUp}>
           <p className="text-sm text-gray-800 uppercase font-semibold tracking-wide">FAQ</p>
-          <h3 className="text-4xl md:text-5xl font-bold mt-2 mb-6 text-gray-800">
+          <h3 className="text-4xl md:text-5xl font-sora font-bold mt-2 mb-6 text-gray-800">
             Everything You Need to Know About Our{' '}
             <span className="text-gray-800">Purifiers</span>
           </h3>
-          <p className="text-gray-700 text-lg leading-relaxed">
+          <p className="text-gray-700 font-montserrat text-lg leading-relaxed">
             Have questions about our air purifiers? We've got answers. 
             Find everything you need to know about performance, maintenance, 
             and features.
@@ -100,7 +100,7 @@ export function FAQ() {
             >
               <motion.button
                 onClick={() => toggleFAQ(index)}
-                className="flex justify-between items-center w-full text-left font-semibold text-lg text-gray-800 hover:text-gray-600 transition-colors duration-200"
+                className="flex justify-between items-center w-full text-left font-sora font-semibold text-lg text-gray-800 hover:text-gray-600 transition-colors duration-200"
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.2 }}
               >
@@ -140,7 +140,7 @@ export function FAQ() {
                       animate={{ y: 0, opacity: 1 }}
                       exit={{ y: -10, opacity: 0 }}
                       transition={{ duration: 0.2, delay: 0.1 }}
-                      className="text-gray-700 mt-3 text-base leading-relaxed"
+                      className="text-gray-700 font-montserrat mt-3 text-base leading-relaxed"
                     >
                       {faq.answer}
                     </motion.p>
@@ -151,6 +151,9 @@ export function FAQ() {
           ))}
         </motion.div>
       </motion.div>
+      
+      {/* Gradient Transition to White */}
+      <div className="absolute -bottom-4 left-0 right-0 h-20 bg-gradient-to-b from-gray-50 to-white pointer-events-none z-10"></div>
     </section>
   )
 }

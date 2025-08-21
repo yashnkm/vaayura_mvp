@@ -25,7 +25,7 @@ const allLogos: Logo[] = [
 
 export function ProductClients() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-white relative">
       <div className="container mx-auto">
         <div className="space-y-8">
           <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-8">
@@ -45,6 +45,9 @@ export function ProductClients() {
           </div>
         </div>
       </div>
+      
+      {/* Gradient Transition to Gray */}
+      <div className="absolute -bottom-4 left-0 right-0 h-20 bg-gradient-to-b from-white to-gray-50 pointer-events-none z-10"></div>
     </section>
   );
 }

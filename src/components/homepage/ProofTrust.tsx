@@ -56,12 +56,12 @@ export function ProofTrust({
       <div className="container mx-auto">
         {/* Section Header - matching About section pattern */}
         <div className="text-center space-y-4 mb-12 px-6">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
             Proof &{" "}
             <span className="text-brand-pastel-green">Trust</span>
           </h2>
           <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full"></div>
-          <p className="text-lg md:text-xl text-brand-dark-grey font-body max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat max-w-2xl mx-auto">
             Backed by decades of expertise, proven performance, and unmatched value in air purification.
           </p>
         </div>
@@ -69,17 +69,17 @@ export function ProofTrust({
         <div className="border border-brand-pastel-green/20 rounded-2xl overflow-hidden">
           <div className="group grid gap-4 overflow-hidden px-6 transition-colors duration-500 ease-out hover:bg-brand-pastel-green/5 lg:grid-cols-2 xl:px-28">
             <div className="flex flex-col gap-6 py-6 md:py-8 lg:pb-8">
-              <div className="flex items-center gap-2 text-lg font-heading text-brand-grey-green">
+              <div className="flex items-center gap-2 text-lg font-sora text-brand-grey-green">
                 <span className="text-xl font-light">{featuredProof.icon}</span>
                 {featuredProof.title}
               </div>
               <div>
-                <span className="text-xs text-brand-dark-grey/70 font-subheading uppercase tracking-wider">
+                <span className="text-xs text-brand-dark-grey/70 font-montserrat uppercase tracking-wider">
                   {featuredProof.tags}
                 </span>
-                <h3 className="mt-2 mb-3 text-lg font-semibold font-heading text-brand-grey-green text-balance sm:text-xl">
+                <h3 className="mt-2 mb-3 text-lg font-semibold font-sora text-brand-grey-green text-balance sm:text-xl">
                   {featuredProof.heading}
-                  <span className="block font-normal text-brand-dark-grey transition-colors duration-500 ease-out group-hover:text-brand-grey-green font-body text-sm mt-1">
+                  <span className="block font-normal text-brand-dark-grey transition-colors duration-500 ease-out group-hover:text-brand-grey-green font-montserrat text-sm mt-1">
                     {featuredProof.subtitle}
                   </span>
                 </h3>
@@ -108,17 +108,17 @@ export function ProofTrust({
                       : "border-t lg:border-t-0 lg:border-l"
                   }`}
                 >
-                  <div className="flex items-center gap-2 text-lg font-heading text-brand-grey-green">
+                  <div className="flex items-center gap-2 text-lg font-sora text-brand-grey-green">
                     <span className="text-xl font-light">{item.icon}</span>
                     {item.title}
                   </div>
                   <div>
-                    <span className="text-xs text-brand-dark-grey/70 font-subheading uppercase tracking-wider">
+                    <span className="text-xs text-brand-dark-grey/70 font-montserrat uppercase tracking-wider">
                       {item.tags}
                     </span>
-                    <h3 className="mt-2 mb-3 text-lg font-semibold font-heading text-brand-grey-green text-balance sm:text-xl">
+                    <h3 className="mt-2 mb-3 text-lg font-semibold font-sora text-brand-grey-green text-balance sm:text-xl">
                       {item.heading}
-                      <span className="block font-normal text-brand-dark-grey transition-colors duration-500 ease-out group-hover:text-brand-grey-green font-body text-sm mt-1">
+                      <span className="block font-normal text-brand-dark-grey transition-colors duration-500 ease-out group-hover:text-brand-grey-green font-montserrat text-sm mt-1">
                         {item.subtitle}
                       </span>
                     </h3>

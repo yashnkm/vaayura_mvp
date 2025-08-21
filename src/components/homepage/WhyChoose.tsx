@@ -67,12 +67,12 @@ export function WhyChoose({ features = defaultFeatures }: WhyChooseProps) {
       <div className="container mx-auto">
         {/* Section Header - matching About section pattern */}
         <div className="text-center space-y-4 mb-12 px-6">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
             Why Choose{" "}
             <span className="text-brand-pastel-green">Vaayura?</span>
           </h2>
           <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full"></div>
-          <p className="text-lg md:text-xl text-brand-dark-grey font-body max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat max-w-2xl mx-auto">
             Discover what makes Vaayura the trusted choice for clean air solutions across India.
           </p>
         </div>
@@ -97,13 +97,13 @@ export function WhyChoose({ features = defaultFeatures }: WhyChooseProps) {
                     className="cursor-pointer py-5 !no-underline transition hover:text-brand-grey-green"
                   >
                     <h6
-                      className={`text-xl font-semibold font-heading ${feature.id === activeTabId ? "text-brand-grey-green" : "text-brand-dark-grey"}`}
+                      className={`text-xl font-semibold font-sora ${feature.id === activeTabId ? "text-brand-grey-green" : "text-brand-dark-grey"}`}
                     >
                       {feature.title}
                     </h6>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <p className="mt-3 text-brand-dark-grey font-body">
+                    <p className="mt-3 text-brand-dark-grey font-montserrat">
                       {feature.description}
                     </p>
                     <div className="mt-4 md:hidden">

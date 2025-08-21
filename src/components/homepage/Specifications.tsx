@@ -61,7 +61,7 @@ export function Specifications() {
           {/* Left side: Specifications */}
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 transition-opacity duration-300">
+              <h2 className="text-3xl lg:text-4xl font-sora font-bold text-gray-900 transition-opacity duration-300">
                 {currentProduct.name} Specifications
               </h2>
             </div>
@@ -70,8 +70,8 @@ export function Specifications() {
             <div className="grid md:grid-cols-2 gap-x-8 gap-y-6 transition-opacity duration-500">
               {currentProduct.specifications.map((spec, index) => (
                 <div key={index} className="space-y-2">
-                  <div className="text-gray-700 font-medium text-sm">{spec.label}</div>
-                  <div className="text-gray-900 font-semibold">{spec.value}</div>
+                  <div className="text-gray-700 font-montserrat font-medium text-sm">{spec.label}</div>
+                  <div className="text-gray-900 font-sora font-semibold">{spec.value}</div>
                   {index < currentProduct.specifications.length - 1 && (
                     <div className="border-b border-gray-200 mt-4"></div>
                   )}

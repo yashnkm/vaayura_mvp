@@ -5,7 +5,19 @@
       "Bash(cp:*)",
       "WebFetch(domain:molekule.com)",
       "Bash(git restore:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(npm cache clean:*)",
+      "Bash(npx:*)",
+      "Bash(./node_modules/.bin/vite)",
+      "Bash(node:*)",
+      "Bash(export NVM_DIR=\"$HOME/.nvm\")",
+      "Bash([ -s \"$NVM_DIR/nvm.sh\" ])",
+      "Bash(. \"$NVM_DIR/nvm.sh\")",
+      "Bash(nvm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm:*)",
+      "WebFetch(domain:www.quboworld.com)"
     ],
     "deny": []
   }

@@ -163,7 +163,7 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
   });
 
   return (
-    <section className="py-20 lg:py-32 bg-slate-50">
+    <section className="py-20 lg:py-32 bg-slate-50 relative overflow-visible">
       <div className="container mx-auto max-w-7xl">
         <div className="flex flex-col gap-12">
           
@@ -188,6 +188,9 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
           
         </div>
       </div>
+      
+      {/* Gradient Transition to White */}
+      <div className="absolute -bottom-4 left-0 right-0 h-20 bg-gradient-to-b from-slate-50 to-white pointer-events-none z-10"></div>
     </section>
   );
 }

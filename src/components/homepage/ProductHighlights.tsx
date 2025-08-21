@@ -68,12 +68,12 @@ const ProductHighlights = ({
     <section className="py-20 bg-emerald-900">
       <div className="container mx-auto">
         <div className="text-center space-y-4 mb-6 px-6">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-white leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-white leading-tight">
             Vaayura{" "}
             <span className="text-brand-pastel-green">Products</span>
           </h2>
           <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full"></div>
-          <p className="text-lg md:text-xl text-emerald-100 font-body max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-emerald-100 font-montserrat max-w-2xl mx-auto">
             Discover our flagship air purifiers designed to meet every need, from personal spaces to large environments.
           </p>
         </div>
@@ -100,10 +100,10 @@ const ProductHighlights = ({
                   <Badge variant="outline" className="w-fit bg-white/90 border-brand-pastel-green text-emerald-800">
                     {tab.content.badge}
                   </Badge>
-                  <h3 className="text-3xl font-semibold lg:text-5xl text-white font-display">
+                  <h3 className="text-3xl font-semibold lg:text-5xl text-white font-sora">
                     {tab.content.title}
                   </h3>
-                  <p className="text-emerald-100 lg:text-lg font-body">
+                  <p className="text-emerald-100 lg:text-lg font-montserrat">
                     {tab.content.description}
                   </p>
                   <Button className="mt-1 w-fit gap-2 bg-brand-pastel-green hover:bg-brand-pastel-green/90 text-emerald-900 font-semibold" size="lg">

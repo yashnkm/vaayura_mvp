@@ -1,13 +1,13 @@
 import { Header1 } from '@/components/ui/header'
 import { Hero2 } from '@/components/homepage/Hero2'
+import { ProductFeaturesBanner } from '@/components/homepage/ProductFeaturesBanner'
 import { ProductsShowcase } from '@/components/homepage/ProductsShowcase'
 import { ProductDetailFeatures } from '@/components/product-detail/ProductDetailFeatures'
 import { FiltrationTechnology } from '@/components/homepage/FiltrationTechnology'
-import { Specifications } from '@/components/homepage/Specifications'
-import { Stats } from '@/components/homepage/Stats'
+import { AppControlSection } from '@/components/homepage/AppControlSection'
 import { FAQ } from '@/components/homepage/FAQ'
+import { ProductShowcaseSection } from '@/components/homepage/ProductShowcaseSection'
 import { ProductClients } from '@/components/products/ProductClients'
-import { ProductContact } from '@/components/products/ProductContact'
 import { Footer } from '@/components/shared/Footer'
 
 export function HomePage() {
@@ -15,6 +15,7 @@ export function HomePage() {
     <>
       <Header1 />
       <Hero2 />
+      <ProductFeaturesBanner />
       {/* About Us Section */}
       <section className="py-16 px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">
@@ -37,11 +38,10 @@ export function HomePage() {
         created_at: "" 
       }} />
       <FiltrationTechnology />
-      <Specifications />
-      <Stats />
-      <FAQ />
+      <AppControlSection />
       <ProductClients />
-      <ProductContact />
+      <FAQ />
+      <ProductShowcaseSection />
       <Footer />
     </>
   )
