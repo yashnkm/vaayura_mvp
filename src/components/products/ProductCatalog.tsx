@@ -86,8 +86,8 @@ export function ProductCatalog() {
           </p>
         </div>
 
-        {/* Products Grid - 2 columns, scales vertically */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
+        {/* Products List - Vertical alternating layout */}
+        <div className="space-y-24 max-w-7xl mx-auto">
           {products
             .sort((a, b) => {
               // Priority order: Storm first, then Nest, then others alphabetically
@@ -106,14 +106,22 @@ export function ProductCatalog() {
               
               return a.name.localeCompare(b.name); // Alphabetical for others
             })
-            .map((product) => (
-            <div key={product.id} className="flex flex-col items-center text-center space-y-6">
+            .map((product, index) => (
+            <div 
+              key={product.id} 
+              className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-16 ${
+                index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+              }`}
+            >
               {/* Product Image */}
-              <div className="w-full max-w-md aspect-square">
+              <div 
+                className="flex-1 w-full max-w-lg group cursor-pointer"
+                onClick={() => navigate(`/products/${product.slug || product.id}`)}
+              >
                 <img
                   src={product.images[0] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"}
                   alt={product.name}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full aspect-square object-contain transition-all duration-700 group-hover:scale-110"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement
                     target.src = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
@@ -122,33 +130,29 @@ export function ProductCatalog() {
               </div>
               
               {/* Product Info */}
-              <div className="space-y-4">
-                <h3 className="text-2xl font-normal text-black font-body">{product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`}</h3>
-                <p className="text-gray-600 font-body leading-relaxed max-w-md mx-auto">
-                  {product.description}
+              <div className="flex-1 space-y-6 text-center lg:text-left">
+                <h3 className="text-3xl md:text-4xl font-display text-brand-grey-green leading-tight">
+                  {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`}
+                </h3>
+                <p className="text-lg text-brand-dark-grey font-body leading-relaxed">
+                  {product.description || "Experience cleaner, healthier air with advanced filtration technology designed for your well-being and peace of mind."}
                 </p>
                 
-                {/* CTA Buttons */}
-                <div className="space-y-3">
-                  {/* Shop Now and Bulk Order side by side */}
-                  <div className="flex gap-3">
-                    <Button 
-                      className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex-1"
-                      onClick={() => navigate(`/products/${product.slug || product.id}`)}
-                    >
-                      Shop Now
-                    </Button>
-                    <Button 
-                      className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 flex-1"
-                    >
-                      Bulk Order
-                    </Button>
+                {/* Price (if available) */}
+                {product.price && (
+                  <div className="text-2xl font-semibold text-brand-grey-green">
+                    ₹{product.price.toLocaleString('en-IN')}
+                    <span className="text-sm font-normal text-brand-dark-grey ml-2">inclusive of all taxes</span>
                   </div>
-                  {/* Request Demo below */}
+                )}
+                
+                {/* CTA Button */}
+                <div>
                   <Button 
-                    className="bg-transparent border-2 border-green-800 text-green-800 hover:bg-green-800 hover:text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 w-full"
+                    className="bg-green-800 hover:bg-green-900 text-white px-8 py-4 text-lg rounded-full font-semibold transition-all duration-200 hover:scale-105"
+                    onClick={() => navigate(`/products/${product.slug || product.id}`)}
                   >
-                    Request Demo
+                    Shop Now
                   </Button>
                 </div>
               </div>

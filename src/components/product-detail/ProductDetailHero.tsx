@@ -60,10 +60,6 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
     console.log('Buy now clicked');
   }, []);
 
-  const handleRequestDemo = useCallback(() => {
-    // Add demo request logic here
-    console.log('Request demo clicked');
-  }, []);
 
   return (
     <section className="py-32 lg:py-40 bg-white">
@@ -102,20 +98,6 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
                 onClick={handleBuyNow}
               >
                 Buy Now
-              </Button>
-              <Button 
-                variant="outline"
-                size="lg"
-                className="border-green-800 text-green-800 hover:bg-green-800 hover:text-white px-8 py-4 text-lg font-semibold rounded-full transition-all duration-200 hover:scale-105"
-                onClick={handleRequestDemo}
-              >
-                Request Demo
-              </Button>
-              <Button 
-                size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-semibold rounded-full transition-all duration-200 hover:scale-105"
-              >
-                Bulk Order
               </Button>
             </div>
           </div>

@@ -1,5 +1,5 @@
 // Import asset images
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import fourLayerFilterImg from "@/assets/4 layer filter.jpg";
 import intSensorImg from "@/assets/int_sensor.jpg";
 import realtimeAQIImg from "@/assets/realtime AQI.jpg";
@@ -49,6 +49,38 @@ const features: Feature[] = [
 ];
 
 export function ProductFeatures() {
+  const [visibleFeatures, setVisibleFeatures] = useState<boolean[]>([false, false, false, false, false]);
+  const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observers = features.map((_, index) => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setVisibleFeatures(prev => {
+            const newVisible = [...prev];
+            // Show feature only when it's more centered in viewport
+            newVisible[index] = entry.intersectionRatio >= 0.4;
+            return newVisible;
+          });
+        },
+        {
+          threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5],
+          rootMargin: '50px 0px 50px 0px' // Balanced margins
+        }
+      );
+
+      if (featureRefs.current[index]) {
+        observer.observe(featureRefs.current[index]!);
+      }
+
+      return observer;
+    });
+
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
+
   return (
     <section className="w-full py-16 lg:py-24 bg-white">
       <div className="container mx-auto max-w-7xl px-4">
@@ -65,51 +97,88 @@ export function ProductFeatures() {
           </div>
 
           {/* Features List */}
-          <div className="space-y-16">
+          <div className="space-y-40">
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-16 ${
+                ref={el => featureRefs.current[index] = el}
+                className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-16 min-h-[500px] transition-all duration-1000 ease-out ${
                   index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                } ${
+                  visibleFeatures[index] 
+                    ? 'opacity-100 translate-y-0 scale-100' 
+                    : 'opacity-5 translate-y-12 scale-97'
                 }`}
+                style={{
+                  transitionProperty: 'opacity, transform',
+                  willChange: 'opacity, transform'
+                }}
               >
                 {/* Feature Image */}
-                <div className="flex-1 relative max-w-lg">
+                <div className={`flex-1 relative max-w-lg transition-all duration-1000 ease-out ${
+                  visibleFeatures[index] 
+                    ? 'opacity-100 translate-x-0 scale-100' 
+                    : `opacity-0 scale-95 ${index % 2 === 1 ? 'translate-x-12' : '-translate-x-12'}`
+                }`}>
                   <div className="relative">
                     <div className="aspect-[4/3] w-full">
                       <img 
                         src={feature.image} 
                         alt={feature.title}
-                        className="w-full h-full object-contain rounded-xl"
+                        className="w-full h-full object-contain rounded-xl shadow-lg"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Feature Content */}
-                <div className="flex-1 space-y-6">
+                <div className={`flex-1 space-y-6 transition-all duration-1000 ease-out ${
+                  visibleFeatures[index] 
+                    ? 'opacity-100 translate-x-0' 
+                    : `opacity-0 ${index % 2 === 1 ? '-translate-x-12' : 'translate-x-12'}`
+                }`}>
                   {/* Feature Number */}
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-brand-pastel-green flex items-center justify-center">
+                    <div className={`w-12 h-12 rounded-full bg-brand-pastel-green flex items-center justify-center transition-all duration-1000 ${
+                      visibleFeatures[index] 
+                        ? 'scale-100 rotate-0' 
+                        : 'scale-0 rotate-180'
+                    }`}>
                       <span className="text-brand-grey-green font-bold text-lg">
                         {String(index + 1).padStart(2, '0')}
                       </span>
                     </div>
-                    <div className="h-px bg-brand-pastel-green/30 flex-1" />
+                    <div className={`h-px bg-brand-pastel-green/30 flex-1 transition-all duration-1000 ${
+                      visibleFeatures[index] 
+                        ? 'scale-x-100 opacity-100' 
+                        : 'scale-x-0 opacity-0'
+                    }`} style={{ transformOrigin: 'left' }} />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl md:text-3xl font-subheading text-brand-grey-green leading-tight">
+                  <h3 className={`text-2xl md:text-3xl font-subheading text-brand-grey-green leading-tight transition-all duration-1000 ${
+                    visibleFeatures[index] 
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-6'
+                  }`}>
                     {feature.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-brand-dark-grey font-body leading-relaxed text-lg">
+                  <p className={`text-brand-dark-grey font-body leading-relaxed text-lg transition-all duration-1000 ${
+                    visibleFeatures[index] 
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-6'
+                  }`}>
                     {feature.description}
                   </p>
 
                   {/* Technical Specs */}
-                  <div className="bg-slate-50 rounded-xl p-4 border-l-4 border-brand-pastel-green">
+                  <div className={`bg-slate-50 rounded-xl p-4 border-l-4 border-brand-pastel-green transition-all duration-1000 ${
+                    visibleFeatures[index] 
+                      ? 'opacity-100 translate-y-0 scale-100' 
+                      : 'opacity-0 translate-y-6 scale-95'
+                  }`}>
                     <div className="text-sm font-medium text-brand-grey-green mb-1">
                       Technical Specifications
                     </div>
@@ -119,7 +188,11 @@ export function ProductFeatures() {
                   </div>
 
                   {/* Learn More */}
-                  <div className="pt-2">
+                  <div className={`pt-2 transition-all duration-1000 ${
+                    visibleFeatures[index] 
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-6'
+                  }`}>
                     <button className="inline-flex items-center gap-2 text-brand-pastel-green font-medium hover:gap-3 transition-all duration-300">
                       <span>Learn more about this feature</span>
                       <ArrowRight className="h-4 w-4" />

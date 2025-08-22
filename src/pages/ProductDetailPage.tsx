@@ -136,8 +136,8 @@ export function ProductDetailPage() {
   return (
     <Layout>
       <ProductDetailHero product={product} />
-      <ProductDetailSpecifications product={product} />
       <ProductFeatures />
+      <ProductDetailSpecifications product={product} />
       <ProductContact />
     </Layout>
   );
