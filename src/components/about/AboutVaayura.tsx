@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ProductClients } from "@/components/products/ProductClients";
 import { ProductContact } from "@/components/products/ProductContact";
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import heroImage from "@/assets/main.jpg";
 import productImage from "@/assets/background.png";
 import problemImage from "@/assets/problem_img.png";
@@ -39,6 +41,56 @@ const defaultAchievements = [
   { label: "Cities Served", value: "50+" },
 ];
 
+// Animation variants for scroll effects
+const fadeInUp = {
+  hidden: { opacity: 0, y: 80 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      delay: 0.2
+    }
+  }
+};
+
+const fadeInLeft = {
+  hidden: { opacity: 0, x: -80 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      delay: 0.3
+    }
+  }
+};
+
+const fadeInRight = {
+  hidden: { opacity: 0, x: 80 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      delay: 0.3
+    }
+  }
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2
+    }
+  }
+};
+
 export const AboutVaayura = ({
   title = "About Vaayura",
   description = "Our Story Begins with a Breath. In 2025, we asked a simple question: Why is clean air still considered a privilege? Returning from abroad, our founders saw loved ones breathing 'Hazardous' air daily—without even realizing it. It wasn't just a statistic, it was personal. That moment became our mission.",
@@ -72,16 +124,16 @@ export const AboutVaayura = ({
             {/* Left Column: Text Content */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-brand-grey-green leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-sora text-brand-grey-green leading-tight">
                   About <span className="text-brand-pastel-green">Us</span>
                 </h1>
-                <div className="w-16 h-0.5 bg-brand-pastel-green rounded-full"></div>
+                <div className="w-16 h-1 bg-brand-pastel-green rounded-full"></div>
                 
-                <h2 className="text-2xl md:text-3xl font-semibold font-heading text-brand-grey-green">
+                <h2 className="text-2xl md:text-3xl font-semibold font-sora text-brand-grey-green">
                   Our Story Begins with a Breath.
                 </h2>
                 
-                <div className="space-y-4 text-lg text-brand-dark-grey font-body leading-relaxed">
+                <div className="space-y-4 text-lg text-brand-dark-grey font-montserrat leading-relaxed">
                   <p>
                     In 2025, we asked a simple question: Why is clean air still considered a privilege?
                   </p>
@@ -94,16 +146,18 @@ export const AboutVaayura = ({
 
               {/* Our Roots Section with Visual Element */}
               <div className="relative space-y-6">
+                {/* First section with dot */}
                 <div className="relative flex gap-4">
                   <div className="relative">
                     <div className="flex w-12 h-12 items-center justify-center overflow-hidden rounded-full border-2 border-brand-pastel-green/30 bg-brand-pastel-green/10">
                       <div className="w-6 h-6 bg-brand-grey-green rounded"></div>
                     </div>
-                    <div className="absolute left-1/2 top-12 h-16 w-px -translate-x-1/2 bg-brand-pastel-green/30"></div>
+                    {/* Connecting line from bottom of first circle to top of second circle */}
+                    <div className="absolute left-1/2 top-full w-0.5 h-6 -translate-x-1/2 bg-brand-pastel-green"></div>
                   </div>
                   <div className="flex-1 pt-2">
-                    <h3 className="text-xl font-semibold font-heading text-brand-grey-green mb-3">Our Roots</h3>
-                    <p className="text-base text-brand-dark-grey font-body leading-relaxed">
+                    <h3 className="text-xl font-semibold font-sora text-brand-grey-green mb-3">Our Roots</h3>
+                    <p className="text-base text-brand-dark-grey font-montserrat leading-relaxed">
                       Vaayura is built on the foundation of Grasp Enterprises, an engineering leader since 1996. 
                       With decades of experience in air conditioning, renewable energy, and automation, 
                       we know how to build systems that work beautifully and last.
@@ -111,19 +165,20 @@ export const AboutVaayura = ({
                   </div>
                 </div>
 
+                {/* Second section with dot */}
                 <div className="relative flex gap-4">
-                  <div className="relative">
-                    <div className="flex w-12 h-12 items-center justify-center overflow-hidden rounded-full border-2 border-brand-pastel-green/30 bg-brand-pastel-green/10">
-                      <div className="w-6 h-6 bg-brand-pastel-green rounded-full"></div>
+                    <div className="relative">
+                      <div className="flex w-12 h-12 items-center justify-center overflow-hidden rounded-full border-2 border-brand-pastel-green/30 bg-brand-pastel-green/10">
+                        <div className="w-6 h-6 bg-brand-pastel-green rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="flex-1 pt-2">
+                      <h3 className="text-xl font-semibold font-sora text-brand-grey-green mb-3">Our Mission</h3>
+                      <p className="text-base text-brand-dark-grey font-montserrat leading-relaxed">
+                        To make clean air accessible to every Indian home, transforming the way families breathe, live, and thrive in their indoor spaces.
+                      </p>
                     </div>
                   </div>
-                  <div className="flex-1 pt-2">
-                    <h3 className="text-xl font-semibold font-heading text-brand-grey-green mb-3">Our Mission</h3>
-                    <p className="text-base text-brand-dark-grey font-body leading-relaxed">
-                      To make clean air accessible to every Indian home, transforming the way families breathe, live, and thrive in their indoor spaces.
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -139,10 +194,10 @@ export const AboutVaayura = ({
                 
                 {/* Floating Card */}
                 <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-brand-pastel-green/20">
-                  <h4 className="text-lg font-semibold font-heading text-brand-grey-green mb-2">
+                  <h4 className="text-lg font-semibold font-sora text-brand-grey-green mb-2">
                     Pure Air, Pure Nature
                   </h4>
-                  <p className="text-sm text-brand-dark-grey font-body leading-relaxed">
+                  <p className="text-sm text-brand-dark-grey font-montserrat leading-relaxed">
                     Inspired by nature's own air purification systems, we bring you technology that works in harmony with the environment.
                   </p>
                 </div>
@@ -152,50 +207,59 @@ export const AboutVaayura = ({
         </div>
       </section>
 
-
       {/* Our Philosophy Section */}
-      <section className="py-32 bg-gray-50">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, threshold: 0.3, margin: "-100px" }}
+        variants={staggerContainer}
+        className="py-32 bg-gray-50">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-semibold font-display text-brand-grey-green mb-6">Our Philosophy</h2>
-            <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full mb-8"></div>
+          <motion.div variants={fadeInUp} className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-semibold font-sora text-brand-grey-green mb-6">Our Philosophy</h2>
+            <div className="w-16 h-1 bg-brand-pastel-green mx-auto rounded-full mb-8"></div>
             <div className="max-w-4xl mx-auto space-y-8">
-              <div className="flex items-start gap-6 text-left">
+              <motion.div variants={fadeInUp} className="flex items-start gap-6 text-left">
                 <span className="text-brand-pastel-green text-2xl">•</span>
-                <p className="text-xl text-brand-dark-grey font-body leading-relaxed">Clean air should be a right, not a luxury.</p>
-              </div>
-              <div className="flex items-start gap-6 text-left">
+                <p className="text-xl text-brand-dark-grey font-montserrat leading-relaxed">Clean air should be a right, not a luxury.</p>
+              </motion.div>
+              <motion.div variants={fadeInUp} className="flex items-start gap-6 text-left">
                 <span className="text-brand-pastel-green text-2xl">•</span>
-                <p className="text-xl text-brand-dark-grey font-body leading-relaxed">Performance and beauty can coexist.</p>
-              </div>
-              <div className="flex items-start gap-6 text-left">
+                <p className="text-xl text-brand-dark-grey font-montserrat leading-relaxed">Performance and beauty can coexist.</p>
+              </motion.div>
+              <motion.div variants={fadeInUp} className="flex items-start gap-6 text-left">
                 <span className="text-brand-pastel-green text-2xl">•</span>
-                <p className="text-xl text-brand-dark-grey font-body leading-relaxed">Technology should work silently in the background, while you live fully in the foreground.</p>
-              </div>
+                <p className="text-xl text-brand-dark-grey font-montserrat leading-relaxed">Technology should work silently in the background, while you live fully in the foreground.</p>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* The Problem We Solve Section */}
-      <section className="w-full py-16 lg:py-24 bg-white">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, threshold: 0.3, margin: "-100px" }}
+        variants={staggerContainer}
+        className="w-full py-16 lg:py-24 bg-white">
         <div className="container mx-auto max-w-7xl px-4">
           <div className="flex flex-col gap-12">
             
             {/* Section Header */}
-            <div className="text-center space-y-6">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+            <motion.div variants={fadeInUp} className="text-center space-y-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
                 The Problem We <span className="text-brand-pastel-green">Solve</span>
               </h2>
-              <p className="text-lg text-brand-dark-grey font-body max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg text-brand-dark-grey font-montserrat max-w-3xl mx-auto leading-relaxed">
                 "What You Can't See, You Still Breathe."
               </p>
-            </div>
+            </motion.div>
 
             {/* Problem Content */}
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
               {/* Problem Image */}
-              <div className="flex-1 relative max-w-lg">
+              <motion.div variants={fadeInLeft} className="flex-1 relative max-w-lg">
                 <div className="aspect-[4/3] w-full">
                   <img 
                     src={problemImage} 
@@ -203,10 +267,10 @@ export const AboutVaayura = ({
                     className="w-full h-full object-cover rounded-xl"
                   />
                 </div>
-              </div>
+              </motion.div>
 
               {/* Problem Content */}
-              <div className="flex-1 space-y-6">
+              <motion.div variants={fadeInRight} className="flex-1 space-y-6">
                 {/* Problem Number */}
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-brand-pastel-green flex items-center justify-center">
@@ -216,46 +280,51 @@ export const AboutVaayura = ({
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl md:text-3xl font-subheading text-brand-grey-green leading-tight">
+                <h3 className="text-2xl md:text-3xl font-sora text-brand-grey-green leading-tight">
                   The Invisible Threat
                 </h3>
 
                 {/* Description */}
-                <p className="text-brand-dark-grey font-body leading-relaxed text-lg">
+                <p className="text-brand-dark-grey font-montserrat leading-relaxed text-lg">
                   Every breath you take in India carries more than just oxygen—it carries dust, smoke, industrial particles, and invisible toxins. The WHO estimates that nearly 18% of all deaths in India are linked to air pollution. Vaayura exists to change that—making clean air effortless, affordable, and accessible.
                 </p>
 
                 {/* Technical Specs */}
                 <div className="bg-slate-50 rounded-xl p-4 border-l-4 border-brand-pastel-green">
-                  <div className="text-sm font-medium text-brand-grey-green mb-1">
+                  <div className="text-sm font-medium font-sora text-brand-grey-green mb-1">
                     Critical Statistics
                   </div>
-                  <div className="text-brand-dark-grey font-mono text-sm">
+                  <div className="text-brand-dark-grey font-montserrat text-sm">
                     18% Deaths Linked to Air Pollution • PM2.5 Levels 10x WHO Limits • 1.7M Annual Deaths
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Why Choose Vaayura Section */}
-      <section className="w-full py-16 lg:py-24 bg-gray-100">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, threshold: 0.3, margin: "-100px" }}
+        variants={staggerContainer}
+        className="w-full py-16 lg:py-24 bg-gray-100">
         <div className="container mx-auto max-w-7xl px-4">
           <div className="flex flex-col gap-12">
             
             {/* Section Header */}
-            <div className="text-center space-y-6">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+            <motion.div variants={fadeInUp} className="text-center space-y-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
                 Why Choose <span className="text-brand-pastel-green">Vaayura</span>?
               </h2>
-            </div>
+            </motion.div>
 
             {/* Features Content */}
             <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16">
               {/* Features Image */}
-              <div className="flex-1 relative max-w-lg">
+              <motion.div variants={fadeInRight} className="flex-1 relative max-w-lg">
                 <div className="aspect-[4/3] w-full">
                   <img 
                     src={productImage} 
@@ -263,10 +332,10 @@ export const AboutVaayura = ({
                     className="w-full h-full object-contain rounded-xl"
                   />
                 </div>
-              </div>
+              </motion.div>
 
               {/* Features Content */}
-              <div className="flex-1 space-y-6">
+              <motion.div variants={fadeInLeft} className="flex-1 space-y-6">
                 {/* Features Number */}
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-brand-pastel-green flex items-center justify-center">
@@ -276,7 +345,7 @@ export const AboutVaayura = ({
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl md:text-3xl font-subheading text-brand-grey-green leading-tight">
+                <h3 className="text-2xl md:text-3xl font-sora text-brand-grey-green leading-tight">
                   Our Solution Advantage
                 </h3>
 
@@ -284,35 +353,35 @@ export const AboutVaayura = ({
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
-                    <p className="text-brand-dark-grey font-body leading-relaxed">
+                    <p className="text-brand-dark-grey font-montserrat leading-relaxed">
                       <strong>World-class multi-layer filtration</strong> removing up to 99.97% of harmful airborne particles
                     </p>
                   </div>
                   
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
-                    <p className="text-brand-dark-grey font-body leading-relaxed">
+                    <p className="text-brand-dark-grey font-montserrat leading-relaxed">
                       <strong>Real-time air quality monitoring</strong> for complete control and transparency
                     </p>
                   </div>
                   
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
-                    <p className="text-brand-dark-grey font-body leading-relaxed">
+                    <p className="text-brand-dark-grey font-montserrat leading-relaxed">
                       <strong>Designed to complement your interiors</strong> – elegant, minimal, and timeless
                     </p>
                   </div>
                   
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
-                    <p className="text-brand-dark-grey font-body leading-relaxed">
+                    <p className="text-brand-dark-grey font-montserrat leading-relaxed">
                       <strong>Long-lasting performance</strong> with low maintenance needs and energy efficiency
                     </p>
                   </div>
                   
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
-                    <p className="text-brand-dark-grey font-body leading-relaxed">
+                    <p className="text-brand-dark-grey font-montserrat leading-relaxed">
                       <strong>Backed by exceptional after-sales support</strong> and comprehensive warranty coverage
                     </p>
                   </div>
@@ -320,41 +389,46 @@ export const AboutVaayura = ({
 
                 {/* Technical Specs */}
                 <div className="bg-white rounded-xl p-4 border-l-4 border-brand-pastel-green shadow-sm">
-                  <div className="text-sm font-medium text-brand-grey-green mb-1">
+                  <div className="text-sm font-medium font-sora text-brand-grey-green mb-1">
                     Performance Guarantee
                   </div>
-                  <div className="text-brand-dark-grey font-mono text-sm">
+                  <div className="text-brand-dark-grey font-montserrat text-sm">
                     99.97% Filtration • Real-time Monitoring • 29+ Years Engineering Excellence
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Achievements Section - Our Promise in Numbers */}
-      <section className="py-32 bg-gray-50">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, threshold: 0.3, margin: "-100px" }}
+        variants={staggerContainer}
+        className="py-32 bg-gray-50">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col gap-4 text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-semibold font-display text-brand-grey-green">{achievementsTitle}</h2>
-            <div className="w-16 h-0.5 bg-brand-pastel-green rounded-full mx-auto"></div>
-            <p className="max-w-4xl mx-auto text-lg text-brand-dark-grey font-body">
+          <motion.div variants={fadeInUp} className="flex flex-col gap-4 text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-semibold font-sora text-brand-grey-green">{achievementsTitle}</h2>
+            <div className="w-16 h-1 bg-brand-pastel-green rounded-full mx-auto"></div>
+            <p className="max-w-4xl mx-auto text-lg text-brand-dark-grey font-montserrat">
               {achievementsDescription}
             </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-6xl mx-auto">
+          </motion.div>
+          <motion.div variants={staggerContainer} className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-6xl mx-auto">
             {achievements.map((item, idx) => (
-              <div className="flex flex-col gap-4" key={item.label + idx}>
-                <span className="text-3xl md:text-4xl lg:text-5xl font-semibold font-display text-brand-grey-green">
+              <motion.div variants={fadeInUp} className="flex flex-col gap-4" key={item.label + idx}>
+                <span className="text-3xl md:text-4xl lg:text-5xl font-semibold font-sora text-brand-grey-green">
                   {item.value}
                 </span>
-                <p className="text-brand-dark-grey font-body text-sm md:text-base">{item.label}</p>
-              </div>
+                <p className="text-brand-dark-grey font-montserrat text-sm md:text-base">{item.label}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Trusted by Industry Leaders Section */}
       <ProductClients />

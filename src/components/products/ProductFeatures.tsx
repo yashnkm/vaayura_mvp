@@ -6,6 +6,7 @@ import realtimeAQIImg from "@/assets/realtime AQI.jpg";
 import ambientLightImg from "@/assets/Ambiend light.jpg";
 import aromaTepImg from "@/assets/aroma_tep.jpg";
 import productHeroImg from "@/assets/product_hero.png";
+import silentSleepModeImg from "@/assets/Advance filter homepage/Silentsleepmode.jpg";
 import { ArrowRight } from "lucide-react";
 
 interface Feature {
@@ -41,7 +42,7 @@ const features: Feature[] = [
     technical: "Ultrasonic Diffusion • Essential Oil Compatible • Dual Function"
   },
   {
-    image: realtimeAQIImg,
+    image: silentSleepModeImg,
     title: "Silent Sleep Mode",
     description: "Ultra-quiet operation at just 38dB in sleep mode with dimmed LED indicators, ensuring peaceful rest while maintaining continuous air purification.",
     technical: "<38dB Operation • Dimmed LED • Continuous Purification"

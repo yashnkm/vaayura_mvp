@@ -4,9 +4,10 @@ import natureImg from "@/assets/main.jpg";
 import filtrationImg from "@/assets/4 layer filter.jpg";
 import smartTechImg from "@/assets/int_sensor.jpg";
 import smartAutoImg from "@/assets/gg v1.png";
-import advancedFiltrationImg from "@/assets/advance filteration .png";
+import advancedFiltrationImg from "@/assets/Advance filter homepage/advance hepa filtration.jpg";
 import stormImg from "@/assets/storm.png";
 import aromaImg from "@/assets/aroma.jpg";
+import silentSleepModeImg from "@/assets/Advance filter homepage/Silentsleepmode.jpg";
 
 // Define types locally to avoid import issues
 interface ProductFeature {
@@ -108,7 +109,7 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
       return aromaImg; // Use the beautiful aromatherapy diffuser image
     }
     if (title.toLowerCase().includes('silent') || title.toLowerCase().includes('sleep') || title.toLowerCase().includes('quiet')) {
-      return natureImg; // Use our beautiful forest/nature image for peaceful sleep
+      return silentSleepModeImg; // Use the Silent Sleep Mode image
     }
     if (title.toLowerCase().includes('wifi') || title.toLowerCase().includes('app') || title.toLowerCase().includes('connect')) {
       return "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&auto=format&fit=crop&q=60";

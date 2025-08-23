@@ -268,11 +268,11 @@ export function ProductShowcaseSection() {
               viewport={{ once: true }}
               className="flex justify-center"
             >
-              <div className="inline-block rounded-2xl overflow-hidden shadow-lg">
+              <div className="inline-block rounded-2xl overflow-hidden shadow-lg bg-gray-50">
                 <img
                   src={filterImg}
                   alt="Vaayura Air Purifier Filter"
-                  className="w-80 h-80 object-cover"
+                  className="w-full max-w-md h-auto object-contain"
                 />
               </div>
             </motion.div>
