@@ -1,6 +1,5 @@
 import { Header1 } from '@/components/ui/header'
-import { Hero2 } from '@/components/homepage/Hero2'
-import { ProductFeaturesBanner } from '@/components/homepage/ProductFeaturesBanner'
+import { Hero3DSection } from '@/components/homepage/Hero3DSection'
 import { ProductsShowcase } from '@/components/homepage/ProductsShowcase'
 import { ProductDetailFeatures } from '@/components/product-detail/ProductDetailFeatures'
 import { FiltrationTechnology } from '@/components/homepage/FiltrationTechnology'
@@ -14,8 +13,7 @@ export function HomePage() {
   return (
     <>
       <Header1 />
-      <Hero2 />
-      <ProductFeaturesBanner />
+      <Hero3DSection />
       {/* About Us Section */}
       <section className="py-16 px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">

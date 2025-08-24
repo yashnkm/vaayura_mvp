@@ -79,7 +79,7 @@ export default {
   				'serif'
   			],
   			subheading: [
-  				'Mont',
+  				'Montserrat',
   				'sans-serif'
   			],
   			body: [
