@@ -93,7 +93,7 @@ const staggerContainer = {
 
 export const AboutVaayura = ({
   title = "About Vaayura",
-  description = "Our Story Begins with a Breath. In 2025, we asked a simple question: Why is clean air still considered a privilege? Returning from abroad, our founders saw loved ones breathing 'Hazardous' air daily—without even realizing it. It wasn't just a statistic, it was personal. That moment became our mission.",
+  description = "Our Story Begins with a Breath. In 2025, we asked a simple question: Why is clean air still considered a privilege? Returning from abroad, our founders saw loved ones breathing 'Hazardous' air daily without even realizing it. It wasn't just a statistic, it was personal. That moment became our mission.",
   mainImage = {
     src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=center",
     alt: "Air purification technology",
@@ -138,7 +138,7 @@ export const AboutVaayura = ({
                     In 2025, we asked a simple question: Why is clean air still considered a privilege?
                   </p>
                   <p>
-                    Returning from abroad, our founders saw loved ones breathing "Hazardous" air daily—without even realizing it. 
+                    Returning from abroad, our founders saw loved ones breathing "Hazardous" air daily without even realizing it. 
                     It wasn't just a statistic, it was personal. That moment became our mission.
                   </p>
                 </div>
@@ -150,10 +150,8 @@ export const AboutVaayura = ({
                 <div className="relative flex gap-4">
                   <div className="relative">
                     <div className="flex w-12 h-12 items-center justify-center overflow-hidden rounded-full border-2 border-brand-pastel-green/30 bg-brand-pastel-green/10">
-                      <div className="w-6 h-6 bg-brand-grey-green rounded"></div>
+                      <div className="w-6 h-6 bg-brand-pastel-green rounded"></div>
                     </div>
-                    {/* Connecting line from bottom of first circle to top of second circle */}
-                    <div className="absolute left-1/2 top-full w-0.5 h-6 -translate-x-1/2 bg-brand-pastel-green"></div>
                   </div>
                   <div className="flex-1 pt-2">
                     <h3 className="text-xl font-semibold font-sora text-brand-grey-green mb-3">Our Roots</h3>
@@ -286,7 +284,7 @@ export const AboutVaayura = ({
 
                 {/* Description */}
                 <p className="text-brand-dark-grey font-montserrat leading-relaxed text-lg">
-                  Every breath you take in India carries more than just oxygen—it carries dust, smoke, industrial particles, and invisible toxins. The WHO estimates that nearly 18% of all deaths in India are linked to air pollution. Vaayura exists to change that—making clean air effortless, affordable, and accessible.
+                  Every breath you take in India carries more than just oxygen - it carries dust, smoke, industrial particles, and invisible toxins. The WHO estimates that nearly 18% of all deaths in India are linked to air pollution. Vaayura exists to change that by making clean air effortless, affordable, and accessible.
                 </p>
 
                 {/* Technical Specs */}
@@ -368,7 +366,7 @@ export const AboutVaayura = ({
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
                     <p className="text-brand-dark-grey font-montserrat leading-relaxed">
-                      <strong>Designed to complement your interiors</strong> – elegant, minimal, and timeless
+                      <strong>Designed to complement your interiors</strong> - elegant, minimal, and timeless
                     </p>
                   </div>
                   
