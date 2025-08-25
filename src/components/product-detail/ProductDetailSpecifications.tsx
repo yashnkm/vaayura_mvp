@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatePresence, motion } from "framer-motion";
+import nestFrontView from "@/assets/Productimages/nestfrontview.png";
+import nestSideView from "@/assets/Productimages/nestsideview.png";
+import stormFrontView from "@/assets/Productimages/stormfrontview.png";
+import stormSideView from "@/assets/Productimages/stormsideview.png";
 
 // Define types locally to avoid import issues
 interface ProductFeature {
@@ -32,6 +36,7 @@ interface ProductDetailSpecificationsProps {
 
 export function ProductDetailSpecifications({ product }: ProductDetailSpecificationsProps) {
   const [showPopup, setShowPopup] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const TRANSITION = {
     type: "spring",
@@ -65,6 +70,38 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
 
   // Get all specification entries and limit to 10 items for better layout
   const specEntries = Object.entries(specifications).slice(0, 10);
+
+  // Get product-specific images for carousel
+  const getProductImages = () => {
+    const productName = product.name.toLowerCase();
+    if (productName.includes('nest')) {
+      return [
+        { src: product.images[0] || nestSideView, alt: 'Nest Side View' },
+        { src: nestFrontView, alt: 'Nest Front View' }
+      ];
+    } else if (productName.includes('storm')) {
+      return [
+        { src: product.images[0] || stormSideView, alt: 'Storm Side View' },
+        { src: stormFrontView, alt: 'Storm Front View' }
+      ];
+    } else {
+      // Default fallback
+      return [
+        { src: product.images[0] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3", alt: 'Product View 1' },
+        { src: product.images[1] || product.images[0] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3", alt: 'Product View 2' }
+      ];
+    }
+  };
+
+  const productImages = getProductImages();
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % productImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + productImages.length) % productImages.length);
+  };
 
   // Detailed technical specifications for popup
   const detailedSpecs = [
@@ -121,18 +158,47 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
             </div>
           </div>
 
-          {/* Right side: Product Image */}
+          {/* Right side: Product Image Carousel */}
           <div className="relative flex justify-center items-start">
-            <div className="relative">
-              <img 
-                src={product.images[0] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"}
-                alt={`${product.name} - Specifications`}
-                className="w-96 h-[500px] object-contain"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement
-                  target.src = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
-                }}
-              />
+            <div className="relative w-96 h-[500px]">
+              {/* Main Image Display */}
+              <div className="relative w-full h-full overflow-hidden rounded-2xl">
+                <AnimatePresence mode="wait">
+                  <motion.img 
+                    key={currentImageIndex}
+                    src={productImages[currentImageIndex].src}
+                    alt={productImages[currentImageIndex].alt}
+                    className="w-full h-full object-contain"
+                    style={{ filter: 'drop-shadow(0 15px 35px rgba(0, 0, 0, 0.2))' }}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.3 }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.src = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+                    }}
+                  />
+                </AnimatePresence>
+              </div>
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={prevImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 hover:text-green-600 transition-all duration-300 hover:scale-125 group"
+                style={{ filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2))' }}
+              >
+                <ChevronLeft className="w-8 h-8 transition-transform duration-300 group-hover:-translate-x-1" />
+              </button>
+              
+              <button
+                onClick={nextImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 hover:text-green-600 transition-all duration-300 hover:scale-125 group"
+                style={{ filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2))' }}
+              >
+                <ChevronRight className="w-8 h-8 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+
             </div>
           </div>
         </div>

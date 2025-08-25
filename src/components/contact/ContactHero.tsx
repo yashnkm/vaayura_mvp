@@ -2,7 +2,7 @@ export function ContactHero() {
   return (
     <section className="pt-32 pb-20 px-6 bg-slate-50">
       <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-brand-grey-green leading-tight mb-6">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-sora text-brand-grey-green leading-tight mb-6">
           Get in <span className="text-brand-pastel-green">Touch</span>
         </h1>
         <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full mb-8"></div>

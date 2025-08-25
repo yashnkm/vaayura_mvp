@@ -41,7 +41,7 @@ export function ProductContact() {
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight mb-4">
               Ready to improve your <span className="text-brand-pastel-green">air quality</span>?
             </h2>
             <p className="text-lg text-brand-dark-grey font-body max-w-2xl mx-auto">

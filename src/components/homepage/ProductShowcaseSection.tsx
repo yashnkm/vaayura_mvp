@@ -1,28 +1,44 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
-import { PhoneCall } from 'lucide-react'
 import { motion } from 'framer-motion'
 import stormImg from "@/assets/storm.png"
 import nestImg from "@/assets/nest.png"
-import filterImg from "@/assets/4 layer filter.jpg"
+import stormFrontView from "@/assets/Productimages/stormfrontview.png"
+import stormSideView from "@/assets/Productimages/stormsideview.png"
+import nestFrontView from "@/assets/Productimages/nestfrontview.png"
+import nestSideView from "@/assets/Productimages/nestsideview.png"
+import herosectionProduct from "@/assets/herosection_product.png"
+import backgroundImg from "@/assets/background.png"
+import productHeroSection from "@/assets/productHeroSection.jpg"
+import backgroundimage2 from "@/assets/backgroundimage2.png"
 
 const models = [
   { id: 'storm', name: 'Storm', price: 15990, originalPrice: 21990, image: stormImg },
   { id: 'nest', name: 'Nest', price: 8990, originalPrice: 12990, image: nestImg }
 ]
 
-const filters = [
-  { id: 'storm-filter', name: 'Storm Filter', price: 2990 },
-  { id: 'nest-filter', name: 'Nest Filter', price: 1990 }
+const heroBackgrounds = [
+  { id: 'herosection', name: 'Hero Section', image: herosectionProduct },
+  { id: 'background', name: 'Background', image: backgroundImg },
+  { id: 'product-hero', name: 'Product Hero', image: productHeroSection },
+  { id: 'background2', name: 'Background 2', image: backgroundimage2 }
 ]
 
 export function ProductShowcaseSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [selectedFilter, setSelectedFilter] = useState(filters[0])
+  const [heroCarouselIndex, setHeroCarouselIndex] = useState(0)
 
   // Get current product data
   const currentProduct = models[currentImageIndex]
   const discountPercentage = Math.round(((currentProduct.originalPrice - currentProduct.price) / currentProduct.originalPrice) * 100)
+
+  // Auto-carousel effect for hero section backgrounds
+  useEffect(() => {
+    const backgroundInterval = setInterval(() => {
+      setHeroCarouselIndex(prev => (prev + 1) % heroBackgrounds.length)
+    }, 1500)
+    return () => clearInterval(backgroundInterval)
+  }, [])
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % models.length)
@@ -205,79 +221,204 @@ export function ProductShowcaseSection() {
           </div>
         </motion.div>
 
-        {/* Filters Section */}
-        <motion.div 
+        {/* New Hero Section - Bigger. Faster. Stronger. */}
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-12 shadow-lg"
+          className="mt-20 relative overflow-hidden rounded-3xl shadow-2xl"
+          style={{ height: '600px' }}
         >
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Filter Content */}
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-4xl lg:text-5xl font-sora font-bold mb-6 text-gray-900">
-                  Premium <span className="text-brand-pastel-green">Filters</span>
-                </h2>
-                <p className="text-xl text-gray-600 mb-6 font-subheading font-semibold">HIGH EFFICIENCY, LOW COST</p>
-                
-                <p className="text-gray-700 leading-relaxed mb-8 font-sora text-lg">
-                  Our premium filters deliver exceptional performance while saving you from expensive replacements. 
-                  Engineered for longevity and superior air purification.
-                </p>
-
-                {/* Filter Selection */}
-                <div className="mb-8">
-                  <h4 className="text-lg font-semibold mb-4 font-sora">Select Filter:</h4>
-                  <div className="flex gap-3">
-                    {filters.map((filter) => (
-                      <motion.button
-                        key={filter.id}
-                        onClick={() => setSelectedFilter(filter)}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`px-6 py-3 rounded-full font-semibold transition-all duration-200 font-sora ${
-                          selectedFilter.id === filter.id
-                            ? 'bg-green-800 hover:bg-green-900 text-white'
-                            : 'bg-transparent border-2 border-green-800 text-green-800 hover:bg-green-800 hover:text-white'
-                        }`}
-                      >
-                        {filter.name}
-                      </motion.button>
-                    ))}
-                  </div>
-                </div>
-
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button className="bg-green-800 hover:bg-green-900 text-white font-semibold px-8 py-3 rounded-full font-sora transition-all duration-200">
-                    BUY FILTER - ₹{selectedFilter.price.toLocaleString()}
-                  </Button>
-                </motion.div>
-              </div>
-            </div>
-
-            {/* Filter Image - Card sized to match image with rounded edges */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="flex justify-center"
+          {/* Background Image Carousel */}
+          <div className="absolute inset-0">
+            {/* Background 1 - herosection_product */}
+            <motion.div
+              key={`bg-hero-${heroCarouselIndex}`}
+              className="absolute inset-0 bg-cover bg-center"
+              initial={{
+                opacity: heroCarouselIndex === 0 ? 1 : 0
+              }}
+              animate={{
+                opacity: heroCarouselIndex === 0 ? 1 : 0,
+                transition: {
+                  duration: 0.2,
+                  ease: "linear"
+                }
+              }}
+              style={{
+                backgroundImage: `url(${herosectionProduct})`
+              }}
             >
-              <div className="inline-block rounded-2xl overflow-hidden shadow-lg bg-gray-50">
-                <img
-                  src={filterImg}
-                  alt="Vaayura Air Purifier Filter"
-                  className="w-full max-w-md h-auto object-contain"
-                />
-              </div>
+              <div className="absolute inset-0 bg-black/25"></div>
+            </motion.div>
+
+            {/* Background 2 - background.png */}
+            <motion.div
+              key={`bg-background-${heroCarouselIndex}`}
+              className="absolute inset-0 bg-cover bg-center"
+              initial={{
+                opacity: heroCarouselIndex === 1 ? 1 : 0
+              }}
+              animate={{
+                opacity: heroCarouselIndex === 1 ? 1 : 0,
+                transition: {
+                  duration: 0.2,
+                  ease: "linear"
+                }
+              }}
+              style={{
+                backgroundImage: `url(${backgroundImg})`
+              }}
+            >
+              <div className="absolute inset-0 bg-black/25"></div>
+            </motion.div>
+
+            {/* Background 3 - productHeroSection.jpg */}
+            <motion.div
+              key={`bg-product-${heroCarouselIndex}`}
+              className="absolute inset-0 bg-cover bg-center"
+              initial={{
+                opacity: heroCarouselIndex === 2 ? 1 : 0
+              }}
+              animate={{
+                opacity: heroCarouselIndex === 2 ? 1 : 0,
+                transition: {
+                  duration: 0.2,
+                  ease: "linear"
+                }
+              }}
+              style={{
+                backgroundImage: `url(${productHeroSection})`
+              }}
+            >
+              <div className="absolute inset-0 bg-black/25"></div>
+            </motion.div>
+
+            {/* Background 4 - backgroundimage2.png */}
+            <motion.div
+              key={`bg-background2-${heroCarouselIndex}`}
+              className="absolute inset-0 bg-cover bg-center"
+              initial={{
+                opacity: heroCarouselIndex === 3 ? 1 : 0
+              }}
+              animate={{
+                opacity: heroCarouselIndex === 3 ? 1 : 0,
+                transition: {
+                  duration: 0.2,
+                  ease: "linear"
+                }
+              }}
+              style={{
+                backgroundImage: `url(${backgroundimage2})`
+              }}
+            >
+              <div className="absolute inset-0 bg-black/25"></div>
             </motion.div>
           </div>
+
+          {/* Content Container */}
+          <div className="relative z-10 flex flex-col justify-between h-full p-8 lg:p-16">
+            
+            {/* Top Section - Typography */}
+            <div className="text-center mb-8">
+              <motion.h1 
+                initial={{ opacity: 0, y: -30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-4xl lg:text-6xl font-sora font-bold text-white mb-4 leading-tight"
+              >
+                Bigger. Faster. <span className="text-blue-400">Stronger</span>.
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="text-lg lg:text-xl text-gray-300 font-montserrat font-light tracking-wider"
+              >
+                PURE AIR EVERYWHERE
+              </motion.p>
+            </div>
+
+            {/* Center Section - Products Display */}
+            <div className="flex-1 relative">
+              
+
+            </div>
+          </div>
         </motion.div>
+
+        {/* Information Badges with Product Images - Below Background Container */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+          className="mt-8 flex justify-center items-center relative"
+        >
+          {/* Storm Specs - Left Side */}
+          <div className="text-center mr-8">
+            <h4 className="text-gray-900 font-sora font-semibold text-lg mb-3">Storm</h4>
+            <div className="flex gap-3">
+              <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                <div className="text-gray-600 text-xs font-montserrat font-medium">Area Coverage</div>
+                <div className="text-green-800 font-sora font-bold text-sm">1000 sq. ft.</div>
+              </div>
+              <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                <div className="text-gray-600 text-xs font-montserrat font-medium">CADR</div>
+                <div className="text-green-800 font-sora font-bold text-sm">600m³/h</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Product Images - Center with Overlap */}
+          <div className="relative flex items-center justify-center mx-8 -mt-96">
+            {/* Storm Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.2, delay: 0.1 }}
+              className="relative z-30"
+            >
+              <img
+                src={stormSideView}
+                alt="Vaayura Storm"
+                className="h-80 lg:h-96 w-auto object-contain"
+                style={{ filter: 'drop-shadow(0 25px 60px rgba(0, 0, 0, 0.4))' }}
+              />
+            </motion.div>
+
+            {/* Nest Image - Smoothly Overlapping Storm */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.2, delay: 0.2 }}
+              className="relative z-40 -ml-48 mt-16"
+            >
+              <img
+                src={nestFrontView}
+                alt="Vaayura Nest"
+                className="h-80 lg:h-96 w-auto object-contain"
+                style={{ filter: 'drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3))' }}
+              />
+            </motion.div>
+          </div>
+
+          {/* Nest Specs - Right Side */}
+          <div className="text-center ml-8">
+            <h4 className="text-gray-900 font-sora font-semibold text-lg mb-3">Nest</h4>
+            <div className="flex gap-3">
+              <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                <div className="text-gray-600 text-xs font-montserrat font-medium">Area Coverage</div>
+                <div className="text-green-800 font-sora font-bold text-sm">600 sq. ft.</div>
+              </div>
+              <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                <div className="text-gray-600 text-xs font-montserrat font-medium">CADR</div>
+                <div className="text-green-800 font-sora font-bold text-sm">450m³/h</div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   )

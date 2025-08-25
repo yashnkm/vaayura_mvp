@@ -1,12 +1,12 @@
 // Import asset images
 import React, { useState, useEffect, useRef } from "react";
-import fourLayerFilterImg from "@/assets/4 layer filter.jpg";
+import fourLayerFilterImg from "@/assets/filterimage.png";
 import intSensorImg from "@/assets/int_sensor.jpg";
 import realtimeAQIImg from "@/assets/realtime AQI.jpg";
 import ambientLightImg from "@/assets/Ambiend light.jpg";
 import aromaTepImg from "@/assets/aroma_tep.jpg";
 import productHeroImg from "@/assets/product_hero.png";
-import silentSleepModeImg from "@/assets/Advance filter homepage/Silentsleepmode.jpg";
+import silentSleepModeImg from "@/assets/Adobe Express - file.png";
 import { ArrowRight } from "lucide-react";
 
 interface Feature {
@@ -89,7 +89,7 @@ export function ProductFeatures() {
           
           {/* Section Header */}
           <div className="text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
               Engineered for <span className="text-brand-pastel-green">Excellence</span>
             </h2>
             <p className="text-lg text-brand-dark-grey font-body max-w-3xl mx-auto leading-relaxed">
@@ -103,8 +103,8 @@ export function ProductFeatures() {
               <div 
                 key={index}
                 ref={el => featureRefs.current[index] = el}
-                className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-16 min-h-[500px] transition-all duration-1000 ease-out ${
-                  index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                className={`flex flex-col lg:flex-row items-center ${feature.title === 'Silent Sleep Mode' ? 'gap-4 lg:gap-8' : 'gap-8 lg:gap-16'} min-h-[500px] transition-all duration-1000 ease-out ${
+                  (index % 2 === 1 && feature.title !== 'Silent Sleep Mode') ? 'lg:flex-row-reverse' : ''
                 } ${
                   visibleFeatures[index] 
                     ? 'opacity-100 translate-y-0 scale-100' 
@@ -116,20 +116,17 @@ export function ProductFeatures() {
                 }}
               >
                 {/* Feature Image */}
-                <div className={`flex-1 relative max-w-lg transition-all duration-1000 ease-out ${
+                <div className={`${feature.title === 'Silent Sleep Mode' ? 'flex-none w-full max-w-xl -ml-24' : 'flex-1 max-w-md'} relative transition-all duration-1000 ease-out ${
                   visibleFeatures[index] 
                     ? 'opacity-100 translate-x-0 scale-100' 
                     : `opacity-0 scale-95 ${index % 2 === 1 ? 'translate-x-12' : '-translate-x-12'}`
                 }`}>
-                  <div className="relative">
-                    <div className="aspect-[4/3] w-full">
-                      <img 
-                        src={feature.image} 
-                        alt={feature.title}
-                        className="w-full h-full object-contain rounded-xl shadow-lg"
-                      />
-                    </div>
-                  </div>
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title}
+                    className={`w-full object-contain ${feature.title === 'Silent Sleep Mode' ? 'h-[28rem]' : 'h-80'}`}
+                    style={{ filter: 'drop-shadow(0 15px 35px rgba(0, 0, 0, 0.2))' }}
+                  />
                 </div>
 
                 {/* Feature Content */}
@@ -157,7 +154,7 @@ export function ProductFeatures() {
                   </div>
 
                   {/* Title */}
-                  <h3 className={`text-2xl md:text-3xl font-subheading text-brand-grey-green leading-tight transition-all duration-1000 ${
+                  <h3 className={`text-2xl md:text-3xl font-sora text-brand-grey-green leading-tight transition-all duration-1000 ${
                     visibleFeatures[index] 
                       ? 'opacity-100 translate-y-0' 
                       : 'opacity-0 translate-y-6'

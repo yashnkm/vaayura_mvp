@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
-import stormImg from "@/assets/storm.png"
-import nestImg from "@/assets/nest.png"
+import stormImg from "@/assets/Productimages/stormfrontview.png"
+import nestImg from "@/assets/Productimages/nestfrontview.png"
 
 export function ProductsShowcase() {
   return (
@@ -16,7 +16,8 @@ export function ProductsShowcase() {
                 <img
                   src={stormImg}
                   alt="Storm"
-                  className="w-full h-full object-contain p-8"
+                  className="w-full h-full object-contain p-6 scale-110 hover:scale-125 transition-transform duration-300 cursor-pointer"
+                  style={{ filter: 'drop-shadow(0 10px 25px rgba(0, 0, 0, 0.15))' }}
                 />
               </div>
             </div>
@@ -52,7 +53,8 @@ export function ProductsShowcase() {
                 <img
                   src={nestImg}
                   alt="Nest"
-                  className="w-full h-full object-contain p-8"
+                  className="w-full h-full object-contain p-7 hover:scale-110 transition-transform duration-300 cursor-pointer"
+                  style={{ filter: 'drop-shadow(0 10px 25px rgba(0, 0, 0, 0.15))' }}
                 />
               </div>
             </div>

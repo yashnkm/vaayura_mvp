@@ -59,7 +59,7 @@ export function ProductCatalog() {
       <section className="py-32 bg-white">
         <div className="container">
           <div className="text-center space-y-4 mb-12 px-6">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
               Our <span className="text-brand-pastel-green">Products</span>
             </h2>
             <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full"></div>
@@ -77,7 +77,7 @@ export function ProductCatalog() {
       <div className="container mx-auto">
         {/* Section Header - matching homepage pattern */}
         <div className="text-center space-y-4 mb-12 px-6">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
             Our <span className="text-brand-pastel-green">Products</span>
           </h2>
           <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full"></div>
@@ -131,7 +131,7 @@ export function ProductCatalog() {
               
               {/* Product Info */}
               <div className="flex-1 space-y-6 text-center lg:text-left">
-                <h3 className="text-3xl md:text-4xl font-display text-brand-grey-green leading-tight">
+                <h3 className="text-3xl md:text-4xl font-sora text-brand-grey-green leading-tight">
                   {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`}
                 </h3>
                 <p className="text-lg text-brand-dark-grey font-body leading-relaxed">

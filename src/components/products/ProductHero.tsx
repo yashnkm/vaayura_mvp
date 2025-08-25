@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import heroSectionImg from "@/assets/productHeroSection.jpg";
+import heroSectionImg from "@/assets/hero2background.jpg";
 
 const ProductHeroComponent = memo(() => {
   return (
@@ -32,7 +32,7 @@ const ProductHeroComponent = memo(() => {
         <div className="absolute bottom-16 left-0 right-0 z-20">
           <div className="container mx-auto px-6">
             <div className="flex flex-col justify-center items-center space-y-8">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-white leading-tight text-center drop-shadow-lg">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-sora text-white leading-tight text-center drop-shadow-lg">
                 Pure Air, Pure Life
               </h1>
             </div>

@@ -71,7 +71,7 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
           {/* Left Content */}
           <div className="space-y-8">
             <div className="space-y-6">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display text-brand-grey-green leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-sora text-brand-grey-green leading-tight">
                 {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`}
               </h1>
               
@@ -108,7 +108,8 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
               <img
                 src={imageSrc}
                 alt={product.name}
-                className="w-full h-full object-cover rounded-2xl"
+                className="w-full h-full object-contain rounded-2xl"
+                style={{ filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3))' }}
                 loading="lazy"
                 decoding="async"
                 onError={handleImageError}
