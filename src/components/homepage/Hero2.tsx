@@ -120,7 +120,7 @@ export function Hero2() {
           <div className="space-y-8 max-w-2xl">
             {/* Main Headline */}
             <div className="space-y-6">
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-display font-bold leading-tight text-white">
+              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-sora font-bold leading-tight text-white">
                 Life Begins with<br />
                 <span className="text-brand-pastel-green">Clean Air</span>
               </h1>

@@ -44,10 +44,10 @@ export function AppControlSection() {
     <section className="py-20 bg-white text-gray-900">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-sora font-bold mb-6">
-            Breathe <span className="text-green-600">Smart</span>
+          <h2 className="text-4xl lg:text-5xl font-sora font-bold mb-6 text-gray-900">
+            Breathe <span className="text-brand-pastel-green">Smart</span>
           </h2>
-          <p className="text-xl text-gray-600 font-sora max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 font-subheading max-w-2xl mx-auto">
             PURIFY AIR FROM THE VAAYURA APP
           </p>
         </div>

@@ -170,7 +170,7 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
           
           {/* Section Header */}
           <div className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-sora font-bold text-gray-900 leading-tight mb-6">
               Advanced <span className="text-brand-pastel-green">Features</span>
             </h2>
             <p className="text-lg text-brand-dark-grey font-body max-w-3xl mx-auto leading-relaxed">

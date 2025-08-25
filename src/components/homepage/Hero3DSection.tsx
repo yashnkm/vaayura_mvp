@@ -113,7 +113,7 @@ export function Hero3DSection() {
             }`}
           >
             <div className="text-center px-6 max-w-4xl">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-brand-grey-green mb-6 leading-tight" style={{ fontFamily: 'Sora, sans-serif' }}>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-sora font-bold text-gray-900 mb-6 leading-tight">
                 Life Begins with Clean Air.
               </h1>
               <p className="text-xl md:text-2xl text-brand-dark-grey/80 leading-relaxed font-subheading">

@@ -6,7 +6,7 @@ export function FiltrationTechnology() {
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-sora font-bold text-emerald-900 mb-6">
+          <h2 className="text-4xl lg:text-5xl font-sora font-bold text-gray-900 mb-6">
             Filtration Technology
           </h2>
         </div>

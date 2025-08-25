@@ -70,6 +70,10 @@ export default {
   				'Sora',
   				'sans-serif'
   			],
+  			sora: [
+  				'Sora',
+  				'sans-serif'
+  			],
   			display: [
   				'The Season',
   				'serif'
@@ -79,7 +83,7 @@ export default {
   				'serif'
   			],
   			subheading: [
-  				'Montserrat',
+  				'Mont',
   				'sans-serif'
   			],
   			body: [

@@ -33,7 +33,7 @@ export function ProductClients() {
               <p className="text-lg text-brand-dark-grey font-body">
                 Trusted by Industry Leaders
               </p>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-sora font-bold text-gray-900 leading-tight mb-6">
                 Join the <span className="text-brand-pastel-green">Clean Air Revolution</span>
               </h2>
               <p className="text-lg text-brand-dark-grey font-body max-w-2xl mx-auto">

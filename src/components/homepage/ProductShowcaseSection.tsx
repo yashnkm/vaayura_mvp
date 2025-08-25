@@ -62,7 +62,7 @@ export function ProductShowcaseSection() {
             <h1 className="text-4xl lg:text-5xl font-sora font-bold text-gray-900 mb-6">
               Choose Your Perfect Air Purifier
             </h1>
-            <p className="text-xl text-gray-600 font-sora max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 font-subheading max-w-3xl mx-auto">
               Advanced filtration technology meets elegant design. Select from our premium collection.
             </p>
           </div>
@@ -217,10 +217,10 @@ export function ProductShowcaseSection() {
             {/* Filter Content */}
             <div className="space-y-6">
               <div>
-                <h2 className="text-3xl lg:text-4xl font-sora font-bold mb-2">
+                <h2 className="text-4xl lg:text-5xl font-sora font-bold mb-6 text-gray-900">
                   Premium <span className="text-brand-pastel-green">Filters</span>
                 </h2>
-                <p className="text-xl text-gray-600 mb-6 font-sora font-semibold">HIGH EFFICIENCY, LOW COST</p>
+                <p className="text-xl text-gray-600 mb-6 font-subheading font-semibold">HIGH EFFICIENCY, LOW COST</p>
                 
                 <p className="text-gray-700 leading-relaxed mb-8 font-sora text-lg">
                   Our premium filters deliver exceptional performance while saving you from expensive replacements. 

@@ -56,7 +56,7 @@ export function ProofTrust({
       <div className="container mx-auto">
         {/* Section Header - matching About section pattern */}
         <div className="text-center space-y-4 mb-12 px-6">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
+          <h2 className="text-4xl lg:text-5xl font-sora font-bold text-gray-900 leading-tight mb-6">
             Proof &{" "}
             <span className="text-brand-pastel-green">Trust</span>
           </h2>
