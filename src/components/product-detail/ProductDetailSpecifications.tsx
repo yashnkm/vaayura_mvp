@@ -74,15 +74,16 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
   // Get product-specific images for carousel
   const getProductImages = () => {
     const productName = product.name.toLowerCase();
+    
     if (productName.includes('nest')) {
       return [
         { src: product.images[0] || nestSideView, alt: 'Nest Side View' },
         { src: nestFrontView, alt: 'Nest Front View' }
       ];
-    } else if (productName.includes('storm')) {
+    } else if (productName.includes('storm') || productName.includes('strom')) {
       return [
-        { src: product.images[0] || stormSideView, alt: 'Storm Side View' },
-        { src: stormFrontView, alt: 'Storm Front View' }
+        { src: stormFrontView, alt: 'Storm Front View' },
+        { src: product.images[0] || stormSideView, alt: 'Storm Side View' }
       ];
     } else {
       // Default fallback
@@ -164,21 +165,30 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
               {/* Main Image Display */}
               <div className="relative w-full h-full overflow-hidden rounded-2xl">
                 <AnimatePresence mode="wait">
-                  <motion.img 
+                  <motion.div
                     key={currentImageIndex}
-                    src={productImages[currentImageIndex].src}
-                    alt={productImages[currentImageIndex].alt}
-                    className="w-full h-full object-contain"
-                    style={{ filter: 'drop-shadow(0 15px 35px rgba(0, 0, 0, 0.2))' }}
+                    className="w-full h-full flex items-center justify-center"
+                    style={{
+                      transform: productImages[currentImageIndex].alt === 'Storm Front View' 
+                        ? 'scale(10)' 
+                        : 'scale(1)'
+                    }}
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -50 }}
                     transition={{ duration: 0.3 }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement
-                      target.src = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
-                    }}
-                  />
+                  >
+                    <img 
+                      src={productImages[currentImageIndex].src}
+                      alt={productImages[currentImageIndex].alt}
+                      className="max-w-full max-h-full object-contain"
+                      style={{ filter: 'drop-shadow(0 15px 35px rgba(0, 0, 0, 0.2))' }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.src = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+                      }}
+                    />
+                  </motion.div>
                 </AnimatePresence>
               </div>
 
