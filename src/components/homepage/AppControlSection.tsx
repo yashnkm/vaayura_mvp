@@ -54,14 +54,12 @@ export function AppControlSection() {
     setActiveFeature(featureId)
     
     if (featureId === 'turn-on-off') {
-      if (!showMobile) {
-        // If mobile is not shown, show it
-        setShowMobile(true)
-      } else if (showModal) {
-        // If mobile is shown and modal is open, just close the modal
+      // Always show mobile when Turn On/Off is clicked
+      setShowMobile(true)
+      // Close any open modal
+      if (showModal) {
         setShowModal(null)
       }
-      // If mobile is shown and no modal is open, do nothing (keep mobile visible)
     } else if (featureId === 'choose-mode' || featureId === 'speed' || featureId === 'settings') {
       if (showMobile) {
         setShowModal(featureId)
@@ -270,71 +268,71 @@ export function AppControlSection() {
                                 exit={{ y: 300, opacity: 0 }}
                                 className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-2xl overflow-hidden z-10"
                               >
-                            {showModal === 'choose-mode' && (
-                              <div>
-                                <h3 className="text-lg font-medium text-center py-3 text-gray-900">Mode</h3>
-                                <div>
-                                  {modeOptions.map((mode, index) => (
+                                {showModal === 'choose-mode' && (
+                                  <div>
+                                    <h3 className="text-lg font-medium text-center py-3 text-gray-900">Mode</h3>
+                                    <div>
+                                      {modeOptions.map((mode, index) => (
+                                        <button
+                                          key={mode}
+                                          onClick={() => setSelectedMode(mode)}
+                                          className={`w-full py-3 px-4 text-center flex justify-center items-center relative hover:bg-gray-50 transition-colors ${
+                                            index < modeOptions.length - 1 ? 'border-b border-gray-100' : ''
+                                          }`}
+                                        >
+                                          <span className="text-base font-normal text-gray-800">{mode}</span>
+                                          {selectedMode === mode && (
+                                            <Check className="text-blue-500 absolute right-4" size={18} strokeWidth={2.5} />
+                                          )}
+                                        </button>
+                                      ))}
+                                    </div>
+                                    
+                                    {/* Separator */}
+                                    <div className="border-t border-gray-200 my-2"></div>
+                                    
                                     <button
-                                      key={mode}
-                                      onClick={() => setSelectedMode(mode)}
-                                      className={`w-full py-3 px-4 text-center flex justify-center items-center relative hover:bg-gray-50 transition-colors ${
-                                        index < modeOptions.length - 1 ? 'border-b border-gray-100' : ''
-                                      }`}
+                                      onClick={() => setShowModal(null)}
+                                      className="w-full py-3 text-center text-base font-normal text-gray-500 hover:bg-gray-50 transition-colors"
                                     >
-                                      <span className="text-base font-normal text-gray-800">{mode}</span>
-                                      {selectedMode === mode && (
-                                        <Check className="text-blue-500 absolute right-4" size={18} strokeWidth={2.5} />
-                                      )}
+                                      Cancel
                                     </button>
-                                  ))}
-                                </div>
-                                
-                                {/* Separator */}
-                                <div className="border-t border-gray-200 my-2"></div>
-                                
-                                <button
-                                  onClick={() => setShowModal(null)}
-                                  className="w-full py-3 text-center text-base font-normal text-gray-500 hover:bg-gray-50 transition-colors"
-                                >
-                                  Cancel
-                                </button>
-                              </div>
-                            )}
+                                  </div>
+                                )}
 
-                            {showModal === 'speed' && (
-                              <div>
-                                <h3 className="text-lg font-medium text-center py-3 text-gray-900">Speed</h3>
-                                <div>
-                                  {speedOptions.map((speed, index) => (
+                                {showModal === 'speed' && (
+                                  <div>
+                                    <h3 className="text-lg font-medium text-center py-3 text-gray-900">Speed</h3>
+                                    <div>
+                                      {speedOptions.map((speed, index) => (
+                                        <button
+                                          key={speed}
+                                          onClick={() => setSelectedSpeed(speed)}
+                                          className={`w-full py-3 px-4 text-center flex justify-center items-center relative hover:bg-gray-50 transition-colors ${
+                                            index < speedOptions.length - 1 ? 'border-b border-gray-100' : ''
+                                          }`}
+                                        >
+                                          <span className="text-base font-normal text-gray-800">{speed}</span>
+                                          {selectedSpeed === speed && (
+                                            <Check className="text-blue-500 absolute right-4" size={18} strokeWidth={2.5} />
+                                          )}
+                                        </button>
+                                      ))}
+                                    </div>
+                                    
+                                    {/* Separator */}
+                                    <div className="border-t border-gray-200 my-2"></div>
+                                    
                                     <button
-                                      key={speed}
-                                      onClick={() => setSelectedSpeed(speed)}
-                                      className={`w-full py-3 px-4 text-center flex justify-center items-center relative hover:bg-gray-50 transition-colors ${
-                                        index < speedOptions.length - 1 ? 'border-b border-gray-100' : ''
-                                      }`}
+                                      onClick={() => setShowModal(null)}
+                                      className="w-full py-3 text-center text-base font-normal text-gray-500 hover:bg-gray-50 transition-colors"
                                     >
-                                      <span className="text-base font-normal text-gray-800">{speed}</span>
-                                      {selectedSpeed === speed && (
-                                        <Check className="text-blue-500 absolute right-4" size={18} strokeWidth={2.5} />
-                                      )}
+                                      Cancel
                                     </button>
-                                  ))}
-                                </div>
-                                
-                                {/* Separator */}
-                                <div className="border-t border-gray-200 my-2"></div>
-                                
-                                <button
-                                  onClick={() => setShowModal(null)}
-                                  className="w-full py-3 text-center text-base font-normal text-gray-500 hover:bg-gray-50 transition-colors"
-                                >
-                                  Cancel
-                                </button>
-                              </div>
+                                  </div>
+                                )}
+                              </motion.div>
                             )}
-
-                            </motion.div>
                           </>
                         )}
                       </AnimatePresence>

@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import heroSectionImg from "@/assets/hero2background.jpg";
+import heroSectionImg from "@/assets/product_hero.png";
 
 const ProductHeroComponent = memo(() => {
   return (
