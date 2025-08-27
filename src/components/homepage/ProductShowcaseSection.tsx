@@ -350,9 +350,10 @@ export function ProductShowcaseSection() {
 
         {/* Information Badges with Product Images - Below Background Container */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true }}
           className="mt-8 flex justify-center items-center relative"
         >
           {/* Storm Specs - Left Side */}
@@ -372,33 +373,41 @@ export function ProductShowcaseSection() {
 
           {/* Product Images - Center with Overlap */}
           <div className="relative flex items-center justify-center mx-8 -mt-96">
-            {/* Storm Image */}
+            {/* Storm Image - Animated Entry */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.2, delay: 0.1 }}
+              initial={{ opacity: 0, x: -30, scale: 0.8 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true }}
               className="relative z-30"
             >
               <img
                 src={stormSideView}
                 alt="Vaayura Storm"
                 className="h-80 lg:h-96 w-auto object-contain"
-                style={{ filter: 'drop-shadow(0 25px 60px rgba(0, 0, 0, 0.4))' }}
+                style={{ 
+                  filter: 'drop-shadow(0 25px 60px rgba(0, 0, 0, 0.4))',
+                  transform: 'translate3d(0, 0, 0)' // GPU acceleration
+                }}
               />
             </motion.div>
 
-            {/* Nest Image - Smoothly Overlapping Storm */}
+            {/* Nest Image - Animated Entry with Delay */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.2, delay: 0.2 }}
+              initial={{ opacity: 0, x: 30, scale: 0.8 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+              viewport={{ once: true }}
               className="relative z-40 -ml-48 mt-16"
             >
               <img
                 src={nestFrontView}
                 alt="Vaayura Nest"
                 className="h-80 lg:h-96 w-auto object-contain"
-                style={{ filter: 'drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3))' }}
+                style={{ 
+                  filter: 'drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3))',
+                  transform: 'translate3d(0, 0, 0)' // GPU acceleration
+                }}
               />
             </motion.div>
           </div>

@@ -1,7 +1,7 @@
 // Import asset images
 import React, { useState, useEffect, useRef } from "react";
 import fourLayerFilterImg from "@/assets/filterimage.png";
-import intSensorImg from "@/assets/int_sensor.jpg";
+import intSensorImg from "@/assets/Adobe_Express_-_file_1.png";
 import realtimeAQIImg from "@/assets/realtime AQI.jpg";
 import ambientLightImg from "@/assets/Ambiend light.jpg";
 import aromaTepImg from "@/assets/aroma_tep.jpg";

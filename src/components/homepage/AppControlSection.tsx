@@ -27,6 +27,18 @@ const features = [
     name: 'Settings',
     description: 'Configure device preferences, schedules, and advanced options',
     appHighlight: 'settings'
+  },
+  {
+    id: 'countdown-timer',
+    name: 'Countdown timer',
+    description: 'Set automatic shutdown timers to save energy and customize operation duration',
+    appHighlight: 'countdown-timer'
+  },
+  {
+    id: 'schedule-power',
+    name: 'Schedule power on/off',
+    description: 'Create custom schedules to automatically turn your air purifier on or off at specific times',
+    appHighlight: 'schedule-power'
   }
 ]
 
@@ -35,16 +47,20 @@ export function AppControlSection() {
   const [showModal, setShowModal] = useState<string | null>(null)
   const [selectedMode, setSelectedMode] = useState('Auto')
   const [selectedSpeed, setSelectedSpeed] = useState('Low')
-  const [showMobile, setShowMobile] = useState(false)
+  const [selectedTimer, setSelectedTimer] = useState('Off')
+  const [showMobile, setShowMobile] = useState(true)
+  const [childLock, setChildLock] = useState(true)
+  const [ambientLight, setAmbientLight] = useState(true)
   
   const modeOptions = ['Manual', 'Auto', 'Sleep']
   const speedOptions = ['Low', 'Medium', 'High']
+  const timerOptions = ['Off', '2h', '4h', '8h']
   
   const settingsOptions = [
-    { name: 'Child lock', type: 'toggle', value: true },
-    { name: 'Ambient light', type: 'toggle', value: true },
+    { name: 'Child lock', type: 'toggle', value: childLock },
+    { name: 'Ambient light', type: 'toggle', value: ambientLight },
     { name: 'Reset filter', type: 'action' },
-    { name: 'Countdown timer', type: 'setting', value: 'Off' },
+    { name: 'Countdown timer', type: 'setting', value: selectedTimer },
     { name: 'Schedule power on/off', type: 'action' }
   ]
 
@@ -60,10 +76,22 @@ export function AppControlSection() {
       if (showModal) {
         setShowModal(null)
       }
-    } else if (featureId === 'choose-mode' || featureId === 'speed' || featureId === 'settings') {
+    } else if (featureId === 'choose-mode' || featureId === 'speed' || featureId === 'countdown-timer' || featureId === 'schedule-power' || featureId === 'settings') {
       if (showMobile) {
         setShowModal(featureId)
       }
+    }
+  }
+
+  const handleSettingsToggle = (settingName: string) => {
+    if (settingName === 'Child lock') {
+      setChildLock(!childLock)
+    } else if (settingName === 'Ambient light') {
+      setAmbientLight(!ambientLight)
+    } else if (settingName === 'Countdown timer') {
+      setShowModal('countdown-timer')
+    } else if (settingName === 'Schedule power on/off') {
+      setShowModal('schedule-power')
     }
   }
 
@@ -161,49 +189,63 @@ export function AppControlSection() {
           </div>
 
           {/* Right side: Mobile App Mockup */}
-          <div className="flex justify-center">
-            <AnimatePresence>
-              {showMobile && (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.6 }}
-                  className="relative"
-                >
-                  {/* Phone Frame */}
-                  <div className="relative w-80 h-[600px] bg-gray-800 rounded-[3rem] p-4 border-4 border-gray-600">
-                    {/* Screen Content */}
-                    <div className="w-full h-full rounded-[2rem] relative overflow-hidden">
+          <div className="flex justify-center items-center min-h-[600px]">
+            <div className="relative w-[280px] h-[580px] flex-shrink-0"> {/* Fixed container */}
+              <AnimatePresence mode="wait">
+                {showMobile && (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.6 }}
+                    className="absolute inset-0 w-full h-full"
+                  >
+                  {/* iPhone 16 Pro Frame - Fixed Dimensions */}
+                  <div className="absolute inset-0 w-[280px] h-[580px] bg-gradient-to-b from-gray-800 to-gray-900 rounded-[2.8rem] p-[3px]" 
+                    style={{ 
+                      filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3)) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2))' 
+                    }}
+                  >
+                    {/* iPhone 16 Pro titanium frame edge */}
+                    <div className="absolute inset-[3px] rounded-[2.6rem] bg-gradient-to-b from-gray-700 to-gray-800 p-[5px]">
                       
-                      {/* Always show the static image */}
-                      <img 
-                        src={appHomescreenImg} 
-                        alt="Vaayura App Homescreen" 
-                        className="w-full h-full object-cover object-top rounded-[2rem]"
-                      />
+                      {/* Screen Content - Fixed Dimensions */}
+                      <div className="w-full h-full rounded-[2.4rem] relative overflow-hidden bg-black">
+                        
+                        {/* Dynamic Island */}
+                        <div className="absolute top-5 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-full z-40 shadow-inner border border-gray-800"></div>
+                        
+                        {/* Screen area */}
+                        <div className="w-full h-full relative overflow-hidden rounded-[2.4rem]">
+                          
+                          {/* Always show the static image */}
+                          <img 
+                            src={appHomescreenImg} 
+                            alt="Vaayura App Homescreen" 
+                            className="w-full h-full object-cover object-top rounded-[2.4rem]"
+                          />
 
                       {/* Modal Popup Overlay on Phone */}
                       <AnimatePresence>
                         {showModal && (
                           <>
-                            {/* Black tint background - only for mode and speed */}
+                            {/* Black tint background - only for popups */}
                             {(showModal === 'choose-mode' || showModal === 'speed') && (
                               <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="absolute inset-0 bg-black bg-opacity-50 rounded-[2rem]"
+                                className="absolute inset-0 bg-black bg-opacity-50 rounded-[2.4rem]"
                               />
                             )}
                             
-                            {/* Settings Full Screen */}
-                            {showModal === 'settings' && (
+                            {/* Settings and Schedule Power Full Screen */}
+                            {(showModal === 'settings' || showModal === 'schedule-power' || showModal === 'countdown-timer') && (
                               <motion.div
                                 initial={{ x: 300, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
                                 exit={{ x: 300, opacity: 0 }}
-                                className="absolute inset-0 bg-gray-100 rounded-[2rem] z-10"
+                                className="absolute inset-0 bg-gray-100 rounded-[2.4rem] z-10"
                               >
                                 {/* Status Bar */}
                                 <div className="flex justify-between items-center p-4 text-gray-800 text-sm">
@@ -226,39 +268,105 @@ export function AppControlSection() {
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                     </svg>
                                   </button>
-                                  <h1 className="text-xl font-semibold text-gray-900">Settings</h1>
+                                  <h1 className="text-xl font-semibold text-gray-900">
+                                    {showModal === 'settings' ? 'Settings' : showModal === 'schedule-power' ? 'Schedule' : 'Settings'}
+                                  </h1>
                                 </div>
 
-                                {/* Settings List */}
-                                <div className="px-6 pt-4">
-                                  {settingsOptions.map((setting, index) => (
-                                    <div key={index} className="bg-white rounded-xl mb-4 px-5 py-4 shadow-sm">
-                                      <div className="flex justify-between items-center">
-                                        <span className="text-lg font-normal text-gray-900">{setting.name}</span>
-                                        {setting.type === 'toggle' && (
-                                          <div className={`w-12 h-7 rounded-full ${setting.value ? 'bg-blue-500' : 'bg-gray-300'} relative transition-colors`}>
-                                            <div className={`w-5 h-5 bg-white rounded-full absolute top-1 transition-transform ${setting.value ? 'translate-x-6' : 'translate-x-1'}`}></div>
-                                          </div>
-                                        )}
-                                        {setting.type === 'setting' && (
-                                          <div className="flex items-center space-x-2">
-                                            <span className="text-gray-500">{setting.value}</span>
-                                            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                {/* Content List */}
+                                <div className="px-4 pt-4">
+                                  {(showModal === 'settings' || showModal === 'countdown-timer') ? (
+                                    /* Settings List */
+                                    settingsOptions.map((setting, index) => (
+                                      <motion.button
+                                        key={index}
+                                        onClick={() => handleSettingsToggle(setting.name)}
+                                        whileHover={{ backgroundColor: "rgba(249, 250, 251, 1)" }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="w-full bg-white hover:bg-gray-50 border-b border-gray-100 last:border-b-0 px-4 py-4 transition-colors cursor-pointer"
+                                      >
+                                        <div className="flex justify-between items-center">
+                                          <span className="text-base font-normal text-gray-900 text-left">{setting.name}</span>
+                                          {setting.type === 'toggle' && (
+                                            <div className={`w-11 h-6 rounded-full ${setting.value ? 'bg-blue-500' : 'bg-gray-300'} relative transition-colors`}>
+                                              <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform ${setting.value ? 'translate-x-5' : 'translate-x-0.5'}`}></div>
+                                            </div>
+                                          )}
+                                          {setting.type === 'setting' && (
+                                            <div className="flex items-center space-x-2">
+                                              <span className="text-gray-500 text-sm">{setting.value}</span>
+                                              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                              </svg>
+                                            </div>
+                                          )}
+                                          {setting.type === 'action' && (
+                                            <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                             </svg>
-                                          </div>
-                                        )}
-                                        {setting.type === 'action' && (
-                                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                          </svg>
-                                        )}
+                                          )}
+                                        </div>
+                                      </motion.button>
+                                    ))
+                                  ) : (
+                                    /* Schedule Power Content */
+                                    <div className="px-3">
+                                      {/* Time variance note */}
+                                      <div className="px-1 py-2 mb-3">
+                                        <p className="text-xs text-gray-500">Time variance is ±30s</p>
                                       </div>
+
+                                      {/* Schedule Items */}
+                                      <div className="space-y-3">
+                                        {/* PM 6:30 Schedule */}
+                                        <div className="bg-gray-50 rounded px-3 py-3">
+                                          <div className="flex justify-between items-center mb-1">
+                                            <span className="text-lg font-light text-gray-300">PM 6:30</span>
+                                            <div className="w-9 h-5 rounded-full bg-gray-300 relative transition-colors">
+                                              <div className="w-4 h-4 bg-white rounded-full absolute top-0.5 translate-x-0.5"></div>
+                                            </div>
+                                          </div>
+                                          <p className="text-xs text-gray-400 mb-0.5">Once</p>
+                                          <p className="text-xs text-gray-400">Switch:ON</p>
+                                        </div>
+
+                                        {/* PM 11:00 Schedule */}
+                                        <div className="bg-white rounded px-3 py-3 border border-gray-200">
+                                          <div className="flex justify-between items-center mb-1">
+                                            <span className="text-lg font-light text-gray-900">PM 11:00</span>
+                                            <div className="w-9 h-5 rounded-full bg-green-500 relative transition-colors">
+                                              <div className="w-4 h-4 bg-white rounded-full absolute top-0.5 translate-x-4"></div>
+                                            </div>
+                                          </div>
+                                          <p className="text-xs text-gray-600 mb-0.5">Every day</p>
+                                          <p className="text-xs text-gray-600">Switch:OFF</p>
+                                        </div>
+                                      </div>
+
+                                      {/* Add Schedule Button */}
+                                      <motion.button
+                                        whileHover={{ backgroundColor: "rgba(249, 250, 251, 1)" }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="w-full mt-6 mb-3 py-3 bg-white border-t border-gray-200 transition-colors"
+                                      >
+                                        <span className="text-base font-normal text-gray-900">Add Schedule</span>
+                                      </motion.button>
                                     </div>
-                                  ))}
+                                  )}
                                 </div>
+
+                                {/* Black overlay OVER the Settings screen content for countdown timer */}
+                                {showModal === 'countdown-timer' && (
+                                  <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="absolute inset-0 bg-black bg-opacity-50 rounded-[2.4rem] z-10"
+                                  />
+                                )}
                               </motion.div>
                             )}
+
 
                             {/* Mode and Speed Popups */}
                             {(showModal === 'choose-mode' || showModal === 'speed') && (
@@ -331,17 +439,66 @@ export function AppControlSection() {
                                     </button>
                                   </div>
                                 )}
+
+
                               </motion.div>
                             )}
+
+                            {/* Countdown Timer Popup - separate from other popups */}
+                            {showModal === 'countdown-timer' && (
+                              <motion.div
+                                initial={{ y: 300, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                exit={{ y: 300, opacity: 0 }}
+                                className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-2xl overflow-hidden z-20"
+                              >
+                                <div>
+                                  <h3 className="text-base font-medium text-center py-2 text-gray-900">Countdown timer</h3>
+                                  <div>
+                                    {timerOptions.map((timer, index) => (
+                                      <motion.button
+                                        key={timer}
+                                        onClick={() => setSelectedTimer(timer)}
+                                        whileHover={{ backgroundColor: "rgba(249, 250, 251, 1)" }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className={`w-full py-3 px-3 text-center flex justify-center items-center relative transition-colors ${
+                                          index < timerOptions.length - 1 ? 'border-b border-gray-100' : ''
+                                        }`}
+                                      >
+                                        <span className="text-base font-normal text-gray-800">{timer}</span>
+                                        {selectedTimer === timer && (
+                                          <Check className="text-blue-500 absolute right-3" size={16} strokeWidth={2.5} />
+                                        )}
+                                      </motion.button>
+                                    ))}
+                                  </div>
+                                  
+                                  <div className="border-t border-gray-200"></div>
+                                  
+                                  <motion.button
+                                    onClick={() => setShowModal(null)}
+                                    whileHover={{ backgroundColor: "rgba(249, 250, 251, 1)" }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="w-full py-2 text-center text-sm font-normal text-gray-500 transition-colors"
+                                  >
+                                    Cancel
+                                  </motion.button>
+                                </div>
+                              </motion.div>
+                            )}
+
                           </>
                         )}
                       </AnimatePresence>
                       
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>

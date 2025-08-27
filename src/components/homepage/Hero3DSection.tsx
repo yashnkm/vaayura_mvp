@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Lottie from 'lottie-react';
 import animationData from '@/assets/video/animiation2.mp4.lottie.json';
-import heroBackground from '@/assets/hero2background.jpg';
+import heroBackground from '@/assets/productHeroSection.jpg';
 
 export function Hero3DSection() {
   const containerRef = useRef<HTMLDivElement>(null);
