@@ -113,16 +113,18 @@ export function Hero3DSection() {
             }`}
           >
             <div className="text-center px-6 max-w-4xl">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-sora font-bold text-gray-900 mb-6 leading-tight">
-                Life Begins with Clean Air.
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-sora font-bold text-[#36454F] mb-6 leading-tight">
+                Life Begins with<br />
+                Clean Air.
               </h1>
-              <p className="text-xl md:text-2xl text-brand-dark-grey/80 leading-relaxed font-subheading">
-                Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.
-              </p>
+              <div className="text-xl md:text-2xl text-brand-dark-grey/80 leading-relaxed font-montserrat">
+                <p className="text-justify">Clean air is no longer a luxury it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and</p>
+                <p className="text-center">beautiful.</p>
+              </div>
               
               {/* Scroll hint */}
               <div className="mt-12">
-                <span className="text-sm text-brand-grey-green font-subheading">Scroll to explore</span>
+                <span className="text-base text-gray-300 font-montserrat">Scroll to explore</span>
               </div>
             </div>
           </div>
@@ -162,7 +164,7 @@ export function Hero3DSection() {
             scrollStarted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
             <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-              <p className="text-sm font-subheading text-brand-grey-green">
+              <p className="text-sm font-montserrat text-brand-grey-green">
                 {displayProgress < 0.05 ? 'Scroll to rotate ↓' : 
                  displayProgress > 0.95 ? 'Complete! ✨' : 
                  'Keep scrolling...'}

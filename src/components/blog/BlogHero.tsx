@@ -6,7 +6,7 @@ export function BlogHero() {
           Our <span className="text-brand-pastel-green">Blog</span>
         </h1>
         <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full mb-8"></div>
-        <p className="text-lg md:text-xl text-brand-dark-grey font-body max-w-2xl mx-auto leading-relaxed">
+        <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat max-w-2xl mx-auto leading-relaxed">
           Expert insights on air quality, health, and clean living.
         </p>
       </div>

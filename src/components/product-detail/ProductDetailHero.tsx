@@ -75,7 +75,7 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
                 {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`}
               </h1>
               
-              <p className="text-lg md:text-xl text-brand-dark-grey font-body leading-relaxed max-w-lg">
+              <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat leading-relaxed max-w-lg">
                 {description}
               </p>
             </div>
@@ -85,7 +85,7 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
               <div className="text-4xl font-bold text-brand-grey-green mb-6">
                 ₹{formattedPrice}
               </div>
-              <p className="text-brand-dark-grey font-body mb-8">
+              <p className="text-brand-dark-grey font-montserrat mb-8">
                 inclusive of all taxes
               </p>
             </div>

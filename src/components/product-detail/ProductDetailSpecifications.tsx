@@ -140,7 +140,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
           {/* Left side: Specifications */}
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#36454F]">
                 Specifications
               </h2>
             </div>
@@ -150,7 +150,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
               {specEntries.map(([key, value], index) => (
                 <div key={index} className="space-y-2">
                   <div className="text-gray-700 font-medium text-sm">{key}:</div>
-                  <div className="text-gray-900 font-semibold">{value}</div>
+                  <div className="text-[#36454F] font-semibold">{value}</div>
                   {index < specEntries.length - 1 && (
                     <div className="border-b border-gray-200 mt-4"></div>
                   )}
@@ -216,7 +216,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
 
       {/* Useful Documents Section */}
       <div className="container mx-auto px-6 mt-24">
-        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12">
+        <h3 className="text-2xl md:text-3xl font-bold text-[#36454F] mb-12">
           Useful documents
         </h3>
         
@@ -228,7 +228,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-gray-900 font-semibold mb-2">
+                  <h4 className="text-[#36454F] font-semibold mb-2">
                     Technical specification, PDF, 8MB
                   </h4>
                   <p className="text-gray-600 text-sm">
@@ -275,7 +275,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.2 }}
                     >
-                      <h2 className="text-xl font-bold text-gray-900">Technical Specifications</h2>
+                      <h2 className="text-xl font-bold text-[#36454F]">Technical Specifications</h2>
                     </motion.div>
 
                     {/* Content */}
@@ -293,7 +293,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
                               delay: 0.3 + (sectionIndex * 0.1) 
                             }}
                           >
-                            <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">
+                            <h3 className="text-lg font-semibold text-[#36454F] border-b pb-2">
                               {section.category}
                             </h3>
                             <div className="overflow-x-auto">
@@ -321,7 +321,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
                                       }}
                                     >
                                       <td className="py-2 px-3 text-gray-600 text-sm">{spec.label}</td>
-                                      <td className="py-2 px-3 text-gray-900 font-medium text-sm">{spec.value}</td>
+                                      <td className="py-2 px-3 text-[#36454F] font-medium text-sm">{spec.value}</td>
                                     </motion.tr>
                                   ))}
                                 </tbody>

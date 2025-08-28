@@ -104,7 +104,7 @@ export function Hero3DFinal() {
           {/* Scroll indicator */}
           <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
             <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-              <p className="text-sm font-subheading text-brand-grey-green">
+              <p className="text-sm font-montserrat text-brand-grey-green">
                 {displayProgress < 0.05 ? 'Scroll to rotate ↓' : 
                  displayProgress > 0.95 ? 'Complete! ✨' : 
                  'Keep scrolling...'}

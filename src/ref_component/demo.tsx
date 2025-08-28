@@ -60,14 +60,14 @@ const MediaContent = ({ mediaType }: { mediaType: 'video' | 'image' }) => {
 
   return (
     <div className='max-w-4xl mx-auto'>
-      <h2 className='text-3xl font-bold mb-6 text-black dark:text-white'>
+      <h2 className='text-3xl font-bold mb-6 text-[#36454F] dark:text-white'>
         About This Component
       </h2>
-      <p className='text-lg mb-8 text-black dark:text-white'>
+      <p className='text-lg mb-8 text-[#36454F] dark:text-white'>
         {currentMedia.about.overview}
       </p>
 
-      <p className='text-lg mb-8 text-black dark:text-white'>
+      <p className='text-lg mb-8 text-[#36454F] dark:text-white'>
         {currentMedia.about.conclusion}
       </p>
     </div>
@@ -204,7 +204,7 @@ const Demo = () => {
           onClick={() => setMediaType('video')}
           className={`px-4 py-2 rounded-lg ${
             mediaType === 'video'
-              ? 'bg-white text-black'
+              ? 'bg-white text-[#36454F]'
               : 'bg-black/50 text-white border border-white/30'
           }`}
         >
@@ -215,7 +215,7 @@ const Demo = () => {
           onClick={() => setMediaType('image')}
           className={`px-4 py-2 rounded-lg ${
             mediaType === 'image'
-              ? 'bg-white text-black'
+              ? 'bg-white text-[#36454F]'
               : 'bg-black/50 text-white border border-white/30'
           }`}
         >

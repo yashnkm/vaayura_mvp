@@ -12,14 +12,15 @@ const HeroContent = ({ showContent }: { showContent?: boolean }) => {
       }`}
     >
       {/* Dark green card with blended borders - increased transparency */}
-      <div className='bg-brand-grey-green/35 backdrop-blur-sm rounded-3xl shadow-2xl border border-brand-grey-green/20 p-8 md:p-12 max-w-4xl mx-auto'>
+      <div className='bg-brand-grey-green/20 backdrop-blur-sm rounded-3xl shadow-2xl border border-brand-grey-green/20 p-8 md:p-12 max-w-4xl mx-auto'>
         {/* Main Headline */}
         <h1 className='text-4xl md:text-5xl lg:text-6xl font-sora font-bold mb-6 leading-tight text-brand-white text-center'>
-          Life Begins with <span className="text-brand-pastel-green">Clean Air</span>
+          Life Begins with<br />
+          <span className="text-brand-pastel-green">Clean Air</span>
         </h1>
         
         {/* Subheadline */}
-        <p className='text-lg md:text-xl font-body mb-10 text-brand-white/90 max-w-3xl mx-auto leading-relaxed text-center'>
+        <p className='text-lg md:text-xl font-montserrat mb-10 text-brand-white/90 max-w-3xl mx-auto leading-relaxed text-center'>
           Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.
         </p>
 

@@ -54,7 +54,7 @@ export function BlogGrid() {
                     >
                       {post.category}
                     </Badge>
-                    <span className="text-sm text-brand-dark-grey/70 font-body">
+                    <span className="text-sm text-brand-dark-grey/70 font-montserrat">
                       {post.readTime}
                     </span>
                   </div>
@@ -63,12 +63,12 @@ export function BlogGrid() {
                     {post.title}
                   </h3>
                   
-                  <p className="text-brand-dark-grey font-body mb-6 leading-relaxed">
+                  <p className="text-brand-dark-grey font-montserrat mb-6 leading-relaxed">
                     {post.excerpt}
                   </p>
                   
                   <div className="flex items-center justify-between">
-                    <p className="text-sm text-brand-dark-grey/70 font-body">
+                    <p className="text-sm text-brand-dark-grey/70 font-montserrat">
                       {new Date(post.date).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long',
@@ -91,7 +91,7 @@ export function BlogGrid() {
             <h3 className="text-3xl font-semibold font-heading text-brand-grey-green mb-4">
               More Insights Coming Soon
             </h3>
-            <p className="text-brand-dark-grey font-body max-w-2xl mx-auto mb-8 leading-relaxed">
+            <p className="text-brand-dark-grey font-montserrat max-w-2xl mx-auto mb-8 leading-relaxed">
               We're constantly researching and sharing the latest insights on air quality, health, and clean living. 
               Subscribe to our newsletter to stay updated with our latest articles and expert tips.
             </p>
@@ -99,7 +99,7 @@ export function BlogGrid() {
               <input 
                 type="email" 
                 placeholder="Enter your email address" 
-                className="px-6 py-3 rounded-full border border-brand-grey-green/20 focus:outline-none focus:ring-2 focus:ring-brand-pastel-green text-brand-dark-grey font-body min-w-[300px]"
+                className="px-6 py-3 rounded-full border border-brand-grey-green/20 focus:outline-none focus:ring-2 focus:ring-brand-pastel-green text-brand-dark-grey font-montserrat min-w-[300px]"
               />
               <button className="bg-brand-grey-green text-white px-8 py-3 rounded-full font-semibold hover:bg-brand-grey-green/90 transition-colors duration-300">
                 Subscribe

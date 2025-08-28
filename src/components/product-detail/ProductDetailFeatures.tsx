@@ -170,10 +170,10 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
           
           {/* Section Header */}
           <div className="text-center space-y-4">
-            <h2 className="text-4xl lg:text-5xl font-sora font-bold text-gray-900 leading-tight mb-6">
+            <h2 className="text-4xl lg:text-5xl font-sora font-bold text-[#36454F] leading-tight mb-6">
               Advanced <span className="text-brand-pastel-green">Features</span>
             </h2>
-            <p className="text-lg text-brand-dark-grey font-body max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-brand-dark-grey font-montserrat max-w-3xl mx-auto leading-relaxed">
               Every feature in {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`} is engineered to provide you with the cleanest, healthiest air while maintaining 
               the perfect balance of performance and tranquility.
             </p>

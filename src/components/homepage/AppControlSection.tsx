@@ -96,13 +96,13 @@ export function AppControlSection() {
   }
 
   return (
-    <section className="py-20 bg-white text-gray-900">
+    <section className="py-20 bg-white text-[#36454F]">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-sora font-bold mb-6 text-gray-900">
+          <h2 className="text-4xl lg:text-5xl font-sora font-bold mb-6 text-[#36454F]">
             Breathe <span className="text-brand-pastel-green">Smart</span>
           </h2>
-          <p className="text-xl text-gray-600 font-subheading max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 font-montserrat max-w-2xl mx-auto">
             PURIFY AIR FROM THE VAAYURA APP
           </p>
         </div>
@@ -268,7 +268,7 @@ export function AppControlSection() {
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                     </svg>
                                   </button>
-                                  <h1 className="text-xl font-semibold text-gray-900">
+                                  <h1 className="text-xl font-semibold text-[#36454F]">
                                     {showModal === 'settings' ? 'Settings' : showModal === 'schedule-power' ? 'Schedule' : 'Settings'}
                                   </h1>
                                 </div>
@@ -286,7 +286,7 @@ export function AppControlSection() {
                                         className="w-full bg-white hover:bg-gray-50 border-b border-gray-100 last:border-b-0 px-4 py-4 transition-colors cursor-pointer"
                                       >
                                         <div className="flex justify-between items-center">
-                                          <span className="text-base font-normal text-gray-900 text-left">{setting.name}</span>
+                                          <span className="text-base font-normal text-[#36454F] text-left">{setting.name}</span>
                                           {setting.type === 'toggle' && (
                                             <div className={`w-11 h-6 rounded-full ${setting.value ? 'bg-blue-500' : 'bg-gray-300'} relative transition-colors`}>
                                               <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform ${setting.value ? 'translate-x-5' : 'translate-x-0.5'}`}></div>
@@ -333,7 +333,7 @@ export function AppControlSection() {
                                         {/* PM 11:00 Schedule */}
                                         <div className="bg-white rounded px-3 py-3 border border-gray-200">
                                           <div className="flex justify-between items-center mb-1">
-                                            <span className="text-lg font-light text-gray-900">PM 11:00</span>
+                                            <span className="text-lg font-light text-[#36454F]">PM 11:00</span>
                                             <div className="w-9 h-5 rounded-full bg-green-500 relative transition-colors">
                                               <div className="w-4 h-4 bg-white rounded-full absolute top-0.5 translate-x-4"></div>
                                             </div>
@@ -349,7 +349,7 @@ export function AppControlSection() {
                                         whileTap={{ scale: 0.98 }}
                                         className="w-full mt-6 mb-3 py-3 bg-white border-t border-gray-200 transition-colors"
                                       >
-                                        <span className="text-base font-normal text-gray-900">Add Schedule</span>
+                                        <span className="text-base font-normal text-[#36454F]">Add Schedule</span>
                                       </motion.button>
                                     </div>
                                   )}
@@ -378,7 +378,7 @@ export function AppControlSection() {
                               >
                                 {showModal === 'choose-mode' && (
                                   <div>
-                                    <h3 className="text-lg font-medium text-center py-3 text-gray-900">Mode</h3>
+                                    <h3 className="text-lg font-medium text-center py-3 text-[#36454F]">Mode</h3>
                                     <div>
                                       {modeOptions.map((mode, index) => (
                                         <button
@@ -410,7 +410,7 @@ export function AppControlSection() {
 
                                 {showModal === 'speed' && (
                                   <div>
-                                    <h3 className="text-lg font-medium text-center py-3 text-gray-900">Speed</h3>
+                                    <h3 className="text-lg font-medium text-center py-3 text-[#36454F]">Speed</h3>
                                     <div>
                                       {speedOptions.map((speed, index) => (
                                         <button
@@ -453,7 +453,7 @@ export function AppControlSection() {
                                 className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-2xl overflow-hidden z-20"
                               >
                                 <div>
-                                  <h3 className="text-base font-medium text-center py-2 text-gray-900">Countdown timer</h3>
+                                  <h3 className="text-base font-medium text-center py-2 text-[#36454F]">Countdown timer</h3>
                                   <div>
                                     {timerOptions.map((timer, index) => (
                                       <motion.button

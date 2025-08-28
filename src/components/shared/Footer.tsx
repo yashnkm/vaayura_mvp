@@ -86,7 +86,7 @@ export const Footer = ({
             >
               <img src={logoImage} alt="Vaayura" className="h-10 filter brightness-0 invert mb-4" />
             </motion.div>
-            <p className="text-white text-lg mb-6">{description}</p>
+            <p className="text-white text-lg mb-6 font-montserrat">{description}</p>
             
             {/* Social Media Icons */}
             <div className="flex space-x-4">

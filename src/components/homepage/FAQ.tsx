@@ -77,10 +77,10 @@ export function FAQ() {
         className="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-start"
       >
         <motion.div variants={fadeInUp}>
-          <p className="text-sm text-gray-800 uppercase font-semibold tracking-wide">FAQ</p>
-          <h3 className="text-4xl md:text-5xl font-sora font-bold mt-2 mb-6 text-gray-800">
+          <p className="text-sm text-[#36454F] uppercase font-semibold tracking-wide">FAQ</p>
+          <h3 className="text-4xl md:text-5xl font-sora font-bold mt-2 mb-6 text-[#36454F]">
             Everything You Need to Know About Our{' '}
-            <span className="text-gray-800">Purifiers</span>
+            <span className="text-[#36454F]">Purifiers</span>
           </h3>
           <p className="text-gray-700 font-montserrat text-lg leading-relaxed">
             Have questions about our air purifiers? We've got answers. 
@@ -100,7 +100,7 @@ export function FAQ() {
             >
               <motion.button
                 onClick={() => toggleFAQ(index)}
-                className="flex justify-between items-center w-full text-left font-sora font-semibold text-lg text-gray-800 hover:text-gray-600 transition-colors duration-200"
+                className="flex justify-between items-center w-full text-left font-sora font-semibold text-lg text-[#36454F] hover:text-gray-600 transition-colors duration-200"
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.2 }}
               >
@@ -119,7 +119,7 @@ export function FAQ() {
                     strokeWidth="1.5" 
                     viewBox="0 0 24 24" 
                     width="24"
-                    className="text-gray-800"
+                    className="text-[#36454F]"
                   >
                     <path d="M6 9l6 6 6-6"></path>
                   </svg>

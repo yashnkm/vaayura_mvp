@@ -49,7 +49,7 @@ export function ProductShowcaseSection() {
   }
 
   return (
-    <section className="py-20 bg-white text-gray-900">
+    <section className="py-20 bg-white text-[#36454F]">
       <style jsx>{`
         .perspective-1000 {
           perspective: 1000px;
@@ -75,10 +75,10 @@ export function ProductShowcaseSection() {
           className="mb-20"
         >
           <div className="text-center mb-16">
-            <h1 className="text-4xl lg:text-5xl font-sora font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl lg:text-5xl font-sora font-bold text-[#36454F] mb-6">
               Choose Your Perfect Air Purifier
             </h1>
-            <p className="text-xl text-gray-600 font-subheading max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 font-montserrat max-w-3xl mx-auto">
               Advanced filtration technology meets elegant design. Select from our premium collection.
             </p>
           </div>
@@ -144,7 +144,7 @@ export function ProductShowcaseSection() {
                   key={currentImageIndex}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="absolute -top-4 -right-4 z-30 bg-red-600 text-white px-4 py-2 rounded-full font-sora font-semibold shadow-lg"
+                  className="absolute -top-4 -right-4 z-30 bg-red-500 text-white px-4 py-2 rounded-full font-sora font-semibold shadow-lg"
                 >
                   {discountPercentage}% OFF
                 </motion.div>
@@ -164,7 +164,7 @@ export function ProductShowcaseSection() {
                   key={currentProduct.name}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="text-3xl lg:text-4xl font-sora font-bold text-gray-900 mb-4"
+                  className="text-3xl lg:text-4xl font-sora font-bold text-[#36454F] mb-4"
                 >
                   Vaayura {currentProduct.name}
                 </motion.h2>
@@ -186,7 +186,7 @@ export function ProductShowcaseSection() {
 
               {/* Clean Model Selection */}
               <div>
-                <h4 className="text-lg font-semibold mb-4 font-sora text-gray-900">Select Your Model:</h4>
+                <h4 className="text-lg font-semibold mb-4 font-sora text-[#36454F]">Select Your Model:</h4>
                 <div className="flex gap-3">
                   {models.map((model, index) => (
                     <motion.button
@@ -358,7 +358,7 @@ export function ProductShowcaseSection() {
         >
           {/* Storm Specs - Left Side */}
           <div className="text-center mr-8">
-            <h4 className="text-gray-900 font-sora font-semibold text-lg mb-3">Storm</h4>
+            <h4 className="text-[#36454F] font-sora font-semibold text-lg mb-3">Storm</h4>
             <div className="flex gap-3">
               <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
                 <div className="text-gray-600 text-xs font-montserrat font-medium">Area Coverage</div>
@@ -414,7 +414,7 @@ export function ProductShowcaseSection() {
 
           {/* Nest Specs - Right Side */}
           <div className="text-center ml-8">
-            <h4 className="text-gray-900 font-sora font-semibold text-lg mb-3">Nest</h4>
+            <h4 className="text-[#36454F] font-sora font-semibold text-lg mb-3">Nest</h4>
             <div className="flex gap-3">
               <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
                 <div className="text-gray-600 text-xs font-montserrat font-medium">Area Coverage</div>

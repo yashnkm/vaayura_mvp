@@ -35,7 +35,7 @@ export function ProductCatalog() {
       <section className="py-32 bg-white">
         <div className="container">
           <div className="text-center">
-            <p className="text-lg text-brand-dark-grey font-body">Loading products...</p>
+            <p className="text-lg text-brand-dark-grey font-montserrat">Loading products...</p>
           </div>
         </div>
       </section>
@@ -47,7 +47,7 @@ export function ProductCatalog() {
       <section className="py-32 bg-white">
         <div className="container">
           <div className="text-center">
-            <p className="text-lg text-red-600 font-body">Error loading products: {error}</p>
+            <p className="text-lg text-red-600 font-montserrat">Error loading products: {error}</p>
           </div>
         </div>
       </section>
@@ -63,7 +63,7 @@ export function ProductCatalog() {
               Our <span className="text-brand-pastel-green">Products</span>
             </h2>
             <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full"></div>
-            <p className="text-lg md:text-xl text-brand-dark-grey font-body max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat max-w-2xl mx-auto">
               Discover our premium air purification solutions designed for every space and need.
             </p>
           </div>
@@ -81,7 +81,7 @@ export function ProductCatalog() {
             Our <span className="text-brand-pastel-green">Products</span>
           </h2>
           <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full"></div>
-          <p className="text-lg md:text-xl text-brand-dark-grey font-body max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat max-w-2xl mx-auto">
             Discover our premium air purification solutions designed for every space and need.
           </p>
         </div>
@@ -134,7 +134,7 @@ export function ProductCatalog() {
                 <h3 className="text-3xl md:text-4xl font-sora text-brand-grey-green leading-tight">
                   {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`}
                 </h3>
-                <p className="text-lg text-brand-dark-grey font-body leading-relaxed">
+                <p className="text-lg text-brand-dark-grey font-montserrat leading-relaxed">
                   {product.description || "Experience cleaner, healthier air with advanced filtration technology designed for your well-being and peace of mind."}
                 </p>
                 

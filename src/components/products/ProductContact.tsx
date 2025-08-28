@@ -44,7 +44,7 @@ export function ProductContact() {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight mb-4">
               Ready to improve your <span className="text-brand-pastel-green">air quality</span>?
             </h2>
-            <p className="text-lg text-brand-dark-grey font-body max-w-2xl mx-auto">
+            <p className="text-lg text-brand-dark-grey font-montserrat max-w-2xl mx-auto">
               Get in touch with our air quality experts. We're here to help you breathe easier.
             </p>
           </div>
@@ -68,11 +68,11 @@ export function ProductContact() {
                 
                 {/* Content */}
                 <div className="space-y-2">
-                  <h3 className="text-xl font-semibold text-brand-grey-green font-subheading group-hover:text-brand-pastel-green transition-colors duration-300">
+                  <h3 className="text-xl font-semibold text-brand-grey-green font-montserrat group-hover:text-brand-pastel-green transition-colors duration-300">
                     {method.title}
                   </h3>
                   {method.subtitle && (
-                    <p className="text-brand-dark-grey font-body text-lg">
+                    <p className="text-brand-dark-grey font-montserrat text-lg">
                       {method.subtitle}
                     </p>
                   )}

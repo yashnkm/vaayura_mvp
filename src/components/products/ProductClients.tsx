@@ -30,13 +30,13 @@ export function ProductClients() {
         <div className="space-y-8">
           <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-8">
             <div className="text-center space-y-4">
-              <p className="text-lg text-brand-dark-grey font-body">
+              <p className="text-lg text-brand-dark-grey font-montserrat">
                 Trusted by Industry Leaders
               </p>
-              <h2 className="text-4xl lg:text-5xl font-sora font-bold text-gray-900 leading-tight mb-6">
+              <h2 className="text-4xl lg:text-5xl font-sora font-bold text-[#36454F] leading-tight mb-6">
                 Join the <span className="text-brand-pastel-green">Clean Air Revolution</span>
               </h2>
-              <p className="text-lg text-brand-dark-grey font-body max-w-2xl mx-auto">
+              <p className="text-lg text-brand-dark-grey font-montserrat max-w-2xl mx-auto">
                 Leading organizations trust Vaayura for their air purification needs.
               </p>
             </div>

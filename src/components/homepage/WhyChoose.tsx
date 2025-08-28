@@ -67,7 +67,7 @@ export function WhyChoose({ features = defaultFeatures }: WhyChooseProps) {
       <div className="container mx-auto">
         {/* Section Header - matching About section pattern */}
         <div className="text-center space-y-4 mb-12 px-6">
-          <h2 className="text-4xl lg:text-5xl font-sora font-bold text-gray-900 leading-tight mb-6">
+          <h2 className="text-4xl lg:text-5xl font-sora font-bold text-[#36454F] leading-tight mb-6">
             Why Choose{" "}
             <span className="text-brand-pastel-green">Vaayura?</span>
           </h2>

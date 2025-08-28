@@ -44,8 +44,8 @@ const ProductCarouselColumn = (props: {
                     className="w-full h-60 object-cover rounded-2xl mb-6"
                   />
                   <div className="space-y-3">
-                    <div className="font-subheading font-semibold text-brand-grey-green text-xl">{name}</div>
-                    <div className="text-base text-brand-dark-grey/70 font-body leading-relaxed">{description}</div>
+                    <div className="font-montserrat font-semibold text-brand-grey-green text-xl">{name}</div>
+                    <div className="text-base text-brand-dark-grey/70 font-montserrat leading-relaxed">{description}</div>
                   </div>
                 </div>
               ))}
@@ -125,7 +125,7 @@ export function Hero2() {
                 <span className="text-brand-pastel-green">Clean Air</span>
               </h1>
               
-              <p className="text-lg lg:text-xl text-white/90 font-body leading-relaxed">
+              <p className="text-lg lg:text-xl text-white/90 font-montserrat leading-relaxed">
                 Vaayura delivers intelligent air purification that transforms your space into a sanctuary of health.
               </p>
             </div>

@@ -92,7 +92,7 @@ export function ProductFeatures() {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
               Engineered for <span className="text-brand-pastel-green">Excellence</span>
             </h2>
-            <p className="text-lg text-brand-dark-grey font-body max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-brand-dark-grey font-montserrat max-w-3xl mx-auto leading-relaxed">
               Every Vaayura air purifier combines cutting-edge filtration technology with intelligent automation for superior performance.
             </p>
           </div>
@@ -163,7 +163,7 @@ export function ProductFeatures() {
                   </h3>
 
                   {/* Description */}
-                  <p className={`text-brand-dark-grey font-body leading-relaxed text-lg transition-all duration-1000 ${
+                  <p className={`text-brand-dark-grey font-montserrat leading-relaxed text-lg transition-all duration-1000 ${
                     visibleFeatures[index] 
                       ? 'opacity-100 translate-y-0' 
                       : 'opacity-0 translate-y-6'

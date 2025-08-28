@@ -24,7 +24,7 @@ export function ProductsShowcase() {
 
             {/* Product Info */}
             <div className="space-y-4 max-w-sm">
-              <h3 className="text-2xl font-sora font-semibold text-gray-900">
+              <h3 className="text-2xl font-sora font-semibold text-[#36454F]">
                 Vaayura Storm
               </h3>
               
@@ -61,7 +61,7 @@ export function ProductsShowcase() {
 
             {/* Product Info */}
             <div className="space-y-4 max-w-sm">
-              <h3 className="text-2xl font-sora font-semibold text-gray-900">
+              <h3 className="text-2xl font-sora font-semibold text-[#36454F]">
                 Vaayura Nest
               </h3>
               
