@@ -34,7 +34,7 @@ export function ProductsShowcase() {
 
               {/* CTA Buttons */}
               <div className="pt-4">
-                <a href="/products/storm">
+                <a href="/checkout">
                   <Button
                     className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 w-full"
                   >
@@ -71,7 +71,7 @@ export function ProductsShowcase() {
 
               {/* CTA Buttons */}
               <div className="pt-4">
-                <a href="/products/nest">
+                <a href="/checkout">
                   <Button
                     className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 hover:scale-105 w-full"
                   >

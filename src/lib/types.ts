@@ -41,3 +41,4 @@ export interface SupabaseListResponse<T> {
   data: T[] | null
   error: any
 }
+

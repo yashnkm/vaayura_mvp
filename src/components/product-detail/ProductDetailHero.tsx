@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { PlayIcon } from "lucide-react";
-import { useState, memo, useMemo, useCallback } from "react";
+import { memo, useMemo, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Define types locally to avoid import issues
 interface ProductFeature {
@@ -32,6 +33,8 @@ interface ProductDetailHeroProps {
 }
 
 const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) => {
+  const navigate = useNavigate();
+
   // Memoize formatted price to avoid recalculation
   const formattedPrice = useMemo(() => 
     product.price?.toLocaleString('en-IN') || '25,000', 
@@ -56,9 +59,18 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
   }, []);
 
   const handleBuyNow = useCallback(() => {
-    // Add buy now logic here
-    console.log('Buy now clicked');
-  }, []);
+    navigate('/checkout', {
+      state: {
+        item: {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+          image: imageSrc
+        }
+      }
+    });
+  }, [navigate, product, imageSrc]);
 
 
   return (

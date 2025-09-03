@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Check } from 'lucide-react'
-import appHomescreenImg from '@/assets/Mobile app/AppHomescreen.jpeg'
+import appHomescreenImg from '@/assets/Mobile app/phone_ss.jpg'
 
 const features = [
   {
@@ -222,7 +222,8 @@ export function AppControlSection() {
                           <img 
                             src={appHomescreenImg} 
                             alt="Vaayura App Homescreen" 
-                            className="w-full h-full object-cover object-top rounded-[2.4rem]"
+                            className="w-full h-full object-cover object-center rounded-[2.4rem]"
+                            style={{ objectPosition: 'center center' }}
                           />
 
                       {/* Modal Popup Overlay on Phone */}

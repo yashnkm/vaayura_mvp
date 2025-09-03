@@ -2,7 +2,6 @@ import { Header1 } from '@/components/ui/header'
 import { Hero3DSection } from '@/components/homepage/Hero3DSection'
 import { ProductsShowcase } from '@/components/homepage/ProductsShowcase'
 import { ProductDetailFeatures } from '@/components/product-detail/ProductDetailFeatures'
-import { FiltrationTechnology } from '@/components/homepage/FiltrationTechnology'
 import { AppControlSection } from '@/components/homepage/AppControlSection'
 import { FAQ } from '@/components/homepage/FAQ'
 import { ProductShowcaseSection } from '@/components/homepage/ProductShowcaseSection'
@@ -35,7 +34,6 @@ export function HomePage() {
         slug: "vaayura-air-purifier", 
         created_at: "" 
       }} />
-      <FiltrationTechnology />
       <AppControlSection />
       <ProductClients />
       <FAQ />

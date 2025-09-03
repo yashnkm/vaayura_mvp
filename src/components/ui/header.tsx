@@ -34,6 +34,10 @@ function Header1() {
             title: "About",
             href: "/about",
         },
+        {
+            title: "Blog",
+            href: "/blog",
+        },
     ];
 
     const [isOpen, setOpen] = useState(false);
@@ -105,7 +109,7 @@ function Header1() {
                 </div>
                 <div className="flex justify-end w-full gap-4">
                     <Button variant="ghost" className="hidden md:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
-                        <Link to="/blog">Blog</Link>
+                        <Link to="/bulk-order">Bulk Order</Link>
                     </Button>
                     <Button variant="ghost" className="hidden md:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
                         <Link to="/contact">Contact</Link>

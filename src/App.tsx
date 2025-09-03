@@ -6,6 +6,8 @@ import { Home2Page } from './pages/Home2Page'
 import { AboutPage } from './pages/AboutPage'
 import { ProductsPage } from './pages/ProductsPage'
 import { ProductDetailPage } from './pages/ProductDetailPage'
+import { CheckoutPage } from './pages/CheckoutPage'
+import { BulkOrderPage } from './pages/BulkOrderPage'
 import { ContactPage } from './pages/ContactPage'
 import { BlogPage } from './pages/BlogPage'
 import { BlogPostPage } from './pages/BlogPostPage'
@@ -55,6 +57,8 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:slug" element={<ProductDetailPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/bulk-order" element={<BulkOrderPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />

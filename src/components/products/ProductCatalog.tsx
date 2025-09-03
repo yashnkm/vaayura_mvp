@@ -152,7 +152,7 @@ export function ProductCatalog() {
                     className="bg-green-800 hover:bg-green-900 text-white px-8 py-4 text-lg rounded-full font-semibold transition-all duration-200 hover:scale-105"
                     onClick={() => navigate(`/products/${product.slug || product.id}`)}
                   >
-                    Shop Now
+                    Learn More
                   </Button>
                 </div>
               </div>

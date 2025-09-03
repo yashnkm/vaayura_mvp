@@ -1,10 +1,10 @@
 // Import asset images
 import React, { useState, useEffect, useRef } from "react";
-import fourLayerFilterImg from "@/assets/filterimage.png";
+import fourLayerFilterImg from "@/assets/hepa_filtration_new.png";
 import intSensorImg from "@/assets/Adobe_Express_-_file_1.png";
 import realtimeAQIImg from "@/assets/realtime AQI.jpg";
-import ambientLightImg from "@/assets/Ambiend light.jpg";
-import aromaTepImg from "@/assets/aroma_tep.jpg";
+import ambientLightImg from "@/assets/ambient_light_new.png";
+import aromaTepImg from "@/assets/aromatherapy_new.png";
 import productHeroImg from "@/assets/product_hero.png";
 import silentSleepModeImg from "@/assets/Adobe Express - file.png";
 import { ArrowRight } from "lucide-react";

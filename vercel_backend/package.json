@@ -1,0 +1,17 @@
+{
+  "name": "vaayura-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Secure Razorpay backend for Vaayura payments",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "razorpay": "^2.9.4",
+    "@supabase/supabase-js": "^2.55.0"
+  },
+  "devDependencies": {
+    "@vercel/node": "^3.0.0"
+  }
+}

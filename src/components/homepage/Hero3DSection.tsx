@@ -101,7 +101,7 @@ export function Hero3DSection() {
           
           {/* Background blur overlay - fades out when scrolling starts */}
           <div 
-            className={`absolute inset-0 bg-white/60 backdrop-blur-md z-20 transition-all duration-700 ${
+            className={`absolute inset-0 bg-white/55 backdrop-blur-md z-20 transition-all duration-700 ${
               scrollStarted ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}
           />
@@ -118,8 +118,7 @@ export function Hero3DSection() {
                 Clean Air.
               </h1>
               <div className="text-xl md:text-2xl text-brand-dark-grey/80 leading-relaxed font-montserrat">
-                <p className="text-justify">Clean air is no longer a luxury it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and</p>
-                <p className="text-center">beautiful.</p>
+                <p className="text-center">Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
               </div>
               
               {/* Scroll hint */}
