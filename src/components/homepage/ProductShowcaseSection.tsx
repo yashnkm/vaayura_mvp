@@ -27,7 +27,11 @@ const heroBackgrounds = [
   { id: 'background2', name: 'Background 2', image: backgroundimage2 }
 ]
 
-export function ProductShowcaseSection() {
+interface ProductShowcaseSectionProps {
+  productFilter?: 'storm' | 'nest'
+}
+
+export function ProductShowcaseSection({ productFilter }: ProductShowcaseSectionProps = {}) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [heroCarouselIndex, setHeroCarouselIndex] = useState(0)
   const [imagesLoaded, setImagesLoaded] = useState(false)
@@ -111,7 +115,7 @@ export function ProductShowcaseSection() {
 
   return (
     <section className="py-20 bg-white text-[#36454F]">
-      <style jsx>{`
+      <style>{`
         .perspective-1000 {
           perspective: 1000px;
         }
@@ -148,153 +152,7 @@ export function ProductShowcaseSection() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <div className="text-center mb-16">
-            <h1 className="text-4xl lg:text-5xl font-sora font-bold text-[#36454F] mb-6">
-              Choose Your Perfect Air Purifier
-            </h1>
-            <p className="text-xl text-gray-600 font-montserrat max-w-3xl mx-auto">
-              Advanced filtration technology meets elegant design. Select from our premium collection.
-            </p>
-          </div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Right side: 3D Carousel - EXACT COPY from Specifications */}
-            <div className="relative flex justify-center items-center">
-              <div className="relative w-96 h-[500px] perspective-1000">
-                
-                {/* Carousel Container */}
-                <div className="relative w-full h-full overflow-hidden rounded-2xl">
-                  {models.map((product, index) => (
-                    <div
-                      key={product.id}
-                      className={`carousel-item absolute inset-0 transition-all duration-700 ease-in-out ${
-                        index === currentImageIndex
-                          ? 'opacity-100 scale-100 translate-x-0 z-20'
-                          : index === (currentImageIndex + 1) % models.length
-                          ? 'opacity-50 scale-75 translate-x-24 z-10'
-                          : index === (currentImageIndex - 1 + models.length) % models.length
-                          ? 'opacity-50 scale-75 -translate-x-24 z-10'
-                          : 'opacity-0 scale-75 z-0'
-                      }`}
-                      style={{
-                        transformStyle: 'preserve-3d',
-                        transform: index === currentImageIndex
-                          ? 'translateX(0px) scale(1) rotateY(0deg)'
-                          : index === (currentImageIndex + 1) % models.length
-                          ? 'translateX(96px) scale(0.75) rotateY(20deg)'
-                          : index === (currentImageIndex - 1 + models.length) % models.length
-                          ? 'translateX(-96px) scale(0.75) rotateY(-20deg)'
-                          : 'scale(0.75) rotateY(0deg)'
-                      }}
-                    >
-                      <img 
-                        src={product.image} 
-                        alt={`Vaayura ${product.name}`} 
-                        className="product-image w-full h-full object-contain"
-                        loading="eager"
-                        decoding="async"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-
-                {/* Dots Indicator */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex space-x-2">
-                  {models.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        index === currentImageIndex
-                          ? 'bg-emerald-600 scale-110'
-                          : 'bg-white/60 hover:bg-white/80'
-                      }`}
-                      aria-label={`Go to image ${index + 1}`}
-                    />
-                  ))}
-                </div>
-                
-                {/* Discount Badge */}
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="absolute -top-4 -right-4 z-30 bg-red-500 text-white px-4 py-2 rounded-full font-sora font-semibold shadow-lg"
-                >
-                  {discountPercentage}% OFF
-                </motion.div>
-              </div>
-            </div>
-
-            {/* Product Details */}
-            <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div>
-                <motion.h2 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-3xl lg:text-4xl font-sora font-bold text-[#36454F] mb-4"
-                >
-                  Vaayura {currentProduct.name}
-                </motion.h2>
-                
-                <div className="space-y-3">
-                  <span className="text-gray-500 line-through font-sora text-lg">
-                    MRP ₹{currentProduct.originalPrice.toLocaleString()}
-                  </span>
-                  <div className="flex items-center gap-4">
-                    <span className="text-4xl font-bold text-brand-pastel-green font-sora">
-                      ₹{currentProduct.price.toLocaleString()}
-                    </span>
-                    <span className="text-gray-600 font-sora">
-                      (inclusive of all taxes)
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Clean Model Selection */}
-              <div>
-                <h4 className="text-lg font-semibold mb-4 font-sora text-[#36454F]">Select Your Model:</h4>
-                <div className="flex gap-3">
-                  {models.map((model, index) => (
-                    <motion.button
-                      key={model.id}
-                      onClick={() => setCurrentImageIndex(index)}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`px-6 py-3 rounded-full font-semibold transition-all duration-200 font-sora ${
-                        index === currentImageIndex
-                          ? 'bg-green-800 hover:bg-green-900 text-white'
-                          : 'bg-transparent border-2 border-green-800 text-green-800 hover:bg-green-800 hover:text-white'
-                      }`}
-                    >
-                      {model.name}
-                    </motion.button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Single Buy Button */}
-              <div className="pt-6">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link to="/checkout">
-                    <Button className="bg-green-800 hover:bg-green-900 text-white font-semibold px-6 py-3 rounded-full font-sora transition-all duration-200">
-                      BUY NOW - ₹{currentProduct.price.toLocaleString()}
-                    </Button>
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
         </motion.div>
 
         {/* New Hero Section - Bigger. Faster. Stronger. */}
@@ -356,68 +214,139 @@ export function ProductShowcaseSection() {
 
         {/* Information Badges with Product Images - Below Background Container */}
         <div className="mt-8 flex justify-center items-center relative">
-          {/* Storm Specs - Left Side */}
-          <div className="text-center mr-8">
-            <h4 className="text-[#36454F] font-sora font-semibold text-lg mb-3">Storm</h4>
-            <div className="flex gap-3">
-              <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
-                <div className="text-gray-600 text-xs font-montserrat font-medium">Area Coverage</div>
-                <div className="text-green-800 font-sora font-bold text-sm">1000 sq. ft.</div>
+          {/* Show both products if no filter, otherwise show only the filtered product */}
+          {!productFilter ? (
+            <>
+              {/* Storm Specs - Left Side */}
+              <div className="text-center mr-8">
+                <h4 className="text-[#36454F] font-sora font-semibold text-lg mb-3">Storm</h4>
+                <div className="flex gap-3">
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                    <div className="text-gray-600 text-xs font-montserrat font-medium">Area Coverage</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">1000 sq. ft.</div>
+                  </div>
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                    <div className="text-gray-600 text-xs font-montserrat font-medium">CADR</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">600m³/h</div>
+                  </div>
+                </div>
               </div>
-              <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
-                <div className="text-gray-600 text-xs font-montserrat font-medium">CADR</div>
-                <div className="text-green-800 font-sora font-bold text-sm">600m³/h</div>
-              </div>
-            </div>
-          </div>
 
-          {/* Product Images - Center with Overlap */}
-          <div className="relative flex items-center justify-center mx-8 -mt-96">
-            {/* Storm Image - No Animation */}
-            <div className="relative z-30">
-              <img
-                src={stormSideView}
-                alt="Vaayura Storm"
-                className="product-image h-80 lg:h-96 w-auto object-contain"
-                style={{ 
-                  filter: 'drop-shadow(0 25px 60px rgba(0, 0, 0, 0.4))',
-                  transform: 'translate3d(0, 0, 0)' // GPU acceleration
-                }}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+              {/* Product Images - Center with Overlap */}
+              <div className="relative flex items-center justify-center mx-8 -mt-96">
+                {/* Storm Image - No Animation */}
+                <div className="relative z-30">
+                  <img
+                    src={stormSideView}
+                    alt="Vaayura Storm"
+                    className="product-image h-80 lg:h-96 w-auto object-contain"
+                    style={{ 
+                      filter: 'drop-shadow(0 25px 60px rgba(0, 0, 0, 0.4))',
+                      transform: 'translate3d(0, 0, 0)' // GPU acceleration
+                    }}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
 
-            {/* Nest Image - No Animation */}
-            <div className="relative z-40 -ml-48 mt-16">
-              <img
-                src={nestFrontView}
-                alt="Vaayura Nest"
-                className="product-image h-80 lg:h-96 w-auto object-contain"
-                style={{ 
-                  filter: 'drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3))',
-                  transform: 'translate3d(0, 0, 0)' // GPU acceleration
-                }}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </div>
+                {/* Nest Image - No Animation */}
+                <div className="relative z-40 -ml-48 mt-16">
+                  <img
+                    src={nestFrontView}
+                    alt="Vaayura Nest"
+                    className="product-image h-80 lg:h-96 w-auto object-contain"
+                    style={{ 
+                      filter: 'drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3))',
+                      transform: 'translate3d(0, 0, 0)' // GPU acceleration
+                    }}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
 
-          {/* Nest Specs - Right Side */}
-          <div className="text-center ml-8">
-            <h4 className="text-[#36454F] font-sora font-semibold text-lg mb-3">Nest</h4>
-            <div className="flex gap-3">
-              <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
-                <div className="text-gray-600 text-xs font-montserrat font-medium">Area Coverage</div>
-                <div className="text-green-800 font-sora font-bold text-sm">600 sq. ft.</div>
+              {/* Nest Specs - Right Side */}
+              <div className="text-center ml-8">
+                <h4 className="text-[#36454F] font-sora font-semibold text-lg mb-3">Nest</h4>
+                <div className="flex gap-3">
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                    <div className="text-gray-600 text-xs font-montserrat font-medium">Area Coverage</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">600 sq. ft.</div>
+                  </div>
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                    <div className="text-gray-600 text-xs font-montserrat font-medium">CADR</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">450m³/h</div>
+                  </div>
+                </div>
               </div>
-              <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
-                <div className="text-gray-600 text-xs font-montserrat font-medium">CADR</div>
-                <div className="text-green-800 font-sora font-bold text-sm">450m³/h</div>
-              </div>
-            </div>
-          </div>
+            </>
+          ) : (
+            <>
+              {/* Show only Storm */}
+              {productFilter === 'storm' && (
+                <>
+                  <div className="text-center -mt-96">
+                    <div className="relative flex justify-center mb-8">
+                      <img
+                        src={stormSideView}
+                        alt="Vaayura Storm"
+                        className="product-image h-80 lg:h-96 w-auto object-contain"
+                        style={{ 
+                          filter: 'drop-shadow(0 25px 60px rgba(0, 0, 0, 0.4))',
+                          transform: 'translate3d(0, 0, 0)' // GPU acceleration
+                        }}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <h4 className="text-[#36454F] font-sora font-semibold text-2xl mb-4">Storm</h4>
+                    <div className="flex gap-4 justify-center">
+                      <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
+                        <div className="text-gray-600 text-sm font-montserrat font-medium">Area Coverage</div>
+                        <div className="text-green-800 font-sora font-bold text-lg">1000 sq. ft.</div>
+                      </div>
+                      <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
+                        <div className="text-gray-600 text-sm font-montserrat font-medium">CADR</div>
+                        <div className="text-green-800 font-sora font-bold text-lg">600m³/h</div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {/* Show only Nest */}
+              {productFilter === 'nest' && (
+                <>
+                  <div className="text-center -mt-80">
+                    <div className="relative flex justify-center mb-8">
+                      <img
+                        src={nestFrontView}
+                        alt="Vaayura Nest"
+                        className="product-image h-80 lg:h-96 w-auto object-contain"
+                        style={{ 
+                          filter: 'drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3))',
+                          transform: 'translate3d(0, 0, 0)' // GPU acceleration
+                        }}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <h4 className="text-[#36454F] font-sora font-semibold text-2xl mb-2 -mt-18">Nest</h4>
+                    <div className="flex gap-4 justify-center mt-8">
+                      <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
+                        <div className="text-gray-600 text-sm font-montserrat font-medium">Area Coverage</div>
+                        <div className="text-green-800 font-sora font-bold text-lg">600 sq. ft.</div>
+                      </div>
+                      <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
+                        <div className="text-gray-600 text-sm font-montserrat font-medium">CADR</div>
+                        <div className="text-green-800 font-sora font-bold text-lg">450m³/h</div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+            </>
+          )}
         </div>
 
       </div>

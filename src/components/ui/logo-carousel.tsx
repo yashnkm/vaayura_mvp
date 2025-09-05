@@ -39,9 +39,25 @@ const distributeLogos = (allLogos: Logo[], columnCount: number): Logo[][] => {
   })
 
   const maxLength = Math.max(...columns.map((col) => col.length))
-  columns.forEach((col) => {
+  
+  // Create extended shuffled arrays for each column to avoid duplicates
+  columns.forEach((col, columnIndex) => {
     while (col.length < maxLength) {
-      col.push(shuffled[Math.floor(Math.random() * shuffled.length)])
+      // Create a pool of unused logos at this position
+      const currentPosition = col.length
+      const usedLogosAtThisPosition = new Set(
+        columns.map(otherCol => otherCol[currentPosition]?.id).filter(Boolean)
+      )
+      
+      // Find available logos not used at this position
+      const availableLogos = shuffled.filter(logo => !usedLogosAtThisPosition.has(logo.id))
+      
+      // If no available logos, fall back to any logo (shouldn't happen with proper distribution)
+      const logoToAdd = availableLogos.length > 0 
+        ? availableLogos[Math.floor(Math.random() * availableLogos.length)]
+        : shuffled[Math.floor(Math.random() * shuffled.length)]
+      
+      col.push(logoToAdd)
     }
   })
 

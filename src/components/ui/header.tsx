@@ -43,10 +43,15 @@ function Header1() {
     const [isOpen, setOpen] = useState(false);
     return (
         <header className="w-full z-40 fixed top-0 left-0 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-            <div className="container relative mx-auto min-h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center">
-                <div className="justify-start items-center gap-4 lg:flex hidden flex-row">
-                    <NavigationMenu className="flex justify-start items-start">
-                        <NavigationMenuList className="flex justify-start gap-4 flex-row">
+            <div className="container relative mx-auto min-h-20 flex gap-4 items-center justify-between">
+                <div className="flex justify-start">
+                    <Link to="/">
+                        <img src={logoImage} alt="Vaayura" className="h-10" />
+                    </Link>
+                </div>
+                <div className="flex items-center justify-end gap-4 lg:flex hidden flex-1">
+                    <NavigationMenu>
+                        <NavigationMenuList className="flex gap-4 flex-row">
                             {navigationItems.map((item) => (
                                 <NavigationMenuItem key={item.title}>
                                     {item.href ? (
@@ -102,14 +107,9 @@ function Header1() {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
-                <div className="flex lg:justify-center">
-                    <Link to="/">
-                        <img src={logoImage} alt="Vaayura" className="h-10" />
-                    </Link>
-                </div>
-                <div className="flex justify-end w-full gap-4">
+                <div className="flex justify-end gap-4">
                     <Button variant="ghost" className="hidden md:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
-                        <Link to="/bulk-order">Bulk Order</Link>
+                        <Link to="/bulk-order">Corporate Queries</Link>
                     </Button>
                     <Button variant="ghost" className="hidden md:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
                         <Link to="/contact">Contact</Link>

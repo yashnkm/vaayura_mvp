@@ -5,7 +5,7 @@ import Lenis from 'lenis';
 import { ProductDetailHero } from '@/components/product-detail/ProductDetailHero';
 import { ProductFeatures } from '@/components/products/ProductFeatures';
 import { ProductDetailSpecifications } from '@/components/product-detail/ProductDetailSpecifications';
-import { ProductContact } from '@/components/products/ProductContact';
+import { ProductShowcaseSection } from '@/components/homepage/ProductShowcaseSection';
 import { database } from '@/lib/supabase';
 
 // Define types locally to avoid import issues
@@ -133,12 +133,21 @@ export function ProductDetailPage() {
     );
   }
 
+  // Determine product filter based on product name or slug
+  const getProductFilter = (product: Product): 'storm' | 'nest' | undefined => {
+    const name = product.name.toLowerCase();
+    const slug = product.slug.toLowerCase();
+    if (name.includes('storm') || slug.includes('storm')) return 'storm';
+    if (name.includes('nest') || slug.includes('nest')) return 'nest';
+    return undefined;
+  };
+
   return (
     <Layout>
       <ProductDetailHero product={product} />
       <ProductFeatures />
       <ProductDetailSpecifications product={product} />
-      <ProductContact />
+      <ProductShowcaseSection productFilter={getProductFilter(product)} />
     </Layout>
   );
 }

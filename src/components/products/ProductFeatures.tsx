@@ -84,15 +84,15 @@ export function ProductFeatures() {
 
   return (
     <section className="w-full py-16 lg:py-24 bg-white">
-      <div className="container mx-auto max-w-7xl px-4">
+      <div className="container mx-auto max-w-7xl px-8">
         <div className="flex flex-col gap-12">
           
           {/* Section Header */}
-          <div className="text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
+          <div className="text-left space-y-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-montserrat text-brand-grey-green leading-tight">
               Engineered for <span className="text-brand-pastel-green">Excellence</span>
             </h2>
-            <p className="text-lg text-brand-dark-grey font-montserrat max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-brand-dark-grey font-montserrat max-w-3xl leading-relaxed">
               Every Vaayura air purifier combines cutting-edge filtration technology with intelligent automation for superior performance.
             </p>
           </div>
@@ -116,7 +116,7 @@ export function ProductFeatures() {
                 }}
               >
                 {/* Feature Image */}
-                <div className={`${feature.title === 'Silent Sleep Mode' ? 'flex-none w-full max-w-xl -ml-24' : 'flex-1 max-w-md'} relative transition-all duration-1000 ease-out ${
+                <div className={`${feature.title === 'Silent Sleep Mode' ? 'flex-none w-full max-w-2xl -ml-24' : 'flex-1 max-w-lg'} relative transition-all duration-1000 ease-out ${
                   visibleFeatures[index] 
                     ? 'opacity-100 translate-x-0 scale-100' 
                     : `opacity-0 scale-95 ${index % 2 === 1 ? 'translate-x-12' : '-translate-x-12'}`
@@ -124,7 +124,7 @@ export function ProductFeatures() {
                   <img 
                     src={feature.image} 
                     alt={feature.title}
-                    className={`w-full object-contain ${feature.title === 'Silent Sleep Mode' ? 'h-[28rem]' : 'h-80'}`}
+                    className={`w-full object-contain ${feature.title === 'Silent Sleep Mode' ? 'h-[32rem]' : 'h-96'}`}
                     style={{ filter: 'drop-shadow(0 15px 35px rgba(0, 0, 0, 0.2))' }}
                   />
                 </div>
@@ -135,26 +135,9 @@ export function ProductFeatures() {
                     ? 'opacity-100 translate-x-0' 
                     : `opacity-0 ${index % 2 === 1 ? '-translate-x-12' : 'translate-x-12'}`
                 }`}>
-                  {/* Feature Number */}
-                  <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-full bg-brand-pastel-green flex items-center justify-center transition-all duration-1000 ${
-                      visibleFeatures[index] 
-                        ? 'scale-100 rotate-0' 
-                        : 'scale-0 rotate-180'
-                    }`}>
-                      <span className="text-brand-grey-green font-bold text-lg">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                    </div>
-                    <div className={`h-px bg-brand-pastel-green/30 flex-1 transition-all duration-1000 ${
-                      visibleFeatures[index] 
-                        ? 'scale-x-100 opacity-100' 
-                        : 'scale-x-0 opacity-0'
-                    }`} style={{ transformOrigin: 'left' }} />
-                  </div>
 
                   {/* Title */}
-                  <h3 className={`text-2xl md:text-3xl font-sora text-brand-grey-green leading-tight transition-all duration-1000 ${
+                  <h3 className={`text-2xl md:text-3xl font-montserrat text-brand-grey-green leading-tight transition-all duration-1000 ${
                     visibleFeatures[index] 
                       ? 'opacity-100 translate-y-0' 
                       : 'opacity-0 translate-y-6'
@@ -172,30 +155,16 @@ export function ProductFeatures() {
                   </p>
 
                   {/* Technical Specs */}
-                  <div className={`bg-slate-50 rounded-xl p-4 border-l-4 border-brand-pastel-green transition-all duration-1000 ${
-                    visibleFeatures[index] 
-                      ? 'opacity-100 translate-y-0 scale-100' 
-                      : 'opacity-0 translate-y-6 scale-95'
-                  }`}>
-                    <div className="text-sm font-medium text-brand-grey-green mb-1">
-                      Technical Specifications
-                    </div>
-                    <div className="text-brand-dark-grey font-mono text-sm">
-                      {feature.technical}
-                    </div>
-                  </div>
-
-                  {/* Learn More */}
-                  <div className={`pt-2 transition-all duration-1000 ${
+                  <div className={`transition-all duration-1000 ${
                     visibleFeatures[index] 
                       ? 'opacity-100 translate-y-0' 
                       : 'opacity-0 translate-y-6'
                   }`}>
-                    <button className="inline-flex items-center gap-2 text-brand-pastel-green font-medium hover:gap-3 transition-all duration-300">
-                      <span>Learn more about this feature</span>
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
+                    <div className="text-brand-dark-grey text-sm">
+                      {feature.technical}
+                    </div>
                   </div>
+
                 </div>
               </div>
             ))}

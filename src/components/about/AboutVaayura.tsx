@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ProductClients } from "@/components/products/ProductClients";
-import { ProductContact } from "@/components/products/ProductContact";
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { TreePine, Target } from 'lucide-react';
 import heroImage from "@/assets/main.jpg";
 import productImage from "@/assets/background.png";
 import problemImage from "@/assets/problem_img.png";
@@ -125,11 +125,11 @@ export const AboutVaayura = ({
             <div className="space-y-8">
               <div className="space-y-6">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-sora text-brand-grey-green leading-tight">
-                  About <span className="text-brand-pastel-green">Us</span>
+                  About Us
                 </h1>
                 <div className="w-16 h-1 bg-brand-pastel-green rounded-full"></div>
                 
-                <h2 className="text-2xl md:text-3xl font-semibold font-sora text-brand-grey-green">
+                <h2 className="text-xl md:text-2xl font-semibold font-sora text-brand-grey-green">
                   Our Story Begins with a Breath.
                 </h2>
                 
@@ -150,7 +150,7 @@ export const AboutVaayura = ({
                 <div className="relative flex gap-4">
                   <div className="relative">
                     <div className="flex w-12 h-12 items-center justify-center overflow-hidden rounded-full border-2 border-brand-pastel-green/30 bg-brand-pastel-green/10">
-                      <div className="w-6 h-6 bg-brand-pastel-green rounded"></div>
+                      <TreePine className="w-6 h-6 text-brand-pastel-green" />
                     </div>
                   </div>
                   <div className="flex-1 pt-2">
@@ -167,7 +167,7 @@ export const AboutVaayura = ({
                 <div className="relative flex gap-4">
                     <div className="relative">
                       <div className="flex w-12 h-12 items-center justify-center overflow-hidden rounded-full border-2 border-brand-pastel-green/30 bg-brand-pastel-green/10">
-                        <div className="w-6 h-6 bg-brand-pastel-green rounded-full"></div>
+                        <Target className="w-6 h-6 text-brand-pastel-green" />
                       </div>
                     </div>
                     <div className="flex-1 pt-2">
@@ -193,7 +193,7 @@ export const AboutVaayura = ({
                 {/* Floating Card */}
                 <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-brand-pastel-green/20">
                   <h4 className="text-lg font-semibold font-sora text-brand-grey-green mb-2">
-                    Pure Air, Pure Nature
+                    Pure Air Technology
                   </h4>
                   <p className="text-sm text-brand-dark-grey font-montserrat leading-relaxed">
                     Inspired by nature's own air purification systems, we bring you technology that works in harmony with the environment.
@@ -213,10 +213,10 @@ export const AboutVaayura = ({
         variants={staggerContainer}
         className="py-32 bg-gray-50">
         <div className="container mx-auto px-6">
-          <motion.div variants={fadeInUp} className="text-center mb-12">
+          <motion.div variants={fadeInUp} className="text-left mb-12">
             <h2 className="text-4xl md:text-5xl font-semibold font-sora text-brand-grey-green mb-6">Our Philosophy</h2>
-            <div className="w-16 h-1 bg-brand-pastel-green mx-auto rounded-full mb-8"></div>
-            <div className="max-w-4xl mx-auto space-y-8">
+            <div className="w-16 h-1 bg-brand-pastel-green rounded-full mb-8"></div>
+            <div className="max-w-4xl space-y-8">
               <motion.div variants={fadeInUp} className="flex items-start gap-6 text-left">
                 <span className="text-brand-pastel-green text-2xl">•</span>
                 <p className="text-xl text-brand-dark-grey font-montserrat leading-relaxed">Clean air should be a right, not a luxury.</p>
@@ -245,11 +245,12 @@ export const AboutVaayura = ({
           <div className="flex flex-col gap-12">
             
             {/* Section Header */}
-            <motion.div variants={fadeInUp} className="text-center space-y-6">
+            <motion.div variants={fadeInUp} className="text-left space-y-6">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
                 The Problem We <span className="text-brand-pastel-green">Solve</span>
               </h2>
-              <p className="text-lg text-brand-dark-grey font-montserrat max-w-3xl mx-auto leading-relaxed">
+              <div className="w-16 h-1 bg-brand-pastel-green rounded-full"></div>
+              <p className="text-lg text-brand-dark-grey font-montserrat max-w-3xl leading-relaxed">
                 "What You Can't See, You Still Breathe."
               </p>
             </motion.div>
@@ -287,9 +288,9 @@ export const AboutVaayura = ({
                   Every breath you take in India carries more than just oxygen - it carries dust, smoke, industrial particles, and invisible toxins. The WHO estimates that nearly 18% of all deaths in India are linked to air pollution. Vaayura exists to change that by making clean air effortless, affordable, and accessible.
                 </p>
 
-                {/* Technical Specs */}
-                <div className="bg-slate-50 rounded-xl p-4 border-l-4 border-brand-pastel-green">
-                  <div className="text-sm font-medium font-sora text-brand-grey-green mb-1">
+                {/* Critical Statistics */}
+                <div className="space-y-2">
+                  <div className="text-sm font-medium font-sora text-brand-grey-green">
                     Critical Statistics
                   </div>
                   <div className="text-brand-dark-grey font-montserrat text-sm">
@@ -313,10 +314,11 @@ export const AboutVaayura = ({
           <div className="flex flex-col gap-12">
             
             {/* Section Header */}
-            <motion.div variants={fadeInUp} className="text-center space-y-6">
+            <motion.div variants={fadeInUp} className="text-left space-y-6">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
                 Why Choose <span className="text-brand-pastel-green">Vaayura</span>?
               </h2>
+              <div className="w-16 h-1 bg-brand-pastel-green rounded-full"></div>
             </motion.div>
 
             {/* Features Content */}
@@ -385,9 +387,9 @@ export const AboutVaayura = ({
                   </div>
                 </div>
 
-                {/* Technical Specs */}
-                <div className="bg-white rounded-xl p-4 border-l-4 border-brand-pastel-green shadow-sm">
-                  <div className="text-sm font-medium font-sora text-brand-grey-green mb-1">
+                {/* Performance Guarantee */}
+                <div className="space-y-2">
+                  <div className="text-sm font-medium font-sora text-brand-grey-green">
                     Performance Guarantee
                   </div>
                   <div className="text-brand-dark-grey font-montserrat text-sm">
@@ -408,17 +410,17 @@ export const AboutVaayura = ({
         variants={staggerContainer}
         className="py-32 bg-gray-50">
         <div className="container mx-auto px-6">
-          <motion.div variants={fadeInUp} className="flex flex-col gap-4 text-center mb-16">
+          <motion.div variants={fadeInUp} className="flex flex-col gap-4 text-left mb-16">
             <h2 className="text-4xl md:text-5xl font-semibold font-sora text-brand-grey-green">{achievementsTitle}</h2>
-            <div className="w-16 h-1 bg-brand-pastel-green rounded-full mx-auto"></div>
-            <p className="max-w-4xl mx-auto text-lg text-brand-dark-grey font-montserrat">
+            <div className="w-16 h-1 bg-brand-pastel-green rounded-full"></div>
+            <p className="max-w-4xl text-lg text-brand-dark-grey font-montserrat">
               {achievementsDescription}
             </p>
           </motion.div>
-          <motion.div variants={staggerContainer} className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-6xl mx-auto">
+          <motion.div variants={staggerContainer} className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl">
             {achievements.map((item, idx) => (
-              <motion.div variants={fadeInUp} className="flex flex-col gap-4" key={item.label + idx}>
-                <span className="text-3xl md:text-4xl lg:text-5xl font-semibold font-sora text-brand-grey-green">
+              <motion.div variants={fadeInUp} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center" key={item.label + idx}>
+                <span className="text-3xl md:text-4xl lg:text-5xl font-semibold font-sora text-brand-grey-green block mb-3">
                   {item.value}
                 </span>
                 <p className="text-brand-dark-grey font-montserrat text-sm md:text-base">{item.label}</p>
@@ -430,9 +432,6 @@ export const AboutVaayura = ({
 
       {/* Trusted by Industry Leaders Section */}
       <ProductClients />
-
-      {/* Ready to Improve Your Air Quality Section */}
-      <ProductContact />
 
     </>
   );

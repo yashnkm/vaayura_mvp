@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Header1 } from '@/components/ui/header'
 import { Footer } from '@/components/shared/Footer'
-import { CheckCircle, Package, Clock, FileText, User, Mail, Phone, Building } from 'lucide-react'
+import { CheckCircle, Package, Clock, MessageSquare, User, Mail, Phone, Building, Plus, Minus } from 'lucide-react'
 
 interface BulkOrderForm {
   name: string
@@ -126,7 +126,7 @@ export function BulkOrderPage() {
               </p>
               <Button
                 onClick={() => setShowSuccessPopup(false)}
-                className="bg-brand-pastel-green hover:bg-brand-pastel-green/90 text-white px-6 py-2 rounded-full font-heading"
+                className="bg-green-800 hover:bg-green-900 text-white px-6 py-2 rounded-full font-heading"
               >
                 Close
               </Button>
@@ -168,12 +168,6 @@ export function BulkOrderPage() {
                 initial={{ opacity: 0, y: 50, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.8, type: "spring", stiffness: 100, damping: 20 }}
-                whileHover={{ 
-                  y: -8,
-                  scale: 1.02,
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(59, 130, 246, 0.1)",
-                  transition: { duration: 0.3, ease: "easeOut" }
-                }}
                 className="rounded-3xl"
                 style={{ overflow: "hidden" }}
               >
@@ -194,7 +188,7 @@ export function BulkOrderPage() {
                     {/* Contact Information */}
                     <div className="space-y-4">
                       <div className="flex items-center mb-3">
-                        <User className="w-5 h-5 mr-2 text-brand-pastel-green" />
+                        <User className="w-5 h-5 mr-2 text-green-600" />
                         <h3 className="text-lg font-heading font-semibold text-brand-grey-green">
                           Contact Information
                         </h3>
@@ -274,7 +268,7 @@ export function BulkOrderPage() {
                     {/* Order Information */}
                     <div className="space-y-4">
                       <div className="flex items-center mb-3">
-                        <Package className="w-5 h-5 mr-2 text-brand-pastel-green" />
+                        <Package className="w-5 h-5 mr-2 text-green-600" />
                         <h3 className="text-lg font-heading font-semibold text-brand-grey-green">
                           Order Details
                         </h3>
@@ -304,18 +298,34 @@ export function BulkOrderPage() {
                           <Label htmlFor="quantity" className="text-gray-700 font-subheading text-sm font-medium">
                             Quantity Required *
                           </Label>
-                          <Input
-                            id="quantity"
-                            name="quantity"
-                            type="number"
-                            min="5"
-                            required
-                            value={formData.quantity}
-                            onChange={handleInputChange}
-                            className="h-10 border-gray-300 focus:border-brand-pastel-green focus:ring-brand-pastel-green rounded-lg"
-                            placeholder="Minimum 5 units"
-                          />
-                          <p className="text-xs text-gray-500 mt-1">Minimum order quantity: 5 units</p>
+                          <div className="relative flex items-center">
+                            <button
+                              type="button"
+                              onClick={() => setFormData(prev => ({ ...prev, quantity: Math.max(1, prev.quantity - 1) }))}
+                              className="absolute left-3 z-10 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center transition-colors"
+                            >
+                              <Minus className="w-4 h-4 text-gray-600" />
+                            </button>
+                            <Input
+                              id="quantity"
+                              name="quantity"
+                              type="number"
+                              min="1"
+                              required
+                              value={formData.quantity}
+                              onChange={handleInputChange}
+                              className="h-10 border-gray-300 focus:border-brand-pastel-green focus:ring-brand-pastel-green rounded-lg text-center pl-12 pr-12 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
+                              placeholder="1"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setFormData(prev => ({ ...prev, quantity: prev.quantity + 1 }))}
+                              className="absolute right-3 z-10 w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded flex items-center justify-center transition-colors"
+                            >
+                              <Plus className="w-4 h-4 text-gray-600" />
+                            </button>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">Enter the quantity you need</p>
                         </div>
                         
                         <div className="space-y-2">
@@ -346,7 +356,7 @@ export function BulkOrderPage() {
                     {/* Additional Notes */}
                     <div className="space-y-3">
                       <div className="flex items-center mb-2">
-                        <FileText className="w-5 h-5 mr-2 text-brand-pastel-green" />
+                        <MessageSquare className="w-5 h-5 mr-2 text-green-600" />
                         <Label htmlFor="notes" className="text-lg font-heading font-semibold text-brand-grey-green">
                           Additional Notes or Requirements
                         </Label>
@@ -367,7 +377,7 @@ export function BulkOrderPage() {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-brand-grey-green hover:bg-brand-grey-green/90 text-white py-3 px-6 rounded-full font-heading font-semibold text-base transition-all duration-200 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed h-12"
+                        className="w-full bg-green-800 hover:bg-green-900 text-white py-2 px-4 rounded-full font-heading font-semibold text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed h-10"
                       >
                         {isSubmitting ? (
                           <div className="flex items-center justify-center">
@@ -431,8 +441,8 @@ export function BulkOrderPage() {
                     </div>
 
                     <div className="flex items-start">
-                      <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                        <Building className="w-6 h-6 text-purple-600" />
+                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <Building className="w-6 h-6 text-green-600" />
                       </div>
                       <div>
                         <h4 className="text-lg font-heading font-semibold text-brand-grey-green mb-2">Custom Solutions</h4>

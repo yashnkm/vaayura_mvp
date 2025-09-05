@@ -89,7 +89,7 @@ export function FAQ() {
           </p>
         </motion.div>
         
-        <motion.div variants={fadeInUp} className="space-y-4">
+        <motion.div variants={fadeInUp} className="space-y-5">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}

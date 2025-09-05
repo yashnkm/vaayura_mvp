@@ -44,6 +44,7 @@ const features = [
 
 export function AppControlSection() {
   const [activeFeature, setActiveFeature] = useState('turn-on-off')
+  const [expandedFeature, setExpandedFeature] = useState<string | null>('turn-on-off')
   const [showModal, setShowModal] = useState<string | null>(null)
   const [selectedMode, setSelectedMode] = useState('Auto')
   const [selectedSpeed, setSelectedSpeed] = useState('Low')
@@ -67,7 +68,17 @@ export function AppControlSection() {
   const activeFeatureData = features.find(f => f.id === activeFeature) || features[0]
   
   const handleFeatureClick = (featureId: string) => {
-    setActiveFeature(featureId)
+    // Toggle expanded state for accordion behavior
+    if (expandedFeature === featureId) {
+      setExpandedFeature(null) // Collapse if already expanded
+      // For the last button, reset to default position to maintain line continuity
+      if (featureId === 'schedule-power') {
+        setActiveFeature('turn-on-off')
+      }
+    } else {
+      setExpandedFeature(featureId) // Expand the clicked feature
+      setActiveFeature(featureId) // Update active feature for visual indicator
+    }
     
     if (featureId === 'turn-on-off') {
       // Always show mobile when Turn On/Off is clicked
@@ -103,7 +114,7 @@ export function AppControlSection() {
             Breathe <span className="text-brand-pastel-green">Smart</span>
           </h2>
           <p className="text-xl text-gray-600 font-montserrat max-w-2xl mx-auto">
-            PURIFY AIR FROM THE VAAYURA APP
+            Purify air from the Vaayura app
           </p>
         </div>
 
@@ -112,22 +123,6 @@ export function AppControlSection() {
           <div className="space-y-8">
             <h3 className="text-2xl font-sora font-semibold mb-8 text-green-800">App Control</h3>
             
-            {/* Active Feature Description */}
-            <motion.div 
-              key={activeFeature}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-green-50 rounded-2xl p-6 mb-8 border border-green-200"
-            >
-              <h4 className="text-lg font-semibold font-sora text-green-800 mb-2">
-                Enable smart air {activeFeatureData.name.toLowerCase()}
-              </h4>
-              <p className="text-gray-700 font-sora leading-relaxed">
-                {activeFeatureData.description}
-              </p>
-            </motion.div>
-
             {/* Feature List with Vertical Line */}
             <div className="relative">
               {/* Vertical Line */}
@@ -144,48 +139,76 @@ export function AppControlSection() {
               />
 
               {/* Feature Items */}
-              <div className="space-y-6 pl-8">
+              <div className="space-y-2 pl-8">
                 {features.map((feature) => (
-                  <motion.button
-                    key={feature.id}
-                    onClick={() => handleFeatureClick(feature.id)}
-                    whileHover={{ 
-                      x: 8,
-                      scale: 1.05,
-                      transition: { type: "spring", stiffness: 400, damping: 25 }
-                    }}
-                    whileTap={{ 
-                      scale: 0.98,
-                      x: 12,
-                      transition: { duration: 0.1 }
-                    }}
-                    animate={activeFeature === feature.id ? {
-                      x: 10,
-                      textShadow: "0 0 8px rgba(34, 197, 94, 0.6)",
-                      transition: { type: "spring", stiffness: 300, damping: 20 }
-                    } : { x: 0 }}
-                    className={`block text-left transition-all duration-300 font-sora py-2 px-3 rounded-lg relative ${
-                      activeFeature === feature.id
-                        ? 'text-green-800 font-semibold bg-green-50/50 shadow-md'
-                        : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
-                    }`}
-                  >
-                    {activeFeature === feature.id && (
-                      <motion.div
-                        layoutId="activeFeatureGlow"
-                        className="absolute inset-0 bg-gradient-to-r from-green-100/80 to-green-50/80 rounded-lg border border-green-200/50"
-                        initial={false}
-                        animate={{
-                          boxShadow: "0 4px 12px rgba(34, 197, 94, 0.15), 0 0 20px rgba(34, 197, 94, 0.1)"
-                        }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    )}
-                    <span className="relative z-10">{feature.name}</span>
-                  </motion.button>
+                  <div key={feature.id}>
+                    <motion.button
+                      onClick={() => handleFeatureClick(feature.id)}
+                      whileHover={{ 
+                        x: 8,
+                        scale: 1.05,
+                        transition: { type: "spring", stiffness: 400, damping: 25 }
+                      }}
+                      whileTap={{ 
+                        scale: 0.98,
+                        x: 12,
+                        transition: { duration: 0.1 }
+                      }}
+                      animate={activeFeature === feature.id ? {
+                        x: 10,
+                        textShadow: "0 0 8px rgba(34, 197, 94, 0.6)",
+                        transition: { type: "spring", stiffness: 300, damping: 20 }
+                      } : { x: 0 }}
+                      className={`block text-left transition-all duration-300 font-sora py-2 px-3 rounded-lg relative w-full ${
+                        activeFeature === feature.id
+                          ? 'text-green-800 font-semibold bg-green-50/50 shadow-md'
+                          : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+                      }`}
+                    >
+                      {activeFeature === feature.id && (
+                        <motion.div
+                          layoutId="activeFeatureGlow"
+                          className="absolute inset-0 bg-gradient-to-r from-green-100/80 to-green-50/80 rounded-lg border border-green-200/50"
+                          initial={false}
+                          animate={{
+                            boxShadow: "0 4px 12px rgba(34, 197, 94, 0.15), 0 0 20px rgba(34, 197, 94, 0.1)"
+                          }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      )}
+                      <span className="relative z-10">{feature.name}</span>
+                    </motion.button>
+                    
+                    {/* Expandable Description under each button */}
+                    <motion.div
+                      initial={false}
+                      animate={{ 
+                        height: expandedFeature === feature.id ? "auto" : 0,
+                        opacity: expandedFeature === feature.id ? 1 : 0,
+                        marginTop: expandedFeature === feature.id ? 8 : 0
+                      }}
+                      transition={{ 
+                        duration: 0.25, 
+                        ease: [0.04, 0.62, 0.23, 0.98],
+                        height: { duration: 0.25 },
+                        opacity: { duration: 0.15, delay: expandedFeature === feature.id ? 0.1 : 0 }
+                      }}
+                      className="overflow-hidden ml-4"
+                    >
+                      <div className="bg-green-50 rounded-lg p-2.5 border border-green-200">
+                        <h4 className="text-sm font-semibold font-sora text-green-800 mb-2">
+                          Enable smart air {feature.name.toLowerCase()}
+                        </h4>
+                        <p className="text-gray-700 font-sora text-sm leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </div>
+                    </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
+
           </div>
 
           {/* Right side: Mobile App Mockup */}
@@ -212,8 +235,6 @@ export function AppControlSection() {
                       {/* Screen Content - Fixed Dimensions */}
                       <div className="w-full h-full rounded-[2.4rem] relative overflow-hidden bg-black">
                         
-                        {/* Dynamic Island */}
-                        <div className="absolute top-5 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-full z-40 shadow-inner border border-gray-800"></div>
                         
                         {/* Screen area */}
                         <div className="w-full h-full relative overflow-hidden rounded-[2.4rem]">
@@ -269,7 +290,7 @@ export function AppControlSection() {
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                     </svg>
                                   </button>
-                                  <h1 className="text-xl font-semibold text-[#36454F]">
+                                  <h1 className="text-lg font-semibold text-[#36454F]">
                                     {showModal === 'settings' ? 'Settings' : showModal === 'schedule-power' ? 'Schedule' : 'Settings'}
                                   </h1>
                                 </div>
@@ -287,7 +308,7 @@ export function AppControlSection() {
                                         className="w-full bg-white hover:bg-gray-50 border-b border-gray-100 last:border-b-0 px-4 py-4 transition-colors cursor-pointer"
                                       >
                                         <div className="flex justify-between items-center">
-                                          <span className="text-base font-normal text-[#36454F] text-left">{setting.name}</span>
+                                          <span className="text-xs font-normal text-[#36454F] text-left">{setting.name}</span>
                                           {setting.type === 'toggle' && (
                                             <div className={`w-11 h-6 rounded-full ${setting.value ? 'bg-blue-500' : 'bg-gray-300'} relative transition-colors`}>
                                               <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform ${setting.value ? 'translate-x-5' : 'translate-x-0.5'}`}></div>
@@ -295,7 +316,7 @@ export function AppControlSection() {
                                           )}
                                           {setting.type === 'setting' && (
                                             <div className="flex items-center space-x-2">
-                                              <span className="text-gray-500 text-sm">{setting.value}</span>
+                                              <span className="text-gray-500 text-xs">{setting.value}</span>
                                               <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                               </svg>
@@ -314,7 +335,7 @@ export function AppControlSection() {
                                     <div className="px-3">
                                       {/* Time variance note */}
                                       <div className="px-1 py-2 mb-3">
-                                        <p className="text-xs text-gray-500">Time variance is ±30s</p>
+                                        <p className="text-[10px] text-gray-500">Time variance is ±30s</p>
                                       </div>
 
                                       {/* Schedule Items */}
@@ -322,19 +343,19 @@ export function AppControlSection() {
                                         {/* PM 6:30 Schedule */}
                                         <div className="bg-gray-50 rounded px-3 py-3">
                                           <div className="flex justify-between items-center mb-1">
-                                            <span className="text-lg font-light text-gray-300">PM 6:30</span>
+                                            <span className="text-sm font-light text-gray-300">PM 6:30</span>
                                             <div className="w-9 h-5 rounded-full bg-gray-300 relative transition-colors">
                                               <div className="w-4 h-4 bg-white rounded-full absolute top-0.5 translate-x-0.5"></div>
                                             </div>
                                           </div>
-                                          <p className="text-xs text-gray-400 mb-0.5">Once</p>
-                                          <p className="text-xs text-gray-400">Switch:ON</p>
+                                          <p className="text-[10px] text-gray-400 mb-0.5">Once</p>
+                                          <p className="text-[10px] text-gray-400">Switch:ON</p>
                                         </div>
 
                                         {/* PM 11:00 Schedule */}
                                         <div className="bg-white rounded px-3 py-3 border border-gray-200">
                                           <div className="flex justify-between items-center mb-1">
-                                            <span className="text-lg font-light text-[#36454F]">PM 11:00</span>
+                                            <span className="text-sm font-light text-[#36454F]">PM 11:00</span>
                                             <div className="w-9 h-5 rounded-full bg-green-500 relative transition-colors">
                                               <div className="w-4 h-4 bg-white rounded-full absolute top-0.5 translate-x-4"></div>
                                             </div>
@@ -375,21 +396,21 @@ export function AppControlSection() {
                                 initial={{ y: 300, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 exit={{ y: 300, opacity: 0 }}
-                                className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-2xl overflow-hidden z-10"
+                                className="absolute bottom-6 left-6 right-6 bg-white rounded-2xl shadow-2xl overflow-hidden z-10"
                               >
                                 {showModal === 'choose-mode' && (
                                   <div>
-                                    <h3 className="text-lg font-medium text-center py-3 text-[#36454F]">Mode</h3>
+                                    <h3 className="text-base font-medium text-center py-2 text-[#36454F]">Mode</h3>
                                     <div>
                                       {modeOptions.map((mode, index) => (
                                         <button
                                           key={mode}
                                           onClick={() => setSelectedMode(mode)}
-                                          className={`w-full py-3 px-4 text-center flex justify-center items-center relative hover:bg-gray-50 transition-colors ${
+                                          className={`w-full py-2 px-3 text-center flex justify-center items-center relative hover:bg-gray-50 transition-colors ${
                                             index < modeOptions.length - 1 ? 'border-b border-gray-100' : ''
                                           }`}
                                         >
-                                          <span className="text-base font-normal text-gray-800">{mode}</span>
+                                          <span className="text-sm font-normal text-gray-800">{mode}</span>
                                           {selectedMode === mode && (
                                             <Check className="text-blue-500 absolute right-4" size={18} strokeWidth={2.5} />
                                           )}
@@ -402,7 +423,7 @@ export function AppControlSection() {
                                     
                                     <button
                                       onClick={() => setShowModal(null)}
-                                      className="w-full py-3 text-center text-base font-normal text-gray-500 hover:bg-gray-50 transition-colors"
+                                      className="w-full py-2 text-center text-sm font-normal text-gray-500 hover:bg-gray-50 transition-colors"
                                     >
                                       Cancel
                                     </button>
@@ -411,17 +432,17 @@ export function AppControlSection() {
 
                                 {showModal === 'speed' && (
                                   <div>
-                                    <h3 className="text-lg font-medium text-center py-3 text-[#36454F]">Speed</h3>
+                                    <h3 className="text-base font-medium text-center py-2 text-[#36454F]">Speed</h3>
                                     <div>
                                       {speedOptions.map((speed, index) => (
                                         <button
                                           key={speed}
                                           onClick={() => setSelectedSpeed(speed)}
-                                          className={`w-full py-3 px-4 text-center flex justify-center items-center relative hover:bg-gray-50 transition-colors ${
+                                          className={`w-full py-2 px-3 text-center flex justify-center items-center relative hover:bg-gray-50 transition-colors ${
                                             index < speedOptions.length - 1 ? 'border-b border-gray-100' : ''
                                           }`}
                                         >
-                                          <span className="text-base font-normal text-gray-800">{speed}</span>
+                                          <span className="text-sm font-normal text-gray-800">{speed}</span>
                                           {selectedSpeed === speed && (
                                             <Check className="text-blue-500 absolute right-4" size={18} strokeWidth={2.5} />
                                           )}
@@ -434,7 +455,7 @@ export function AppControlSection() {
                                     
                                     <button
                                       onClick={() => setShowModal(null)}
-                                      className="w-full py-3 text-center text-base font-normal text-gray-500 hover:bg-gray-50 transition-colors"
+                                      className="w-full py-2 text-center text-sm font-normal text-gray-500 hover:bg-gray-50 transition-colors"
                                     >
                                       Cancel
                                     </button>
@@ -451,7 +472,7 @@ export function AppControlSection() {
                                 initial={{ y: 300, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 exit={{ y: 300, opacity: 0 }}
-                                className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl shadow-2xl overflow-hidden z-20"
+                                className="absolute bottom-6 left-6 right-6 bg-white rounded-2xl shadow-2xl overflow-hidden z-20"
                               >
                                 <div>
                                   <h3 className="text-base font-medium text-center py-2 text-[#36454F]">Countdown timer</h3>
@@ -462,11 +483,11 @@ export function AppControlSection() {
                                         onClick={() => setSelectedTimer(timer)}
                                         whileHover={{ backgroundColor: "rgba(249, 250, 251, 1)" }}
                                         whileTap={{ scale: 0.98 }}
-                                        className={`w-full py-3 px-3 text-center flex justify-center items-center relative transition-colors ${
+                                        className={`w-full py-2 px-3 text-center flex justify-center items-center relative transition-colors ${
                                           index < timerOptions.length - 1 ? 'border-b border-gray-100' : ''
                                         }`}
                                       >
-                                        <span className="text-base font-normal text-gray-800">{timer}</span>
+                                        <span className="text-sm font-normal text-gray-800">{timer}</span>
                                         {selectedTimer === timer && (
                                           <Check className="text-blue-500 absolute right-3" size={16} strokeWidth={2.5} />
                                         )}
@@ -480,7 +501,7 @@ export function AppControlSection() {
                                     onClick={() => setShowModal(null)}
                                     whileHover={{ backgroundColor: "rgba(249, 250, 251, 1)" }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="w-full py-2 text-center text-sm font-normal text-gray-500 transition-colors"
+                                    className="w-full py-1.5 text-center text-xs font-normal text-gray-500 transition-colors"
                                   >
                                     Cancel
                                   </motion.button>

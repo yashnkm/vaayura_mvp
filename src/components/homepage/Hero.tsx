@@ -12,7 +12,7 @@ const HeroContent = ({ showContent }: { showContent?: boolean }) => {
       }`}
     >
       {/* Dark green card with blended borders - increased transparency */}
-      <div className='bg-brand-grey-green/20 backdrop-blur-sm rounded-3xl shadow-2xl border border-brand-grey-green/20 p-8 md:p-12 max-w-4xl mx-auto'>
+      <div className='bg-brand-grey-green/10 backdrop-blur-sm rounded-3xl shadow-2xl border border-brand-grey-green/10 p-8 md:p-12 max-w-4xl mx-auto'>
         {/* Main Headline */}
         <h1 className='text-4xl md:text-5xl lg:text-6xl font-sora font-bold mb-6 leading-tight text-brand-white text-center'>
           Life Begins with<br />

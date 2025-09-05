@@ -134,9 +134,45 @@ export function ProductCatalog() {
                 <h3 className="text-3xl md:text-4xl font-sora text-brand-grey-green leading-tight">
                   {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`}
                 </h3>
-                <p className="text-lg text-brand-dark-grey font-montserrat leading-relaxed">
-                  {product.description || "Experience cleaner, healthier air with advanced filtration technology designed for your well-being and peace of mind."}
-                </p>
+                {/* Feature Cards */}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto lg:mx-0">
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                    <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">CADR</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">
+                      {product.name.toLowerCase().includes('storm') ? '600 m³/hr' : 
+                       product.name.toLowerCase().includes('nest') ? '450 m³/hr' : '190 m³/hr'}
+                    </div>
+                  </div>
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                    <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Coverage</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">
+                      {product.name.toLowerCase().includes('storm') ? '1000 sq ft' : 
+                       product.name.toLowerCase().includes('nest') ? '600 sq ft' : '400 sq ft'}
+                    </div>
+                  </div>
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                    <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">
+                      {product.name.toLowerCase().includes('storm') ? 'Power' : 
+                       product.name.toLowerCase().includes('nest') ? 'Size' : 'Type'}
+                    </div>
+                    <div className="text-green-800 font-sora font-bold text-sm">
+                      {product.name.toLowerCase().includes('storm') ? 'High Performance' : 
+                       product.name.toLowerCase().includes('nest') ? 'Compact' : 'Advanced'}
+                    </div>
+                  </div>
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                    <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Fan Speeds</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">Adjustable</div>
+                  </div>
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                    <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Sleep Timer</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">Available</div>
+                  </div>
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                    <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Filter Alert</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">Smart</div>
+                  </div>
+                </div>
                 
                 {/* Price (if available) */}
                 {product.price && (

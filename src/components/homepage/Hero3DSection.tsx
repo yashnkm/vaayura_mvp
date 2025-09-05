@@ -101,7 +101,7 @@ export function Hero3DSection() {
           
           {/* Background blur overlay - fades out when scrolling starts */}
           <div 
-            className={`absolute inset-0 bg-white/55 backdrop-blur-md z-20 transition-all duration-700 ${
+            className={`absolute inset-0 bg-black/30 backdrop-blur-md z-20 transition-all duration-700 ${
               scrollStarted ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}
           />
@@ -113,17 +113,17 @@ export function Hero3DSection() {
             }`}
           >
             <div className="text-center px-6 max-w-4xl">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-sora font-bold text-[#36454F] mb-6 leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-sora font-bold text-green-200 mb-6 leading-tight">
                 Life Begins with<br />
                 Clean Air.
               </h1>
-              <div className="text-xl md:text-2xl text-brand-dark-grey/80 leading-relaxed font-montserrat">
+              <div className="text-xl md:text-2xl text-green-100/90 leading-relaxed font-montserrat">
                 <p className="text-center">Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
               </div>
               
               {/* Scroll hint */}
               <div className="mt-12">
-                <span className="text-base text-gray-300 font-montserrat">Scroll to explore</span>
+                <span className="text-base text-white/70 font-montserrat">Scroll to explore</span>
               </div>
             </div>
           </div>

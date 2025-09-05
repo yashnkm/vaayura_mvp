@@ -373,7 +373,7 @@ export function CheckoutPage() {
               {/* Product Details */}
               <div className="flex gap-4 mb-6">
                 <img
-                  src={checkoutItem.image}
+                  src={checkoutItem.image || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"}
                   alt={checkoutItem.name}
                   className="w-20 h-20 object-cover rounded-lg"
                 />

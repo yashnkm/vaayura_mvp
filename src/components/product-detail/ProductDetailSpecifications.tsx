@@ -140,7 +140,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
           {/* Left side: Specifications */}
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#36454F]">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#36454F] font-montserrat">
                 Specifications
               </h2>
             </div>
@@ -149,9 +149,10 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
             <div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
               {specEntries.map(([key, value], index) => (
                 <div key={index} className="space-y-2">
-                  <div className="text-gray-700 font-medium text-sm">{key}:</div>
-                  <div className="text-[#36454F] font-semibold">{value}</div>
-                  {index < specEntries.length - 1 && (
+                  <div className="text-gray-700 font-medium text-sm font-montserrat">{key}:</div>
+                  <div className="text-[#36454F] font-semibold font-montserrat">{value}</div>
+                  {/* Add divider under all items except the last one, plus special cases for "< 0.5W" and "350°" */}
+                  {(index < specEntries.length - 1 || value === "< 0.5W" || value === "350°") && (
                     <div className="border-b border-gray-200 mt-4"></div>
                   )}
                 </div>
@@ -163,7 +164,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
           <div className="relative flex justify-center items-start">
             <div className="relative w-96 h-[500px]">
               {/* Main Image Display */}
-              <div className="relative w-full h-full overflow-hidden rounded-2xl">
+              <div className="relative w-full h-full overflow-hidden rounded-xl">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentImageIndex}
@@ -216,7 +217,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
 
       {/* Useful Documents Section */}
       <div className="container mx-auto px-6 mt-24">
-        <h3 className="text-2xl md:text-3xl font-bold text-[#36454F] mb-12">
+        <h3 className="text-2xl md:text-3xl font-bold text-[#36454F] mb-12 font-montserrat">
           Useful documents
         </h3>
         
@@ -228,10 +229,10 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-[#36454F] font-semibold mb-2">
-                    Technical specification, PDF, 8MB
+                  <h4 className="text-[#36454F] font-semibold mb-2 font-montserrat">
+                    Technical Specifications
                   </h4>
-                  <p className="text-gray-600 text-sm">
+                  <p className="text-gray-600 text-sm font-montserrat">
                     Detailed technical specifications and performance data
                   </p>
                 </div>
@@ -275,7 +276,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.2 }}
                     >
-                      <h2 className="text-xl font-bold text-[#36454F]">Technical Specifications</h2>
+                      <h2 className="text-xl font-bold text-[#36454F] font-montserrat">Technical Specifications</h2>
                     </motion.div>
 
                     {/* Content */}
@@ -293,15 +294,15 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
                               delay: 0.3 + (sectionIndex * 0.1) 
                             }}
                           >
-                            <h3 className="text-lg font-semibold text-[#36454F] border-b pb-2">
+                            <h3 className="text-lg font-semibold text-[#36454F] border-b pb-2 font-montserrat">
                               {section.category}
                             </h3>
                             <div className="overflow-x-auto">
                               <table className="w-full">
                                 <thead>
                                   <tr className="border-b border-gray-200">
-                                    <th className="text-left py-2 px-3 font-semibold text-gray-700 text-sm">Parameter</th>
-                                    <th className="text-left py-2 px-3 font-semibold text-gray-700 text-sm">Value</th>
+                                    <th className="text-left py-2 px-3 font-semibold text-gray-700 text-sm font-montserrat">Parameter</th>
+                                    <th className="text-left py-2 px-3 font-semibold text-gray-700 text-sm font-montserrat">Value</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -320,8 +321,8 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
                                         transition: { duration: 0.15 } 
                                       }}
                                     >
-                                      <td className="py-2 px-3 text-gray-600 text-sm">{spec.label}</td>
-                                      <td className="py-2 px-3 text-[#36454F] font-medium text-sm">{spec.value}</td>
+                                      <td className="py-2 px-3 text-gray-600 text-sm font-montserrat">{spec.label}</td>
+                                      <td className="py-2 px-3 text-[#36454F] font-medium text-sm font-montserrat">{spec.value}</td>
                                     </motion.tr>
                                   ))}
                                 </tbody>

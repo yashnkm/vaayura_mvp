@@ -138,7 +138,6 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
       name: feature.title,
       description: feature.description,
       href: "#",
-      cta: "Learn more",
       whiteText: true, // Make text white for all cards
       background: (
         <div className="absolute inset-0">

@@ -36,8 +36,12 @@ export function HomePage() {
       }} />
       <AppControlSection />
       <ProductClients />
+      
+      {/* Subtle Divider */}
+      <div className="h-px bg-gray-200/50"></div>
+      
       <FAQ />
-      <ProductShowcaseSection />
+      {/* <ProductShowcaseSection /> */}
       <Footer />
     </>
   )
