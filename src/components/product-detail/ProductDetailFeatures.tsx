@@ -144,42 +144,50 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
           <img 
             src={featureImage} 
             alt={feature.title}
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-85 transition-all duration-300 group-hover:blur-sm"
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-90 transition-all duration-300 group-hover:blur-sm"
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center',
+              width: '100%',
+              height: '100%',
+              aspectRatio: 'auto'
+            }}
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-black/50" />
         </div>
       ),
-      // Assign different grid positions for varied layout matching the reference
+      // Mobile-first responsive grid positions
       className: index === 0 
-        ? "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3" // Large center card
+        ? "col-span-1 sm:col-span-2 lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3" // Large center card, full width on mobile
         : index === 1
-        ? "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3" // Tall left card
+        ? "col-span-1 lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3" // Tall left card
         : index === 2
-        ? "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4" // Small left bottom
+        ? "col-span-1 lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4" // Small left bottom
         : index === 3
-        ? "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2" // Small right top
-        : "lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4" // Tall right card
+        ? "col-span-1 lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2" // Small right top
+        : "col-span-1 lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4" // Tall right card
     };
   });
 
   return (
-    <section className="py-20 lg:py-32 bg-slate-50 relative overflow-visible">
-      <div className="container mx-auto max-w-7xl">
-        <div className="flex flex-col gap-12">
+    <section className="py-12 sm:py-16 lg:py-20 xl:py-32 bg-slate-50 relative overflow-visible">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="flex flex-col gap-8 sm:gap-12">
           
           {/* Section Header */}
-          <div className="text-center space-y-4">
-            <h2 className="text-4xl lg:text-5xl font-sora font-bold text-[#36454F] leading-tight mb-6">
-              Advanced <span className="text-brand-pastel-green">Features</span>
+          <div className="text-left space-y-3 sm:space-y-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold text-[#36454F] leading-tight mb-4 sm:mb-6">
+              Advanced Features
             </h2>
-            <p className="text-lg text-brand-dark-grey font-montserrat max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg text-brand-dark-grey font-montserrat max-w-3xl leading-relaxed">
               Every feature in {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`} is engineered to provide you with the cleanest, healthiest air while maintaining 
               the perfect balance of performance and tranquility.
             </p>
           </div>
 
           {/* Bento Grid Features */}
-          <BentoGrid className="lg:grid-rows-3">
+          <BentoGrid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-3 gap-4 sm:gap-6 auto-rows-fr">
             {bentoFeatures.map((feature) => (
               <BentoCard key={feature.name} {...feature} />
             ))}

@@ -1,10 +1,13 @@
 import { Phone, Mail, MessageCircle, Calendar } from "lucide-react";
+import { useState } from "react";
+import { DemoBookingModal } from "@/components/contact/DemoBookingModal";
 
 interface ContactMethod {
   icon: React.ReactNode;
   title: string;
   subtitle: string;
   action?: string;
+  isDemo?: boolean;
 }
 
 const contactMethods: ContactMethod[] = [
@@ -30,11 +33,21 @@ const contactMethods: ContactMethod[] = [
     icon: <Calendar className="h-12 w-12" />,
     title: "Book a demo",
     subtitle: "Schedule now",
-    action: "/book-demo"
+    isDemo: true
   },
 ];
 
 export function ProductContact() {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+
+  const handleMethodClick = (method: ContactMethod) => {
+    if (method.isDemo) {
+      setIsDemoModalOpen(true);
+    } else if (method.action) {
+      window.open(method.action, '_self');
+    }
+  };
+
   return (
     <section className="py-24 bg-slate-50">
       <div className="container mx-auto">
@@ -55,7 +68,7 @@ export function ProductContact() {
               <div 
                 key={index}
                 className="text-center group cursor-pointer"
-                onClick={() => method.action && window.open(method.action, '_self')}
+                onClick={() => handleMethodClick(method)}
               >
                 {/* Icon */}
                 <div className="mb-6 flex justify-center">
@@ -83,6 +96,12 @@ export function ProductContact() {
 
         </div>
       </div>
+
+      {/* Demo Booking Modal */}
+      <DemoBookingModal 
+        isOpen={isDemoModalOpen}
+        onClose={() => setIsDemoModalOpen(false)}
+      />
     </section>
   );
 }

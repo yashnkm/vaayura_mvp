@@ -112,18 +112,18 @@ export function Hero3DSection() {
               scrollStarted ? 'opacity-0 translate-y-[-20px] pointer-events-none' : 'opacity-100 translate-y-0'
             }`}
           >
-            <div className="text-center px-6 max-w-4xl">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-sora font-bold text-green-200 mb-6 leading-tight">
-                Life Begins with<br />
-                Clean Air.
+            <div className="text-center px-4 sm:px-6 max-w-4xl">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-sora font-bold text-green-200 mb-4 sm:mb-6 leading-tight">
+                Life Begins with<br className="hidden sm:block" />
+                <span className="sm:hidden"> </span>Clean Air.
               </h1>
-              <div className="text-xl md:text-2xl text-green-100/90 leading-relaxed font-montserrat">
-                <p className="text-center">Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
+              <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-green-100/90 leading-relaxed font-montserrat">
+                <p className="text-center px-2 sm:px-0">Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
               </div>
               
               {/* Scroll hint */}
-              <div className="mt-12">
-                <span className="text-base text-white/70 font-montserrat">Scroll to explore</span>
+              <div className="mt-8 sm:mt-12">
+                <span className="text-sm sm:text-base text-white/70 font-montserrat">Scroll to explore</span>
               </div>
             </div>
           </div>
@@ -144,12 +144,15 @@ export function Hero3DSection() {
               animationData={animationData}
               loop={false}
               autoplay={false}
-              className="w-full h-full"
+              className="w-full h-full max-w-full max-h-full"
               style={{
-                width: '75vw',
-                height: '75vh',
+                width: 'min(90vw, 100%)',
+                height: 'min(50vh, 100%)',
                 maxWidth: '1200px',
-                maxHeight: '800px'
+                maxHeight: '800px',
+                minWidth: '280px',
+                minHeight: '200px',
+                aspectRatio: '16/9'
               }}
               rendererSettings={{
                 preserveAspectRatio: 'xMidYMid meet',

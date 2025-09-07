@@ -107,21 +107,21 @@ export function AppControlSection() {
   }
 
   return (
-    <section className="py-20 bg-white text-[#36454F]">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-sora font-bold mb-6 text-[#36454F]">
+    <section className="py-12 sm:py-16 lg:py-20 bg-white text-[#36454F]">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
+        <div className="text-left mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold mb-4 sm:mb-6 text-[#36454F]">
             Breathe <span className="text-brand-pastel-green">Smart</span>
           </h2>
-          <p className="text-xl text-gray-600 font-montserrat max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 font-montserrat max-w-2xl">
             Purify air from the Vaayura app
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Left side: App Control Features */}
-          <div className="space-y-8">
-            <h3 className="text-2xl font-sora font-semibold mb-8 text-green-800">App Control</h3>
+          <div className="space-y-6 sm:space-y-8 order-2 lg:order-1">
+            <h3 className="text-xl sm:text-2xl font-sora font-semibold mb-6 sm:mb-8 text-green-800">App Control</h3>
             
             {/* Feature List with Vertical Line */}
             <div className="relative">
@@ -139,30 +139,30 @@ export function AppControlSection() {
               />
 
               {/* Feature Items */}
-              <div className="space-y-2 pl-8">
+              <div className="space-y-3 sm:space-y-2 pl-6 sm:pl-8">
                 {features.map((feature) => (
                   <div key={feature.id}>
                     <motion.button
                       onClick={() => handleFeatureClick(feature.id)}
                       whileHover={{ 
-                        x: 8,
-                        scale: 1.05,
+                        x: 4,
+                        scale: 1.02,
                         transition: { type: "spring", stiffness: 400, damping: 25 }
                       }}
                       whileTap={{ 
                         scale: 0.98,
-                        x: 12,
+                        x: 8,
                         transition: { duration: 0.1 }
                       }}
                       animate={activeFeature === feature.id ? {
-                        x: 10,
+                        x: 6,
                         textShadow: "0 0 8px rgba(34, 197, 94, 0.6)",
                         transition: { type: "spring", stiffness: 300, damping: 20 }
                       } : { x: 0 }}
-                      className={`block text-left transition-all duration-300 font-sora py-2 px-3 rounded-lg relative w-full ${
+                      className={`block text-left transition-all duration-300 font-sora py-3 px-4 rounded-lg relative w-full touch-manipulation text-sm sm:text-base min-h-[50px] sm:min-h-[auto] ${
                         activeFeature === feature.id
                           ? 'text-green-800 font-semibold bg-green-50/50 shadow-md'
-                          : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+                          : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50 active:bg-gray-100'
                       }`}
                     >
                       {activeFeature === feature.id && (
@@ -212,8 +212,8 @@ export function AppControlSection() {
           </div>
 
           {/* Right side: Mobile App Mockup */}
-          <div className="flex justify-center items-center min-h-[600px]">
-            <div className="relative w-[280px] h-[580px] flex-shrink-0"> {/* Fixed container */}
+          <div className="flex justify-center items-center min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] order-1 lg:order-2">
+            <div className="relative w-[200px] h-[400px] sm:w-[240px] sm:h-[480px] lg:w-[280px] lg:h-[580px] flex-shrink-0"> {/* Responsive container */}
               <AnimatePresence mode="wait">
                 {showMobile && (
                   <motion.div 
@@ -244,7 +244,13 @@ export function AppControlSection() {
                             src={appHomescreenImg} 
                             alt="Vaayura App Homescreen" 
                             className="w-full h-full object-cover object-center rounded-[2.4rem]"
-                            style={{ objectPosition: 'center center' }}
+                            style={{ 
+                              objectPosition: 'center center',
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover'
+                            }}
+                            loading="lazy"
                           />
 
                       {/* Modal Popup Overlay on Phone */}

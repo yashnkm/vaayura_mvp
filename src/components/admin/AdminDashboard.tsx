@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ProductForm } from './ProductForm'
 import { ProductList } from './ProductList'
+import { CouponManagement } from './CouponManagement'
 import { useState } from 'react'
 
 export function AdminDashboard() {
@@ -11,6 +12,7 @@ export function AdminDashboard() {
   const { products, loading, refetch } = useAdminProducts()
   const [showProductForm, setShowProductForm] = useState(false)
   const [editingProduct, setEditingProduct] = useState(null)
+  const [currentView, setCurrentView] = useState<'dashboard' | 'products' | 'coupons'>('dashboard')
 
   const handleSignOut = async () => {
     await signOut()
@@ -42,6 +44,10 @@ export function AdminDashboard() {
     )
   }
 
+  if (currentView === 'coupons') {
+    return <CouponManagement />
+  }
+
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
@@ -65,9 +71,68 @@ export function AdminDashboard() {
         </div>
       </header>
 
+      {/* Navigation */}
+      <nav className="bg-white border-b border-slate-200 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex space-x-8">
+            <button
+              onClick={() => setCurrentView('dashboard')}
+              className={`py-4 px-2 border-b-2 font-medium text-sm ${
+                currentView === 'dashboard'
+                  ? 'border-brand-pastel-green text-brand-grey-green'
+                  : 'border-transparent text-brand-dark-grey hover:text-brand-grey-green'
+              }`}
+            >
+              Dashboard
+            </button>
+            <button
+              onClick={() => setCurrentView('products')}
+              className={`py-4 px-2 border-b-2 font-medium text-sm ${
+                currentView === 'products'
+                  ? 'border-brand-pastel-green text-brand-grey-green'
+                  : 'border-transparent text-brand-dark-grey hover:text-brand-grey-green'
+              }`}
+            >
+              Products
+            </button>
+            <button
+              onClick={() => setCurrentView('coupons')}
+              className={`py-4 px-2 border-b-2 font-medium text-sm ${
+                currentView === 'coupons'
+                  ? 'border-brand-pastel-green text-brand-grey-green'
+                  : 'border-transparent text-brand-dark-grey hover:text-brand-grey-green'
+              }`}
+            >
+              Coupons
+            </button>
+          </div>
+        </div>
+      </nav>
+
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {currentView === 'products' ? (
+          <div>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-heading text-brand-grey-green">
+                Products Management
+              </h2>
+              <Button
+                onClick={handleAddProduct}
+                className="bg-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/90"
+              >
+                Add New Product
+              </Button>
+            </div>
+            
+            <ProductList
+              products={products}
+              loading={loading}
+              onEdit={handleEditProduct}
+            />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           
           {/* Stats Cards */}
           <div className="lg:col-span-4 grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -104,30 +169,8 @@ export function AdminDashboard() {
               </CardContent>
             </Card>
           </div>
-
-          {/* Products Section */}
-          <div className="lg:col-span-4">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-heading text-brand-grey-green">
-                Products Management
-              </h2>
-              <Button
-                variant="brand-primary"
-                size="brand-default"
-                onClick={handleAddProduct}
-                className="bg-brand-pastel-green text-brand-grey-green hover:bg-brand-pastel-green/90"
-              >
-                Add New Product
-              </Button>
-            </div>
-            
-            <ProductList
-              products={products}
-              loading={loading}
-              onEdit={handleEditProduct}
-            />
           </div>
-        </div>
+        )}
       </main>
     </div>
   )

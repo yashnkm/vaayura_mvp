@@ -66,7 +66,7 @@ export function ProductFeatures() {
         },
         {
           threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5],
-          rootMargin: '50px 0px 50px 0px' // Balanced margins
+          rootMargin: '200px 0px 200px 0px' // Load images 200px before they come into view
         }
       );
 
@@ -83,27 +83,27 @@ export function ProductFeatures() {
   }, []);
 
   return (
-    <section className="w-full py-16 lg:py-24 bg-white">
-      <div className="container mx-auto max-w-7xl px-8">
-        <div className="flex flex-col gap-12">
+    <section className="w-full py-12 sm:py-16 lg:py-20 xl:py-24 bg-white">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
           
           {/* Section Header */}
-          <div className="text-left space-y-6">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-montserrat text-brand-grey-green leading-tight">
-              Engineered for <span className="text-brand-pastel-green">Excellence</span>
+          <div className="text-left space-y-4 sm:space-y-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-montserrat text-brand-grey-green leading-tight">
+              Engineered for Excellence
             </h2>
-            <p className="text-lg text-brand-dark-grey font-montserrat max-w-3xl leading-relaxed">
+            <p className="text-base sm:text-lg text-brand-dark-grey font-montserrat max-w-3xl leading-relaxed">
               Every Vaayura air purifier combines cutting-edge filtration technology with intelligent automation for superior performance.
             </p>
           </div>
 
           {/* Features List */}
-          <div className="space-y-40">
+          <div className="space-y-16 sm:space-y-24 lg:space-y-32 xl:space-y-40">
             {features.map((feature, index) => (
               <div 
                 key={index}
                 ref={el => featureRefs.current[index] = el}
-                className={`flex flex-col lg:flex-row items-center ${feature.title === 'Silent Sleep Mode' ? 'gap-4 lg:gap-8' : 'gap-8 lg:gap-16'} min-h-[500px] transition-all duration-1000 ease-out ${
+                className={`flex flex-col lg:flex-row items-center ${feature.title === 'Silent Sleep Mode' ? 'gap-6 sm:gap-8 lg:gap-12' : 'gap-8 sm:gap-12 lg:gap-16'} min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] transition-all duration-1000 ease-out ${
                   (index % 2 === 1 && feature.title !== 'Silent Sleep Mode') ? 'lg:flex-row-reverse' : ''
                 } ${
                   visibleFeatures[index] 
@@ -121,12 +121,27 @@ export function ProductFeatures() {
                     ? 'opacity-100 translate-x-0 scale-100' 
                     : `opacity-0 scale-95 ${index % 2 === 1 ? 'translate-x-12' : '-translate-x-12'}`
                 }`}>
-                  <img 
-                    src={feature.image} 
-                    alt={feature.title}
-                    className={`w-full object-contain ${feature.title === 'Silent Sleep Mode' ? 'h-[32rem]' : 'h-96'}`}
-                    style={{ filter: 'drop-shadow(0 15px 35px rgba(0, 0, 0, 0.2))' }}
-                  />
+                  {visibleFeatures[index] ? (
+                    <img 
+                      src={feature.image} 
+                      alt={feature.title}
+                      className={`w-full max-w-full object-contain ${feature.title === 'Silent Sleep Mode' ? 'h-64 sm:h-80 md:h-96 lg:h-[32rem]' : 'h-48 sm:h-64 md:h-80 lg:h-96'}`}
+                      style={{ 
+                        filter: 'drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15))',
+                        maxHeight: '100%',
+                        height: 'auto',
+                        aspectRatio: 'auto'
+                      }}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div 
+                      className={`w-full max-w-full ${feature.title === 'Silent Sleep Mode' ? 'h-64 sm:h-80 md:h-96 lg:h-[32rem]' : 'h-48 sm:h-64 md:h-80 lg:h-96'} bg-gray-100 rounded-lg animate-pulse flex items-center justify-center`}
+                      style={{ filter: 'drop-shadow(0 8px 20px rgba(0, 0, 0, 0.1))' }}
+                    >
+                      <div className="text-gray-400 text-xs sm:text-sm">Loading...</div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Feature Content */}

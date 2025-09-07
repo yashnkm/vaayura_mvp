@@ -84,7 +84,17 @@ export const Footer = ({
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              <img src={logoImage} alt="Vaayura" className="h-10 filter brightness-0 invert mb-4" />
+              <img 
+                src={logoImage} 
+                alt="Vaayura" 
+                className="h-10 filter brightness-0 invert mb-4" 
+                style={{ 
+                  width: 'auto',
+                  height: '2.5rem',
+                  objectFit: 'contain'
+                }}
+                loading="lazy"
+              />
             </motion.div>
             <p className="text-white text-lg mb-6 font-montserrat">{description}</p>
             

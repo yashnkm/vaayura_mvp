@@ -46,7 +46,17 @@ function Header1() {
             <div className="container relative mx-auto min-h-20 flex gap-4 items-center justify-between">
                 <div className="flex justify-start">
                     <Link to="/">
-                        <img src={logoImage} alt="Vaayura" className="h-10" />
+                        <img 
+                            src={logoImage} 
+                            alt="Vaayura" 
+                            className="h-10" 
+                            style={{ 
+                                width: 'auto',
+                                height: '2.5rem',
+                                objectFit: 'contain'
+                            }}
+                            loading="lazy"
+                        />
                     </Link>
                 </div>
                 <div className="flex items-center justify-end gap-4 lg:flex hidden flex-1">
@@ -123,37 +133,58 @@ function Header1() {
                         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                     </Button>
                     {isOpen && (
-                        <div className="absolute top-20 border-t flex flex-col w-full right-0 bg-white shadow-lg py-4 container gap-8">
+                        <div className="absolute top-20 border-t flex flex-col w-full right-0 bg-white shadow-lg py-6 container gap-6 max-h-[70vh] overflow-y-auto">
                             {navigationItems.map((item) => (
-                                <div key={item.title}>
-                                    <div className="flex flex-col gap-2">
+                                <div key={item.title} className="border-b border-gray-100 pb-4 last:border-b-0">
+                                    <div className="flex flex-col gap-3">
                                         {item.href ? (
                                             <Link
                                                 to={item.href!}
-                                                className="flex justify-between items-center"
+                                                className="flex justify-between items-center py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors"
+                                                onClick={() => setOpen(false)}
                                             >
-                                                <span className="text-lg">{item.title}</span>
+                                                <span className="text-lg font-medium text-brand-grey-green">{item.title}</span>
                                                 <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
                                             </Link>
                                         ) : (
-                                            <p className="text-lg">{item.title}</p>
+                                            <p className="text-lg font-medium text-brand-grey-green px-3 py-2">{item.title}</p>
                                         )}
                                         {item.items &&
                                             item.items.map((subItem) => (
                                                 <Link
                                                     key={subItem.title}
                                                     to={subItem.href}
-                                                    className="flex justify-between items-center"
+                                                    className="flex justify-between items-center py-2 px-6 rounded-lg hover:bg-gray-50 transition-colors ml-3"
+                                                    onClick={() => setOpen(false)}
                                                 >
-                                                    <span className="text-muted-foreground">
+                                                    <span className="text-brand-dark-grey">
                                                         {subItem.title}
                                                     </span>
-                                                    <MoveRight className="w-4 h-4 stroke-1" />
+                                                    <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
                                                 </Link>
                                             ))}
                                     </div>
                                 </div>
                             ))}
+                            {/* Mobile-only links */}
+                            <div className="flex flex-col gap-3 pt-4 border-t border-gray-100">
+                                <Link
+                                    to="/bulk-order"
+                                    className="flex justify-between items-center py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors"
+                                    onClick={() => setOpen(false)}
+                                >
+                                    <span className="text-lg font-medium text-brand-grey-green">Corporate Queries</span>
+                                    <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
+                                </Link>
+                                <Link
+                                    to="/contact"
+                                    className="flex justify-between items-center py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors"
+                                    onClick={() => setOpen(false)}
+                                >
+                                    <span className="text-lg font-medium text-brand-grey-green">Contact</span>
+                                    <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
+                                </Link>
+                            </div>
                         </div>
                     )}
                 </div>

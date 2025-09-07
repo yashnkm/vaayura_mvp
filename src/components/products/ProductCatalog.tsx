@@ -58,12 +58,12 @@ export function ProductCatalog() {
     return (
       <section className="py-32 bg-white">
         <div className="container">
-          <div className="text-center space-y-4 mb-12 px-6">
+          <div className="text-left space-y-4 mb-12 px-6">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
-              Our <span className="text-brand-pastel-green">Products</span>
+              Our Products
             </h2>
-            <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full"></div>
-            <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat max-w-2xl mx-auto">
+            <div className="w-16 h-0.5 bg-brand-pastel-green rounded-full"></div>
+            <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat max-w-2xl">
               Discover our premium air purification solutions designed for every space and need.
             </p>
           </div>
@@ -75,13 +75,13 @@ export function ProductCatalog() {
   return (
     <section className="py-32 bg-white">
       <div className="container mx-auto">
-        {/* Section Header - matching homepage pattern */}
-        <div className="text-center space-y-4 mb-12 px-6">
+        {/* Section Header - left aligned pattern */}
+        <div className="text-left space-y-4 mb-12 px-6">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
-            Our <span className="text-brand-pastel-green">Products</span>
+            Our Products
           </h2>
-          <div className="w-16 h-0.5 bg-brand-pastel-green mx-auto rounded-full"></div>
-          <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat max-w-2xl mx-auto">
+          <div className="w-16 h-0.5 bg-brand-pastel-green rounded-full"></div>
+          <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat max-w-2xl">
             Discover our premium air purification solutions designed for every space and need.
           </p>
         </div>
@@ -122,6 +122,13 @@ export function ProductCatalog() {
                   src={product.images[0] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"}
                   alt={product.name}
                   className="w-full h-full aspect-square object-contain transition-all duration-700 group-hover:scale-110"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    aspectRatio: '1/1'
+                  }}
+                  loading="lazy"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement
                     target.src = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"

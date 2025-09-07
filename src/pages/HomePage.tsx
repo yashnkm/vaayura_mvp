@@ -14,9 +14,9 @@ export function HomePage() {
       <Header1 />
       <Hero3DSection />
       {/* About Us Section */}
-      <section className="py-16 px-6 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xl md:text-2xl text-brand-dark-grey font-montserrat leading-relaxed">
+      <section className="py-8 sm:py-12 lg:py-16 px-4 sm:px-6 bg-white">
+        <div className="max-w-4xl mx-auto text-left">
+          <p className="text-lg sm:text-xl md:text-2xl text-brand-dark-grey font-montserrat leading-relaxed">
             Breathe clean, live healthy. Vaayura's advanced air purification technology ensures your home has the cleanest air possible.
           </p>
         </div>

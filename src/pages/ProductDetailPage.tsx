@@ -8,6 +8,10 @@ import { ProductDetailSpecifications } from '@/components/product-detail/Product
 import { ProductShowcaseSection } from '@/components/homepage/ProductShowcaseSection';
 import { database } from '@/lib/supabase';
 
+// Simple in-memory cache for product data
+const productCache = new Map<string, { data: Product; timestamp: number }>();
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+
 // Define types locally to avoid import issues
 interface ProductFeature {
   title: string
@@ -49,6 +53,17 @@ export function ProductDetailPage() {
       try {
         setLoading(true);
         
+        // Check cache first
+        const cached = productCache.get(slug);
+        const now = Date.now();
+        
+        if (cached && (now - cached.timestamp) < CACHE_DURATION) {
+          // Use cached data if it's still fresh
+          setProduct(cached.data);
+          setLoading(false);
+          return;
+        }
+        
         // Try to fetch by slug first, fallback to ID
         let { data, error } = await database.products.getBySlug(slug);
         
@@ -68,6 +83,8 @@ export function ProductDetailPage() {
           return;
         }
 
+        // Cache the successful result
+        productCache.set(slug, { data, timestamp: now });
         setProduct(data);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch product');

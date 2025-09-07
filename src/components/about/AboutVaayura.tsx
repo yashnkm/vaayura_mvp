@@ -247,7 +247,7 @@ export const AboutVaayura = ({
             {/* Section Header */}
             <motion.div variants={fadeInUp} className="text-left space-y-6">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
-                The Problem We <span className="text-brand-pastel-green">Solve</span>
+                The Problem We Solve
               </h2>
               <div className="w-16 h-1 bg-brand-pastel-green rounded-full"></div>
               <p className="text-lg text-brand-dark-grey font-montserrat max-w-3xl leading-relaxed">
@@ -316,7 +316,7 @@ export const AboutVaayura = ({
             {/* Section Header */}
             <motion.div variants={fadeInUp} className="text-left space-y-6">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
-                Why Choose <span className="text-brand-pastel-green">Vaayura</span>?
+                Why Choose Vaayura?
               </h2>
               <div className="w-16 h-1 bg-brand-pastel-green rounded-full"></div>
             </motion.div>

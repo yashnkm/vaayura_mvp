@@ -82,12 +82,18 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
           
           {/* Left Visual - Clean Product Image */}
           <div className="flex justify-center lg:justify-start">
-            <div className="w-[500px] h-[500px] lg:w-[650px] lg:h-[650px]">
+            <div className="w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[650px] lg:h-[650px]">
               <img
                 src={imageSrc}
                 alt={product.name}
                 className="w-full h-full object-contain rounded-2xl"
-                style={{ filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3))' }}
+                style={{ 
+                  filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3))',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  aspectRatio: '1/1'
+                }}
                 loading="lazy"
                 decoding="async"
                 onError={handleImageError}
