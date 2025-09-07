@@ -88,7 +88,7 @@ export function CheckoutPage2() {
         id: product.id,
         name: product.name,
         price: product.price,
-        originalPrice: product.price * 1.25, // 25% markup as original price
+        originalPrice: Math.round(product.price * 1.25), // 25% markup as original price
         image: product.images[0] || '/src/assets/Productimages/stormfrontview.png',
         badge: product.name.toLowerCase().includes('storm') ? 'Best Seller' : 
                product.name.toLowerCase().includes('nest') ? 'Compact' : 'Popular'
@@ -135,8 +135,8 @@ export function CheckoutPage2() {
     
     fallbackProducts.forEach(fallback => {
       const existsInAdmin = adminRecommendations.some(admin => 
-        admin.name.toLowerCase().includes(fallback.name.toLowerCase().split(' ')[1]) || 
-        admin.id === fallback.id
+        admin.id === fallback.id ||
+        admin.name.toLowerCase().includes(fallback.name.toLowerCase())
       )
       if (!existsInAdmin) {
         combined.push(fallback)
@@ -341,8 +341,10 @@ export function CheckoutPage2() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          productId: checkoutItem.id,
-          quantity: quantity
+          items: cartItems,
+          customerData: customerData,
+          totalAmount: finalAmount,
+          coupon: appliedCoupon ? appliedCoupon.coupon : null
         })
       })
 
@@ -358,7 +360,7 @@ export function CheckoutPage2() {
         amount: orderData.razorpay_order.amount,
         currency: orderData.razorpay_order.currency,
         name: 'Vaayura',
-        description: `Payment for ${checkoutItem.name}`,
+        description: `Payment for ${cartItems.length} item(s)`,
         order_id: orderData.razorpay_order.id,
         handler: async function (response: any) {
           setShowConfirmation(true)
@@ -452,11 +454,6 @@ export function CheckoutPage2() {
                       </h3>
                       
                       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4">
-                        {adminProduct?.originalPrice && adminProduct.originalPrice > item.price && (
-                          <div className="text-sm text-gray-500">
-                            <span className="line-through">₹{adminProduct.originalPrice.toLocaleString()}</span>
-                          </div>
-                        )}
                         <div className="text-lg sm:text-xl font-semibold text-gray-900">
                           ₹{item.price.toLocaleString()}
                         </div>
@@ -799,6 +796,10 @@ export function CheckoutPage2() {
                 <div className="flex justify-between text-gray-700">
                   <span>Shipping</span>
                   <span className="text-green-600">Free</span>
+                </div>
+                <div className="flex justify-between text-gray-700">
+                  <span>GST (18%)</span>
+                  <span>₹{taxAmount.toLocaleString()}</span>
                 </div>
               </div>
 
