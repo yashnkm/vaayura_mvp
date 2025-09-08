@@ -18,16 +18,18 @@ export function Hero3DSection() {
     const smoothAnimation = () => {
       if (!isActive) return;
 
-      // Very smooth interpolation
-      const diff = targetProgressRef.current - currentProgressRef.current;
-      currentProgressRef.current += diff * 0.1; // Smooth factor
+      // Immediate response - no interpolation delay
+      currentProgressRef.current = targetProgressRef.current;
 
       // Update Lottie animation
       if (lottieRef.current) {
         const totalFrames = lottieRef.current.getDuration(true);
         if (totalFrames) {
-          // Calculate frame with high precision
-          const frame = currentProgressRef.current * (totalFrames - 1);
+          // Calculate frame with high precision (reversed, trimmed)
+          // Assuming 30fps, skip first and last 30 frames (1 second each)
+          const framesToSkip = 30;
+          const usableFrames = Math.max(totalFrames - (framesToSkip * 2), 1);
+          const frame = framesToSkip + ((1 - currentProgressRef.current) * usableFrames);
           
           // Update animation
           lottieRef.current.goToAndStop(frame, true);
@@ -82,7 +84,7 @@ export function Hero3DSection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-[400vh] bg-white">
+    <section ref={containerRef} className="relative h-[250vh] bg-white">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <div className="relative flex items-center justify-center w-full h-full">
           
@@ -161,18 +163,6 @@ export function Hero3DSection() {
             />
           </div>
 
-          {/* Scroll progress indicator - only shows after scroll starts */}
-          <div className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 transition-all duration-500 ${
-            scrollStarted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
-            <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-              <p className="text-sm font-subheading text-brand-grey-green">
-                {displayProgress < 0.05 ? 'Scroll to rotate ↓' : 
-                 displayProgress > 0.95 ? 'Complete! ✨' : 
-                 'Keep scrolling...'}
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
