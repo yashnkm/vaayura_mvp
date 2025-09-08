@@ -9,24 +9,37 @@ import nestSideImg from "@/assets/sections/products/product-images/nestsideview.
 export function ProductsShowcase() {
   const [stormImageIndex, setStormImageIndex] = useState(0)
   const [nestImageIndex, setNestImageIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
 
   const stormImages = [stormFrontImg, stormSideImg]
   const nestImages = [nestFrontImg, nestSideImg]
 
   const nextStormImage = () => {
+    if (isTransitioning) return
+    setIsTransitioning(true)
     setStormImageIndex((prev) => (prev + 1) % stormImages.length)
+    setTimeout(() => setIsTransitioning(false), 300)
   }
 
   const prevStormImage = () => {
+    if (isTransitioning) return
+    setIsTransitioning(true)
     setStormImageIndex((prev) => (prev - 1 + stormImages.length) % stormImages.length)
+    setTimeout(() => setIsTransitioning(false), 300)
   }
 
   const nextNestImage = () => {
+    if (isTransitioning) return
+    setIsTransitioning(true)
     setNestImageIndex((prev) => (prev + 1) % nestImages.length)
+    setTimeout(() => setIsTransitioning(false), 300)
   }
 
   const prevNestImage = () => {
+    if (isTransitioning) return
+    setIsTransitioning(true)
     setNestImageIndex((prev) => (prev - 1 + nestImages.length) % nestImages.length)
+    setTimeout(() => setIsTransitioning(false), 300)
   }
 
   return (
@@ -36,21 +49,18 @@ export function ProductsShowcase() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-end mb-8 sm:mb-12">
           
           {/* Storm Image */}
-          <div className="flex justify-center">
+          <div className="flex justify-center" style={{ transform: 'translateY(-20px)' }}>
             <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg group mx-auto">
-              <div className="aspect-square rounded-2xl sm:rounded-3xl overflow-hidden flex items-center justify-center bg-gray-50/30">
+              <div className="aspect-square flex items-center justify-center">
                 <img
                   src={stormImages[stormImageIndex]}
                   alt="Vaayura Storm"
-                  className={`max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105 ${
-                    stormImageIndex === 0 
-                      ? 'p-2 sm:p-3 md:p-4 lg:p-5' // Front-facing: less padding = bigger image
-                      : 'p-6 sm:p-8 md:p-10 lg:p-12' // Side view: more padding = smaller image
-                  }`}
+                  className="object-contain"
                   style={{ 
-                    filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08)) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.12))',
-                    maxHeight: stormImageIndex === 0 ? '95%' : '80%',
-                    maxWidth: stormImageIndex === 0 ? '95%' : '80%'
+                    width: stormImageIndex === 0 ? '85%' : '70%',
+                    height: stormImageIndex === 0 ? '85%' : '70%',
+                    transform: stormImageIndex === 1 ? 'translateY(15px)' : 'none',
+                    transition: 'width 0.3s ease, height 0.3s ease, transform 0.3s ease'
                   }}
                   loading="lazy"
                 />
@@ -90,19 +100,15 @@ export function ProductsShowcase() {
           {/* Nest Image */}
           <div className="flex justify-center mt-8 sm:mt-12 md:mt-16">
             <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg group mx-auto">
-              <div className="aspect-square rounded-2xl sm:rounded-3xl overflow-hidden flex items-center justify-center bg-gray-50/30">
+              <div className="aspect-square flex items-center justify-center">
                 <img
                   src={nestImages[nestImageIndex]}
                   alt="Vaayura Nest"
-                  className={`max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105 ${
-                    nestImageIndex === 0 
-                      ? 'p-2 sm:p-3 md:p-4 lg:p-5' // Front-facing: less padding = bigger image
-                      : 'p-6 sm:p-8 md:p-10 lg:p-12' // Side view: more padding = smaller image
-                  }`}
+                  className="object-contain"
                   style={{ 
-                    filter: nestImageIndex === 0 ? 'none' : 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08)) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.12))',
-                    maxHeight: nestImageIndex === 0 ? '95%' : '80%',
-                    maxWidth: nestImageIndex === 0 ? '95%' : '80%'
+                    width: nestImageIndex === 0 ? '85%' : '70%',
+                    height: nestImageIndex === 0 ? '85%' : '70%',
+                    transition: 'width 0.3s ease, height 0.3s ease'
                   }}
                   loading="lazy"
                 />

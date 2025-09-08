@@ -104,14 +104,36 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
     setCurrentImageIndex((prev) => (prev - 1 + productImages.length) % productImages.length);
   };
 
+  // Get dynamic dimensions based on product
+  const getDimensions = () => {
+    const productName = product.name.toLowerCase();
+    if (productName.includes('storm') || productName.includes('strom')) {
+      return [
+        { label: "Height", value: "447 mm" },
+        { label: "Width", value: "254 mm" },
+        { label: "Length", value: "254 mm" },
+        { label: "Weight", value: "4.65 kg" }
+      ];
+    } else if (productName.includes('nest')) {
+      return [
+        { label: "Height", value: "317 mm" },
+        { label: "Width", value: "213 mm" },
+        { label: "Length", value: "210 mm" },
+        { label: "Weight", value: "3.2 kg" }
+      ];
+    } else {
+      return [
+        { label: "Height", value: "1050 mm" },
+        { label: "Width", value: "220 mm" },
+        { label: "Length", value: "220 mm" },
+        { label: "Weight", value: "4.65 kg" }
+      ];
+    }
+  };
+
   // Detailed technical specifications for popup
   const detailedSpecs = [
-    { category: "Physical Dimensions", specs: [
-      { label: "Height", value: "1050 mm" },
-      { label: "Width", value: "220 mm" },
-      { label: "Length", value: "220 mm" },
-      { label: "Weight", value: "4.65 kg" }
-    ]},
+    { category: "Physical Dimensions", specs: getDimensions() },
     { category: "Performance", specs: [
       { label: "Room coverage", value: "81m² (according to POLAR)" },
       { label: "Sound level", value: "59.8 dB" },
@@ -161,19 +183,14 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
           </div>
 
           {/* Right side: Product Image Carousel */}
-          <div className="relative flex justify-center items-start">
+          <div className="relative flex justify-center items-center">
             <div className="relative w-96 h-[500px]">
               {/* Main Image Display */}
-              <div className="relative w-full h-full overflow-hidden rounded-xl">
+              <div className="relative w-full h-full">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentImageIndex}
                     className="w-full h-full flex items-center justify-center"
-                    style={{
-                      transform: productImages[currentImageIndex].alt === 'Storm Front View' 
-                        ? 'scale(10)' 
-                        : 'scale(1)'
-                    }}
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -50 }}
@@ -182,8 +199,14 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
                     <img 
                       src={productImages[currentImageIndex].src}
                       alt={productImages[currentImageIndex].alt}
-                      className="max-w-full max-h-full object-contain"
-                      style={{ filter: 'drop-shadow(0 15px 35px rgba(0, 0, 0, 0.2))' }}
+                      className="object-contain w-full h-full"
+                      style={{ 
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        transform: productImages[currentImageIndex].alt.includes('Front View')
+                          ? 'scale(1.5) translateY(-10px)' 
+                          : 'none'
+                      }}
                       onError={(e) => {
                         const target = e.target as HTMLImageElement
                         target.src = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
@@ -245,97 +268,56 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
             </div>
 
             {/* Inline Technical Specs Expansion */}
-            <AnimatePresence mode="wait">
-              {showPopup && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                  animate={{ height: "auto", opacity: 1, marginTop: 16 }}
-                  exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                  transition={{
-                    height: { ...exitTransition, duration: showPopup ? TRANSITION.duration : exitTransition.duration },
-                    opacity: { duration: showPopup ? TRANSITION.duration : exitTransition.duration * 0.5 },
-                    marginTop: { ...exitTransition, duration: showPopup ? TRANSITION.duration : exitTransition.duration }
-                  }}
-                  className="overflow-hidden"
-                  style={{ willChange: "height, opacity, margin-top" }}
-                >
-                  <motion.div
-                    initial={{ y: -20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -10, opacity: 0 }}
-                    transition={{ 
-                      y: { ...TRANSITION, delay: showPopup ? 0.1 : 0 },
-                      opacity: { duration: showPopup ? TRANSITION.duration : exitTransition.duration * 0.3 }
-                    }}
-                    className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden"
-                  >
-                    {/* Header */}
-                    <motion.div 
-                      className="bg-gray-50 p-6 border-b border-gray-200"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      <h2 className="text-xl font-bold text-[#36454F] font-montserrat">Technical Specifications</h2>
-                    </motion.div>
+            <div 
+              className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                showPopup ? 'max-h-screen opacity-100 mt-4' : 'max-h-0 opacity-0'
+              }`}
+            >
+              <div className="bg-white rounded-xl shadow-lg border border-gray-200">
+                {/* Header */}
+                <div className="bg-gray-50 p-6 border-b border-gray-200">
+                  <h2 className="text-xl font-bold text-[#36454F] font-montserrat">Technical Specifications</h2>
+                </div>
 
-                    {/* Content */}
-                    <div className="p-6 space-y-8">
-                      {/* Grid layout for sections */}
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        {detailedSpecs.map((section, sectionIndex) => (
-                          <motion.div 
-                            key={sectionIndex}
-                            className="space-y-4"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ 
-                              ...TRANSITION, 
-                              delay: 0.3 + (sectionIndex * 0.1) 
-                            }}
-                          >
-                            <h3 className="text-lg font-semibold text-[#36454F] border-b pb-2 font-montserrat">
-                              {section.category}
-                            </h3>
-                            <div className="overflow-x-auto">
-                              <table className="w-full">
-                                <thead>
-                                  <tr className="border-b border-gray-200">
-                                    <th className="text-left py-2 px-3 font-semibold text-gray-700 text-sm font-montserrat">Parameter</th>
-                                    <th className="text-left py-2 px-3 font-semibold text-gray-700 text-sm font-montserrat">Value</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {section.specs.map((spec, specIndex) => (
-                                    <motion.tr 
-                                      key={specIndex}
-                                      className="border-b border-gray-100 hover:bg-gray-50"
-                                      initial={{ opacity: 0, x: -10 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ 
-                                        ...TRANSITION,
-                                        delay: 0.4 + (sectionIndex * 0.1) + (specIndex * 0.02)
-                                      }}
-                                      whileHover={{ 
-                                        backgroundColor: "rgb(249 250 251)", 
-                                        transition: { duration: 0.15 } 
-                                      }}
-                                    >
-                                      <td className="py-2 px-3 text-gray-600 text-sm font-montserrat">{spec.label}</td>
-                                      <td className="py-2 px-3 text-[#36454F] font-medium text-sm font-montserrat">{spec.value}</td>
-                                    </motion.tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
-                          </motion.div>
-                        ))}
+                {/* Content */}
+                <div className="p-6 space-y-8">
+                  {/* Grid layout for sections */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {detailedSpecs.map((section, sectionIndex) => (
+                      <div 
+                        key={sectionIndex}
+                        className="space-y-4"
+                      >
+                        <h3 className="text-lg font-semibold text-[#36454F] border-b pb-2 font-montserrat">
+                          {section.category}
+                        </h3>
+                        <div className="overflow-x-auto">
+                          <table className="w-full">
+                            <thead>
+                              <tr className="border-b border-gray-200">
+                                <th className="text-left py-2 px-3 font-semibold text-gray-700 text-sm font-montserrat">Parameter</th>
+                                <th className="text-left py-2 px-3 font-semibold text-gray-700 text-sm font-montserrat">Value</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {section.specs.map((spec, specIndex) => (
+                                <tr 
+                                  key={specIndex}
+                                  className="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200"
+                                >
+                                  <td className="py-2 px-3 text-gray-600 text-sm font-montserrat">{spec.label}</td>
+                                  <td className="py-2 px-3 text-[#36454F] font-medium text-sm font-montserrat">{spec.value}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

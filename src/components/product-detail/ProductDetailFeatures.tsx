@@ -6,7 +6,8 @@ import smartTechImg from "@/assets/sections/products/features/int_sensor.jpg";
 import smartAutoImg from "@/assets/sections/homepage/specs/gg v1.png";
 import advancedFiltrationImg from "@/assets/Advance filter homepage/advance hepa filtration.jpg";
 import stormImg from "@/assets/sections/shared/products/storm.png";
-import aromaImg from "@/assets/sections/products/features/aroma.jpg";
+import aromaImg from "@/assets/Advance filter homepage/Built-in aromatherapy.png";
+import ambientImg from "@/assets/Advance filter homepage/Generated.png";
 import silentSleepModeImg from "@/assets/Advance filter homepage/Silentsleepmode.jpg";
 
 // Define types locally to avoid import issues
@@ -103,7 +104,7 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
       return smartAutoImg; // Use our new Vaayura air purifier image
     }
     if (title.toLowerCase().includes('ambient') || title.toLowerCase().includes('light') || title.toLowerCase().includes('display')) {
-      return "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&auto=format&fit=crop&q=60"; // Nature with light
+      return ambientImg; // Use the green ambient lighting image
     }
     if (title.toLowerCase().includes('aroma') || title.toLowerCase().includes('essential')) {
       return aromaImg; // Use the beautiful aromatherapy diffuser image
@@ -144,13 +145,22 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
           <img 
             src={featureImage} 
             alt={feature.title}
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-90 transition-all duration-300 group-hover:blur-sm"
+            className="absolute inset-0 w-full h-full opacity-90 transition-all duration-300 group-hover:blur-sm"
             style={{
               objectFit: 'cover',
-              objectPosition: 'center',
+              objectPosition: feature.title.toLowerCase().includes('aroma') || feature.title.toLowerCase().includes('essential') 
+                ? 'center 60%' 
+                : feature.title.toLowerCase().includes('ambient') || feature.title.toLowerCase().includes('light') || feature.title.toLowerCase().includes('display')
+                ? 'center 40%'
+                : 'center',
               width: '100%',
               height: '100%',
-              aspectRatio: 'auto'
+              aspectRatio: 'auto',
+              transform: feature.title.toLowerCase().includes('aroma') || feature.title.toLowerCase().includes('essential') 
+                ? 'scale(1.2)' 
+                : feature.title.toLowerCase().includes('ambient') || feature.title.toLowerCase().includes('light') || feature.title.toLowerCase().includes('display')
+                ? 'scale(1.1)'
+                : 'none'
             }}
             loading="lazy"
           />
