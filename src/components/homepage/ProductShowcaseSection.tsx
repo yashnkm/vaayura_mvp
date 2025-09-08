@@ -2,17 +2,15 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import { Button } from "@/components/ui/button"
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import stormImg from "@/assets/storm.png"
-import nestImg from "@/assets/nest.png"
-import stormFrontView from "@/assets/Productimages/stormfrontview.png"
-import stormSideView from "@/assets/Productimages/stormsideview.png"
-import nestFrontView from "@/assets/Productimages/nestfrontview.png"
-import nestSideView from "@/assets/Productimages/nestsideview.png"
-import backgroundImg from "@/assets/background.png"
-import backgroundimage2 from "@/assets/backgroundimage2.png"
-import products1 from "@/assets/PRODUCTS1.png"
-import products2 from "@/assets/PRODUCTS2.png"
-import products3 from "@/assets/PRODUCTS3.png"
+import stormImg from "@/assets/sections/shared/products/storm.png"
+import nestImg from "@/assets/sections/shared/products/nest.png"
+import stormFrontView from "@/assets/sections/products/product-images/stormfrontview.png"
+import stormSideView from "@/assets/sections/products/product-images/stormsideview.png"
+import nestFrontView from "@/assets/sections/products/product-images/nestfrontview.png"
+import nestSideView from "@/assets/sections/products/product-images/nestsideview.png"
+import productImage1 from "@/assets/product images/pexels-falling4utah-2724748.jpg"
+import productImage2 from "@/assets/product images/pexels-fotoaibe-1743227.jpg"
+import productImage3 from "@/assets/product images/pexels-pixabay-259962.jpg"
 
 const models = [
   { id: 'storm', name: 'Storm', price: 15990, originalPrice: 21990, image: stormImg },
@@ -20,11 +18,9 @@ const models = [
 ]
 
 const heroBackgrounds = [
-  { id: 'products1', name: 'Office Space', image: products1 },
-  { id: 'products2', name: 'Living Room', image: products2 },
-  { id: 'products3', name: 'Modern Living', image: products3 },
-  { id: 'background', name: 'Background', image: backgroundImg },
-  { id: 'background2', name: 'Background 2', image: backgroundimage2 }
+  { id: 'product1', name: 'Modern Interior 1', image: productImage1 },
+  { id: 'product2', name: 'Modern Interior 2', image: productImage2 },
+  { id: 'product3', name: 'Modern Interior 3', image: productImage3 }
 ]
 
 interface ProductShowcaseSectionProps {
@@ -198,7 +194,7 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-lg lg:text-xl text-gray-300 font-montserrat font-light tracking-wider"
+                className="text-lg lg:text-xl text-gray-300 font-subheading font-light tracking-wider"
               >
                 PURE AIR EVERYWHERE
               </motion.p>
@@ -222,11 +218,11 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
                 <h4 className="text-[#36454F] font-sora font-semibold text-lg mb-3">Storm</h4>
                 <div className="flex gap-3">
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
-                    <div className="text-gray-600 text-xs font-montserrat font-medium">Area Coverage</div>
+                    <div className="text-gray-600 text-xs font-subheading font-medium">Area Coverage</div>
                     <div className="text-green-800 font-sora font-bold text-sm">1000 sq. ft.</div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
-                    <div className="text-gray-600 text-xs font-montserrat font-medium">CADR</div>
+                    <div className="text-gray-600 text-xs font-subheading font-medium">CADR</div>
                     <div className="text-green-800 font-sora font-bold text-sm">600m³/h</div>
                   </div>
                 </div>
@@ -270,11 +266,11 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
                 <h4 className="text-[#36454F] font-sora font-semibold text-lg mb-3">Nest</h4>
                 <div className="flex gap-3">
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
-                    <div className="text-gray-600 text-xs font-montserrat font-medium">Area Coverage</div>
+                    <div className="text-gray-600 text-xs font-subheading font-medium">Area Coverage</div>
                     <div className="text-green-800 font-sora font-bold text-sm">600 sq. ft.</div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
-                    <div className="text-gray-600 text-xs font-montserrat font-medium">CADR</div>
+                    <div className="text-gray-600 text-xs font-subheading font-medium">CADR</div>
                     <div className="text-green-800 font-sora font-bold text-sm">450m³/h</div>
                   </div>
                 </div>
@@ -302,11 +298,11 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
                     <h4 className="text-[#36454F] font-sora font-semibold text-2xl mb-4">Storm</h4>
                     <div className="flex gap-4 justify-center">
                       <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
-                        <div className="text-gray-600 text-sm font-montserrat font-medium">Area Coverage</div>
+                        <div className="text-gray-600 text-sm font-subheading font-medium">Area Coverage</div>
                         <div className="text-green-800 font-sora font-bold text-lg">1000 sq. ft.</div>
                       </div>
                       <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
-                        <div className="text-gray-600 text-sm font-montserrat font-medium">CADR</div>
+                        <div className="text-gray-600 text-sm font-subheading font-medium">CADR</div>
                         <div className="text-green-800 font-sora font-bold text-lg">600m³/h</div>
                       </div>
                     </div>
@@ -334,11 +330,11 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
                     <h4 className="text-[#36454F] font-sora font-semibold text-2xl mb-2 -mt-18">Nest</h4>
                     <div className="flex gap-4 justify-center mt-8">
                       <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
-                        <div className="text-gray-600 text-sm font-montserrat font-medium">Area Coverage</div>
+                        <div className="text-gray-600 text-sm font-subheading font-medium">Area Coverage</div>
                         <div className="text-green-800 font-sora font-bold text-lg">600 sq. ft.</div>
                       </div>
                       <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
-                        <div className="text-gray-600 text-sm font-montserrat font-medium">CADR</div>
+                        <div className="text-gray-600 text-sm font-subheading font-medium">CADR</div>
                         <div className="text-green-800 font-sora font-bold text-lg">450m³/h</div>
                       </div>
                     </div>

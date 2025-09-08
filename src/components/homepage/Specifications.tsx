@@ -1,5 +1,5 @@
-import specifications9933 from "@/assets/storm.png";
-import ggV1 from "@/assets/gg v1.png";
+import specifications9933 from "@/assets/sections/shared/products/storm.png";
+import ggV1 from "@/assets/sections/homepage/specs/gg v1.png";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 

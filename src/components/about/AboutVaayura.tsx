@@ -3,9 +3,9 @@ import { ProductClients } from "@/components/products/ProductClients";
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { TreePine, Target } from 'lucide-react';
-import heroImage from "@/assets/main.jpg";
-import productImage from "@/assets/background.png";
-import problemImage from "@/assets/problem_img.png";
+import heroImage from "@/assets/sections/shared/backgrounds/main.jpg";
+import productImage from "@/assets/sections/shared/backgrounds/background.png";
+import problemImage from "@/assets/sections/about/problem_img.png";
 
 interface AboutVaayuraProps {
   title?: string;
@@ -205,34 +205,6 @@ export const AboutVaayura = ({
         </div>
       </section>
 
-      {/* Our Philosophy Section */}
-      <motion.section 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, threshold: 0.3, margin: "-100px" }}
-        variants={staggerContainer}
-        className="py-32 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <motion.div variants={fadeInUp} className="text-left mb-12">
-            <h2 className="text-4xl md:text-5xl font-semibold font-sora text-brand-grey-green mb-6">Our Philosophy</h2>
-            <div className="w-16 h-1 bg-brand-pastel-green rounded-full mb-8"></div>
-            <div className="max-w-4xl space-y-8">
-              <motion.div variants={fadeInUp} className="flex items-start gap-6 text-left">
-                <span className="text-brand-pastel-green text-2xl">•</span>
-                <p className="text-xl text-brand-dark-grey font-montserrat leading-relaxed">Clean air should be a right, not a luxury.</p>
-              </motion.div>
-              <motion.div variants={fadeInUp} className="flex items-start gap-6 text-left">
-                <span className="text-brand-pastel-green text-2xl">•</span>
-                <p className="text-xl text-brand-dark-grey font-montserrat leading-relaxed">Performance and beauty can coexist.</p>
-              </motion.div>
-              <motion.div variants={fadeInUp} className="flex items-start gap-6 text-left">
-                <span className="text-brand-pastel-green text-2xl">•</span>
-                <p className="text-xl text-brand-dark-grey font-montserrat leading-relaxed">Technology should work silently in the background, while you live fully in the foreground.</p>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
 
       {/* The Problem We Solve Section */}
       <motion.section 
@@ -303,6 +275,125 @@ export const AboutVaayura = ({
         </div>
       </motion.section>
 
+      {/* Why Clean Air Matters Section */}
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, threshold: 0.3, margin: "-100px" }}
+        variants={staggerContainer}
+        className="w-full py-16 lg:py-24 bg-gray-50">
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="flex flex-col gap-12">
+            
+            {/* Section Header */}
+            <motion.div variants={fadeInUp} className="text-left space-y-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
+                Why Clean Air Matters
+              </h2>
+              <div className="w-16 h-1 bg-brand-pastel-green rounded-full"></div>
+              <p className="text-lg text-brand-dark-grey font-subheading max-w-3xl leading-relaxed">
+                "Polluted air: the silent killer in Indian cities."
+              </p>
+            </motion.div>
+
+            {/* Health Impact Content */}
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16">
+              {/* Health Impact Visual */}
+              <motion.div variants={fadeInRight} className="flex-1 relative max-w-lg">
+                <div className="aspect-[4/3] w-full bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-8 flex flex-col justify-center">
+                  {/* Symptoms Grid */}
+                  <div className="space-y-6">
+                    <div className="text-center mb-6">
+                      <h4 className="text-xl font-sora font-bold text-red-700 mb-2">SYMPTOMS OF AIR POLLUTION</h4>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 text-center">
+                      <div className="bg-white/70 rounded-lg p-3">
+                        <p className="text-sm font-medium text-gray-800">Difficulty in Breathing</p>
+                      </div>
+                      <div className="bg-white/70 rounded-lg p-3">
+                        <p className="text-sm font-medium text-gray-800">Fatigue</p>
+                      </div>
+                      <div className="bg-white/70 rounded-lg p-3">
+                        <p className="text-sm font-medium text-gray-800">Regular Sneezing</p>
+                      </div>
+                      <div className="bg-white/70 rounded-lg p-3">
+                        <p className="text-sm font-medium text-gray-800">Asthma</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Health Impact Content */}
+              <motion.div variants={fadeInLeft} className="flex-1 space-y-6">
+                {/* Health Number */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-brand-pastel-green flex items-center justify-center">
+                    <span className="text-brand-grey-green font-bold text-lg">02</span>
+                  </div>
+                  <div className="h-px bg-brand-pastel-green/30 flex-1" />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-2xl md:text-3xl font-sora text-brand-grey-green leading-tight">
+                  The Health Impact
+                </h3>
+
+                {/* Description */}
+                <p className="text-brand-dark-grey font-subheading leading-relaxed text-lg">
+                  WHO estimates that 7 million people die every year from exposure to fine particles in polluted air that lead to diseases such as stroke, heart disease, lung cancer, chronic obstructive pulmonary diseases and respiratory infections, including pneumonia.
+                </p>
+
+                {/* Vulnerable Groups */}
+                <div className="space-y-4">
+                  <h4 className="text-lg font-sora font-semibold text-brand-grey-green mb-3">Most Vulnerable Groups</h4>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-white rounded-lg p-4 border border-red-100">
+                      <h5 className="font-semibold text-red-700 mb-1">Children</h5>
+                      <p className="text-sm text-gray-700">May develop lung issues in early stage of development</p>
+                    </div>
+                    
+                    <div className="bg-white rounded-lg p-4 border border-red-100">
+                      <h5 className="font-semibold text-red-700 mb-1">Pregnant Women</h5>
+                      <p className="text-sm text-gray-700">Increased risk of low birth weight & preterm birth</p>
+                    </div>
+                    
+                    <div className="bg-white rounded-lg p-4 border border-red-100">
+                      <h5 className="font-semibold text-red-700 mb-1">Elderly</h5>
+                      <p className="text-sm text-gray-700">Increased risk of poor health</p>
+                    </div>
+                    
+                    <div className="bg-white rounded-lg p-4 border border-red-100">
+                      <h5 className="font-semibold text-red-700 mb-1">Pre-existing Conditions</h5>
+                      <p className="text-sm text-gray-700">Increased risk of complications</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* WHO Recommendation */}
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <p className="text-sm font-medium text-green-800">
+                    WHO Recommendation: Use of air purifiers in India to minimize indoor air pollution.
+                  </p>
+                </div>
+
+                {/* At Risk Groups */}
+                <div className="space-y-2">
+                  <div className="text-sm font-medium font-sora text-brand-grey-green">
+                    High Risk Groups
+                  </div>
+                  <div className="text-brand-dark-grey font-subheading text-sm">
+                    City Residents • Construction Areas • Vehicular Emissions • Crop Burning Zones • Pet Allergies
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
       {/* Why Choose Vaayura Section */}
       <motion.section 
         initial="hidden"
@@ -329,7 +420,7 @@ export const AboutVaayura = ({
                   <img 
                     src={productImage} 
                     alt="Vaayura air purifier - premium design and technology"
-                    className="w-full h-full object-contain rounded-xl"
+                    className="w-full h-full object-cover rounded-xl"
                   />
                 </div>
               </motion.div>
@@ -339,7 +430,7 @@ export const AboutVaayura = ({
                 {/* Features Number */}
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-brand-pastel-green flex items-center justify-center">
-                    <span className="text-brand-grey-green font-bold text-lg">02</span>
+                    <span className="text-brand-grey-green font-bold text-lg">03</span>
                   </div>
                   <div className="h-px bg-brand-pastel-green/30 flex-1" />
                 </div>

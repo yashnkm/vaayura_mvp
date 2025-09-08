@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Header1 } from "@/components/ui/header"
 import ScrollExpandMedia from "@/components/ui/scroll-expand-media"
-import mainImage from "@/assets/background.png"
-import backgroundImage from "@/assets/main.jpg"
+import mainImage from "@/assets/sections/shared/backgrounds/background.png"
+import backgroundImage from "@/assets/sections/shared/backgrounds/main.jpg"
 
 const HeroContent = ({ showContent }: { showContent?: boolean }) => {
   return (

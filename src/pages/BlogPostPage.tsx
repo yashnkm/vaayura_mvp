@@ -4,8 +4,8 @@ import { Layout } from '@/components/layout/Layout'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft } from 'lucide-react'
-import blog1Img from '@/assets/blog1.png'
-import blog2Img from '@/assets/blog2.png'
+import blog1Img from '@/assets/sections/blog/blog1.png'
+import blog2Img from '@/assets/sections/blog/blog2.png'
 
 // Blog data based on available documents
 const blogPosts = [

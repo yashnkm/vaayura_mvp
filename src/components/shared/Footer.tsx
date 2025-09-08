@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import logoImage from "@/assets/logo_2.png";
+import logoImage from "@/assets/sections/shared/logos/logo_2.png";
 
 interface FooterProps {
   sections?: Array<{
@@ -96,7 +96,7 @@ export const Footer = ({
                 loading="lazy"
               />
             </motion.div>
-            <p className="text-white text-lg mb-6 font-montserrat">{description}</p>
+            <p className="text-white text-lg mb-6 font-subheading">{description}</p>
             
             {/* Social Media Icons */}
             <div className="flex space-x-4">

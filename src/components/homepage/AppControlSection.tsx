@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Check } from 'lucide-react'
-import appHomescreenImg from '@/assets/Mobile app/phone_ss.jpg'
+import appHomescreenImg from '@/assets/sections/homepage/features/screenshot_new.png'
 
 const features = [
   {
@@ -113,7 +113,7 @@ export function AppControlSection() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold mb-4 sm:mb-6 text-[#36454F]">
             Breathe <span className="text-brand-pastel-green">Smart</span>
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 font-montserrat max-w-2xl">
+          <p className="text-lg sm:text-xl text-gray-600 font-subheading max-w-2xl">
             Purify air from the Vaayura app
           </p>
         </div>
@@ -243,12 +243,11 @@ export function AppControlSection() {
                           <img 
                             src={appHomescreenImg} 
                             alt="Vaayura App Homescreen" 
-                            className="w-full h-full object-cover object-center rounded-[2.4rem]"
+                            className="w-full h-full rounded-[2.4rem]"
                             style={{ 
-                              objectPosition: 'center center',
                               width: '100%',
                               height: '100%',
-                              objectFit: 'cover'
+                              objectFit: 'fill'
                             }}
                             loading="lazy"
                           />

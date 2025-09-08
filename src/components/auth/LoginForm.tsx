@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Link } from "react-router-dom"
-import logoImage from "@/assets/logo_2.png"
-import backgroundImage from "@/assets/background.png"
+import logoImage from "@/assets/sections/shared/logos/logo_2.png"
+import backgroundImage from "@/assets/sections/shared/backgrounds/background.png"
 
 export function LoginForm({
   className,

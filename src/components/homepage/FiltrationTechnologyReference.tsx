@@ -2,10 +2,10 @@ import React from 'react'
 import { motion } from 'framer-motion'
 
 // Import filter images
-import primaryFilter from "@/assets/primary.png"
-import antibacterialFilter from "@/assets/anit bacterial.png"
-import hepaFilter from "@/assets/true hepa.png"
-import honeycombFilter from "@/assets/honeycomb.png"
+import primaryFilter from "@/assets/sections/homepage/filtration/primary.png"
+import antibacterialFilter from "@/assets/sections/homepage/filtration/anit bacterial.png"
+import hepaFilter from "@/assets/sections/homepage/filtration/true hepa.png"
+import honeycombFilter from "@/assets/sections/homepage/filtration/honeycomb.png"
 
 
 export function FiltrationTechnologyReference() {

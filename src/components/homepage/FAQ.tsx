@@ -82,7 +82,7 @@ export function FAQ() {
             Everything You Need to Know About Our{' '}
             <span className="text-[#36454F]">Purifiers</span>
           </h3>
-          <p className="text-gray-700 font-montserrat text-lg leading-relaxed">
+          <p className="text-gray-700 font-subheading text-lg leading-relaxed">
             Have questions about our air purifiers? We've got answers. 
             Find everything you need to know about performance, maintenance, 
             and features.
@@ -140,7 +140,7 @@ export function FAQ() {
                       animate={{ y: 0, opacity: 1 }}
                       exit={{ y: -10, opacity: 0 }}
                       transition={{ duration: 0.2, delay: 0.1 }}
-                      className="text-gray-700 font-montserrat mt-3 text-base leading-relaxed"
+                      className="text-gray-700 font-subheading mt-3 text-base leading-relaxed"
                     >
                       {faq.answer}
                     </motion.p>

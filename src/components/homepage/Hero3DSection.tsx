@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Lottie from 'lottie-react';
-import animationData from '@/assets/video/animiation2.mp4.lottie.json';
-import heroBackground from '@/assets/productHeroSection.jpg';
+import animationData from '@/assets/video/lottie_new_video.json';
+import heroBackground from '@/assets/sections/homepage/hero/productHeroSection.jpg';
 
 export function Hero3DSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -117,13 +117,13 @@ export function Hero3DSection() {
                 Life Begins with<br className="hidden sm:block" />
                 <span className="sm:hidden"> </span>Clean Air.
               </h1>
-              <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-green-100/90 leading-relaxed font-montserrat">
+              <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-green-100/90 leading-relaxed font-subheading">
                 <p className="text-center px-2 sm:px-0">Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
               </div>
               
               {/* Scroll hint */}
               <div className="mt-8 sm:mt-12">
-                <span className="text-sm sm:text-base text-white/70 font-montserrat">Scroll to explore</span>
+                <span className="text-sm sm:text-base text-white/70 font-subheading">Scroll to explore</span>
               </div>
             </div>
           </div>
@@ -135,7 +135,7 @@ export function Hero3DSection() {
             <div className="w-96 h-96 bg-brand-pastel-green/10 rounded-full"></div>
           </div>
           
-          {/* 3D Lottie Animation */}
+          {/* 3D Lottie Animation - NEW VIDEO */}
           <div className={`absolute inset-0 z-15 flex items-center justify-center transition-all duration-700 ${
             scrollStarted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
           }`}>
@@ -146,12 +146,12 @@ export function Hero3DSection() {
               autoplay={false}
               className="w-full h-full max-w-full max-h-full"
               style={{
-                width: 'min(90vw, 100%)',
-                height: 'min(50vh, 100%)',
-                maxWidth: '1200px',
-                maxHeight: '800px',
-                minWidth: '280px',
-                minHeight: '200px',
+                width: 'min(95vw, 100%)',
+                height: 'min(70vh, 100%)',
+                maxWidth: '1600px',
+                maxHeight: '1000px',
+                minWidth: '320px',
+                minHeight: '240px',
                 aspectRatio: '16/9'
               }}
               rendererSettings={{
@@ -166,7 +166,7 @@ export function Hero3DSection() {
             scrollStarted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
             <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-              <p className="text-sm font-montserrat text-brand-grey-green">
+              <p className="text-sm font-subheading text-brand-grey-green">
                 {displayProgress < 0.05 ? 'Scroll to rotate ↓' : 
                  displayProgress > 0.95 ? 'Complete! ✨' : 
                  'Keep scrolling...'}

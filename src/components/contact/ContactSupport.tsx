@@ -2,8 +2,8 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import stormImg from "@/assets/storm.png"
-import nestImg from "@/assets/nest.png"
+import stormImg from "@/assets/sections/shared/products/storm.png"
+import nestImg from "@/assets/sections/shared/products/nest.png"
 
 export function ContactSupport() {
   const navigate = useNavigate()

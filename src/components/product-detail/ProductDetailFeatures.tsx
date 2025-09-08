@@ -1,12 +1,12 @@
 import { Shield, Zap, Leaf, Moon, Sparkles, Wifi, Wind, Heart, Timer, Volume2 } from "lucide-react";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
-import natureImg from "@/assets/main.jpg";
-import filtrationImg from "@/assets/4 layer filter.jpg";
-import smartTechImg from "@/assets/int_sensor.jpg";
-import smartAutoImg from "@/assets/gg v1.png";
+import natureImg from "@/assets/sections/shared/backgrounds/main.jpg";
+import filtrationImg from "@/assets/sections/homepage/filtration/4 layer filter.jpg";
+import smartTechImg from "@/assets/sections/products/features/int_sensor.jpg";
+import smartAutoImg from "@/assets/sections/homepage/specs/gg v1.png";
 import advancedFiltrationImg from "@/assets/Advance filter homepage/advance hepa filtration.jpg";
-import stormImg from "@/assets/storm.png";
-import aromaImg from "@/assets/aroma.jpg";
+import stormImg from "@/assets/sections/shared/products/storm.png";
+import aromaImg from "@/assets/sections/products/features/aroma.jpg";
 import silentSleepModeImg from "@/assets/Advance filter homepage/Silentsleepmode.jpg";
 
 // Define types locally to avoid import issues
@@ -180,7 +180,7 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold text-[#36454F] leading-tight mb-4 sm:mb-6">
               Advanced Features
             </h2>
-            <p className="text-base sm:text-lg text-brand-dark-grey font-montserrat max-w-3xl leading-relaxed">
+            <p className="text-base sm:text-lg text-brand-dark-grey font-subheading max-w-3xl leading-relaxed">
               Every feature in {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`} is engineered to provide you with the cleanest, healthiest air while maintaining 
               the perfect balance of performance and tranquility.
             </p>

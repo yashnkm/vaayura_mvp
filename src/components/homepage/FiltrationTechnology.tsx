@@ -1,4 +1,4 @@
-import fullwidthImage from "@/assets/fullwidth2.png";
+import fullwidthImage from "@/assets/sections/homepage/filtration/fullwidth2.png";
 
 export function FiltrationTechnology() {
   return (

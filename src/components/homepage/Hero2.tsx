@@ -2,14 +2,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import heroBackground from "@/assets/hero2background.jpg"
-import product1 from "@/assets/product_hero.png"
+import heroBackground from "@/assets/sections/homepage/hero/hero2background.jpg"
+import product1 from "@/assets/sections/homepage/hero/product_hero.png"
 import product2 from "@/ref_images/product1.png"
 import product3 from "@/ref_images/product2.jpg"
-import ambientLight from "@/assets/Ambiend light.jpg"
-import aromaTep from "@/assets/aroma_tep.jpg"
-import intSensor from "@/assets/int_sensor.jpg"
-import realtimeAQI from "@/assets/realtime AQI.jpg"
+import ambientLight from "@/assets/sections/homepage/features/Ambiend light.jpg"
+import aromaTep from "@/assets/sections/products/features/aroma_tep.jpg"
+import intSensor from "@/assets/sections/products/features/int_sensor.jpg"
+import realtimeAQI from "@/assets/sections/products/features/realtime AQI.jpg"
 
 const ProductCarouselColumn = (props: {
   className?: string;

@@ -12,7 +12,7 @@ import {
 import { Menu, MoveRight, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logoImage from "@/assets/logo_2.png";
+import logoImage from "@/assets/sections/shared/logos/logo_2.png";
 
 function Header1() {
     const navigationItems = [

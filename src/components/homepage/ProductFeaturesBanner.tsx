@@ -24,7 +24,7 @@ const FeatureItem = memo(({ feature, index }: { feature: Feature; index: number 
         </div>
       </div>
       <h3 className="mb-2 font-sora font-semibold text-brand-grey-green">{feature.title}</h3>
-      <p className="text-sm text-brand-dark-grey/70 font-montserrat leading-relaxed">
+      <p className="text-sm text-brand-dark-grey/70 font-subheading leading-relaxed">
         {feature.description}
       </p>
     </div>

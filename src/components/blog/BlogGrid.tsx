@@ -1,8 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Link } from 'react-router-dom'
-import blog1Img from '@/assets/blog1.png'
-import blog2Img from '@/assets/blog2.png'
+import blog1Img from '@/assets/sections/blog/blog1.png'
+import blog2Img from '@/assets/sections/blog/blog2.png'
 
 // Blog data based on available documents
 const blogPosts = [

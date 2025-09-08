@@ -1,12 +1,12 @@
 // Import asset images
 import React, { useState, useEffect, useRef } from "react";
-import fourLayerFilterImg from "@/assets/hepa_filtration_new.png";
-import intSensorImg from "@/assets/Adobe_Express_-_file_1.png";
-import realtimeAQIImg from "@/assets/realtime AQI.jpg";
-import ambientLightImg from "@/assets/ambient_light_new.png";
-import aromaTepImg from "@/assets/aromatherapy_new.png";
-import productHeroImg from "@/assets/product_hero.png";
-import silentSleepModeImg from "@/assets/Adobe Express - file.png";
+import fourLayerFilterImg from "@/assets/sections/homepage/filtration/hepa_filtration_new.png";
+import intSensorImg from "@/assets/sections/products/features/Adobe_Express_-_file_1.png";
+import realtimeAQIImg from "@/assets/sections/products/features/realtime AQI.jpg";
+import ambientLightImg from "@/assets/sections/homepage/features/ambient_light_new.png";
+import aromaTepImg from "@/assets/sections/products/features/aromatherapy_new.png";
+import productHeroImg from "@/assets/sections/homepage/hero/product_hero.png";
+import silentSleepModeImg from "@/assets/sections/products/features/Adobe Express - file.png";
 import { ArrowRight } from "lucide-react";
 
 interface Feature {
@@ -116,7 +116,7 @@ export function ProductFeatures() {
                 }}
               >
                 {/* Feature Image */}
-                <div className={`${feature.title === 'Silent Sleep Mode' ? 'flex-none w-full max-w-2xl -ml-24' : 'flex-1 max-w-lg'} relative transition-all duration-1000 ease-out ${
+                <div className={`${feature.title === 'Silent Sleep Mode' ? 'flex-none w-full max-w-2xl' : 'flex-1 max-w-lg'} relative transition-all duration-1000 ease-out p-4 sm:p-6 lg:p-8 ${
                   visibleFeatures[index] 
                     ? 'opacity-100 translate-x-0 scale-100' 
                     : `opacity-0 scale-95 ${index % 2 === 1 ? 'translate-x-12' : '-translate-x-12'}`
@@ -145,7 +145,7 @@ export function ProductFeatures() {
                 </div>
 
                 {/* Feature Content */}
-                <div className={`flex-1 space-y-6 transition-all duration-1000 ease-out ${
+                <div className={`flex-1 space-y-6 transition-all duration-1000 ease-out p-4 sm:p-6 lg:p-8 ${
                   visibleFeatures[index] 
                     ? 'opacity-100 translate-x-0' 
                     : `opacity-0 ${index % 2 === 1 ? '-translate-x-12' : 'translate-x-12'}`

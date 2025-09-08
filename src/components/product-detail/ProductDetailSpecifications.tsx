@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatePresence, motion } from "framer-motion";
-import nestFrontView from "@/assets/Productimages/nestfrontview.png";
-import nestSideView from "@/assets/Productimages/nestsideview.png";
-import stormFrontView from "@/assets/Productimages/stormfrontview.png";
-import stormSideView from "@/assets/Productimages/stormsideview.png";
+import nestFrontView from "@/assets/sections/products/product-images/nestfrontview.png";
+import nestSideView from "@/assets/sections/products/product-images/nestsideview.png";
+import stormFrontView from "@/assets/sections/products/product-images/stormfrontview.png";
+import stormSideView from "@/assets/sections/products/product-images/stormsideview.png";
 
 // Define types locally to avoid import issues
 interface ProductFeature {

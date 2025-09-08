@@ -57,11 +57,11 @@ export function CheckoutPage2() {
   
   // Cart system - initialize with item from location state or default
   const initialItem = location.state?.item || {
-    id: 'storm',
-    name: 'Vaayura Storm Air Purifier',
-    price: 15990,
+    id: '51f1a996-6e38-42a3-a952-b62a40436735', // Use actual Storm product UUID
+    name: 'Strom', // Match database name
+    price: 15000, // Match database price
     quantity: 1,
-    image: '/src/assets/Productimages/stormfrontview.png'
+    image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'
   }
   
   const [cartItems, setCartItems] = useState<CheckoutItem[]>([initialItem])
@@ -173,9 +173,7 @@ export function CheckoutPage2() {
   // Calculate totals based on cart items
   const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
   const couponDiscount = appliedCoupon ? appliedCoupon.discountAmount : 0
-  const discountedAmount = totalAmount - couponDiscount
-  const taxAmount = discountedAmount * 0.18 // 18% GST
-  const finalAmount = discountedAmount + taxAmount
+  const finalAmount = totalAmount - couponDiscount
 
   // Cart management functions
   const addToCart = (productId: string) => {
@@ -335,23 +333,37 @@ export function CheckoutPage2() {
     
     try {
       // Create order via backend API
+      // Backend expects: { productId, quantity, customerData }
+      // Note: Backend only supports single product orders currently
+      const firstItem = cartItems[0]
+      if (!firstItem) {
+        throw new Error('No items in cart')
+      }
+
+      const requestPayload = {
+        productId: firstItem.id,
+        quantity: firstItem.quantity,
+        customerData: customerData
+      }
+
+      console.log('Sending payment request:', JSON.stringify(requestPayload, null, 2))
+
       const response = await fetch('http://localhost:3000/api/create-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          items: cartItems,
-          customerData: customerData,
-          totalAmount: finalAmount,
-          coupon: appliedCoupon ? appliedCoupon.coupon : null
-        })
+        body: JSON.stringify(requestPayload)
       })
 
+      console.log('Response status:', response.status)
+      console.log('Response headers:', response.headers)
+
       const orderData = await response.json()
+      console.log('Response data:', JSON.stringify(orderData, null, 2))
       
-      if (!orderData.success) {
-        throw new Error(orderData.error || 'Failed to create order')
+      if (!response.ok || !orderData.success) {
+        throw new Error(orderData.error || orderData.message || `Server error: ${response.status}`)
       }
 
       // Initialize Razorpay payment
@@ -492,101 +504,6 @@ export function CheckoutPage2() {
               )
             })}
 
-            {/* You May Also Like Section */}
-            <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-900 text-center mb-4 sm:mb-6">You May Also Like</h2>
-                
-                <div className="relative">
-                {/* Navigation Arrows - Show when there are more than 3 products */}
-                {allRecommendedProducts.length > 3 && (
-                  <>
-                    <button
-                      onClick={prevRecommendation}
-                      className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-green-800 hover:bg-green-900 text-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all touch-manipulation"
-                      style={{ left: '-16px' }}
-                    >
-                      <ChevronLeft size={20} />
-                    </button>
-                    <button
-                      onClick={nextRecommendation}
-                      className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-green-800 hover:bg-green-900 text-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all touch-manipulation"
-                      style={{ right: '-16px' }}
-                    >
-                      <ChevronRight size={20} />
-                    </button>
-                  </>
-                )}
-
-                {/* Products Grid - Always show exactly 3 columns */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 min-h-[280px]">
-                  {recommendedProducts.map((product, index) => (
-                    <motion.div
-                      key={product.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="text-center"
-                    >
-                      {/* Product Image */}
-                      <div className="relative mb-4 group">
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-32 sm:h-40 md:h-48 object-contain mx-auto transition-transform group-hover:scale-105"
-                          style={{
-                            aspectRatio: '1/1',
-                            objectFit: 'contain'
-                          }}
-                          loading="lazy"
-                        />
-                        {product.badge && (
-                          <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                            {product.badge}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Product Info */}
-                      <h3 className="font-medium text-gray-900 mb-2">{product.name}</h3>
-                      
-                      <div className="flex items-center justify-center gap-2 mb-4">
-                        {product.originalPrice && (
-                          <span className="text-sm text-gray-500 line-through">
-                            ₹{product.originalPrice.toLocaleString()}
-                          </span>
-                        )}
-                        <span className="text-lg font-semibold text-gray-900">
-                          ₹{product.price.toLocaleString()}
-                        </span>
-                      </div>
-
-                      {/* Add to Cart Button */}
-                      <button 
-                        className="w-full bg-green-800 hover:bg-green-900 text-white font-medium py-2 sm:py-3 px-4 rounded-lg transition-colors touch-manipulation"
-                        onClick={() => addToCart(product.id)}
-                      >
-                        ADD TO CART
-                      </button>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Dots Indicator - Only show if more than 3 products */}
-                {allRecommendedProducts.length > 3 && (
-                  <div className="flex justify-center mt-6 space-x-2">
-                    {Array.from({ length: Math.ceil(allRecommendedProducts.length / 3) }).map((_, groupIndex) => (
-                      <button
-                        key={groupIndex}
-                        onClick={() => setCurrentRecommendationIndex(groupIndex * 3)}
-                        className={`w-3 h-3 rounded-full transition-colors ${
-                          Math.floor(currentRecommendationIndex / 3) === groupIndex ? 'bg-green-600' : 'bg-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
 
             {/* Customer Information */}
             <motion.div
@@ -797,10 +714,6 @@ export function CheckoutPage2() {
                   <span>Shipping</span>
                   <span className="text-green-600">Free</span>
                 </div>
-                <div className="flex justify-between text-gray-700">
-                  <span>GST (18%)</span>
-                  <span>₹{taxAmount.toLocaleString()}</span>
-                </div>
               </div>
 
               <div className="flex justify-between items-center py-4 mb-6">
@@ -810,14 +723,6 @@ export function CheckoutPage2() {
                 </span>
               </div>
 
-              {/* GST Notice */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                <p className="text-sm text-blue-800">
-                  If you wish to add your GST details for this transaction, 
-                  please WhatsApp us @ <span className="font-semibold">+91 8766205724</span> before 
-                  completing your purchase.
-                </p>
-              </div>
 
               {/* Proceed Button */}
               <button
