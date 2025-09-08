@@ -148,7 +148,7 @@ export function ProductsShowcase() {
             {/* Product Info */}
             <div className="space-y-3 sm:space-y-4 max-w-sm px-4 sm:px-0">
               <h3 className="text-xl sm:text-2xl font-sora font-semibold text-[#36454F]">
-                Vaayura Storm
+                Vaayura Strom
               </h3>
               
               <div className="flex gap-2 sm:gap-3 justify-center mb-2">
@@ -166,11 +166,11 @@ export function ProductsShowcase() {
               <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-3 justify-center w-full">
                 <Link to="/checkout" state={{
                   item: {
-                    id: 'storm',
-                    name: 'Vaayura Storm',
-                    price: 15990,
+                    id: '51f1a996-6e38-42a3-a952-b62a40436735', // Storm UUID from database
+                    name: 'Strom', // Match database name
+                    price: 15000, // Match database price
                     quantity: 1,
-                    image: '/src/assets/Productimages/stormfrontview.png'
+                    image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'
                   }
                 }} className="w-full sm:w-[120px]">
                   <Button
@@ -216,11 +216,11 @@ export function ProductsShowcase() {
               <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-3 justify-center w-full">
                 <Link to="/checkout" state={{
                   item: {
-                    id: 'nest',
-                    name: 'Vaayura Nest',
-                    price: 8990,
+                    id: '719171bd-7b50-482f-9ee5-fc8c946c8b15', // Nest UUID from database (you mentioned this earlier)
+                    name: 'Nest', // Match database name
+                    price: 10000, // Match database price  
                     quantity: 1,
-                    image: '/src/assets/Productimages/nestfrontview.png'
+                    image: '/src/assets/sections/products/product-images/nestfrontview.png'
                   }
                 }} className="w-full sm:w-[120px]">
                   <Button

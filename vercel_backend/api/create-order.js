@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { productId, quantity = 1, customerData } = req.body;
+    const { productId, quantity = 1, customerData, coupon } = req.body;
 
     if (!productId) {
       return res.status(400).json({ error: 'Product ID is required' });
@@ -56,7 +56,23 @@ export default async function handler(req, res) {
     }
 
     // Calculate total amount
-    const totalAmount = Math.round(product.price * quantity * 100); // Convert to paise
+    const baseAmount = product.price * quantity;
+    let discountAmount = 0;
+    let finalAmount = baseAmount;
+
+    // Apply coupon discount if provided
+    if (coupon && coupon.discountAmount) {
+      discountAmount = coupon.discountAmount;
+      finalAmount = Math.max(0, baseAmount - discountAmount); // Ensure amount doesn't go negative
+      console.log('Coupon applied:', { 
+        baseAmount, 
+        discountAmount, 
+        finalAmount, 
+        couponCode: coupon.coupon?.code || 'unknown'
+      });
+    }
+
+    const totalAmount = Math.round(finalAmount * 100); // Convert to paise
 
     // Initialize Razorpay
     const razorpay = new Razorpay({
@@ -72,7 +88,10 @@ export default async function handler(req, res) {
       notes: {
         product_id: productId,
         product_name: product.name,
-        quantity: quantity.toString()
+        quantity: quantity.toString(),
+        base_amount: baseAmount.toString(),
+        discount_amount: discountAmount.toString(),
+        coupon_code: coupon?.coupon?.code || 'none'
       }
     });
 
@@ -83,14 +102,18 @@ export default async function handler(req, res) {
         product_id: productId,
         product_name: product.name,
         quantity: quantity,
-        amount: product.price * quantity,
+        amount: finalAmount, // Use final amount after discount
         currency: 'INR',
         razorpay_order_id: razorpayOrder.id,
         status: 'created',
-        user_email: null,
-        user_name: null,
-        user_phone: null,
-        shipping_address: null,
+        user_email: customerData?.email || null,
+        user_name: customerData?.name || null,
+        user_phone: customerData?.phone || null,
+        shipping_address: customerData?.address ? JSON.stringify(customerData.address) : null,
+        // Coupon information stored in metadata or separate fields
+        discount_amount: discountAmount,
+        coupon_code: coupon?.coupon?.code || null,
+        base_amount: baseAmount,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
       }])

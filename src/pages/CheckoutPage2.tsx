@@ -97,11 +97,11 @@ export function CheckoutPage2() {
     // Fallback products (including filters) - only if not in admin products
     const fallbackProducts: RecommendedProduct[] = [
       {
-        id: 'nest',
-        name: 'Vaayura Nest',
-        price: 8990,
-        originalPrice: 11990,
-        image: '/src/assets/Productimages/nestfrontview.png',
+        id: '719171bd-7b50-482f-9ee5-fc8c946c8b15', // Nest UUID
+        name: 'Nest',
+        price: 10000,
+        originalPrice: 12000,
+        image: '/src/assets/sections/products/product-images/nestfrontview.png',
         badge: 'Compact'
       },
       {
@@ -183,8 +183,8 @@ export function CheckoutPage2() {
     // If not found in admin products, check fallback products
     if (!product) {
       const fallbackMap: { [key: string]: any } = {
-        'storm': { id: 'storm', name: 'Vaayura Storm', price: 15990, images: ['/src/assets/Productimages/stormfrontview.png'] },
-        'nest': { id: 'nest', name: 'Vaayura Nest', price: 8990, images: ['/src/assets/Productimages/nestfrontview.png'] },
+        '51f1a996-6e38-42a3-a952-b62a40436735': { id: '51f1a996-6e38-42a3-a952-b62a40436735', name: 'Strom', price: 15000, images: ['https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'] },
+        '719171bd-7b50-482f-9ee5-fc8c946c8b15': { id: '719171bd-7b50-482f-9ee5-fc8c946c8b15', name: 'Nest', price: 10000, images: ['/src/assets/sections/products/product-images/nestfrontview.png'] },
         'hepa-filter': { id: 'hepa-filter', name: 'HEPA Filter Replacement', price: 1999, images: ['/src/assets/4 layer filter.jpg'] },
         'carbon-filter': { id: 'carbon-filter', name: 'Carbon Pre-Filter', price: 899, images: ['/src/assets/4 layer filter.jpg'] },
         'uv-lamp': { id: 'uv-lamp', name: 'UV-C Sanitizer Lamp', price: 2499, images: ['/src/assets/4 layer filter.jpg'] }
@@ -343,7 +343,8 @@ export function CheckoutPage2() {
       const requestPayload = {
         productId: firstItem.id,
         quantity: firstItem.quantity,
-        customerData: customerData
+        customerData: customerData,
+        coupon: appliedCoupon
       }
 
       console.log('Sending payment request:', JSON.stringify(requestPayload, null, 2))

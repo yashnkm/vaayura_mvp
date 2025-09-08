@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Lottie from 'lottie-react';
-import animationData from '@/assets/video/lottie_new_video.json';
+import animationData from '@/assets/video/lottie_new_2.json';
 import heroBackground from '@/assets/sections/homepage/hero/productHeroSection.jpg';
 
 export function Hero3DSection() {
@@ -103,7 +103,7 @@ export function Hero3DSection() {
           
           {/* Background blur overlay - fades out when scrolling starts */}
           <div 
-            className={`absolute inset-0 bg-black/30 backdrop-blur-md z-20 transition-all duration-700 ${
+            className={`absolute inset-0 bg-black/50 backdrop-blur-xl z-20 transition-all duration-700 ${
               scrollStarted ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}
           />
@@ -141,26 +141,57 @@ export function Hero3DSection() {
           <div className={`absolute inset-0 z-15 flex items-center justify-center transition-all duration-700 ${
             scrollStarted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
           }`}>
-            <Lottie
-              lottieRef={lottieRef}
-              animationData={animationData}
-              loop={false}
-              autoplay={false}
-              className="w-full h-full max-w-full max-h-full"
-              style={{
-                width: 'min(95vw, 100%)',
-                height: 'min(70vh, 100%)',
-                maxWidth: '1600px',
-                maxHeight: '1000px',
-                minWidth: '320px',
-                minHeight: '240px',
-                aspectRatio: '16/9'
-              }}
-              rendererSettings={{
-                preserveAspectRatio: 'xMidYMid meet',
-                renderer: 'svg'
-              }}
-            />
+            <div className="relative">
+              <Lottie
+                lottieRef={lottieRef}
+                animationData={animationData}
+                loop={false}
+                autoplay={false}
+                className="w-full h-full max-w-full max-h-full"
+                style={{
+                  width: 'min(95vw, 100%)',
+                  height: 'min(70vh, 100%)',
+                  maxWidth: '1600px',
+                  maxHeight: '1000px',
+                  minWidth: '320px',
+                  minHeight: '240px',
+                  aspectRatio: '16/9'
+                }}
+                rendererSettings={{
+                  preserveAspectRatio: 'xMidYMid meet',
+                  renderer: 'svg'
+                }}
+              />
+              
+              {/* Section 1: Vaayura Storm Text (Left Third) */}
+              <div className={`absolute top-0 bottom-0 left-0 w-1/3 flex items-center justify-center transition-opacity duration-300 ${
+                displayProgress > 0.5 ? 'opacity-100' : 'opacity-0'
+              }`}>
+                <div className="text-center">
+                  <h2 className="text-5xl lg:text-6xl xl:text-7xl font-sora font-bold text-brand-grey-green leading-tight">
+                    Vaayura<br />
+                    <span className="text-brand-pastel-green">Storm</span>
+                  </h2>
+                </div>
+              </div>
+
+              {/* Section 3: Product Specification Cards (Right Third) */}
+              <div className={`absolute top-0 bottom-0 right-0 w-1/3 flex items-center justify-center transition-opacity duration-300 ${
+                displayProgress > 0.5 ? 'opacity-100' : 'opacity-0'
+              }`}>
+                <div className="grid grid-cols-1 gap-4 p-6 max-w-xs">
+                  <div className="bg-white border border-gray-200 rounded-xl px-6 py-4 text-center shadow-md">
+                    <div className="text-gray-600 text-sm font-montserrat font-medium mb-2">CADR</div>
+                    <div className="text-brand-pastel-green font-sora font-bold text-lg">600 m³/hr</div>
+                  </div>
+                  <div className="bg-white border border-gray-200 rounded-xl px-6 py-4 text-center shadow-md">
+                    <div className="text-gray-600 text-sm font-montserrat font-medium mb-2">Coverage</div>
+                    <div className="text-brand-pastel-green font-sora font-bold text-lg">1000 sq ft</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
 
         </div>
