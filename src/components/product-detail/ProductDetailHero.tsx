@@ -1,8 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { PlayIcon } from "lucide-react";
-import { memo, useMemo, useCallback } from "react";
+import { PlayIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { memo, useMemo, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// Import product images from assets
+import stormFrontView from "@/assets/sections/products/product-images/stormfrontview.png";
+import stormSideView from "@/assets/sections/products/product-images/stormsideview.png";
+import leftSideViewStorm from "@/assets/sections/products/product-images/leftsideviewstorm.png";
+import nestFrontView from "@/assets/sections/products/product-images/nestfrontview.png";
+import nestSideView from "@/assets/sections/products/product-images/nestsideview.png";
+import leftSideViewNest from "@/assets/sections/products/product-images/leftsideviewnest.png";
 
 // Define types locally to avoid import issues
 interface ProductFeature {
@@ -34,6 +42,27 @@ interface ProductDetailHeroProps {
 
 const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) => {
   const navigate = useNavigate();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Define product images based on product name
+  const productImages = useMemo(() => {
+    const productName = product.name.toLowerCase();
+    if (productName.includes('storm') || productName.includes('strom')) {
+      return [
+        stormFrontView,
+        stormSideView,
+        leftSideViewStorm
+      ];
+    } else if (productName.includes('nest')) {
+      return [
+        nestFrontView,
+        nestSideView,
+        leftSideViewNest
+      ];
+    }
+    // Fallback to original images array if available
+    return product.images?.length ? product.images : [stormFrontView, stormSideView, leftSideViewStorm];
+  }, [product.name, product.images]);
 
   // Memoize formatted price to avoid recalculation
   const formattedPrice = useMemo(() => 
@@ -47,16 +76,31 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
     [product.description]
   );
 
-  // Memoize image src and error handler
-  const imageSrc = useMemo(() => 
-    product.images[0] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    [product.images]
+  // Memoize current image src and error handler
+  const currentImageSrc = useMemo(() => 
+    productImages[currentImageIndex] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    [productImages, currentImageIndex]
   );
+
+  // Check if current image is a front view (should be larger)
+  const isFrontView = useMemo(() => {
+    const currentImage = productImages[currentImageIndex];
+    return currentImage === stormFrontView || currentImage === nestFrontView;
+  }, [productImages, currentImageIndex]);
 
   const handleImageError = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
     const target = e.target as HTMLImageElement;
     target.src = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3";
   }, []);
+
+  // Image navigation handlers
+  const nextImage = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev + 1) % productImages.length);
+  }, [productImages.length]);
+
+  const prevImage = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev - 1 + productImages.length) % productImages.length);
+  }, [productImages.length]);
 
   const handleBuyNow = useCallback(() => {
     navigate('/checkout', {
@@ -66,11 +110,11 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
           name: product.name,
           price: product.price,
           quantity: 1,
-          image: imageSrc
+          image: currentImageSrc
         }
       }
     });
-  }, [navigate, product, imageSrc]);
+  }, [navigate, product, currentImageSrc]);
 
 
   return (
@@ -80,24 +124,71 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
         {/* Main Hero Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           
-          {/* Left Visual - Clean Product Image */}
+          {/* Left Visual - Product Image with Navigation */}
           <div className="flex justify-center lg:justify-start">
-            <div className="w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[650px] lg:h-[650px]">
+            <div className={`relative transition-all duration-300 ease-in-out overflow-hidden ${
+              isFrontView 
+                ? 'w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] xl:w-[1000px] xl:h-[1000px] p-8'
+                : 'w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] md:w-[550px] md:h-[550px] lg:w-[750px] lg:h-[750px] p-4'
+            }`}>
               <img
-                src={imageSrc}
-                alt={product.name}
-                className="w-full h-full object-contain rounded-2xl"
+                src={currentImageSrc}
+                alt={`${product.name} - View ${currentImageIndex + 1}`}
+                className="w-full h-full object-contain transition-all duration-300 ease-in-out"
                 style={{ 
                   filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3))',
                   width: '100%',
                   height: '100%',
                   objectFit: 'contain',
-                  aspectRatio: '1/1'
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  transform: isFrontView ? 'scale(1.4)' : 'scale(1)'
                 }}
                 loading="lazy"
                 decoding="async"
                 onError={handleImageError}
               />
+              
+              {/* Navigation arrows - only show if multiple images */}
+              {productImages.length > 1 && (
+                <>
+                  {/* Left arrow */}
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg rounded-full p-2 transition-all duration-200 hover:scale-105 z-10"
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft className="w-5 h-5 text-gray-700" />
+                  </button>
+                  
+                  {/* Right arrow */}
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg rounded-full p-2 transition-all duration-200 hover:scale-105 z-10"
+                    aria-label="Next image"
+                  >
+                    <ChevronRight className="w-5 h-5 text-gray-700" />
+                  </button>
+                </>
+              )}
+
+              {/* Image indicators */}
+              {productImages.length > 1 && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                  {productImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                        index === currentImageIndex 
+                          ? 'bg-green-800 scale-125' 
+                          : 'bg-white/60 hover:bg-white/80'
+                      }`}
+                      aria-label={`Go to image ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -105,7 +196,9 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
           <div className="space-y-8">
             <div className="space-y-6">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-sora text-brand-grey-green leading-tight">
-                {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`}
+                {product.name.startsWith('Vaayura') ? product.name : 
+                 product.name.toLowerCase() === 'strom' ? 'Vaayura Storm' : 
+                 `Vaayura ${product.name}`}
               </h1>
               
               {/* Replace text description with feature cards */}
@@ -113,15 +206,22 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
                 <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">CADR</div>
                   <div className="text-green-800 font-sora font-bold text-sm">
-                    {product.name.toLowerCase().includes('storm') ? '600 m³/hr' : 
-                     product.name.toLowerCase().includes('nest') ? '450 m³/hr' : '190 m³/hr'}
+                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '450 m³/hr' : 
+                     product.name.toLowerCase().includes('nest') ? '190 m³/hr' : '190 m³/hr'}
                   </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Coverage</div>
                   <div className="text-green-800 font-sora font-bold text-sm">
-                    {product.name.toLowerCase().includes('storm') ? '1000 sq ft' : 
-                     product.name.toLowerCase().includes('nest') ? '600 sq ft' : '400 sq ft'}
+                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '600 sq ft' : 
+                     product.name.toLowerCase().includes('nest') ? '400 sq ft' : '400 sq ft'}
+                  </div>
+                </div>
+                <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                  <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Dimensions</div>
+                  <div className="text-green-800 font-sora font-bold text-sm">
+                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '254×254×447 mm' : 
+                     product.name.toLowerCase().includes('nest') ? '210×213×317 mm' : 'Compact'}
                   </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">

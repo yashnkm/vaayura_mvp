@@ -91,8 +91,8 @@ export function ProductCatalog() {
           {products
             .sort((a, b) => {
               // Priority order: Storm first, then Nest, then others alphabetically
-              const aIsStorm = a.name.toLowerCase().includes('storm');
-              const bIsStorm = b.name.toLowerCase().includes('storm');
+              const aIsStorm = a.name.toLowerCase().includes('storm') || a.name.toLowerCase().includes('strom');
+              const bIsStorm = b.name.toLowerCase().includes('storm') || b.name.toLowerCase().includes('strom');
               const aIsNest = a.name.toLowerCase().includes('nest');
               const bIsNest = b.name.toLowerCase().includes('nest');
               
@@ -146,24 +146,24 @@ export function ProductCatalog() {
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">CADR</div>
                     <div className="text-green-800 font-sora font-bold text-sm">
-                      {product.name.toLowerCase().includes('storm') ? '600 m³/hr' : 
-                       product.name.toLowerCase().includes('nest') ? '450 m³/hr' : '190 m³/hr'}
+                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '450 m³/hr' : 
+                       product.name.toLowerCase().includes('nest') ? '190 m³/hr' : '190 m³/hr'}
                     </div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Coverage</div>
                     <div className="text-green-800 font-sora font-bold text-sm">
-                      {product.name.toLowerCase().includes('storm') ? '1000 sq ft' : 
-                       product.name.toLowerCase().includes('nest') ? '600 sq ft' : '400 sq ft'}
+                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '600 sq ft' : 
+                       product.name.toLowerCase().includes('nest') ? '400 sq ft' : '400 sq ft'}
                     </div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">
-                      {product.name.toLowerCase().includes('storm') ? 'Power' : 
+                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? 'Power' : 
                        product.name.toLowerCase().includes('nest') ? 'Size' : 'Type'}
                     </div>
                     <div className="text-green-800 font-sora font-bold text-sm">
-                      {product.name.toLowerCase().includes('storm') ? 'High Performance' : 
+                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? 'High Performance' : 
                        product.name.toLowerCase().includes('nest') ? 'Compact' : 'Advanced'}
                     </div>
                   </div>

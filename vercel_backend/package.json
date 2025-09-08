@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "razorpay": "^2.9.4",
-    "@supabase/supabase-js": "^2.55.0"
+    "@supabase/supabase-js": "^2.55.0",
+    "nodemailer": "^6.9.8"
   },
   "devDependencies": {
     "@vercel/node": "^3.0.0"

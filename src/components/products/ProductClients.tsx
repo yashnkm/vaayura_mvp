@@ -10,8 +10,15 @@ import delhiAirportLogo from "@/assets/clients/delhi-airport.png";
 import dlfLogo from "@/assets/clients/dlf.png";
 import emaarLogo from "@/assets/clients/emaar.png";
 import hyattLogo from "@/assets/clients/hyatt.png";
+import client9Logo from "@/assets/clients/9.png";
+import client10Logo from "@/assets/clients/10.png";
+import client11Logo from "@/assets/clients/11.png";
+import client12Logo from "@/assets/clients/12.png";
+import client13Logo from "@/assets/clients/13.png";
+import client14Logo from "@/assets/clients/14.png";
+import client15Logo from "@/assets/clients/15.png";
 
-// Array of client logos using actual images
+// Array of all 15 client logos
 const allLogos: Logo[] = [
   { name: "Airtel", id: 1, img: airtelLogo },
   { name: "American Express", id: 2, img: amexLogo },
@@ -21,6 +28,13 @@ const allLogos: Logo[] = [
   { name: "DLF", id: 6, img: dlfLogo },
   { name: "Emaar", id: 7, img: emaarLogo },
   { name: "Hyatt", id: 8, img: hyattLogo },
+  { name: "Client 9", id: 9, img: client9Logo },
+  { name: "Client 10", id: 10, img: client10Logo },
+  { name: "Client 11", id: 11, img: client11Logo },
+  { name: "Client 12", id: 12, img: client12Logo },
+  { name: "Client 13", id: 13, img: client13Logo },
+  { name: "Client 14", id: 14, img: client14Logo },
+  { name: "Client 15", id: 15, img: client15Logo },
 ];
 
 export function ProductClients() {
