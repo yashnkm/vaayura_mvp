@@ -82,7 +82,7 @@ export function Hero3DSection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-[400vh] bg-gradient-to-b from-white to-gray-50">
+    <section ref={containerRef} className="relative h-[400vh] bg-white">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <div className="relative flex items-center justify-center w-full h-full">
           
