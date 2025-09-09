@@ -59,31 +59,6 @@ export function HomePage() {
               loading="lazy"
             />
             
-            {/* Four Circular Overlay Cards */}
-            {/* Pre-Filter Card */}
-            <div className="absolute top-[20%] left-[15%] w-20 h-20 bg-white/90 backdrop-blur-sm rounded-full flex flex-col items-center justify-center shadow-lg border border-gray-200">
-              <div className="text-xs font-bold text-gray-800 text-center">Pre-Filter</div>
-              <div className="text-xs text-gray-600 text-center mt-1">Large Dust</div>
-            </div>
-            
-            {/* HEPA Filter Card */}
-            <div className="absolute top-[30%] left-[40%] w-22 h-22 bg-white/90 backdrop-blur-sm rounded-full flex flex-col items-center justify-center shadow-lg border border-gray-200">
-              <div className="text-xs font-bold text-gray-800 text-center">True HEPA</div>
-              <div className="text-xs text-gray-600 text-center mt-1">99.97%</div>
-            </div>
-            
-            {/* Carbon Filter Card */}
-            <div className="absolute top-[40%] left-[60%] w-20 h-20 bg-white/90 backdrop-blur-sm rounded-full flex flex-col items-center justify-center shadow-lg border border-gray-200">
-              <div className="text-xs font-bold text-gray-800 text-center">Carbon</div>
-              <div className="text-xs text-gray-600 text-center mt-1">Odors</div>
-            </div>
-            
-            {/* Clean Air Output Card */}
-            <div className="absolute top-[25%] right-[10%] w-20 h-20 bg-green-50/90 backdrop-blur-sm rounded-full flex flex-col items-center justify-center shadow-lg border border-green-200">
-              <div className="text-xs font-bold text-green-800 text-center">Clean Air</div>
-              <div className="text-xs text-green-600 text-center mt-1">Pure</div>
-            </div>
-            
           </div>
         </div>
       </section>
