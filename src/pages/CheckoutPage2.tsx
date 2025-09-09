@@ -70,7 +70,7 @@ export function CheckoutPage2() {
       name: 'Nest', // Match database name
       price: 10000, // Match database price
       quantity: location.state?.item?.id === '719171bd-7b50-482f-9ee5-fc8c946c8b15' ? (location.state.item.quantity || 1) : 0,
-      image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/nestfrontview.png'
+      image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755666606/vaayura/products/tsbzsxd55ya5hrequbm9.png'
     }
   ]
   
@@ -194,7 +194,7 @@ export function CheckoutPage2() {
     if (!product) {
       const fallbackMap: { [key: string]: any } = {
         '51f1a996-6e38-42a3-a952-b62a40436735': { id: '51f1a996-6e38-42a3-a952-b62a40436735', name: 'Storm', price: 15000, images: ['https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'] },
-        '719171bd-7b50-482f-9ee5-fc8c946c8b15': { id: '719171bd-7b50-482f-9ee5-fc8c946c8b15', name: 'Nest', price: 10000, images: ['https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/nestfrontview.png'] },
+        '719171bd-7b50-482f-9ee5-fc8c946c8b15': { id: '719171bd-7b50-482f-9ee5-fc8c946c8b15', name: 'Nest', price: 10000, images: ['https://res.cloudinary.com/dmdhhrgme/image/upload/v1755666606/vaayura/products/tsbzsxd55ya5hrequbm9.png'] },
         'hepa-filter': { id: 'hepa-filter', name: 'HEPA Filter Replacement', price: 1999, images: ['/src/assets/4 layer filter.jpg'] },
         'carbon-filter': { id: 'carbon-filter', name: 'Carbon Pre-Filter', price: 899, images: ['/src/assets/4 layer filter.jpg'] },
         'uv-lamp': { id: 'uv-lamp', name: 'UV-C Sanitizer Lamp', price: 2499, images: ['/src/assets/4 layer filter.jpg'] }
@@ -743,7 +743,7 @@ export function CheckoutPage2() {
               <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-gray-200">
                 <div className="text-center">
                   <Shield className="w-6 h-6 text-gray-600 mx-auto mb-2" />
-                  <p className="text-xs text-gray-600">Secure Payment</p>
+                  <p className="text-xs text-gray-600">Razorpay Secure Payment</p>
                 </div>
                 <div className="text-center">
                   <Truck className="w-6 h-6 text-gray-600 mx-auto mb-2" />
