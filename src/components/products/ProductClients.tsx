@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { LogoCarousel, type Logo } from "@/components/ui/logo-carousel";
 
 // Import actual client logos
@@ -38,30 +38,54 @@ const allLogos: Logo[] = [
 ];
 
 export function ProductClients() {
+  const [columnCount, setColumnCount] = useState(5);
+
+  useEffect(() => {
+    const updateColumnCount = () => {
+      if (window.innerWidth < 640) {
+        // Mobile: 3 columns
+        setColumnCount(3);
+      } else if (window.innerWidth < 1024) {
+        // Tablet: 4 columns
+        setColumnCount(4);
+      } else {
+        // Desktop: 5 columns
+        setColumnCount(5);
+      }
+    };
+
+    updateColumnCount();
+    window.addEventListener('resize', updateColumnCount);
+
+    return () => {
+      window.removeEventListener('resize', updateColumnCount);
+    };
+  }, []);
+
   return (
-    <section className="py-24 bg-white relative">
+    <section className="bg-white relative" style={{ padding: 'clamp(4rem, 8vh, 6rem) clamp(1rem, 4vw, 2rem)' }}>
       <div className="container mx-auto">
-        <div className="space-y-8">
-          <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-8">
-            <div className="text-center space-y-4">
-              <p className="text-lg text-brand-dark-grey font-subheading">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1.5rem, 4vh, 2.5rem)' }}>
+          <div className="mx-auto flex w-full flex-col items-center" style={{ maxWidth: 'clamp(20rem, 90vw, 70rem)', gap: 'clamp(1.5rem, 4vh, 2.5rem)' }}>
+            <div className="text-center" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.75rem, 2vh, 1rem)' }}>
+              <p className="text-brand-dark-grey font-subheading" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
                 Trusted by Industry Leaders
               </p>
-              <h2 className="text-4xl lg:text-5xl font-sora font-bold text-[#36454F] leading-tight mb-6">
+              <h2 className="font-sora font-bold text-[#36454F] leading-tight" style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', padding: 'clamp(0.5rem, 2vw, 1rem)', marginBottom: 'clamp(1rem, 2vh, 1.5rem)' }}>
                 Join the <span className="text-brand-pastel-green">Clean Air Revolution</span>
               </h2>
-              <p className="text-lg text-brand-dark-grey font-subheading max-w-2xl mx-auto">
+              <p className="text-brand-dark-grey font-subheading mx-auto" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', maxWidth: 'clamp(20rem, 60vw, 40rem)', padding: 'clamp(0.5rem, 2vw, 1rem)' }}>
                 Leading organizations trust Vaayura for their air purification needs.
               </p>
             </div>
 
-            <LogoCarousel columnCount={5} logos={allLogos} />
+            <LogoCarousel columnCount={columnCount} logos={allLogos} />
           </div>
         </div>
       </div>
       
       {/* Gradient Transition to Gray */}
-      <div className="absolute -bottom-4 left-0 right-0 h-20 bg-gradient-to-b from-white to-gray-50 pointer-events-none z-10"></div>
+      <div className="absolute -bottom-4 left-0 right-0 bg-gradient-to-b from-white to-gray-50 pointer-events-none z-10" style={{ height: 'clamp(1.25rem, 3vh, 1.5rem)' }}></div>
     </section>
   );
 }

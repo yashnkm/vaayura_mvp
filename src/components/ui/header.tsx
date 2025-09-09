@@ -9,7 +9,7 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Menu, MoveRight, X, ShoppingCart } from "lucide-react";
+import { Menu, MoveRight, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logoImage from "@/assets/sections/shared/logos/logo_2.png";
@@ -118,73 +118,68 @@ function Header1() {
                     </NavigationMenu>
                 </div>
                 <div className="flex justify-end gap-4">
-                    <Button variant="ghost" className="hidden md:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
+                    <Button variant="ghost" className="hidden xl:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
                         <Link to="/bulk-order">Corporate Queries</Link>
                     </Button>
-                    <Button variant="ghost" className="hidden md:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
+                    <Button variant="ghost" className="hidden xl:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
                         <Link to="/contact">Contact</Link>
                     </Button>
-                    <Button variant="ghost" className="text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors p-2">
-                        <ShoppingCart className="w-5 h-5" />
-                    </Button>
                 </div>
-                <div className="flex w-12 shrink lg:hidden items-end justify-end">
+                <div className="flex w-12 shrink xl:hidden items-end justify-end">
                     <Button variant="ghost" onClick={() => setOpen(!isOpen)} className="text-brand-dark-grey hover:text-brand-grey-green">
                         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                     </Button>
                     {isOpen && (
-                        <div className="absolute top-20 border-t flex flex-col w-full right-0 bg-white shadow-lg py-6 container gap-6 max-h-[70vh] overflow-y-auto">
-                            {navigationItems.map((item) => (
-                                <div key={item.title} className="border-b border-gray-100 pb-4 last:border-b-0">
-                                    <div className="flex flex-col gap-3">
-                                        {item.href ? (
-                                            <Link
-                                                to={item.href!}
-                                                className="flex justify-between items-center py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors"
-                                                onClick={() => setOpen(false)}
-                                            >
-                                                <span className="text-lg font-medium text-brand-grey-green">{item.title}</span>
-                                                <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
-                                            </Link>
-                                        ) : (
-                                            <p className="text-lg font-medium text-brand-grey-green px-3 py-2">{item.title}</p>
-                                        )}
-                                        {item.items &&
-                                            item.items.map((subItem) => (
-                                                <Link
-                                                    key={subItem.title}
-                                                    to={subItem.href}
-                                                    className="flex justify-between items-center py-2 px-6 rounded-lg hover:bg-gray-50 transition-colors ml-3"
-                                                    onClick={() => setOpen(false)}
-                                                >
-                                                    <span className="text-brand-dark-grey">
-                                                        {subItem.title}
-                                                    </span>
-                                                    <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
-                                                </Link>
-                                            ))}
-                                    </div>
-                                </div>
-                            ))}
-                            {/* Mobile-only links */}
-                            <div className="flex flex-col gap-3 pt-4 border-t border-gray-100">
-                                <Link
-                                    to="/bulk-order"
-                                    className="flex justify-between items-center py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors"
-                                    onClick={() => setOpen(false)}
-                                >
-                                    <span className="text-lg font-medium text-brand-grey-green">Corporate Queries</span>
-                                    <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
-                                </Link>
-                                <Link
-                                    to="/contact"
-                                    className="flex justify-between items-center py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors"
-                                    onClick={() => setOpen(false)}
-                                >
-                                    <span className="text-lg font-medium text-brand-grey-green">Contact</span>
-                                    <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
-                                </Link>
-                            </div>
+                        <div className="absolute top-20 border-t flex flex-col w-full right-0 bg-white shadow-lg py-4 container gap-2 max-h-[70vh] overflow-y-auto">
+                            {/* Simplified mobile navigation - no submenus */}
+                            <Link
+                                to="/products"
+                                className="flex justify-between items-center py-4 px-4 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation"
+                                onClick={() => setOpen(false)}
+                            >
+                                <span className="text-lg font-medium text-brand-grey-green">Products</span>
+                                <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
+                            </Link>
+                            
+                            <Link
+                                to="/about"
+                                className="flex justify-between items-center py-4 px-4 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation"
+                                onClick={() => setOpen(false)}
+                            >
+                                <span className="text-lg font-medium text-brand-grey-green">About</span>
+                                <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
+                            </Link>
+                            
+                            <Link
+                                to="/blog"
+                                className="flex justify-between items-center py-4 px-4 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation"
+                                onClick={() => setOpen(false)}
+                            >
+                                <span className="text-lg font-medium text-brand-grey-green">Blog</span>
+                                <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
+                            </Link>
+                            
+                            {/* Divider */}
+                            <div className="border-t border-gray-100 my-2"></div>
+                            
+                            {/* Secondary links */}
+                            <Link
+                                to="/bulk-order"
+                                className="flex justify-between items-center py-4 px-4 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation"
+                                onClick={() => setOpen(false)}
+                            >
+                                <span className="text-base font-medium text-brand-dark-grey">Corporate Queries</span>
+                                <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
+                            </Link>
+                            
+                            <Link
+                                to="/contact"
+                                className="flex justify-between items-center py-4 px-4 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation"
+                                onClick={() => setOpen(false)}
+                            >
+                                <span className="text-base font-medium text-brand-dark-grey">Contact</span>
+                                <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
+                            </Link>
                         </div>
                     )}
                 </div>

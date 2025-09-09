@@ -13,10 +13,10 @@ export function HomePage() {
     <>
       <Header1 />
       <Hero3DSection />
-      {/* About Us Section */}
-      <section className="py-8 sm:py-12 lg:py-16 px-4 sm:px-6 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-lg sm:text-xl md:text-2xl text-brand-dark-grey font-subheading leading-relaxed">
+      {/* About Us Section - Zoom Resistant */}
+      <section className="bg-white" style={{ padding: 'clamp(2rem, 6vh, 4rem) clamp(1rem, 4vw, 2rem)' }}>
+        <div className="mx-auto text-center" style={{ maxWidth: 'clamp(20rem, 80vw, 60rem)' }}>
+          <p className="text-brand-dark-grey font-subheading leading-relaxed" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', padding: 'clamp(0.5rem, 2vw, 2rem)' }}>
             Breathe clean, live healthy. Vaayura's advanced air purification technology ensures your home has the cleanest air possible.
           </p>
         </div>
