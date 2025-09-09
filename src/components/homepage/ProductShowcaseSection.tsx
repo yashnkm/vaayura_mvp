@@ -11,16 +11,25 @@ import nestSideView from "@/assets/sections/products/product-images/nestsideview
 import productImage1 from "@/assets/product images/pexels-falling4utah-2724748.jpg"
 import productImage2 from "@/assets/product images/pexels-fotoaibe-1743227.jpg"
 import productImage3 from "@/assets/product images/pexels-pixabay-259962.jpg"
+import stormCarousel1 from "@/assets/storm/stormcoursel.png"
+import stormCarousel2 from "@/assets/storm/Generated Image September 09, 2025 - 12_38PM.png"
+import stormCarousel3 from "@/assets/storm/Generated Image September 09, 2025 - 12_41PM.png"
 
 const models = [
   { id: 'storm', name: 'Storm', price: 15990, originalPrice: 21990, image: stormImg },
   { id: 'nest', name: 'Nest', price: 8990, originalPrice: 12990, image: nestImg }
 ]
 
-const heroBackgrounds = [
+const nestBackgrounds = [
   { id: 'product1', name: 'Modern Interior 1', image: productImage1 },
   { id: 'product2', name: 'Modern Interior 2', image: productImage2 },
   { id: 'product3', name: 'Modern Interior 3', image: productImage3 }
+]
+
+const stormBackgrounds = [
+  { id: 'storm1', name: 'Storm Interior 1', image: stormCarousel1 },
+  { id: 'storm2', name: 'Storm Interior 2', image: stormCarousel2 },
+  { id: 'storm3', name: 'Storm Interior 3', image: stormCarousel3 }
 ]
 
 interface ProductShowcaseSectionProps {
@@ -33,6 +42,18 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
   const [imagesLoaded, setImagesLoaded] = useState(false)
   const [isScrolling, setIsScrolling] = useState(false)
 
+  // Select appropriate background images based on product filter
+  const heroBackgrounds = useMemo(() => {
+    if (productFilter === 'storm') {
+      return stormBackgrounds
+    } else if (productFilter === 'nest') {
+      return nestBackgrounds
+    } else {
+      // Default to nest backgrounds when showing both products
+      return nestBackgrounds
+    }
+  }, [productFilter])
+
   // Memoized product data to prevent recalculation
   const currentProduct = useMemo(() => models[currentImageIndex], [currentImageIndex])
   const discountPercentage = useMemo(() => 
@@ -44,7 +65,15 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
   useEffect(() => {
     const preloadImages = async () => {
       const imagePromises = [
-        ...heroBackgrounds.map(bg => {
+        ...nestBackgrounds.map(bg => {
+          const img = new Image()
+          img.src = bg.image
+          return new Promise(resolve => {
+            img.onload = resolve
+            img.onerror = resolve
+          })
+        }),
+        ...stormBackgrounds.map(bg => {
           const img = new Image()
           img.src = bg.image
           return new Promise(resolve => {

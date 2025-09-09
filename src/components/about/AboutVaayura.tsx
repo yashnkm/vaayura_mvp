@@ -3,7 +3,7 @@ import { ProductClients } from "@/components/products/ProductClients";
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { TreePine, Target } from 'lucide-react';
-import heroImage from "@/assets/sections/shared/backgrounds/main.jpg";
+import heroImage from "@/assets/sections/about/aboutus1.png";
 import productImage from "@/assets/sections/shared/backgrounds/background.png";
 import problemImage from "@/assets/sections/about/problem_img.png";
 
@@ -229,19 +229,8 @@ export const AboutVaayura = ({
 
             {/* Problem Content */}
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-              {/* Problem Image */}
-              <motion.div variants={fadeInLeft} className="flex-1 relative max-w-lg">
-                <div className="aspect-[4/3] w-full">
-                  <img 
-                    src={problemImage} 
-                    alt="Air pollution in urban India - industrial emissions"
-                    className="w-full h-full object-cover rounded-xl"
-                  />
-                </div>
-              </motion.div>
-
               {/* Problem Content */}
-              <motion.div variants={fadeInRight} className="flex-1 space-y-6">
+              <motion.div variants={fadeInLeft} className="flex-1 space-y-6">
                 {/* Problem Number */}
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-brand-pastel-green flex items-center justify-center">
@@ -268,6 +257,17 @@ export const AboutVaayura = ({
                   <div className="text-brand-dark-grey font-montserrat text-sm">
                     18% Deaths Linked to Air Pollution • PM2.5 Levels 10x WHO Limits • 1.7M Annual Deaths
                   </div>
+                </div>
+              </motion.div>
+
+              {/* Problem Image */}
+              <motion.div variants={fadeInRight} className="flex-1 relative max-w-lg">
+                <div className="aspect-[4/3] w-full">
+                  <img 
+                    src={problemImage} 
+                    alt="Air pollution in urban India - industrial emissions"
+                    className="w-full h-full object-cover rounded-xl"
+                  />
                 </div>
               </motion.div>
             </div>
@@ -298,30 +298,14 @@ export const AboutVaayura = ({
 
             {/* Health Impact Content */}
             <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16">
-              {/* Health Impact Visual */}
+              {/* Health Impact Image */}
               <motion.div variants={fadeInRight} className="flex-1 relative max-w-lg">
-                <div className="aspect-[4/3] w-full bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-8 flex flex-col justify-center">
-                  {/* Symptoms Grid */}
-                  <div className="space-y-6">
-                    <div className="text-center mb-6">
-                      <h4 className="text-xl font-sora font-bold text-red-700 mb-2">SYMPTOMS OF AIR POLLUTION</h4>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-4 text-center">
-                      <div className="bg-white/70 rounded-lg p-3">
-                        <p className="text-sm font-medium text-gray-800">Difficulty in Breathing</p>
-                      </div>
-                      <div className="bg-white/70 rounded-lg p-3">
-                        <p className="text-sm font-medium text-gray-800">Fatigue</p>
-                      </div>
-                      <div className="bg-white/70 rounded-lg p-3">
-                        <p className="text-sm font-medium text-gray-800">Regular Sneezing</p>
-                      </div>
-                      <div className="bg-white/70 rounded-lg p-3">
-                        <p className="text-sm font-medium text-gray-800">Asthma</p>
-                      </div>
-                    </div>
-                  </div>
+                <div className="aspect-[4/3] w-full">
+                  <img 
+                    src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=600&h=450&fit=crop&crop=center"
+                    alt="Health impact of air pollution - respiratory health"
+                    className="w-full h-full object-cover rounded-xl"
+                  />
                 </div>
               </motion.div>
 
@@ -349,32 +333,48 @@ export const AboutVaayura = ({
                 <div className="space-y-4">
                   <h4 className="text-lg font-sora font-semibold text-brand-grey-green mb-3">Most Vulnerable Groups</h4>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-white rounded-lg p-4 border border-red-100">
-                      <h5 className="font-semibold text-red-700 mb-1">Children</h5>
-                      <p className="text-sm text-gray-700">May develop lung issues in early stage of development</p>
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
+                        <div>
+                          <h5 className="font-semibold text-brand-pastel-green mb-1">Children</h5>
+                          <p className="text-sm text-brand-dark-grey">May develop lung issues in early stage of development</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
+                        <div>
+                          <h5 className="font-semibold text-brand-pastel-green mb-1">Pregnant Women</h5>
+                          <p className="text-sm text-brand-dark-grey">Increased risk of low birth weight & preterm birth</p>
+                        </div>
+                      </div>
                     </div>
                     
-                    <div className="bg-white rounded-lg p-4 border border-red-100">
-                      <h5 className="font-semibold text-red-700 mb-1">Pregnant Women</h5>
-                      <p className="text-sm text-gray-700">Increased risk of low birth weight & preterm birth</p>
-                    </div>
-                    
-                    <div className="bg-white rounded-lg p-4 border border-red-100">
-                      <h5 className="font-semibold text-red-700 mb-1">Elderly</h5>
-                      <p className="text-sm text-gray-700">Increased risk of poor health</p>
-                    </div>
-                    
-                    <div className="bg-white rounded-lg p-4 border border-red-100">
-                      <h5 className="font-semibold text-red-700 mb-1">Pre-existing Conditions</h5>
-                      <p className="text-sm text-gray-700">Increased risk of complications</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
+                        <div>
+                          <h5 className="font-semibold text-brand-pastel-green mb-1">Elderly</h5>
+                          <p className="text-sm text-brand-dark-grey">Increased risk of poor health</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-brand-pastel-green mt-2 flex-shrink-0"></div>
+                        <div>
+                          <h5 className="font-semibold text-brand-pastel-green mb-1">Pre-existing Conditions</h5>
+                          <p className="text-sm text-brand-dark-grey">Increased risk of complications</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* WHO Recommendation */}
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <p className="text-sm font-medium text-green-800">
+                <div>
+                  <p className="text-sm font-medium text-brand-dark-grey">
                     WHO Recommendation: Use of air purifiers in India to minimize indoor air pollution.
                   </p>
                 </div>

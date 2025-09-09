@@ -10,7 +10,7 @@ import stormSideView from "@/assets/sections/products/product-images/stormsidevi
 import leftSideViewStorm from "@/assets/sections/products/product-images/leftsideviewstorm.png";
 import nestFrontView from "@/assets/sections/products/product-images/nestfrontview.png";
 import nestSideView from "@/assets/sections/products/product-images/nestsideview.png";
-import leftSideViewNest from "@/assets/sections/products/product-images/leftsideviewnest.png";
+import leftSideViewNest from "@/assets/sections/products/product-images/leftsidenest.png";
 
 // Define types locally to avoid import issues
 interface ProductFeature {
@@ -83,9 +83,25 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
   );
 
   // Check if current image is a front view (should be larger)
-  const isFrontView = useMemo(() => {
+  const isStormFrontView = useMemo(() => {
     const currentImage = productImages[currentImageIndex];
-    return currentImage === stormFrontView || currentImage === nestFrontView;
+    return currentImage === stormFrontView;
+  }, [productImages, currentImageIndex]);
+
+  const isNestFrontView = useMemo(() => {
+    const currentImage = productImages[currentImageIndex];
+    return currentImage === nestFrontView;
+  }, [productImages, currentImageIndex]);
+
+  // Check if current image is a left side view (should also be zoomed)
+  const isLeftSideViewStorm = useMemo(() => {
+    const currentImage = productImages[currentImageIndex];
+    return currentImage === leftSideViewStorm;
+  }, [productImages, currentImageIndex]);
+
+  const isLeftSideViewNest = useMemo(() => {
+    const currentImage = productImages[currentImageIndex];
+    return currentImage === leftSideViewNest;
   }, [productImages, currentImageIndex]);
 
   const handleImageError = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -126,15 +142,11 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
           
           {/* Left Visual - Product Image with Navigation */}
           <div className="flex justify-center lg:justify-start">
-            <div className={`relative transition-all duration-300 ease-in-out overflow-hidden ${
-              isFrontView 
-                ? 'w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] xl:w-[1000px] xl:h-[1000px] p-8'
-                : 'w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] md:w-[550px] md:h-[550px] lg:w-[750px] lg:h-[750px] p-4'
-            }`}>
+            <div className="relative transition-all duration-300 ease-in-out overflow-hidden w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] md:w-[550px] md:h-[550px] lg:w-[750px] lg:h-[750px] p-4">
               <img
                 src={currentImageSrc}
                 alt={`${product.name} - View ${currentImageIndex + 1}`}
-                className="w-full h-full object-contain transition-all duration-300 ease-in-out"
+                className="w-full h-full object-contain"
                 style={{ 
                   filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3))',
                   width: '100%',
@@ -142,7 +154,10 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
                   objectFit: 'contain',
                   maxWidth: '100%',
                   maxHeight: '100%',
-                  transform: isFrontView ? 'scale(1.4)' : 'scale(1)'
+                  transform: isStormFrontView ? 'scale(1.4) translateY(-5%)' : 
+                           isNestFrontView ? 'scale(1.4) translateY(-2%)' :
+                           isLeftSideViewStorm ? 'scale(1.3) translateY(-3%)' :
+                           isLeftSideViewNest ? 'scale(1.0) translateY(-3%)' : 'scale(1)'
                 }}
                 loading="lazy"
                 decoding="async"

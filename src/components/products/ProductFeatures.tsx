@@ -4,6 +4,9 @@ import fourLayerFilterImg from "@/assets/sections/homepage/filtration/hepa_filtr
 import intSensorImg from "@/assets/sections/products/features/Adobe_Express_-_file_1.png";
 import realtimeAQIImg from "@/assets/sections/products/features/realtime AQI.jpg";
 import ambientLightImg from "@/assets/sections/homepage/features/ambient_light_new.png";
+import ambientLight1 from "@/assets/sections/homepage/features/ambientlight1.png";
+import ambientLight2 from "@/assets/sections/homepage/features/ambientlight2.png";
+import ambientLight3 from "@/assets/sections/homepage/features/ambientlight3.png";
 import aromaTepImg from "@/assets/sections/products/features/aromatherapy_new.png";
 import productHeroImg from "@/assets/sections/homepage/hero/product_hero.png";
 import silentSleepModeImg from "@/assets/sections/products/features/Adobe Express - file.png";
@@ -49,18 +52,36 @@ const features: Feature[] = [
   },
 ];
 
+// Ambient light carousel images
+const ambientLightImages = [
+  ambientLight2,
+  ambientLight1,
+  ambientLight3
+];
+
 export function ProductFeatures() {
   const [visibleFeatures, setVisibleFeatures] = useState<boolean[]>([false, false, false, false, false]);
+  const [ambientCarouselIndex, setAmbientCarouselIndex] = useState(0);
   const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const observers = features.map((_, index) => {
       const observer = new IntersectionObserver(
         ([entry]) => {
+          const currentScrollY = window.scrollY;
+          const isScrollingDown = currentScrollY > lastScrollY.current;
+          lastScrollY.current = currentScrollY;
+
           setVisibleFeatures(prev => {
             const newVisible = [...prev];
-            // Show feature only when it's more centered in viewport
-            newVisible[index] = entry.intersectionRatio >= 0.4;
+            
+            // Only animate when scrolling down and element becomes visible
+            if (entry.intersectionRatio >= 0.4 && isScrollingDown && !newVisible[index]) {
+              newVisible[index] = true;
+            }
+            // Keep visible state when scrolling up (no animation reset)
+            
             return newVisible;
           });
         },
@@ -81,6 +102,19 @@ export function ProductFeatures() {
       observers.forEach(observer => observer.disconnect());
     };
   }, []);
+
+  // Ambient light carousel effect - starts after feature becomes visible
+  useEffect(() => {
+    const ambientFeatureIndex = 2; // Ambient Air Quality Display is the 3rd feature (index 2)
+    
+    if (!visibleFeatures[ambientFeatureIndex]) return;
+
+    const carouselInterval = setInterval(() => {
+      setAmbientCarouselIndex(prev => (prev + 1) % ambientLightImages.length);
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(carouselInterval);
+  }, [visibleFeatures]);
 
   return (
     <section className="w-full py-12 sm:py-16 lg:py-20 xl:py-24 bg-white">
@@ -122,18 +156,47 @@ export function ProductFeatures() {
                     : `opacity-0 scale-95 ${index % 2 === 1 ? 'translate-x-12' : '-translate-x-12'}`
                 }`}>
                   {visibleFeatures[index] ? (
-                    <img 
-                      src={feature.image} 
-                      alt={feature.title}
-                      className={`w-full max-w-full object-contain ${feature.title === 'Silent Sleep Mode' ? 'h-64 sm:h-80 md:h-96 lg:h-[32rem]' : 'h-48 sm:h-64 md:h-80 lg:h-96'}`}
-                      style={{ 
-                        filter: 'drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15))',
-                        maxHeight: '100%',
-                        height: 'auto',
-                        aspectRatio: 'auto'
-                      }}
-                      loading="lazy"
-                    />
+                    feature.title === 'Ambient Air Quality Display' ? (
+                      // Carousel for Ambient Air Quality Display
+                      <div className="relative w-full max-w-full h-48 sm:h-64 md:h-80 lg:h-96">
+                        {ambientLightImages.map((img, imgIndex) => (
+                          <img 
+                            key={imgIndex}
+                            src={img} 
+                            alt={`${feature.title} - View ${imgIndex + 1}`}
+                            className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${
+                              imgIndex === ambientCarouselIndex ? 'opacity-100' : 'opacity-0'
+                            }`}
+                            style={{ 
+                              filter: 'drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15))',
+                              maxHeight: '100%',
+                              height: 'auto',
+                              aspectRatio: 'auto',
+                              transform: img === ambientLight3 ? 'scale(1.8)' : 'scale(1.4)'
+                            }}
+                            loading="lazy"
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      // Regular single image for other features
+                      <img 
+                        src={feature.image} 
+                        alt={feature.title}
+                        className={`w-full max-w-full ${feature.title === 'Silent Sleep Mode' ? 'object-cover object-right h-64 sm:h-80 md:h-96 lg:h-[32rem]' : 'object-contain h-48 sm:h-64 md:h-80 lg:h-96'}`}
+                        style={{ 
+                          filter: 'drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15))',
+                          maxHeight: '100%',
+                          height: 'auto',
+                          aspectRatio: 'auto',
+                          ...(feature.title === 'Silent Sleep Mode' && {
+                            objectPosition: '60% center',
+                            transform: 'scale(1.25) translateX(-20%)'
+                          })
+                        }}
+                        loading="lazy"
+                      />
+                    )
                   ) : (
                     <div 
                       className={`w-full max-w-full ${feature.title === 'Silent Sleep Mode' ? 'h-64 sm:h-80 md:h-96 lg:h-[32rem]' : 'h-48 sm:h-64 md:h-80 lg:h-96'} bg-gray-100 rounded-lg animate-pulse flex items-center justify-center`}
@@ -145,7 +208,7 @@ export function ProductFeatures() {
                 </div>
 
                 {/* Feature Content */}
-                <div className={`flex-1 space-y-6 transition-all duration-1000 ease-out p-4 sm:p-6 lg:p-8 ${
+                <div className={`flex-1 space-y-6 transition-all duration-1000 ease-out ${feature.title === 'Silent Sleep Mode' ? 'p-4 sm:p-6 lg:p-8 lg:pl-0' : 'p-4 sm:p-6 lg:p-8'} ${
                   visibleFeatures[index] 
                     ? 'opacity-100 translate-x-0' 
                     : `opacity-0 ${index % 2 === 1 ? '-translate-x-12' : 'translate-x-12'}`
