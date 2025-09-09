@@ -60,7 +60,7 @@ export function CheckoutPage2() {
   const initialItems = [
     {
       id: '51f1a996-6e38-42a3-a952-b62a40436735', // Storm product UUID
-      name: 'Strom', // Match database name
+      name: 'Storm', // Match database name
       price: 15000, // Match database price
       quantity: location.state?.item?.id === '51f1a996-6e38-42a3-a952-b62a40436735' ? (location.state.item.quantity || 1) : 0,
       image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'
@@ -70,7 +70,7 @@ export function CheckoutPage2() {
       name: 'Nest', // Match database name
       price: 10000, // Match database price
       quantity: location.state?.item?.id === '719171bd-7b50-482f-9ee5-fc8c946c8b15' ? (location.state.item.quantity || 1) : 0,
-      image: '/src/assets/sections/products/product-images/nestfrontview.png'
+      image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/nestfrontview.png'
     }
   ]
   
@@ -193,8 +193,8 @@ export function CheckoutPage2() {
     // If not found in admin products, check fallback products
     if (!product) {
       const fallbackMap: { [key: string]: any } = {
-        '51f1a996-6e38-42a3-a952-b62a40436735': { id: '51f1a996-6e38-42a3-a952-b62a40436735', name: 'Strom', price: 15000, images: ['https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'] },
-        '719171bd-7b50-482f-9ee5-fc8c946c8b15': { id: '719171bd-7b50-482f-9ee5-fc8c946c8b15', name: 'Nest', price: 10000, images: ['/src/assets/sections/products/product-images/nestfrontview.png'] },
+        '51f1a996-6e38-42a3-a952-b62a40436735': { id: '51f1a996-6e38-42a3-a952-b62a40436735', name: 'Storm', price: 15000, images: ['https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'] },
+        '719171bd-7b50-482f-9ee5-fc8c946c8b15': { id: '719171bd-7b50-482f-9ee5-fc8c946c8b15', name: 'Nest', price: 10000, images: ['https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/nestfrontview.png'] },
         'hepa-filter': { id: 'hepa-filter', name: 'HEPA Filter Replacement', price: 1999, images: ['/src/assets/4 layer filter.jpg'] },
         'carbon-filter': { id: 'carbon-filter', name: 'Carbon Pre-Filter', price: 899, images: ['/src/assets/4 layer filter.jpg'] },
         'uv-lamp': { id: 'uv-lamp', name: 'UV-C Sanitizer Lamp', price: 2499, images: ['/src/assets/4 layer filter.jpg'] }
@@ -664,7 +664,7 @@ export function CheckoutPage2() {
                       <button
                         onClick={handleApplyCoupon}
                         disabled={applyingCoupon || !couponCode.trim()}
-                        className="px-4 py-2 bg-green-800 hover:bg-green-900 disabled:bg-gray-400 text-white text-sm font-medium rounded-lg transition-colors"
+                        className="px-4 py-2 bg-brand-pastel-green hover:bg-green-800 text-brand-grey-green hover:text-white font-semibold rounded-lg transition-colors"
                       >
                         {applyingCoupon ? 'Applying...' : 'Apply'}
                       </button>
@@ -734,7 +734,7 @@ export function CheckoutPage2() {
               <button
                 onClick={handlePayment}
                 disabled={loading || !validateForm()}
-                className="w-full bg-green-800 hover:bg-green-900 disabled:bg-gray-400 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg transition-colors text-base sm:text-lg touch-manipulation"
+                className="w-full bg-brand-pastel-green hover:bg-green-800 text-brand-grey-green hover:text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg transition-colors text-base sm:text-lg touch-manipulation"
               >
                 {loading ? 'PROCESSING...' : 'PROCEED TO CHECKOUT'}
               </button>
