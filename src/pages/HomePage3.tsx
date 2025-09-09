@@ -1,5 +1,5 @@
 import { Header1 } from '@/components/ui/header'
-import { HeroVideoScroll } from '@/components/homepage/HeroVideoScroll'
+import { HeroVideoScroll2 } from '@/components/homepage/HeroVideoScroll2'
 import { ProductsShowcase } from '@/components/homepage/ProductsShowcase'
 import { ProductDetailFeatures } from '@/components/product-detail/ProductDetailFeatures'
 import { AppControlSection } from '@/components/homepage/AppControlSection'
@@ -8,11 +8,11 @@ import { ProductShowcaseSection } from '@/components/homepage/ProductShowcaseSec
 import { ProductClients } from '@/components/products/ProductClients'
 import { Footer } from '@/components/shared/Footer'
 
-export function HomePage() {
+export function HomePage3() {
   return (
     <>
       <Header1 />
-      <HeroVideoScroll />
+      <HeroVideoScroll2 />
       {/* About Us Section - Zoom Resistant */}
       <section className="bg-white" style={{ padding: 'clamp(2rem, 6vh, 4rem) clamp(1rem, 4vw, 2rem)' }}>
         <div className="mx-auto text-center" style={{ maxWidth: 'clamp(20rem, 80vw, 60rem)' }}>
