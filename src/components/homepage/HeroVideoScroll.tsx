@@ -25,11 +25,13 @@ export function HeroVideoScroll() {
       if (lottieRef.current) {
         const totalFrames = lottieRef.current.getDuration(true);
         if (totalFrames) {
-          // Calculate frame with high precision (reversed, trimmed)
+          // Calculate frame with high precision (reversed, trimmed) - SLOWER ANIMATION
           // Assuming 30fps, skip first and last 30 frames (1 second each)
           const framesToSkip = 30;
           const usableFrames = Math.max(totalFrames - (framesToSkip * 2), 1);
-          const frame = framesToSkip + ((1 - currentProgressRef.current) * usableFrames);
+          // Make animation slower by using a slower progress curve (0.7 multiplier)
+          const slowedProgress = Math.pow(currentProgressRef.current, 0.7);
+          const frame = framesToSkip + ((1 - slowedProgress) * usableFrames);
           
           // Update animation
           lottieRef.current.goToAndStop(frame, true);
