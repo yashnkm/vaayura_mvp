@@ -6,6 +6,8 @@ import { TreePine, Target } from 'lucide-react';
 import heroImage from "@/assets/sections/about/aboutus1.png";
 import productImage from "@/assets/sections/shared/backgrounds/background.png";
 import problemImage from "@/assets/sections/about/problem_img.png";
+import lowAirQualityImage from "@/assets/sections/about/lowairquality.png";
+import pollutedAirImage from "@/assets/sections/about/poluttedair.png";
 
 interface AboutVaayuraProps {
   title?: string;
@@ -187,6 +189,9 @@ export const AboutVaayura = ({
                   src={heroImage}
                   alt="Pure nature - representing clean air and environmental wellness"
                   className="w-full h-full object-cover"
+                  style={{
+                    objectPosition: '50% center'
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-grey-green/30 to-transparent"></div>
                 
@@ -264,7 +269,7 @@ export const AboutVaayura = ({
               <motion.div variants={fadeInRight} className="flex-1 relative max-w-lg">
                 <div className="aspect-[4/3] w-full">
                   <img 
-                    src={problemImage} 
+                    src={lowAirQualityImage} 
                     alt="Air pollution in urban India - industrial emissions"
                     className="w-full h-full object-cover rounded-xl"
                   />
@@ -302,9 +307,12 @@ export const AboutVaayura = ({
               <motion.div variants={fadeInRight} className="flex-1 relative max-w-lg">
                 <div className="aspect-[4/3] w-full">
                   <img 
-                    src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=600&h=450&fit=crop&crop=center"
-                    alt="Health impact of air pollution - respiratory health"
+                    src={pollutedAirImage}
+                    alt="Polluted air impact - health and environmental concerns"
                     className="w-full h-full object-cover rounded-xl"
+                    style={{
+                      objectPosition: 'center 95%'
+                    }}
                   />
                 </div>
               </motion.div>
