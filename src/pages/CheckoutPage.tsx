@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, CreditCard, Shield, Truck } from 'lucide-react'
+import logoImage from '@/assets/logo/logo2.png'
 
 // Declare Razorpay types
 declare global {
@@ -219,13 +220,27 @@ export function CheckoutPage() {
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-4 py-4">
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            <ArrowLeft size={20} />
-            Back to Products
-          </button>
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center">
+              <img 
+                src={logoImage} 
+                alt="Vaayura Logo" 
+                className="h-8 w-auto"
+                onClick={() => navigate('/')}
+                style={{ cursor: 'pointer' }}
+              />
+            </div>
+            
+            {/* Back Button */}
+            <button
+              onClick={() => navigate(-1)}
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <ArrowLeft size={20} />
+              Back to Products
+            </button>
+          </div>
         </div>
       </div>
 

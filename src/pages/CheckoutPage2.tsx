@@ -5,6 +5,7 @@ import { ArrowLeft, CreditCard, Shield, Truck, Plus, Minus, Trash2, ChevronLeft,
 import { couponService } from '@/services/couponService'
 import { AppliedCoupon } from '@/types/coupon'
 import { useAdminProducts } from '@/hooks/useProducts'
+import logoImage from '@/assets/sections/shared/logos/logo_2.png'
 
 // Declare Razorpay types
 declare global {
@@ -416,15 +417,10 @@ export function CheckoutPage2() {
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center">
               <img 
-                src="/src/assets/logo_2.png" 
-                alt="Logo" 
-                className="h-8" 
-                style={{ 
-                  width: 'auto',
-                  height: '2rem',
-                  objectFit: 'contain'
-                }}
-                loading="lazy"
+                src={logoImage} 
+                alt="Vaayura Logo" 
+                className="h-8 w-auto cursor-pointer" 
+                onClick={() => navigate('/')}
               />
             </div>
             <div className="flex items-center space-x-2">

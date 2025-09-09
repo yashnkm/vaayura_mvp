@@ -46,7 +46,7 @@ export function HomePage() {
         </div>
         
         <div className="flex justify-center items-center">
-          <div className="w-[70vw] h-auto relative">
+          <div className="w-[70vw] h-auto">
             <img
               src={filterationImage}
               alt="Filteration Technology - Advanced air purification system"
@@ -58,7 +58,6 @@ export function HomePage() {
               }}
               loading="lazy"
             />
-            
           </div>
         </div>
       </section>
