@@ -120,7 +120,7 @@ export function HeroVideoScroll() {
                 <span className="sm:hidden"> </span>Clean Air.
               </h1>
               <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-green-100/90 leading-relaxed font-subheading">
-                <p className="text-center px-2 sm:px-0">Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
+                <p className="text-center px-2 sm:px-0">Clean air is no longer a luxury it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
               </div>
               
               {/* Scroll hint */}

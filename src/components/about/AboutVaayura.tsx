@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ProductClients } from "@/components/products/ProductClients";
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { TreePine, Target } from 'lucide-react';
+import { TreePine, Compass } from 'lucide-react';
 import heroImage from "@/assets/sections/about/aboutus1.png";
 import productImage from "@/assets/sections/shared/backgrounds/background.png";
 import problemImage from "@/assets/sections/about/problem_img.png";
@@ -37,7 +37,7 @@ interface AboutVaayuraProps {
 }
 
 const defaultAchievements = [
-  { label: "Years of Engineering Excellence", value: "29+" },
+  { label: "Years of\nEngineering Excellence", value: "29+" },
   { label: "Air Quality Improved", value: "99.95%" },
   { label: "Customer Satisfaction", value: "100%" },
   { label: "Cities Served", value: "50+" },
@@ -169,7 +169,7 @@ export const AboutVaayura = ({
                 <div className="relative flex gap-4">
                     <div className="relative">
                       <div className="flex w-12 h-12 items-center justify-center overflow-hidden rounded-full border-2 border-brand-pastel-green/30 bg-brand-pastel-green/10">
-                        <Target className="w-6 h-6 text-brand-pastel-green" />
+                        <Compass className="w-6 h-6 text-brand-pastel-green" />
                       </div>
                     </div>
                     <div className="flex-1 pt-2">
@@ -518,11 +518,11 @@ export const AboutVaayura = ({
           </motion.div>
           <motion.div variants={staggerContainer} className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl">
             {achievements.map((item, idx) => (
-              <motion.div variants={fadeInUp} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center" key={item.label + idx}>
-                <span className="text-3xl md:text-4xl lg:text-5xl font-semibold font-sora text-brand-grey-green block mb-3">
+              <motion.div variants={fadeInUp} className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 text-center min-h-[160px] flex flex-col justify-between items-center" key={item.label + idx}>
+                <span className="text-3xl md:text-4xl lg:text-5xl font-semibold font-sora text-brand-pastel-green block flex-shrink-0">
                   {item.value}
                 </span>
-                <p className="text-brand-dark-grey font-montserrat text-sm md:text-base">{item.label}</p>
+                <p className="text-brand-dark-grey font-montserrat text-sm md:text-base whitespace-pre-line mt-4">{item.label}</p>
               </motion.div>
             ))}
           </motion.div>

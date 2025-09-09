@@ -24,12 +24,6 @@ const contactMethods: ContactMethod[] = [
     action: "mailto:info@vaayura.com"
   },
   {
-    icon: <MessageCircle className="h-12 w-12" />,
-    title: "WhatsApp us",
-    subtitle: "Chat instantly",
-    action: "https://wa.me/91XXXXXXXXXX"
-  },
-  {
     icon: <Calendar className="h-12 w-12" />,
     title: "Book a demo",
     subtitle: "Schedule now",
@@ -63,7 +57,7 @@ export function ProductContact() {
           </div>
 
           {/* Contact Methods */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-6">
             {contactMethods.map((method, index) => (
               <div 
                 key={index}

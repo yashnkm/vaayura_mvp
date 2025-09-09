@@ -38,11 +38,11 @@ export function HomePage() {
       
       {/* Filteration Technology Section */}
       <section className="w-full py-16" style={{ backgroundColor: '#fafafa' }}>
-        <div className="container mx-auto text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
+        <div className="container mx-auto text-left mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold text-[#36454F] leading-tight">
             Filteration Technology
           </h2>
-          <div className="w-16 h-1 bg-brand-pastel-green rounded-full mx-auto mt-4"></div>
+          <div className="w-16 h-1 bg-brand-pastel-green rounded-full mt-4"></div>
         </div>
         
         <div className="flex justify-center items-center">

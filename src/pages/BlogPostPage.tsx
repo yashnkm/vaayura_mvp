@@ -356,7 +356,7 @@ export function BlogPostPage() {
       <Layout>
         <div className="bg-slate-50 pt-32 px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl font-heading text-brand-grey-green mb-4">Post Not Found</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold text-[#36454F] mb-4">Post Not Found</h1>
             <Link to="/blog">
               <Button variant="brand-primary" size="brand-default">
                 Back to Blog
@@ -382,8 +382,8 @@ export function BlogPostPage() {
             <div className="mb-6">
               <div className="flex items-center gap-4 mb-4">
                 <Badge variant="secondary">{post.category}</Badge>
-                <span className="text-sm text-brand-dark-grey font-body">{post.readTime}</span>
-                <span className="text-sm text-brand-dark-grey font-body">
+                <span className="text-sm text-brand-dark-grey font-subheading">{post.readTime}</span>
+                <span className="text-sm text-brand-dark-grey font-subheading">
                   {new Date(post.date).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
@@ -392,15 +392,15 @@ export function BlogPostPage() {
                 </span>
               </div>
               
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-display text-brand-grey-green leading-tight mb-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold text-[#36454F] leading-tight mb-4">
                 {post.title}
               </h1>
               
-              <p className="text-lg text-brand-dark-grey font-body mb-6">
+              <p className="text-lg text-brand-dark-grey font-subheading mb-6">
                 {post.excerpt}
               </p>
               
-              <p className="text-sm text-brand-dark-grey font-body">
+              <p className="text-sm text-brand-dark-grey font-subheading">
                 By {post.author}
               </p>
             </div>
@@ -425,7 +425,7 @@ export function BlogPostPage() {
           <div className="max-w-3xl mx-auto">
             <article className="prose prose-lg max-w-none">
               <div 
-                className="text-brand-dark-grey font-body leading-relaxed"
+                className="text-brand-dark-grey font-subheading leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
             </article>
@@ -439,10 +439,10 @@ export function BlogPostPage() {
             <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand-grey-green/5 to-brand-pastel-green/10 p-12 border border-brand-pastel-green/20 mb-8">
               <div className="grid lg:grid-cols-2 gap-8 items-center">
                 <div>
-                  <h2 className="text-3xl font-semibold font-heading text-brand-grey-green mb-4">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold text-[#36454F] mb-4">
                     Experience Vaayura Technology
                   </h2>
-                  <p className="text-brand-dark-grey font-body mb-6 leading-relaxed">
+                  <p className="text-brand-dark-grey font-subheading mb-6 leading-relaxed">
                     Put the insights from this article into practice. Our advanced air purification systems are designed to tackle the exact challenges discussed here, providing clean, healthy air for your home.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
@@ -467,10 +467,10 @@ export function BlogPostPage() {
 
             {/* Related Articles */}
             <div className="text-center bg-white rounded-xl p-8 shadow-lg">
-              <h3 className="text-2xl font-semibold font-heading text-brand-grey-green mb-4">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold text-[#36454F] mb-4">
                 Continue Learning
               </h3>
-              <p className="text-brand-dark-grey font-body mb-6">
+              <p className="text-brand-dark-grey font-subheading mb-6">
                 Explore more expert insights on air quality and healthy living.
               </p>
               <Link to="/blog">

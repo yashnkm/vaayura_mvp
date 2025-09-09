@@ -56,16 +56,25 @@ export function CheckoutPage2() {
   const [couponError, setCouponError] = useState('')
   const [applyingCoupon, setApplyingCoupon] = useState(false)
   
-  // Cart system - initialize with item from location state or default
-  const initialItem = location.state?.item || {
-    id: '51f1a996-6e38-42a3-a952-b62a40436735', // Use actual Storm product UUID
-    name: 'Strom', // Match database name
-    price: 15000, // Match database price
-    quantity: 1,
-    image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'
-  }
+  // Cart system - initialize with both Storm and Nest products
+  const initialItems = [
+    {
+      id: '51f1a996-6e38-42a3-a952-b62a40436735', // Storm product UUID
+      name: 'Strom', // Match database name
+      price: 15000, // Match database price
+      quantity: location.state?.item?.id === '51f1a996-6e38-42a3-a952-b62a40436735' ? (location.state.item.quantity || 1) : 0,
+      image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'
+    },
+    {
+      id: '719171bd-7b50-482f-9ee5-fc8c946c8b15', // Nest product UUID
+      name: 'Nest', // Match database name
+      price: 10000, // Match database price
+      quantity: location.state?.item?.id === '719171bd-7b50-482f-9ee5-fc8c946c8b15' ? (location.state.item.quantity || 1) : 0,
+      image: '/src/assets/sections/products/product-images/nestfrontview.png'
+    }
+  ]
   
-  const [cartItems, setCartItems] = useState<CheckoutItem[]>([initialItem])
+  const [cartItems, setCartItems] = useState<CheckoutItem[]>(initialItems)
 
   const [customerData, setCustomerData] = useState<CustomerData>({
     name: '',
@@ -171,7 +180,7 @@ export function CheckoutPage2() {
   
   const recommendedProducts = getVisibleRecommendedProducts()
 
-  // Calculate totals based on cart items
+  // Calculate totals based on cart items with quantity > 0
   const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
   const couponDiscount = appliedCoupon ? appliedCoupon.discountAmount : 0
   const finalAmount = totalAmount - couponDiscount
@@ -225,7 +234,7 @@ export function CheckoutPage2() {
   }
 
   const updateCartItemQuantity = (itemId: string, newQuantity: number) => {
-    if (newQuantity >= 1) {
+    if (newQuantity >= 0) { // Allow 0 quantity for items
       setCartItems(prev => prev.map(item => 
         item.id === itemId 
           ? { ...item, quantity: newQuantity }
@@ -334,13 +343,15 @@ export function CheckoutPage2() {
     
     try {
       // Create order via backend API
-      // Backend expects: { productId, quantity, customerData }
-      // Note: Backend only supports single product orders currently
-      const firstItem = cartItems[0]
-      if (!firstItem) {
+      // Filter items with quantity > 0
+      const itemsWithQuantity = cartItems.filter(item => item.quantity > 0)
+      if (itemsWithQuantity.length === 0) {
         throw new Error('No items in cart')
       }
 
+      // For now, handle the first item with quantity > 0 (backend limitation)
+      const firstItem = itemsWithQuantity[0]
+      
       const requestPayload = {
         productId: firstItem.id,
         quantity: firstItem.quantity,
@@ -374,7 +385,7 @@ export function CheckoutPage2() {
         amount: orderData.razorpay_order.amount,
         currency: orderData.razorpay_order.currency,
         name: 'Vaayura',
-        description: `Payment for ${cartItems.length} item(s)`,
+        description: `Payment for ${itemsWithQuantity.length} item(s)`,
         order_id: orderData.razorpay_order.id,
         handler: async function (response: any) {
           setShowConfirmation(true)
@@ -424,9 +435,7 @@ export function CheckoutPage2() {
               />
             </div>
             <div className="flex items-center space-x-2">
-              <span className="text-green-600 font-medium">CART</span>
-              <span className="text-gray-400">→</span>
-              <span className="text-gray-900 font-medium">ADDRESS & PAYMENT</span>
+              {/* Progress text removed as requested */}
             </div>
           </div>
         </div>
@@ -474,9 +483,9 @@ export function CheckoutPage2() {
                           <button
                             onClick={() => updateCartItemQuantity(item.id, item.quantity - 1)}
                             className="p-2 sm:p-3 hover:bg-gray-100 transition-colors touch-manipulation"
-                            disabled={item.quantity <= 1}
+                            disabled={item.quantity <= 0}
                           >
-                            <Minus size={16} className={item.quantity <= 1 ? 'text-gray-300' : 'text-gray-600'} />
+                            <Minus size={16} className={item.quantity <= 0 ? 'text-gray-300' : 'text-gray-600'} />
                           </button>
                           <span className="px-3 sm:px-4 py-2 min-w-[50px] sm:min-w-[60px] text-center font-medium">
                             {item.quantity}
@@ -695,7 +704,7 @@ export function CheckoutPage2() {
               {/* Price Breakdown */}
               <div className="space-y-4 pb-6 border-b border-gray-200">
                 <div className="flex justify-between text-gray-700">
-                  <span>Subtotal</span>
+                  <span>Subtotal ({cartItems.filter(item => item.quantity > 0).length} item{cartItems.filter(item => item.quantity > 0).length !== 1 ? 's' : ''})</span>
                   <span>₹{totalAmount.toLocaleString()}</span>
                 </div>
                 {appliedCoupon && (

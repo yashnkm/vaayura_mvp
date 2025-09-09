@@ -18,7 +18,6 @@ function Header1() {
     const navigationItems = [
         {
             title: "Products",
-            description: "Discover our range of advanced air purification solutions.",
             items: [
                 {
                     title: "Vaayura Storm",
@@ -78,16 +77,10 @@ function Header1() {
                                                 {item.title}
                                             </NavigationMenuTrigger>
                                             <NavigationMenuContent className="!w-[450px] p-4">
-                                                <div className="flex flex-col lg:grid grid-cols-2 gap-4">
-                                                    <div className="flex flex-col h-full justify-between">
-                                                        <div className="flex flex-col">
-                                                            <p className="text-base">{item.title}</p>
-                                                            <p className="text-muted-foreground text-sm">
-                                                                {item.description}
-                                                            </p>
-                                                        </div>
+                                                <div className="flex flex-col lg:grid grid-cols-2">
+                                                    <div className="flex flex-col h-full justify-center pl-4">
                                                         <Link to="/products">
-                                                            <Button size="sm" className="mt-10 bg-brand-grey-green hover:bg-brand-grey-green/90 text-white">
+                                                            <Button size="sm" className="bg-brand-grey-green hover:bg-brand-grey-green/90 text-white">
                                                                 View Products
                                                             </Button>
                                                         </Link>

@@ -9,11 +9,11 @@ export function ContactSupport() {
   const navigate = useNavigate()
 
   const handleStormClick = () => {
-    navigate('/products/storm')
+    navigate('/support/storm')
   }
 
   const handleNestClick = () => {
-    navigate('/products/nest')
+    navigate('/support/nest')
   }
 
   return (
@@ -43,113 +43,22 @@ export function ContactSupport() {
         <div className="absolute -bottom-4 left-0 right-0 h-20 bg-gradient-to-b from-white to-gray-50 pointer-events-none z-10"></div>
       </section>
 
-      {/* Four Action Cards Section */}
+      {/* Installation Support Section */}
       <section className="py-16 px-6 bg-gray-50 relative overflow-visible">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-8">
-            {/* Filter Replacement Card */}
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-center pb-8">
+            {/* Installation Support Card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
-              className="h-full"
+              className="w-full max-w-md"
             >
-              <Card className="bg-white border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-full flex flex-col">
-                <div className="flex items-center mb-4">
-                  <div className="w-6 h-6 rounded-full bg-green-800 flex items-center justify-center mr-3">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-sora font-semibold text-[#36454F]">Filter Replacement</h3>
-                </div>
-                <div className="flex-grow">
-                  <p className="text-[#36454F] text-sm font-montserrat leading-relaxed mb-6">
-                    Order replacement filters for your
-                    <br />
-                    Vaayura air purifiers and extend
-                    <br />
-                    device life.
-                  </p>
-                </div>
-                <Button className="w-full bg-green-800 hover:bg-green-900 text-white font-montserrat font-semibold py-3 px-4 rounded-full transition-all duration-200 hover:scale-105 mt-auto">
-                  Order Filters
-                </Button>
-              </Card>
-            </motion.div>
-
-            {/* Track Your Order Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="h-full"
-            >
-              <Card className="bg-white border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-full flex flex-col">
-                <div className="flex items-center mb-4">
-                  <div className="w-6 h-6 rounded-full bg-green-800 flex items-center justify-center mr-3">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-sora font-semibold text-[#36454F]">Track your Order</h3>
-                </div>
-                <div className="flex-grow">
-                  <p className="text-[#36454F] text-sm font-montserrat leading-relaxed mb-6">
-                    Track your Vaayura products
-                    <br />
-                    with real-time delivery
-                    <br />
-                    updates.
-                  </p>
-                </div>
-                <Button className="w-full bg-green-800 hover:bg-green-900 text-white font-montserrat font-semibold py-3 px-4 rounded-full transition-all duration-200 hover:scale-105 mt-auto">
-                  Track Now
-                </Button>
-              </Card>
-            </motion.div>
-
-            {/* Chat With Us Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="h-full"
-            >
-              <Card className="bg-white border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-full flex flex-col">
-                <div className="flex items-center mb-4">
-                  <div className="w-6 h-6 rounded-full bg-green-800 flex items-center justify-center mr-3">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-sora font-semibold text-[#36454F]">Chat With Us</h3>
-                </div>
-                <div className="flex-grow">
-                  <p className="text-[#36454F] text-sm font-montserrat leading-relaxed mb-6">
-                    Get 24/7 Chat on Whatsapp at
-                    <br />
-                    <span className="font-semibold text-[#36454F] font-montserrat">+91-8766802724</span> or just
-                  </p>
-                </div>
-                <Button className="w-full bg-green-800 hover:bg-green-900 text-white font-montserrat font-semibold py-3 px-4 rounded-full transition-all duration-200 hover:scale-105 mt-auto">
-                  Chat Now
-                </Button>
-              </Card>
-            </motion.div>
-
-            {/* Installation Support Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="h-full"
-            >
-              <Card className="bg-white border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-full flex flex-col">
+              <Card 
+                className="bg-white border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-full flex flex-col cursor-pointer"
+                onClick={() => navigate('/support')}
+              >
                 <div className="flex items-center mb-4">
                   <div className="w-6 h-6 rounded-full bg-green-800 flex items-center justify-center mr-3">
                     <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -166,7 +75,7 @@ export function ContactSupport() {
                   </p>
                 </div>
                 <Button className="w-full bg-green-800 hover:bg-green-900 text-white font-montserrat font-semibold py-3 px-4 rounded-full transition-all duration-200 hover:scale-105 mt-auto">
-                  Schedule Now
+                  Get Support
                 </Button>
               </Card>
             </motion.div>
@@ -222,7 +131,10 @@ export function ContactSupport() {
                 <div className="flex justify-center">
                   <Button
                     className="bg-green-800 hover:bg-green-900 text-white px-8 py-3 rounded-full font-montserrat font-semibold transition-all duration-200 hover:scale-105"
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleStormClick()
+                    }}
                   >
                     Get Support
                   </Button>
@@ -259,7 +171,10 @@ export function ContactSupport() {
                 <div className="flex justify-center">
                   <Button
                     className="bg-green-800 hover:bg-green-900 text-white px-8 py-3 rounded-full font-montserrat font-semibold transition-all duration-200 hover:scale-105"
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleNestClick()
+                    }}
                   >
                     Get Support
                   </Button>

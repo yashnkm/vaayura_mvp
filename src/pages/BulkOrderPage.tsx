@@ -118,15 +118,15 @@ export function BulkOrderPage() {
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="text-2xl font-heading font-bold text-brand-grey-green mb-2">
+              <h3 className="text-2xl font-sora font-bold text-brand-grey-green mb-2">
                 Request Sent Successfully!
               </h3>
-              <p className="text-gray-600 font-body leading-relaxed mb-6">
+              <p className="text-gray-600 font-subheading leading-relaxed mb-6">
                 Your bulk order request has been sent to our team. We'll review your requirements and get back to you shortly with a customized quote.
               </p>
               <Button
                 onClick={() => setShowSuccessPopup(false)}
-                className="bg-green-800 hover:bg-green-900 text-white px-6 py-2 rounded-full font-heading"
+                className="bg-green-800 hover:bg-green-900 text-white px-6 py-2 rounded-full font-sora"
               >
                 Close
               </Button>
@@ -142,7 +142,7 @@ export function BulkOrderPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight mb-4 text-brand-grey-green"
+            className="text-3xl md:text-4xl lg:text-5xl font-sora font-bold leading-tight mb-4 text-brand-grey-green"
           >
             Bulk Orders Made <span className="text-brand-pastel-green">Simple</span>
           </motion.h1>
@@ -176,10 +176,10 @@ export function BulkOrderPage() {
                         boxShadow: "0 20px 40px -12px rgba(0, 0, 0, 0.15), 0 8px 16px -8px rgba(0, 0, 0, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)" 
                       }}>
                   <div className="mb-6">
-                    <h2 className="text-2xl lg:text-3xl font-heading font-bold text-brand-grey-green mb-2">
+                    <h2 className="text-2xl lg:text-3xl font-sora font-bold text-brand-grey-green mb-2">
                       Submit Your Bulk Order Request
                     </h2>
-                    <p className="text-sm text-gray-600 font-body">
+                    <p className="text-sm text-gray-600 font-subheading">
                       Fill out the form below and our team will get back to you within 24 hours.
                     </p>
                   </div>
@@ -189,7 +189,7 @@ export function BulkOrderPage() {
                     <div className="space-y-4">
                       <div className="flex items-center mb-3">
                         <User className="w-5 h-5 mr-2 text-green-600" />
-                        <h3 className="text-lg font-heading font-semibold text-brand-grey-green">
+                        <h3 className="text-lg font-sora font-semibold text-brand-grey-green">
                           Contact Information
                         </h3>
                       </div>
@@ -269,7 +269,7 @@ export function BulkOrderPage() {
                     <div className="space-y-4">
                       <div className="flex items-center mb-3">
                         <Package className="w-5 h-5 mr-2 text-green-600" />
-                        <h3 className="text-lg font-heading font-semibold text-brand-grey-green">
+                        <h3 className="text-lg font-sora font-semibold text-brand-grey-green">
                           Order Details
                         </h3>
                       </div>
@@ -357,7 +357,7 @@ export function BulkOrderPage() {
                     <div className="space-y-3">
                       <div className="flex items-center mb-2">
                         <MessageSquare className="w-5 h-5 mr-2 text-green-600" />
-                        <Label htmlFor="notes" className="text-lg font-heading font-semibold text-brand-grey-green">
+                        <Label htmlFor="notes" className="text-lg font-sora font-semibold text-brand-grey-green">
                           Additional Notes or Requirements
                         </Label>
                       </div>
@@ -377,7 +377,7 @@ export function BulkOrderPage() {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-green-800 hover:bg-green-900 text-white py-2 px-4 rounded-full font-heading font-semibold text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed h-10"
+                        className="w-full bg-green-800 hover:bg-green-900 text-white py-2 px-4 rounded-full font-sora font-semibold text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed h-10"
                       >
                         {isSubmitting ? (
                           <div className="flex items-center justify-center">
@@ -415,7 +415,7 @@ export function BulkOrderPage() {
                         style={{ 
                           boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" 
                         }}>
-                  <h3 className="text-2xl font-heading font-bold text-brand-grey-green mb-6">
+                  <h3 className="text-2xl font-sora font-bold text-brand-grey-green mb-6">
                     Why Choose Bulk Orders?
                   </h3>
                   
@@ -425,8 +425,8 @@ export function BulkOrderPage() {
                         <Package className="w-6 h-6 text-green-600" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-heading font-semibold text-brand-grey-green mb-2">Volume Discounts</h4>
-                        <p className="text-gray-600 font-body text-sm leading-relaxed">Get competitive pricing with significant savings on orders of 5+ units.</p>
+                        <h4 className="text-lg font-sora font-semibold text-brand-grey-green mb-2">Volume Discounts</h4>
+                        <p className="text-gray-600 font-subheading text-sm leading-relaxed">Get competitive pricing with significant savings on orders of 5+ units.</p>
                       </div>
                     </div>
 
@@ -435,8 +435,8 @@ export function BulkOrderPage() {
                         <Clock className="w-6 h-6 text-blue-600" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-heading font-semibold text-brand-grey-green mb-2">Priority Support</h4>
-                        <p className="text-gray-600 font-body text-sm leading-relaxed">Dedicated account manager and faster delivery for bulk orders.</p>
+                        <h4 className="text-lg font-sora font-semibold text-brand-grey-green mb-2">Priority Support</h4>
+                        <p className="text-gray-600 font-subheading text-sm leading-relaxed">Dedicated account manager and faster delivery for bulk orders.</p>
                       </div>
                     </div>
 
@@ -445,8 +445,8 @@ export function BulkOrderPage() {
                         <Building className="w-6 h-6 text-green-600" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-heading font-semibold text-brand-grey-green mb-2">Custom Solutions</h4>
-                        <p className="text-gray-600 font-body text-sm leading-relaxed">Tailored installations and maintenance packages for your organization.</p>
+                        <h4 className="text-lg font-sora font-semibold text-brand-grey-green mb-2">Custom Solutions</h4>
+                        <p className="text-gray-600 font-subheading text-sm leading-relaxed">Tailored installations and maintenance packages for your organization.</p>
                       </div>
                     </div>
                   </div>
@@ -467,18 +467,18 @@ export function BulkOrderPage() {
                         style={{ 
                           boxShadow: "0 8px 20px -5px rgba(0, 0, 0, 0.08), 0 3px 5px -2px rgba(0, 0, 0, 0.04)" 
                         }}>
-                  <h4 className="text-lg font-heading font-semibold text-brand-grey-green mb-4">Need Help?</h4>
-                  <p className="text-gray-600 font-body mb-4 text-sm leading-relaxed">
+                  <h4 className="text-lg font-sora font-semibold text-brand-grey-green mb-4">Need Help?</h4>
+                  <p className="text-gray-600 font-subheading mb-4 text-sm leading-relaxed">
                     Have questions about bulk pricing or custom requirements? Our team is here to help.
                   </p>
                   <div className="space-y-3">
                     <div className="flex items-center text-gray-600">
                       <Mail className="w-4 h-4 mr-3 flex-shrink-0" />
-                      <span className="font-body text-sm">bulk@vaayura.com</span>
+                      <span className="font-subheading text-sm">bulk@vaayura.com</span>
                     </div>
                     <div className="flex items-center text-gray-600">
                       <Phone className="w-4 h-4 mr-3 flex-shrink-0" />
-                      <span className="font-body text-sm">+91-8766802724</span>
+                      <span className="font-subheading text-sm">+91-8766802724</span>
                     </div>
                   </div>
                 </Card>

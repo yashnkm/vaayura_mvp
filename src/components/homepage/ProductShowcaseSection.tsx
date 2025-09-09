@@ -13,7 +13,7 @@ import productImage2 from "@/assets/product images/pexels-fotoaibe-1743227.jpg"
 import productImage3 from "@/assets/product images/pexels-pixabay-259962.jpg"
 import stormCarousel1 from "@/assets/storm/stormcoursel.png"
 import stormCarousel2 from "@/assets/storm/Generated Image September 09, 2025 - 12_38PM.png"
-import stormCarousel3 from "@/assets/storm/Generated Image September 09, 2025 - 12_41PM.png"
+import stormCarousel3 from "@/assets/storm/Generated Image September 09, 2025 - 12_41PM.jpg"
 
 const models = [
   { id: 'storm', name: 'Storm', price: 15990, originalPrice: 21990, image: stormImg },
@@ -201,7 +201,7 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
                   backgroundImage: `url(${bg.image})`
                 }}
               >
-                <div className="absolute inset-0 bg-black/25"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-gray-400/30 via-gray-600/40 to-black/70"></div>
               </div>
             ))}
           </div>
@@ -217,7 +217,7 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-4xl lg:text-6xl font-sora font-bold text-white mb-4 leading-tight"
               >
-                Bigger. Faster. <span className="text-blue-400">Stronger</span>.
+                Bigger. Faster. <span className="text-brand-grey-green">Stronger</span>.
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}

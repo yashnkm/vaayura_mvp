@@ -551,28 +551,12 @@ export function AppControlSection() {
                           x: 8,
                           transition: { duration: 0.1 }
                         }}
-                        animate={activeFeature === feature.id ? {
-                          x: 6,
-                          textShadow: "0 0 8px rgba(34, 197, 94, 0.6)",
-                          transition: { type: "spring", stiffness: 300, damping: 20 }
-                        } : { x: 0 }}
                         className={`block text-left transition-all duration-300 font-sora py-3 px-4 rounded-lg relative w-full touch-manipulation text-sm sm:text-base min-h-[50px] sm:min-h-[auto] ${
                           activeFeature === feature.id
                             ? 'text-green-800 font-semibold bg-green-50/50 shadow-md'
                             : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50 active:bg-gray-100'
                         }`}
                       >
-                        {activeFeature === feature.id && (
-                          <motion.div
-                            layoutId="activeFeatureGlow"
-                            className="absolute inset-0 bg-gradient-to-r from-green-100/80 to-green-50/80 rounded-lg border border-green-200/50"
-                            initial={false}
-                            animate={{
-                              boxShadow: "0 4px 12px rgba(34, 197, 94, 0.15), 0 0 20px rgba(34, 197, 94, 0.1)"
-                            }}
-                            transition={{ duration: 0.3 }}
-                          />
-                        )}
                         <span className="relative z-10">{feature.name}</span>
                       </motion.button>
                       

@@ -133,7 +133,7 @@ export function Hero3DSection() {
                 <span className="sm:hidden"> </span>Clean Air.
               </h1>
               <div className="text-green-100/90 leading-relaxed font-subheading" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)' }}>
-                <p className="text-center" style={{ padding: 'clamp(0.5rem, 2vw, 0)' }}>Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
+                <p className="text-center" style={{ padding: 'clamp(0.5rem, 2vw, 0)' }}>Clean air is no longer a luxury it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
               </div>
               
               {/* Scroll hint */}

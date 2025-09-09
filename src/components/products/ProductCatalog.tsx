@@ -59,10 +59,10 @@ export function ProductCatalog() {
       <section className="py-32 bg-white">
         <div className="container">
           <div className="text-left space-y-4 mb-12 px-6">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold text-brand-grey-green leading-tight">
               Our Products
             </h2>
-            <div className="w-16 h-0.5 bg-brand-pastel-green rounded-full"></div>
+            <div className="w-16 h-1 bg-brand-pastel-green rounded-full"></div>
             <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat max-w-2xl">
               Discover our premium air purification solutions designed for every space and need.
             </p>
@@ -77,10 +77,10 @@ export function ProductCatalog() {
       <div className="container mx-auto">
         {/* Section Header - left aligned pattern */}
         <div className="text-left space-y-4 mb-12 px-6">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-sora text-brand-grey-green leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold text-brand-grey-green leading-tight">
             Our Products
           </h2>
-          <div className="w-16 h-0.5 bg-brand-pastel-green rounded-full"></div>
+          <div className="w-16 h-1 bg-brand-pastel-green rounded-full"></div>
           <p className="text-lg md:text-xl text-brand-dark-grey font-montserrat max-w-2xl">
             Discover our premium air purification solutions designed for every space and need.
           </p>
@@ -143,21 +143,21 @@ export function ProductCatalog() {
                 </h3>
                 {/* Feature Cards */}
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto lg:mx-0">
-                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">CADR</div>
                     <div className="text-green-800 font-sora font-bold text-sm">
                       {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '450 m³/hr' : 
                        product.name.toLowerCase().includes('nest') ? '190 m³/hr' : '190 m³/hr'}
                     </div>
                   </div>
-                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Coverage</div>
                     <div className="text-green-800 font-sora font-bold text-sm">
                       {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '600 sq ft' : 
                        product.name.toLowerCase().includes('nest') ? '400 sq ft' : '400 sq ft'}
                     </div>
                   </div>
-                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">
                       {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? 'Power' : 
                        product.name.toLowerCase().includes('nest') ? 'Size' : 'Type'}
@@ -167,15 +167,15 @@ export function ProductCatalog() {
                        product.name.toLowerCase().includes('nest') ? 'Compact' : 'Advanced'}
                     </div>
                   </div>
-                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Fan Speeds</div>
                     <div className="text-green-800 font-sora font-bold text-sm">Adjustable</div>
                   </div>
-                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Sleep Timer</div>
                     <div className="text-green-800 font-sora font-bold text-sm">Available</div>
                   </div>
-                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Filter Alert</div>
                     <div className="text-green-800 font-sora font-bold text-sm">Smart</div>
                   </div>

@@ -172,7 +172,7 @@ export function ProductFeatures() {
                               maxHeight: '100%',
                               height: 'auto',
                               aspectRatio: 'auto',
-                              transform: img === ambientLight3 ? 'scale(1.8)' : 'scale(1.4)'
+                              transform: 'scale(1.4)'
                             }}
                             loading="lazy"
                           />

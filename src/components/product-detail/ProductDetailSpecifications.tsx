@@ -57,7 +57,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
     "Width": "220 mm",
     "Height": "1050 mm",
     "Weight": "4.65kg",
-    "Oscillation/Angle": "350°",
+    "Oscillation /Angle": "350°",
     "Filter life": "1 year for HEPA+Carbon filter",
     "Standby power consumption": "< 0.5W",
     "Room coverage": "81m² (according to POLAR)",
