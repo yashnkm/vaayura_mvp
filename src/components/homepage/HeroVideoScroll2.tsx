@@ -116,11 +116,11 @@ export function HeroVideoScroll2() {
           >
             <div className="text-center px-4 sm:px-6 max-w-4xl">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-sora font-bold text-green-200 mb-4 sm:mb-6 leading-tight">
-                Life Begins with<br className="hidden sm:block" />
-                <span className="sm:hidden"> </span>Clean Air.
+                Good health begins<br className="hidden sm:block" />
+                <span className="sm:hidden"> </span>with Clean Air.
               </h1>
               <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-green-100/90 leading-relaxed font-subheading">
-                <p className="text-center px-2 sm:px-0">Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
+                <p className="text-center px-2 sm:px-0">Clean air shouldn't be a luxury, and it shouldn't be seasonal. Vaayura delivers world-class 4-layer air purification at the touch of a button, making healthier living effortless and beautiful.</p>
               </div>
               
               {/* Scroll hint */}
@@ -179,14 +179,21 @@ export function HeroVideoScroll2() {
               <div className={`absolute top-0 bottom-0 right-0 w-1/3 flex items-center justify-center transition-opacity duration-300 ${
                 displayProgress > 0.5 ? 'opacity-100' : 'opacity-0'
               }`}>
-                <div className="grid grid-cols-1 gap-4 p-6 max-w-xs">
+                <div className="grid grid-cols-2 gap-4 p-6 max-w-sm">
+                  <div className="bg-white border border-gray-200 rounded-xl px-6 py-4 text-center shadow-md">
+                    <div className="text-gray-600 text-sm font-montserrat font-medium mb-2">Smart App</div>
+                    <div className="text-brand-pastel-green font-sora font-bold text-lg">Controlled</div>
+                  </div>
                   <div className="bg-white border border-gray-200 rounded-xl px-6 py-4 text-center shadow-md">
                     <div className="text-gray-600 text-sm font-montserrat font-medium mb-2">CADR</div>
-                    <div className="text-brand-pastel-green font-sora font-bold text-lg">600 m³/hr</div>
+                    <div className="text-brand-pastel-green font-sora font-bold text-lg">400 m³/hr</div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-xl px-6 py-4 text-center shadow-md">
                     <div className="text-gray-600 text-sm font-montserrat font-medium mb-2">Coverage</div>
-                    <div className="text-brand-pastel-green font-sora font-bold text-lg">1000 sq ft</div>
+                    <div className="text-brand-pastel-green font-sora font-bold text-lg">600+ sq. ft.</div>
+                  </div>
+                  <div className="bg-white border border-gray-200 rounded-xl px-6 py-4 text-center shadow-md">
+                    <div className="text-gray-600 text-sm font-montserrat font-medium mb-2">4-layer filtration with <span className="text-brand-pastel-green font-sora font-bold">True HEPA 13 filter</span></div>
                   </div>
                 </div>
               </div>

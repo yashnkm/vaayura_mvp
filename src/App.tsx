@@ -24,10 +24,13 @@ function LenisScrollProvider({ children }: { children: React.ReactNode }) {
   const location = useLocation()
 
   useEffect(() => {
+    // Scroll to top on route change
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+
     // Initialize Lenis on main content pages, not auth pages
     const contentPages = ['/', '/home2', '/home3', '/about', '/products', '/contact', '/blog', '/3d-demo', '/support']
-    const isContentPage = contentPages.includes(location.pathname) || location.pathname.startsWith('/blog/') || location.pathname.startsWith('/support/')
-    
+    const isContentPage = contentPages.includes(location.pathname) || location.pathname.startsWith('/blog/') || location.pathname.startsWith('/support/') || location.pathname.startsWith('/products/')
+
     if (isContentPage) {
       const lenis = new Lenis({
         duration: 1.2,

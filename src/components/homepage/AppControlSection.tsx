@@ -169,7 +169,7 @@ export function AppControlSection() {
             Breathe <span className="text-brand-pastel-green">Smart</span>
           </h2>
           <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }} className="text-gray-600 font-subheading max-w-2xl mx-auto md:mx-0">
-            Purify air from the Vaayura app
+            Purify air at the touch of a button from the Smart Life app
           </p>
         </div>
 

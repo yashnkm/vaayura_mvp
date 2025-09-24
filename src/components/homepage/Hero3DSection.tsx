@@ -129,11 +129,11 @@ export function Hero3DSection() {
           >
             <div className="text-center" style={{ padding: 'clamp(1rem, 3vw, 2rem)', maxWidth: 'clamp(20rem, 80vw, 60rem)' }}>
               <h1 className="font-sora font-bold text-green-200 leading-tight" style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)', marginBottom: 'clamp(1.5rem, 4vh, 2.5rem)' }}>
-                Life Begins with<br className="hidden sm:block" />
-                <span className="sm:hidden"> </span>Clean Air.
+                Good health begins<br className="hidden sm:block" />
+                <span className="sm:hidden"> </span>with Clean Air.
               </h1>
               <div className="text-green-100/90 leading-relaxed font-subheading" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)' }}>
-                <p className="text-center" style={{ padding: 'clamp(0.5rem, 2vw, 0)' }}>Clean air is no longer a luxury it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
+                <p className="text-center" style={{ padding: 'clamp(0.5rem, 2vw, 0)' }}>Clean air shouldn't be a luxury, and it shouldn't be seasonal. Vaayura delivers world-class 4-layer air purification at the touch of a button, making healthier living effortless and beautiful.</p>
               </div>
               
               {/* Scroll hint */}

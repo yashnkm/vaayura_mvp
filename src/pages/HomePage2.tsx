@@ -17,7 +17,7 @@ export function HomePage2() {
       <section className="bg-white" style={{ padding: 'clamp(2rem, 6vh, 4rem) clamp(1rem, 4vw, 2rem)' }}>
         <div className="mx-auto text-center" style={{ maxWidth: 'clamp(20rem, 80vw, 60rem)' }}>
           <p className="text-brand-dark-grey font-subheading leading-relaxed" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', padding: 'clamp(0.5rem, 2vw, 2rem)' }}>
-            Breathe clean, live healthy. Vaayura's advanced air purification technology ensures your home has the cleanest air possible.
+            Vaayura's class-leading advanced air purification with certified True HEPA 13 filters ensures your home has the cleanest air possible.
           </p>
         </div>
       </section>

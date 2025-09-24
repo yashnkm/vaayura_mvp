@@ -119,7 +119,7 @@ const blogPosts = [
             
             <div class="solution-item">
               <h4>4. Invest in Quality Air Purification</h4>
-              <p>HEPA air purifiers can remove 99.97% of airborne particles as small as 0.3 microns. Choose systems with activated carbon filters for comprehensive protection against both particles and gases.</p>
+              <p>HEPA air purifiers can remove 99.97% of airborne particles as small as 0.1 microns. Choose systems with activated carbon filters for comprehensive protection against both particles and gases.</p>
             </div>
           </div>
           
@@ -203,7 +203,7 @@ const blogPosts = [
             
             <div class="layer-card">
               <h3>True HEPA Filter</h3>
-              <p><strong>Function:</strong> Removes 99.97% of particles as small as 0.3 microns</p>
+              <p><strong>Function:</strong> Removes 99.97% of particles as small as 0.1 microns</p>
               <p><strong>Benefit:</strong> Effectively captures PM2.5, pollen, and fine dust that plague Delhi's air</p>
             </div>
             
@@ -411,10 +411,12 @@ export function BlogPostPage() {
         <section className="px-6 mb-12">
           <div className="max-w-4xl mx-auto">
             <div className="aspect-video overflow-hidden rounded-lg">
-              <img 
-                src={post.image} 
+              <img
+                src={post.image}
                 alt={post.title}
-                className="w-full h-full object-cover"
+                className={`w-full h-full ${
+                  post.image === blog2Img ? 'object-cover object-center scale-[2.2]' : 'object-cover'
+                }`}
               />
             </div>
           </div>

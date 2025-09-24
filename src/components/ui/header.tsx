@@ -17,6 +17,10 @@ import logoImage from "@/assets/sections/shared/logos/logo_2.png";
 function Header1() {
     const navigationItems = [
         {
+            title: "Home",
+            href: "/",
+        },
+        {
             title: "Products",
             items: [
                 {
@@ -125,6 +129,15 @@ function Header1() {
                     {isOpen && (
                         <div className="absolute top-20 border-t flex flex-col w-full right-0 bg-white shadow-lg py-4 container gap-2 max-h-[70vh] overflow-y-auto">
                             {/* Simplified mobile navigation - no submenus */}
+                            <Link
+                                to="/"
+                                className="flex justify-between items-center py-4 px-4 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation"
+                                onClick={() => setOpen(false)}
+                            >
+                                <span className="text-lg font-medium text-brand-grey-green">Home</span>
+                                <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
+                            </Link>
+
                             <Link
                                 to="/products"
                                 className="flex justify-between items-center py-4 px-4 rounded-lg hover:bg-gray-50 transition-colors touch-manipulation"

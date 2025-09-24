@@ -18,7 +18,7 @@ export function HomePage() {
       <section className="bg-white" style={{ padding: 'clamp(2rem, 6vh, 4rem) clamp(1rem, 4vw, 2rem)' }}>
         <div className="mx-auto text-center" style={{ maxWidth: 'clamp(20rem, 80vw, 60rem)' }}>
           <p className="text-brand-dark-grey font-subheading leading-relaxed" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', padding: 'clamp(0.5rem, 2vw, 2rem)' }}>
-            Breathe clean, live healthy. Vaayura's advanced air purification technology ensures your home has the cleanest air possible.
+            Vaayura's class-leading advanced air purification with certified True HEPA 13 filters ensures your home has the cleanest air possible.
           </p>
         </div>
       </section>
@@ -35,16 +35,16 @@ export function HomePage() {
         slug: "vaayura-air-purifier", 
         created_at: "" 
       }} />
-      
-      {/* Filteration Technology Section */}
-      <section className="w-full py-16" style={{ backgroundColor: '#fafafa' }}>
+
+      {/* Filteration Technology Section - Hidden for now */}
+      {/* <section className="w-full py-16" style={{ backgroundColor: '#fafafa' }}>
         <div className="container mx-auto text-left mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sora font-bold text-[#36454F] leading-tight">
             Filteration Technology
           </h2>
           <div className="w-16 h-1 bg-brand-pastel-green rounded-full mt-4"></div>
         </div>
-        
+
         <div className="flex justify-center items-center">
           <div className="w-[70vw] h-auto">
             <img
@@ -60,8 +60,8 @@ export function HomePage() {
             />
           </div>
         </div>
-      </section>
-      
+      </section> */}
+
       <AppControlSection />
       <ProductClients />
       

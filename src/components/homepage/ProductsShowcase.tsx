@@ -103,17 +103,17 @@ export function ProductsShowcase() {
             <div className="flex flex-col items-center text-center w-full">
               <div className="space-y-3 sm:space-y-4 max-w-sm px-4 sm:px-0">
                 <h3 className="text-xl sm:text-2xl font-sora font-semibold text-[#36454F]">
-                  Vaayura Strom
+                  Vaayura Storm
                 </h3>
                 
                 <div className="flex gap-2 sm:gap-3 justify-center mb-2">
                   <div className="bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-center shadow-md flex-1 min-w-0">
-                    <div className="text-gray-500 text-xs font-subheading font-medium mb-1">Ideal For</div>
-                    <div className="text-green-800 font-sora font-bold text-xs sm:text-sm">Living Rooms</div>
+                    <div className="text-gray-500 text-xs font-subheading font-medium mb-1">CADR</div>
+                    <div className="text-green-800 font-sora font-bold text-xs sm:text-sm">400 m³/hr</div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-center shadow-md flex-1 min-w-0">
-                    <div className="text-gray-500 text-xs font-subheading font-medium mb-1">Power</div>
-                    <div className="text-green-800 font-sora font-bold text-xs sm:text-sm">High Performance</div>
+                    <div className="text-gray-500 text-xs font-subheading font-medium mb-1">Coverage</div>
+                    <div className="text-green-800 font-sora font-bold text-xs sm:text-sm">600+ sq. ft.</div>
                   </div>
                 </div>
 
@@ -208,12 +208,12 @@ export function ProductsShowcase() {
                 
                 <div className="flex gap-2 sm:gap-3 justify-center mb-2">
                   <div className="bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-center shadow-md flex-1 min-w-0">
-                    <div className="text-gray-500 text-xs font-subheading font-medium mb-1">Ideal For</div>
-                    <div className="text-green-800 font-sora font-bold text-xs sm:text-sm">Bedrooms</div>
+                    <div className="text-gray-500 text-xs font-subheading font-medium mb-1">CADR</div>
+                    <div className="text-green-800 font-sora font-bold text-xs sm:text-sm">190 m³/hr</div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-center shadow-md flex-1 min-w-0">
-                    <div className="text-gray-500 text-xs font-subheading font-medium mb-1">Size</div>
-                    <div className="text-green-800 font-sora font-bold text-xs sm:text-sm">Compact</div>
+                    <div className="text-gray-500 text-xs font-subheading font-medium mb-1">Coverage</div>
+                    <div className="text-green-800 font-sora font-bold text-xs sm:text-sm">300 sq. ft.</div>
                   </div>
                 </div>
 

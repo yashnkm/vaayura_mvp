@@ -21,7 +21,7 @@ export function Specifications() {
         { label: "Filter life:", value: "1 year for HEPA+Carbon filter" },
         { label: "Standby power consumption:", value: "< 0.5W" },
         { label: "Room coverage:", value: "81m² (according to POLAR)" },
-        { label: "Sound level:", value: "59.8dB" }
+        { label: "Sound level:", value: "20dB" }
       ]
     },
     {

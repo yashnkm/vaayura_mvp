@@ -61,13 +61,13 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
       icon: "shield"
     },
     {
-      title: "Smart Auto Detection", 
-      description: "Intelligent sensors automatically detect air quality.",
+      title: "Extra Large Coverage",
+      description: "Class-leading CADR of 400 m3/hr that purifies spaces of 600+ sq. feet with ease in 9 minutes.",
       icon: "zap"
     },
     {
-      title: "Ambient Air Quality Display",
-      description: "Real-time visual air quality indicator with ambient light functionality that displays current air quality at a glance.",
+      title: "Live AQI Sensor",
+      description: "Real time AQI display on Smart Home App that automatically adjusts fan speed based on AQI levels.",
       icon: "leaf"
     },
     {
@@ -77,7 +77,7 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
     },
     {
       title: "Silent Sleep Mode",
-      description: "Ambient light turns off and operates in near silence (quieter than a silent library at 40 dB) for undisturbed rest.",
+      description: "Ambient light turns off and the purifier becomes more silent than a whisper (20 dB).",
       icon: "volume2"
     }
   ];
@@ -100,11 +100,11 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
     if (title.toLowerCase().includes('hepa') || title.toLowerCase().includes('filtration')) {
       return advancedFiltrationImg; // Use our advanced filtration cutaway image
     }
+    if (title.toLowerCase().includes('ambient') || title.toLowerCase().includes('light') || title.toLowerCase().includes('display') || title.toLowerCase().includes('aqi')) {
+      return ambientImg; // Use the green ambient lighting image
+    }
     if (title.toLowerCase().includes('smart') || title.toLowerCase().includes('auto') || title.toLowerCase().includes('sensor')) {
       return smartAutoImg; // Use our new Vaayura air purifier image
-    }
-    if (title.toLowerCase().includes('ambient') || title.toLowerCase().includes('light') || title.toLowerCase().includes('display')) {
-      return ambientImg; // Use the green ambient lighting image
     }
     if (title.toLowerCase().includes('aroma') || title.toLowerCase().includes('essential')) {
       return aromaImg; // Use the beautiful aromatherapy diffuser image
@@ -191,8 +191,7 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
               Advanced Features
             </h2>
             <p className="text-base sm:text-lg text-brand-dark-grey font-subheading max-w-3xl leading-relaxed">
-              Every feature in {product.name.startsWith('Vaayura') ? product.name : `Vaayura ${product.name}`} is engineered to provide you with the cleanest, healthiest air while maintaining 
-              the perfect balance of performance and tranquility.
+              Vaayura Air Purifiers are aesthetically engineered to provide you the cleanest, healthiest air while maintaining the perfect balance of performance and tranquility.
             </p>
           </div>
 

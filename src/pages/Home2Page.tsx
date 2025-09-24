@@ -14,7 +14,7 @@ export function Home2Page() {
       <section className="py-16 px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-xl md:text-2xl text-brand-dark-grey font-montserrat leading-relaxed">
-            Breathe clean, live healthy. Vaayura's advanced air purification technology ensures your home has the cleanest air possible.
+            Vaayura's class-leading advanced air purification with certified True HEPA 13 filters ensures your home has the cleanest air possible.
           </p>
         </div>
       </section>

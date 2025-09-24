@@ -96,8 +96,13 @@ export function ProductDetailPage() {
     fetchProduct();
   }, [slug]);
 
-  // Initialize Lenis smooth scrolling
+  // Initialize Lenis smooth scrolling and scroll to top
   useEffect(() => {
+    // Force scroll to exact top with multiple methods
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
     const lenis = new Lenis({
       duration: 1.2,
       touchMultiplier: 2,
@@ -114,7 +119,7 @@ export function ProductDetailPage() {
     return () => {
       lenis.destroy();
     };
-  }, []);
+  }, [slug]);
 
   if (loading) {
     return (

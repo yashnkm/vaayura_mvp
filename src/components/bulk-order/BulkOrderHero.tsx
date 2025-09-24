@@ -162,7 +162,7 @@ export function BulkOrderHero() {
                         value={formData.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        placeholder="+91 98765 43210"
+                        placeholder="+91 98710 91717"
                       />
                     </div>
                   </div>
@@ -293,7 +293,7 @@ export function BulkOrderHero() {
               <CardContent>
                 <div className="space-y-2">
                   <p className="text-gray-600">
-                    <strong>Enterprise Sales:</strong> +91 98765 43210
+                    <strong>Enterprise Sales:</strong> +91 98710 91717
                   </p>
                   <p className="text-gray-600">
                     <strong>Email:</strong> enterprise@vaayura.com

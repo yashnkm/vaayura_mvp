@@ -53,19 +53,19 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
   // Fallback specifications if none provided
   const defaultSpecifications = {
     "Cord length": "1.8m",
-    "Length": "220 mm", 
+    "Length": "220 mm",
     "Width": "220 mm",
     "Height": "1050 mm",
     "Weight": "4.65kg",
     "Oscillation /Angle": "350°",
-    "Filter life": "1 year for HEPA+Carbon filter",
+    "Warranty": "2 year",
     "Standby power consumption": "< 0.5W",
     "Room coverage": "81m² (according to POLAR)",
-    "Sound level": "59.8dB"
+    "Sound level": "20 dB"
   };
 
-  let specifications = (product.specifications && Object.keys(product.specifications).length > 0) 
-    ? product.specifications 
+  let specifications = (product.specifications && Object.keys(product.specifications).length > 0)
+    ? product.specifications
     : defaultSpecifications;
 
   // Get all specification entries and limit to 10 items for better layout
@@ -112,7 +112,7 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
         { label: "Height", value: "447 mm" },
         { label: "Width", value: "254 mm" },
         { label: "Length", value: "254 mm" },
-        { label: "Weight", value: "4.65 kg" }
+        { label: "Weight", value: "4 kg" }
       ];
     } else if (productName.includes('nest')) {
       return [
@@ -131,25 +131,34 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
     }
   };
 
+  // Get power consumption based on product type
+  const getPowerConsumption = () => {
+    const productName = product.name.toLowerCase();
+    if (productName.includes('nest')) {
+      return "34W";
+    } else if (productName.includes('storm') || productName.includes('strom')) {
+      return "35W";
+    }
+    return "60W"; // Default for other products
+  };
+
   // Detailed technical specifications for popup
   const detailedSpecs = [
     { category: "Physical Dimensions", specs: getDimensions() },
     { category: "Performance", specs: [
       { label: "Room coverage", value: "81m² (according to POLAR)" },
-      { label: "Sound level", value: "59.8 dB" },
-      { label: "Oscillation/Angle", value: "350°" },
-      { label: "Filter life", value: "1 year for HEPA+Carbon filter" }
+      { label: "Sound level", value: "20 dB" },
+      { label: "Warranty", value: "2 year" },
+      { label: "Particle capture", value: "99.97% at 0.1μm" }
     ]},
     { category: "Power & Connectivity", specs: [
       { label: "Cord length", value: "1.8m" },
       { label: "Standby power consumption", value: "< 0.5W" },
-      { label: "Voltage", value: "220-240V AC" },
-      { label: "Power consumption", value: "60W" }
+      { label: "Power consumption", value: getPowerConsumption() }
     ]},
     { category: "Filtration System", specs: [
-      { label: "Filter stages", value: "4-layer system" },
+      { label: "Filter stages", value: product.name.toLowerCase().includes('nest') ? "3-layer system" : "4-layer system" },
       { label: "HEPA grade", value: "True HEPA 13" },
-      { label: "Particle capture", value: "99.97% at 0.3μm" },
       { label: "Activated carbon", value: "Honeycomb structure" }
     ]}
   ];

@@ -114,7 +114,7 @@ export function ProductCatalog() {
               }`}
             >
               {/* Product Image */}
-              <div 
+              <div
                 className="flex-1 w-full max-w-lg group cursor-pointer"
                 onClick={() => navigate(`/products/${product.slug || product.id}`)}
               >
@@ -146,52 +146,109 @@ export function ProductCatalog() {
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">CADR</div>
                     <div className="text-green-800 font-sora font-bold text-sm">
-                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '450 m³/hr' : 
+                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '400 m³/hr' :
                        product.name.toLowerCase().includes('nest') ? '190 m³/hr' : '190 m³/hr'}
                     </div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Coverage</div>
                     <div className="text-green-800 font-sora font-bold text-sm">
-                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '600 sq ft' : 
-                       product.name.toLowerCase().includes('nest') ? '400 sq ft' : '400 sq ft'}
+                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '600+ sq ft' :
+                       product.name.toLowerCase().includes('nest') ? '300 sq ft' : '400 sq ft'}
                     </div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">
-                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? 'Power' : 
-                       product.name.toLowerCase().includes('nest') ? 'Size' : 'Type'}
+                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? 'Particle capture' :
+                       product.name.toLowerCase().includes('nest') ? 'Particle capture' : 'Type'}
                     </div>
                     <div className="text-green-800 font-sora font-bold text-sm">
-                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? 'High Performance' : 
-                       product.name.toLowerCase().includes('nest') ? 'Compact' : 'Advanced'}
+                      {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '0.1μm' :
+                       product.name.toLowerCase().includes('nest') ? '0.1μm' : 'Advanced'}
                     </div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Fan Speeds</div>
-                    <div className="text-green-800 font-sora font-bold text-sm">Adjustable</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">Automatic</div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
                     <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Sleep Timer</div>
-                    <div className="text-green-800 font-sora font-bold text-sm">Available</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">3-4 hours</div>
                   </div>
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center ">
-                    <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Filter Alert</div>
-                    <div className="text-green-800 font-sora font-bold text-sm">Smart</div>
+                    <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Filter</div>
+                    <div className="text-green-800 font-sora font-bold text-sm">
+                      {product.name.toLowerCase().includes('nest') ? '3 layer filter' : '4 layer filter'}
+                    </div>
                   </div>
                 </div>
                 
-                {/* Price (if available) */}
-                {product.price && (
-                  <div className="text-2xl font-semibold text-brand-grey-green">
-                    ₹{product.price.toLocaleString('en-IN')}
-                    <span className="text-sm font-normal text-brand-dark-grey ml-2">inclusive of all taxes</span>
-                  </div>
-                )}
+                {/* Price with discount MRP functionality */}
+                {product.price && (() => {
+                  const isStorm = product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom');
+                  const isNest = product.name.toLowerCase().includes('nest');
+
+                  if (isStorm) {
+                    const mrp = 24999;
+                    const discountPrice = product.price || 15999;
+                    const discountPercentage = Math.round(((mrp - discountPrice) / mrp) * 100);
+
+                    return (
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-3 flex-wrap">
+                          <div className="text-2xl font-bold text-brand-grey-green">
+                            ₹{discountPrice.toLocaleString('en-IN')}
+                          </div>
+                          <div className="text-lg font-medium text-gray-500 line-through">
+                            ₹{mrp.toLocaleString('en-IN')}
+                          </div>
+                          <div className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">
+                            {discountPercentage}% OFF
+                          </div>
+                        </div>
+                        <p className="text-green-600 font-medium text-sm">
+                          You save ₹{(mrp - discountPrice).toLocaleString('en-IN')}
+                        </p>
+                        <span className="text-sm font-normal text-brand-dark-grey">inclusive of all taxes</span>
+                      </div>
+                    );
+                  } else if (isNest) {
+                    const mrp = 11999;
+                    const discountPrice = product.price || 8000;
+                    const discountPercentage = Math.round(((mrp - discountPrice) / mrp) * 100);
+
+                    return (
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-3 flex-wrap">
+                          <div className="text-2xl font-bold text-brand-grey-green">
+                            ₹{discountPrice.toLocaleString('en-IN')}
+                          </div>
+                          <div className="text-lg font-medium text-gray-500 line-through">
+                            ₹{mrp.toLocaleString('en-IN')}
+                          </div>
+                          <div className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">
+                            {discountPercentage}% OFF
+                          </div>
+                        </div>
+                        <p className="text-green-600 font-medium text-sm">
+                          You save ₹{(mrp - discountPrice).toLocaleString('en-IN')}
+                        </p>
+                        <span className="text-sm font-normal text-brand-dark-grey">inclusive of all taxes</span>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div className="text-2xl font-semibold text-brand-grey-green">
+                        ₹{product.price.toLocaleString('en-IN')}
+                        <span className="text-sm font-normal text-brand-dark-grey ml-2">inclusive of all taxes</span>
+                      </div>
+                    );
+                  }
+                })()}
                 
                 {/* CTA Button */}
                 <div>
-                  <Button 
+                  <Button
                     className="bg-green-800 hover:bg-green-900 text-white px-8 py-4 text-lg rounded-full font-semibold transition-all duration-200 hover:scale-105"
                     onClick={() => navigate(`/products/${product.slug || product.id}`)}
                   >

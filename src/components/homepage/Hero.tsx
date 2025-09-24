@@ -15,13 +15,13 @@ const HeroContent = ({ showContent }: { showContent?: boolean }) => {
       <div className='bg-brand-grey-green/10 backdrop-blur-sm rounded-3xl shadow-2xl border border-brand-grey-green/10 p-8 md:p-12 max-w-4xl mx-auto'>
         {/* Main Headline */}
         <h1 className='text-4xl md:text-5xl lg:text-6xl font-sora font-bold mb-6 leading-tight text-brand-white text-center'>
-          Life Begins with<br />
-          <span className="text-brand-pastel-green">Clean Air</span>
+          Good health begins<br />
+          <span className="text-brand-pastel-green">with Clean Air</span>
         </h1>
         
         {/* Subheadline */}
         <p className='text-lg md:text-xl font-montserrat mb-10 text-brand-white/90 max-w-3xl mx-auto leading-relaxed text-center'>
-          Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.
+          Clean air shouldn't be a luxury, and it shouldn't be seasonal. Vaayura delivers world-class 4-layer air purification at the touch of a button, making healthier living effortless and beautiful.
         </p>
 
         {/* Call to Action Buttons */}

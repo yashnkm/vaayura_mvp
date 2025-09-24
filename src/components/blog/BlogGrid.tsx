@@ -40,10 +40,14 @@ export function BlogGrid() {
             <Link key={post.id} to={`/blog/${post.slug}`} className="group">
               <div className="relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 h-full">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img 
-                    src={post.image} 
+                  <img
+                    src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className={`w-full h-full transition-transform duration-300 ${
+                      post.image === blog2Img
+                        ? 'object-cover object-center scale-[2.2] group-hover:scale-[2.25]'
+                        : 'object-cover group-hover:scale-105'
+                    }`}
                   />
                 </div>
                 <div className="p-8">

@@ -121,12 +121,12 @@ export function Hero2() {
             {/* Main Headline */}
             <div className="space-y-6">
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-sora font-bold leading-tight text-white">
-                Life Begins with<br />
-                <span className="text-brand-pastel-green">Clean Air</span>
+                Good health begins<br />
+                <span className="text-brand-pastel-green">with Clean Air</span>
               </h1>
               
               <p className="text-lg lg:text-xl text-white/90 font-montserrat leading-relaxed">
-                Vaayura delivers intelligent air purification that transforms your space into a sanctuary of health.
+                Clean air shouldn't be a luxury, and it shouldn't be seasonal. Vaayura delivers world-class 4-layer air purification at the touch of a button, making healthier living effortless and beautiful.
               </p>
             </div>
 

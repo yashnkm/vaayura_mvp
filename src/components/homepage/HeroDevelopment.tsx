@@ -107,11 +107,11 @@ export function HeroDevelopment() {
           >
             <div className="text-center px-4 sm:px-6 max-w-4xl">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-sora font-bold text-green-200 mb-4 sm:mb-6 leading-tight">
-                Life Begins with<br className="hidden sm:block" />
-                <span className="sm:hidden"> </span>Clean Air.
+                Good health begins<br className="hidden sm:block" />
+                <span className="sm:hidden"> </span>with Clean Air.
               </h1>
               <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-green-100/90 leading-relaxed font-subheading">
-                <p className="text-center px-2 sm:px-0">Clean air is no longer a luxury—it's a daily necessity. Vaayura delivers world-class air purification with intelligent design, making healthier living effortless and beautiful.</p>
+                <p className="text-center px-2 sm:px-0">Clean air shouldn't be a luxury, and it shouldn't be seasonal. Vaayura delivers world-class 4-layer air purification at the touch of a button, making healthier living effortless and beautiful.</p>
               </div>
               
               {/* Scroll hint */}

@@ -474,11 +474,11 @@ export function BulkOrderPage() {
                   <div className="space-y-3">
                     <div className="flex items-center text-gray-600">
                       <Mail className="w-4 h-4 mr-3 flex-shrink-0" />
-                      <span className="font-subheading text-sm">bulk@vaayura.com</span>
+                      <span className="font-subheading text-sm">info@vaayura.com</span>
                     </div>
                     <div className="flex items-center text-gray-600">
                       <Phone className="w-4 h-4 mr-3 flex-shrink-0" />
-                      <span className="font-subheading text-sm">+91-8766802724</span>
+                      <span className="font-subheading text-sm">+91-98710 91717</span>
                     </div>
                   </div>
                 </Card>

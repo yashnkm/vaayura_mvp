@@ -1,6 +1,8 @@
 // Import asset images
 import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from 'react-router-dom';
 import fourLayerFilterImg from "@/assets/sections/homepage/filtration/hepa_filtration_new.png";
+import threeLayerFilterImg from "@/assets/filters/3layer.png";
 import intSensorImg from "@/assets/sections/products/features/Adobe_Express_-_file_1.png";
 import realtimeAQIImg from "@/assets/sections/products/features/realtime AQI.jpg";
 import ambientLightImg from "@/assets/sections/homepage/features/ambient_light_new.png";
@@ -19,38 +21,73 @@ interface Feature {
   technical: string;
 }
 
-const features: Feature[] = [
-  {
+// Base features that are common to all products
+const getFeatures = (currentProduct: string): Feature[] => {
+  const filtrationFeature = currentProduct === 'nest' ? {
+    image: threeLayerFilterImg,
+    title: "3-Layer True HEPA Filtration",
+    description: "Multi-stage filtration system with pre-filter, True HEPA 13, and activated carbon honeycomb capturing 99.97% of particles as small as 0.1 microns.",
+    technical: "HEPA 13 Grade • 99.97% Efficiency • 0.1μm Particle Capture"
+  } : {
     image: fourLayerFilterImg,
     title: "4-Layer True HEPA Filtration",
-    description: "Multi-stage filtration system with pre-filter, True HEPA 13, anti-bacterial filter, and activated carbon honeycomb capturing 99.97% of particles as small as 0.3 microns.",
-    technical: "HEPA 13 Grade • 99.97% Efficiency • 0.3μm Particle Capture"
-  },
-  {
-    image: intSensorImg,
-    title: "Intelligent Auto Mode",
-    description: "Advanced laser particle sensors continuously monitor air quality and automatically adjust fan speed for optimal performance without manual intervention.",
-    technical: "Laser Sensor Technology • Real-time Detection • Auto Speed Control"
-  },
-  {
-    image: ambientLightImg,
-    title: "Ambient Air Quality Display",
-    description: "360-degree LED indicator ring provides instant visual feedback of current air quality status with color-coded alerts for immediate awareness.",
-    technical: "360° LED Ring • Color-coded Alerts • Real-time Status"
-  },
-  {
-    image: aromaTepImg,
-    title: "Aromatherapy Function",
-    description: "Integrated essential oil compartment with ultrasonic diffusion technology allows you to add your favorite scents while purifying the air.",
-    technical: "Ultrasonic Diffusion • Essential Oil Compatible • Dual Function"
-  },
-  {
-    image: silentSleepModeImg,
-    title: "Silent Sleep Mode",
-    description: "Ultra-quiet operation at just 38dB in sleep mode with dimmed LED indicators, ensuring peaceful rest while maintaining continuous air purification.",
-    technical: "<38dB Operation • Dimmed LED • Continuous Purification"
-  },
-];
+    description: "Multi-stage filtration system with pre-filter, True HEPA 13, anti-bacterial filter, and activated carbon honeycomb capturing 99.97% of particles as small as 0.1 microns.",
+    technical: "HEPA 13 Grade • 99.97% Efficiency • 0.1μm Particle Capture"
+  };
+
+  const baseFeatures = [filtrationFeature];
+
+  // Add features based on product type
+  if (currentProduct === 'storm') {
+    // Storm gets all features
+    baseFeatures.push(
+      {
+        image: intSensorImg,
+        title: "Intelligent Auto Mode",
+        description: "Advanced laser particle sensors continuously monitor air quality and automatically adjust fan speed for optimal performance without manual intervention.",
+        technical: "Laser Sensor Technology • Real-time Detection • Auto Speed Control"
+      },
+      {
+        image: ambientLightImg,
+        title: "Ambient Air Quality Display",
+        description: "360-degree LED indicator ring provides instant visual feedback of current air quality status with color-coded alerts for immediate awareness.",
+        technical: "360° LED Ring • Color-coded Alerts • Real-time Status"
+      },
+      {
+        image: aromaTepImg,
+        title: "Aromatherapy Function",
+        description: "Integrated essential oil compartment with ultrasonic diffusion technology allows you to add your favorite scents while purifying the air.",
+        technical: "Ultrasonic Diffusion • Essential Oil Compatible • Dual Function"
+      }
+    );
+  } else if (currentProduct === 'nest') {
+    // Nest gets only Silent Sleep Mode
+    baseFeatures.push({
+      image: silentSleepModeImg,
+      title: "Silent Sleep Mode",
+      description: "Ultra-quiet operation at just 38dB in sleep mode with dimmed LED indicators, ensuring peaceful rest while maintaining continuous air purification.",
+      technical: "<38dB Operation • Dimmed LED • Continuous Purification"
+    });
+  } else {
+    // Other products get aromatherapy and silent sleep mode
+    baseFeatures.push(
+      {
+        image: aromaTepImg,
+        title: "Aromatherapy Function",
+        description: "Integrated essential oil compartment with ultrasonic diffusion technology allows you to add your favorite scents while purifying the air.",
+        technical: "Ultrasonic Diffusion • Essential Oil Compatible • Dual Function"
+      },
+      {
+        image: silentSleepModeImg,
+        title: "Silent Sleep Mode",
+        description: "Ultra-quiet operation at just 38dB in sleep mode with dimmed LED indicators, ensuring peaceful rest while maintaining continuous air purification.",
+        technical: "<38dB Operation • Dimmed LED • Continuous Purification"
+      }
+    );
+  }
+
+  return baseFeatures;
+};
 
 // Ambient light carousel images
 const ambientLightImages = [
@@ -60,13 +97,37 @@ const ambientLightImages = [
 ];
 
 export function ProductFeatures() {
-  const [visibleFeatures, setVisibleFeatures] = useState<boolean[]>([false, false, false, false, false]);
+  const location = useLocation();
+
+  // Determine current product type from URL
+  const getCurrentProduct = () => {
+    const path = location.pathname;
+    if (path.includes('/storm')) return 'storm';
+    if (path.includes('/nest')) return 'nest';
+    return 'other';
+  };
+
+  const currentProduct = getCurrentProduct();
+
+  // Get dynamic features based on product type
+  const allFeatures = getFeatures(currentProduct);
+
+  // Filter features based on product type
+  const filteredFeatures = allFeatures.filter((feature) => {
+    // Remove Silent Sleep Mode for Storm products
+    if (feature.title === 'Silent Sleep Mode' && currentProduct === 'storm') {
+      return false;
+    }
+    return true;
+  });
+
+  const [visibleFeatures, setVisibleFeatures] = useState<boolean[]>(new Array(filteredFeatures.length).fill(false));
   const [ambientCarouselIndex, setAmbientCarouselIndex] = useState(0);
   const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const observers = features.map((_, index) => {
+    const observers = filteredFeatures.map((_, index) => {
       const observer = new IntersectionObserver(
         ([entry]) => {
           const currentScrollY = window.scrollY;
@@ -133,7 +194,7 @@ export function ProductFeatures() {
 
           {/* Features List */}
           <div className="space-y-16 sm:space-y-24 lg:space-y-32 xl:space-y-40">
-            {features.map((feature, index) => (
+            {filteredFeatures.map((feature, index) => (
               <div 
                 key={index}
                 ref={el => featureRefs.current[index] = el}
@@ -172,7 +233,7 @@ export function ProductFeatures() {
                               maxHeight: '100%',
                               height: 'auto',
                               aspectRatio: 'auto',
-                              transform: 'scale(1.4)'
+                              transform: img === ambientLight1 ? 'scale(1.8) translateY(-1%)' : 'scale(1.8)'
                             }}
                             loading="lazy"
                           />

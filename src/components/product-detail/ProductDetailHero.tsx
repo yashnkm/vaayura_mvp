@@ -49,8 +49,8 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
     const productName = product.name.toLowerCase();
     if (productName.includes('storm') || productName.includes('strom')) {
       return [
-        stormFrontView,
         stormSideView,
+        stormFrontView,
         leftSideViewStorm
       ];
     } else if (productName.includes('nest')) {
@@ -61,14 +61,49 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
       ];
     }
     // Fallback to original images array if available
-    return product.images?.length ? product.images : [stormFrontView, stormSideView, leftSideViewStorm];
+    return product.images?.length ? product.images : [stormSideView, stormFrontView, leftSideViewStorm];
   }, [product.name, product.images]);
 
-  // Memoize formatted price to avoid recalculation
-  const formattedPrice = useMemo(() => 
-    product.price?.toLocaleString('en-IN') || '25,000', 
-    [product.price]
-  );
+  // Pricing details - MRP is hardcoded, discount price from backend, percentage calculated
+  const pricingDetails = useMemo(() => {
+    const isStorm = product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom');
+    const isNest = product.name.toLowerCase().includes('nest');
+
+    if (isStorm) {
+      const mrp = 24999;
+      const discountPrice = product.price || 15999; // Price from backend (discounted price)
+      const discountPercentage = Math.round(((mrp - discountPrice) / mrp) * 100);
+
+      return {
+        mrp: mrp,
+        discountPrice: discountPrice,
+        discountPercentage: discountPercentage,
+        formattedMrp: mrp.toLocaleString('en-IN'),
+        formattedDiscountPrice: discountPrice.toLocaleString('en-IN')
+      };
+    } else if (isNest) {
+      const mrp = 11999;
+      const discountPrice = product.price || 8000; // Price from backend (discounted price)
+      const discountPercentage = Math.round(((mrp - discountPrice) / mrp) * 100);
+
+      return {
+        mrp: mrp,
+        discountPrice: discountPrice,
+        discountPercentage: discountPercentage,
+        formattedMrp: mrp.toLocaleString('en-IN'),
+        formattedDiscountPrice: discountPrice.toLocaleString('en-IN')
+      };
+    }
+
+    // Default pricing for other products (no discount)
+    return {
+      mrp: product.price || 25000,
+      discountPrice: product.price || 25000,
+      discountPercentage: 0,
+      formattedMrp: (product.price?.toLocaleString('en-IN') || '25,000'),
+      formattedDiscountPrice: (product.price?.toLocaleString('en-IN') || '25,000')
+    };
+  }, [product.name, product.price]);
 
   // Memoize description to avoid repeated fallback evaluation
   const description = useMemo(() => 
@@ -99,6 +134,12 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
     return currentImage === leftSideViewStorm;
   }, [productImages, currentImageIndex]);
 
+  // Check if current image is storm side view (for loading optimization only)
+  const isStormSideView = useMemo(() => {
+    const currentImage = productImages[currentImageIndex];
+    return currentImage === stormSideView;
+  }, [productImages, currentImageIndex]);
+
   const isLeftSideViewNest = useMemo(() => {
     const currentImage = productImages[currentImageIndex];
     return currentImage === leftSideViewNest;
@@ -124,25 +165,25 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
         item: {
           id: product.id,
           name: product.name,
-          price: product.price,
+          price: pricingDetails.discountPrice,
           quantity: 1,
           image: currentImageSrc
         }
       }
     });
-  }, [navigate, product, currentImageSrc]);
+  }, [navigate, product, currentImageSrc, pricingDetails.discountPrice]);
 
 
   return (
-    <section className="py-32 lg:py-40 bg-white">
-      <div className="container mx-auto max-w-7xl">
+    <section className="py-16 sm:py-24 lg:py-40 bg-white overflow-x-hidden">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 min-w-0">
         
         {/* Main Hero Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 items-center">
           
           {/* Left Visual - Product Image with Navigation */}
-          <div className="flex justify-center lg:justify-start">
-            <div className="relative transition-all duration-300 ease-in-out overflow-hidden w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] md:w-[550px] md:h-[550px] lg:w-[750px] lg:h-[750px] p-4">
+          <div className="flex justify-center lg:justify-start w-full">
+            <div className={`relative overflow-hidden w-full max-w-[80vw] sm:max-w-[450px] md:max-w-[550px] lg:max-w-[750px] h-[300px] sm:h-[450px] md:h-[550px] lg:h-[750px] p-2 sm:p-4 ${isStormSideView ? 'bg-white' : ''}`}>
               <img
                 src={currentImageSrc}
                 alt={`${product.name} - View ${currentImageIndex + 1}`}
@@ -154,13 +195,15 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
                   objectFit: 'contain',
                   maxWidth: '100%',
                   maxHeight: '100%',
+                  transformOrigin: 'center center',
                   transform: isStormFrontView ? 'scale(1.4) translateY(-5%)' : 
                            isNestFrontView ? 'scale(1.4) translateY(-2%)' :
+                           isStormSideView ? 'scale(1)' :
                            isLeftSideViewStorm ? 'scale(1.3) translateY(-3%)' :
                            isLeftSideViewNest ? 'scale(1.0) translateY(-3%)' : 'scale(1)'
                 }}
-                loading="lazy"
-                decoding="async"
+                loading={isStormSideView ? "eager" : "lazy"}
+                decoding={isStormSideView ? "sync" : "async"}
                 onError={handleImageError}
               />
               
@@ -208,57 +251,79 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
           </div>
 
           {/* Right Content */}
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-sora text-brand-grey-green leading-tight">
+          <div className="w-full space-y-6 sm:space-y-8 px-4 sm:px-6 lg:px-0 min-w-0">
+            <div className="space-y-4 sm:space-y-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-sora text-brand-grey-green leading-tight">
                 {product.name.startsWith('Vaayura') ? product.name : 
                  product.name.toLowerCase() === 'strom' ? 'Vaayura Storm' : 
                  `Vaayura ${product.name}`}
               </h1>
               
               {/* Replace text description with feature cards */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl">
-                <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 md:gap-4 w-full overflow-hidden">
+                <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">CADR</div>
                   <div className="text-green-800 font-sora font-bold text-sm">
-                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '450 m³/hr' : 
+                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '400 m³/hr' :
                      product.name.toLowerCase().includes('nest') ? '190 m³/hr' : '190 m³/hr'}
                   </div>
                 </div>
-                <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Coverage</div>
                   <div className="text-green-800 font-sora font-bold text-sm">
-                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '600 sq ft' : 
-                     product.name.toLowerCase().includes('nest') ? '400 sq ft' : '400 sq ft'}
+                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '600+ sq ft' :
+                     product.name.toLowerCase().includes('nest') ? '300 sq ft' : '400 sq ft'}
                   </div>
                 </div>
-                <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
-                  <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Dimensions</div>
+                <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
+                  <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">
+                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? 'Particle capture' :
+                     product.name.toLowerCase().includes('nest') ? 'Particle capture' : 'Dimensions'}
+                  </div>
                   <div className="text-green-800 font-sora font-bold text-sm">
-                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '254×254×447 mm' : 
-                     product.name.toLowerCase().includes('nest') ? '210×213×317 mm' : 'Compact'}
+                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '0.1μm' :
+                     product.name.toLowerCase().includes('nest') ? '0.1μm' : 'Compact'}
                   </div>
                 </div>
-                <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Fan Speeds</div>
-                  <div className="text-green-800 font-sora font-bold text-sm">Adjustable</div>
+                  <div className="text-green-800 font-sora font-bold text-sm">Automatic</div>
                 </div>
-                <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
+                <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Sleep Timer</div>
-                  <div className="text-green-800 font-sora font-bold text-sm">Available</div>
+                  <div className="text-green-800 font-sora font-bold text-sm">3-4 hours</div>
                 </div>
-                <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 text-center shadow-md">
-                  <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Filter Alert</div>
-                  <div className="text-green-800 font-sora font-bold text-sm">Smart</div>
+                <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
+                  <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Filter</div>
+                  <div className="text-green-800 font-sora font-bold text-sm">
+                    {product.name.toLowerCase().includes('nest') ? '3 layer filter' : '4 layer filter'}
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Price */}
             <div className="pt-4">
-              <div className="text-4xl font-bold text-brand-grey-green mb-6">
-                ₹{formattedPrice}
+              <div className="flex items-center gap-4 mb-2">
+                <div className="text-4xl font-bold text-brand-grey-green">
+                  ₹{pricingDetails.formattedDiscountPrice}
+                </div>
+                {pricingDetails.discountPercentage > 0 && (
+                  <>
+                    <div className="text-2xl font-medium text-gray-500 line-through">
+                      ₹{pricingDetails.formattedMrp}
+                    </div>
+                    <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
+                      {pricingDetails.discountPercentage}% OFF
+                    </div>
+                  </>
+                )}
               </div>
+              {pricingDetails.discountPercentage > 0 && (
+                <p className="text-green-600 font-medium mb-2">
+                  You save ₹{(pricingDetails.mrp - pricingDetails.discountPrice).toLocaleString('en-IN')}
+                </p>
+              )}
               <p className="text-brand-dark-grey font-montserrat mb-8">
                 inclusive of all taxes
               </p>
