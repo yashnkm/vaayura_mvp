@@ -258,7 +258,7 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
               </div>
 
               {/* Product Images - Center with Overlap */}
-              <div className="relative flex items-center justify-center mx-8 -mt-96">
+              <div className="relative flex items-center justify-center mx-8 -mt-80 lg:-mt-96">
                 {/* Storm Image - No Animation */}
                 <div className="relative z-30">
                   <img
@@ -310,7 +310,7 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
               {/* Show only Storm */}
               {productFilter === 'storm' && (
                 <>
-                  <div className="text-center -mt-96">
+                  <div className="text-center -mt-80 lg:-mt-96">
                     <div className="relative flex justify-center mb-8">
                       <img
                         src={stormSideView}
@@ -342,7 +342,7 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
               {/* Show only Nest */}
               {productFilter === 'nest' && (
                 <>
-                  <div className="text-center -mt-80">
+                  <div className="text-center -mt-64 lg:-mt-80">
                     <div className="relative flex justify-center mb-8">
                       <img
                         src={nestFrontView}

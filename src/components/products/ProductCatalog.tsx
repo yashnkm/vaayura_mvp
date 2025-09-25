@@ -2,6 +2,17 @@ import { usePublishedProducts } from '@/hooks/useProducts'
 import { Button } from "@/components/ui/button"
 import { useNavigate } from 'react-router-dom'
 
+// Import ProductFeatures images for preloading
+import fourLayerFilterImg from "@/assets/sections/homepage/filtration/hepa_filtration_new.png";
+import threeLayerFilterImg from "@/assets/filters/3layer.png";
+import intSensorImg from "@/assets/sections/products/features/Adobe_Express_-_file_1.png";
+import ambientLightImg from "@/assets/sections/homepage/features/ambient_light_new.png";
+import ambientLight1 from "@/assets/sections/homepage/features/ambientlight1.png";
+import ambientLight2 from "@/assets/sections/homepage/features/ambientlight2.png";
+import ambientLight3 from "@/assets/sections/homepage/features/ambientlight3.png";
+import aromaTepImg from "@/assets/sections/products/features/aromatherapy_new.png";
+import silentSleepModeImg from "@/assets/sections/products/features/Adobe Express - file.png";
+
 // Define types locally to avoid import issues
 interface ProductFeature {
   title: string
@@ -29,6 +40,54 @@ interface Product {
 export function ProductCatalog() {
   const { products, loading, error } = usePublishedProducts()
   const navigate = useNavigate()
+
+  // Preload ProductFeatures images based on product type
+  const preloadProductFeatureImages = (productName: string) => {
+    const isStorm = productName.toLowerCase().includes('storm') || productName.toLowerCase().includes('strom');
+    const isNest = productName.toLowerCase().includes('nest');
+
+    let imagesToPreload: string[] = [];
+
+    if (isStorm) {
+      // Storm product images
+      imagesToPreload = [
+        fourLayerFilterImg,
+        intSensorImg,
+        ambientLightImg,
+        ambientLight1,
+        ambientLight2,
+        ambientLight3,
+        aromaTepImg
+      ];
+    } else if (isNest) {
+      // Nest product images
+      imagesToPreload = [
+        threeLayerFilterImg,
+        silentSleepModeImg
+      ];
+    } else {
+      // Other product images
+      imagesToPreload = [
+        fourLayerFilterImg,
+        aromaTepImg,
+        silentSleepModeImg
+      ];
+    }
+
+    // Preload each image
+    imagesToPreload.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  };
+
+  const handleLearnMoreClick = (product: Product) => {
+    // Preload images before navigation
+    preloadProductFeatureImages(product.name);
+
+    // Navigate to product detail page
+    navigate(`/products/${product.slug || product.id}`);
+  };
 
   if (loading) {
     return (
@@ -116,7 +175,7 @@ export function ProductCatalog() {
               {/* Product Image */}
               <div
                 className="flex-1 w-full max-w-lg group cursor-pointer"
-                onClick={() => navigate(`/products/${product.slug || product.id}`)}
+                onClick={() => handleLearnMoreClick(product)}
               >
                 <img
                   src={product.images[0] || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"}
@@ -250,7 +309,7 @@ export function ProductCatalog() {
                 <div>
                   <Button
                     className="bg-green-800 hover:bg-green-900 text-white px-8 py-4 text-lg rounded-full font-semibold transition-all duration-200 hover:scale-105"
-                    onClick={() => navigate(`/products/${product.slug || product.id}`)}
+                    onClick={() => handleLearnMoreClick(product)}
                   >
                     Learn More
                   </Button>

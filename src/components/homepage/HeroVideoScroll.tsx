@@ -86,7 +86,7 @@ export function HeroVideoScroll() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-[250vh] bg-white">
+    <section ref={containerRef} className="relative h-[200vh] lg:h-[250vh] bg-white">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <div className="relative flex items-center justify-center w-full h-full">
           
@@ -140,7 +140,7 @@ export function HeroVideoScroll() {
           </div>
           
           {/* 3D Lottie Animation - NEW VIDEO */}
-          <div className={`absolute inset-0 z-15 flex items-center justify-center transition-all duration-700 ${
+          <div className={`absolute inset-0 z-15 flex items-center justify-center transition-all duration-700 overflow-hidden ${
             scrollStarted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
           }`}>
             <div className="relative">
@@ -149,15 +149,15 @@ export function HeroVideoScroll() {
                 animationData={animationData}
                 loop={false}
                 autoplay={false}
-                className="w-full h-full max-w-full max-h-full"
+                className="w-full h-full max-w-full max-h-full lg:transform-none"
                 style={{
                   width: 'min(95vw, 100%)',
-                  height: 'min(70vh, 100%)',
+                  height: 'min(80vh, 100%)',
                   maxWidth: '1600px',
                   maxHeight: '1000px',
                   minWidth: '320px',
-                  minHeight: '240px',
-                  aspectRatio: '16/9'
+                  minHeight: '400px',
+                  transform: window.innerWidth < 1024 ? 'scale(2.7) translateY(20%) translateX(1%)' : 'scale(1.0)'
                 }}
                 rendererSettings={{
                   preserveAspectRatio: 'xMidYMid meet',
@@ -165,8 +165,8 @@ export function HeroVideoScroll() {
                 }}
               />
               
-              {/* Section 1: Vaayura Storm Text (Left Third) */}
-              <div className={`absolute top-0 bottom-0 left-0 w-1/3 flex items-center justify-center transition-opacity duration-300 ${
+              {/* Desktop: Section 1: Vaayura Storm Text (Left Third) */}
+              <div className={`absolute top-0 bottom-0 left-0 w-1/3 hidden lg:flex items-center justify-center transition-opacity duration-300 ${
                 displayProgress > 0.5 ? 'opacity-100' : 'opacity-0'
               }`}>
                 <div className="text-center">
@@ -177,8 +177,8 @@ export function HeroVideoScroll() {
                 </div>
               </div>
 
-              {/* Section 3: Product Specification Cards (Right Third) */}
-              <div className={`absolute top-0 bottom-0 right-0 w-1/3 flex items-center justify-center transition-opacity duration-300 ${
+              {/* Desktop: Section 3: Product Specification Cards (Right Third) */}
+              <div className={`absolute top-0 bottom-0 right-0 w-1/3 hidden lg:flex items-center justify-center transition-opacity duration-300 ${
                 displayProgress > 0.5 ? 'opacity-100' : 'opacity-0'
               }`}>
                 <div className="grid grid-cols-2 gap-4 p-6 max-w-sm">
@@ -200,6 +200,31 @@ export function HeroVideoScroll() {
                 </div>
               </div>
 
+            </div>
+          </div>
+
+          {/* Mobile: Content completely below video container */}
+          <div className={`absolute bottom-4 left-0 right-0 lg:hidden flex flex-col items-center px-4 transition-opacity duration-300 ${
+            displayProgress > 0.3 ? 'opacity-100' : 'opacity-0'
+          }`}>
+            {/* Title */}
+            <div className="mb-4">
+              <h2 className="text-2xl font-sora font-bold text-brand-grey-green leading-tight text-center">
+                Vaayura<br />
+                <span className="text-brand-pastel-green">Storm</span>
+              </h2>
+            </div>
+
+            {/* Specs - horizontal layout */}
+            <div className="flex gap-3 justify-center">
+              <div className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-center shadow-md">
+                <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">CADR</div>
+                <div className="text-brand-pastel-green font-sora font-bold text-sm">400 m³/hr</div>
+              </div>
+              <div className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-center shadow-md">
+                <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Coverage</div>
+                <div className="text-brand-pastel-green font-sora font-bold text-sm">600+ sq. ft.</div>
+              </div>
             </div>
           </div>
 

@@ -43,11 +43,7 @@ export function BlogGrid() {
                   <img
                     src={post.image}
                     alt={post.title}
-                    className={`w-full h-full transition-transform duration-300 ${
-                      post.image === blog2Img
-                        ? 'object-cover object-center scale-[2.2] group-hover:scale-[2.25]'
-                        : 'object-cover group-hover:scale-105'
-                    }`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-8">

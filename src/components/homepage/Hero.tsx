@@ -6,30 +6,30 @@ import backgroundImage from "@/assets/sections/shared/backgrounds/main.jpg"
 
 const HeroContent = ({ showContent }: { showContent?: boolean }) => {
   return (
-    <div 
-      className={`absolute inset-0 flex items-center justify-center z-50 p-8 transition-all duration-700 ${
+    <div
+      className={`absolute inset-0 flex items-center justify-center z-50 p-4 sm:p-8 transition-all duration-700 ${
         showContent ? 'opacity-100' : 'opacity-0'
       }`}
     >
       {/* Dark green card with blended borders - increased transparency */}
-      <div className='bg-brand-grey-green/10 backdrop-blur-sm rounded-3xl shadow-2xl border border-brand-grey-green/10 p-8 md:p-12 max-w-4xl mx-auto'>
+      <div className='bg-brand-grey-green/10 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl border border-brand-grey-green/10 p-6 sm:p-8 md:p-12 max-w-sm sm:max-w-4xl mx-auto'>
         {/* Main Headline */}
-        <h1 className='text-4xl md:text-5xl lg:text-6xl font-sora font-bold mb-6 leading-tight text-brand-white text-center'>
+        <h1 className='text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-sora font-bold mb-4 sm:mb-6 leading-tight text-brand-white text-center'>
           Good health begins<br />
           <span className="text-brand-pastel-green">with Clean Air</span>
         </h1>
-        
+
         {/* Subheadline */}
-        <p className='text-lg md:text-xl font-montserrat mb-10 text-brand-white/90 max-w-3xl mx-auto leading-relaxed text-center'>
+        <p className='text-sm sm:text-lg md:text-xl font-montserrat mb-6 sm:mb-10 text-brand-white/90 max-w-xs sm:max-w-3xl mx-auto leading-relaxed text-center'>
           Clean air shouldn't be a luxury, and it shouldn't be seasonal. Vaayura delivers world-class 4-layer air purification at the touch of a button, making healthier living effortless and beautiful.
         </p>
 
         {/* Call to Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a href="/products" className="bg-brand-pastel-green text-brand-grey-green hover:bg-brand-white hover:text-brand-grey-green px-8 py-4 text-lg font-montserrat font-semibold rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 min-w-[180px] text-center">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+          <a href="/products" className="w-full sm:w-auto bg-brand-pastel-green text-brand-grey-green hover:bg-brand-white hover:text-brand-grey-green px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-montserrat font-semibold rounded-xl sm:rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 min-w-[160px] sm:min-w-[180px] text-center">
             Shop Now
           </a>
-          <button className="border-2 border-brand-pastel-green text-brand-pastel-green hover:bg-brand-pastel-green hover:text-brand-grey-green px-8 py-4 text-lg font-montserrat font-semibold rounded-2xl transition-all duration-300 min-w-[180px]">
+          <button className="w-full sm:w-auto border-2 border-brand-pastel-green text-brand-pastel-green hover:bg-brand-pastel-green hover:text-brand-grey-green px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-montserrat font-semibold rounded-xl sm:rounded-2xl transition-all duration-300 min-w-[160px] sm:min-w-[180px]">
             Book a Demo
           </button>
         </div>

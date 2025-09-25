@@ -187,16 +187,15 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
               <img
                 src={currentImageSrc}
                 alt={`${product.name} - View ${currentImageIndex + 1}`}
-                className="w-full h-full object-contain"
-                style={{ 
-                  filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3))',
+                className="w-full h-full object-contain lg:drop-shadow-[0_25px_50px_rgba(0,0,0,0.3)]"
+                style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'contain',
                   maxWidth: '100%',
                   maxHeight: '100%',
                   transformOrigin: 'center center',
-                  transform: isStormFrontView ? 'scale(1.4) translateY(-5%)' : 
+                  transform: isStormFrontView ? 'scale(1.4) translateY(-5%)' :
                            isNestFrontView ? 'scale(1.4) translateY(-2%)' :
                            isStormSideView ? 'scale(1)' :
                            isLeftSideViewStorm ? 'scale(1.3) translateY(-3%)' :
@@ -213,16 +212,16 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
                   {/* Left arrow */}
                   <button
                     onClick={prevImage}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg rounded-full p-2 transition-all duration-200 hover:scale-105 z-10"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 lg:bg-white/80 lg:hover:bg-white lg:shadow-lg lg:rounded-full p-2 transition-all duration-200 hover:scale-105 z-10"
                     aria-label="Previous image"
                   >
                     <ChevronLeft className="w-5 h-5 text-gray-700" />
                   </button>
-                  
+
                   {/* Right arrow */}
                   <button
                     onClick={nextImage}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg rounded-full p-2 transition-all duration-200 hover:scale-105 z-10"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 lg:bg-white/80 lg:hover:bg-white lg:shadow-lg lg:rounded-full p-2 transition-all duration-200 hover:scale-105 z-10"
                     aria-label="Next image"
                   >
                     <ChevronRight className="w-5 h-5 text-gray-700" />
@@ -230,16 +229,16 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
                 </>
               )}
 
-              {/* Image indicators */}
+              {/* Image indicators - hidden on mobile */}
               {productImages.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 lg:flex space-x-2 hidden">
                   {productImages.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
                       className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                        index === currentImageIndex 
-                          ? 'bg-green-800 scale-125' 
+                        index === currentImageIndex
+                          ? 'bg-green-800 scale-125'
                           : 'bg-white/60 hover:bg-white/80'
                       }`}
                       aria-label={`Go to image ${index + 1}`}

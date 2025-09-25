@@ -43,16 +43,16 @@ export function ProductsShowcase() {
   }
 
   return (
-    <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-24 bg-white relative">
+    <section className="py-6 sm:py-8 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-28 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Mobile: Stacked Product Units, Desktop: Side by Side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-20">
           
           {/* Storm Product Unit */}
-          <div className="flex flex-col items-center space-y-8">
+          <div className="flex flex-col items-center space-y-6 sm:space-y-8">
             {/* Storm Image */}
-            <div className="flex justify-center" style={{ transform: 'translateY(-20px)' }}>
-              <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg group mx-auto">
+            <div className="flex justify-center sm:translate-y-[-20px]">
+              <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg group mx-auto">
                 <div className="aspect-square flex items-center justify-center">
                   <img
                     src={stormImages[stormImageIndex]}
@@ -101,8 +101,8 @@ export function ProductsShowcase() {
 
             {/* Storm Info */}
             <div className="flex flex-col items-center text-center w-full">
-              <div className="space-y-3 sm:space-y-4 max-w-sm px-4 sm:px-0">
-                <h3 className="text-xl sm:text-2xl font-sora font-semibold text-[#36454F]">
+              <div className="space-y-3 sm:space-y-4 max-w-xs sm:max-w-sm px-4 sm:px-0 pb-4">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-sora font-semibold text-[#36454F]">
                   Vaayura Storm
                 </h3>
                 
@@ -118,7 +118,7 @@ export function ProductsShowcase() {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-3 justify-center w-full">
+                <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center w-full">
                   <Link to="/checkout" state={{
                     item: {
                       id: '51f1a996-6e38-42a3-a952-b62a40436735',
@@ -129,17 +129,17 @@ export function ProductsShowcase() {
                     }
                   }} className="w-full sm:w-[140px]">
                     <Button
-                      size="lg"
-                      className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 active:scale-95 sm:hover:scale-105 w-full text-sm min-h-[48px] touch-manipulation"
+                      size="sm"
+                      className="bg-green-800 hover:bg-green-900 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-200 active:scale-95 sm:hover:scale-105 w-full text-xs sm:text-sm min-h-[44px] sm:min-h-[48px] touch-manipulation"
                     >
                       Add to Cart
                     </Button>
                   </Link>
                   <Link to="/products/storm" className="w-full sm:w-[140px]">
                     <Button
-                      size="lg"
+                      size="sm"
                       variant="outline"
-                      className="border-green-800 text-green-800 hover:bg-green-800 hover:text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 active:scale-95 sm:hover:scale-105 w-full text-sm min-h-[48px] touch-manipulation"
+                      className="border-green-800 text-green-800 hover:bg-green-800 hover:text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-200 active:scale-95 sm:hover:scale-105 w-full text-xs sm:text-sm min-h-[44px] sm:min-h-[48px] touch-manipulation"
                     >
                       Learn More
                     </Button>
@@ -150,10 +150,10 @@ export function ProductsShowcase() {
           </div>
 
           {/* Nest Product Unit */}
-          <div className="flex flex-col items-center space-y-8">
+          <div className="flex flex-col items-center space-y-6 sm:space-y-8">
             {/* Nest Image */}
             <div className="flex justify-center">
-              <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg group mx-auto">
+              <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg group mx-auto">
                 <div className="aspect-square flex items-center justify-center">
                   <img
                     src={nestImages[nestImageIndex]}
@@ -201,8 +201,8 @@ export function ProductsShowcase() {
 
             {/* Nest Info */}
             <div className="flex flex-col items-center text-center w-full">
-              <div className="space-y-3 sm:space-y-4 max-w-sm px-4 sm:px-0">
-                <h3 className="text-xl sm:text-2xl font-sora font-semibold text-[#36454F]">
+              <div className="space-y-3 sm:space-y-4 max-w-xs sm:max-w-sm px-4 sm:px-0 pb-4">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-sora font-semibold text-[#36454F]">
                   Vaayura Nest
                 </h3>
                 
@@ -218,7 +218,7 @@ export function ProductsShowcase() {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-3 justify-center w-full">
+                <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center w-full">
                   <Link to="/checkout" state={{
                     item: {
                       id: '719171bd-7b50-482f-9ee5-fc8c946c8b15',
@@ -229,17 +229,17 @@ export function ProductsShowcase() {
                     }
                   }} className="w-full sm:w-[140px]">
                     <Button
-                      size="lg"
-                      className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 active:scale-95 sm:hover:scale-105 w-full text-sm min-h-[48px] touch-manipulation"
+                      size="sm"
+                      className="bg-green-800 hover:bg-green-900 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-200 active:scale-95 sm:hover:scale-105 w-full text-xs sm:text-sm min-h-[44px] sm:min-h-[48px] touch-manipulation"
                     >
                       Add to Cart
                     </Button>
                   </Link>
                   <Link to="/products/nest" className="w-full sm:w-[140px]">
                     <Button
-                      size="lg"
+                      size="sm"
                       variant="outline"
-                      className="border-green-800 text-green-800 hover:bg-green-800 hover:text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 active:scale-95 sm:hover:scale-105 w-full text-sm min-h-[48px] touch-manipulation"
+                      className="border-green-800 text-green-800 hover:bg-green-800 hover:text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-200 active:scale-95 sm:hover:scale-105 w-full text-xs sm:text-sm min-h-[44px] sm:min-h-[48px] touch-manipulation"
                     >
                       Learn More
                     </Button>

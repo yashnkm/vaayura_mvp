@@ -10,7 +10,7 @@ export function Layout({ children, showFooter = true }: LayoutProps) {
   return (
     <>
       <Header1 />
-      <main className="min-h-screen">
+      <main className="min-h-screen mobile-no-overflow">
         {children}
       </main>
       {showFooter && <Footer />}

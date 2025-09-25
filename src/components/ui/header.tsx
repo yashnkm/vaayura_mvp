@@ -46,16 +46,17 @@ function Header1() {
     const [isOpen, setOpen] = useState(false);
     return (
         <header className="w-full z-40 fixed top-0 left-0 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-            <div className="container relative mx-auto min-h-20 flex gap-4 items-center justify-between">
+            <div className="container relative mx-auto min-h-16 sm:min-h-20 flex gap-2 sm:gap-4 items-center justify-between px-4 sm:px-6">
                 <div className="flex justify-start">
                     <Link to="/">
-                        <img 
-                            src={logoImage} 
-                            alt="Vaayura" 
-                            className="h-10" 
-                            style={{ 
+                        <img
+                            src={logoImage}
+                            alt="Vaayura"
+                            className="h-8 sm:h-10"
+                            style={{
                                 width: 'auto',
-                                height: '2.5rem',
+                                height: 'auto',
+                                maxHeight: '2rem',
                                 objectFit: 'contain'
                             }}
                             loading="lazy"
@@ -122,12 +123,12 @@ function Header1() {
                         <Link to="/contact">Contact</Link>
                     </Button>
                 </div>
-                <div className="flex w-12 shrink xl:hidden items-end justify-end">
-                    <Button variant="ghost" onClick={() => setOpen(!isOpen)} className="text-brand-dark-grey hover:text-brand-grey-green">
-                        {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                <div className="flex w-10 sm:w-12 shrink xl:hidden items-end justify-end">
+                    <Button variant="ghost" onClick={() => setOpen(!isOpen)} className="text-brand-dark-grey hover:text-brand-grey-green p-2">
+                        {isOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
                     </Button>
                     {isOpen && (
-                        <div className="absolute top-20 border-t flex flex-col w-full right-0 bg-white shadow-lg py-4 container gap-2 max-h-[70vh] overflow-y-auto">
+                        <div className="absolute top-16 sm:top-20 border-t flex flex-col w-full right-0 bg-white shadow-lg py-4 container gap-2 max-h-[70vh] overflow-y-auto">
                             {/* Simplified mobile navigation - no submenus */}
                             <Link
                                 to="/"

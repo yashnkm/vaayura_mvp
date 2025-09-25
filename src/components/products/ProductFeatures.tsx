@@ -112,21 +112,61 @@ export function ProductFeatures() {
   // Get dynamic features based on product type
   const allFeatures = getFeatures(currentProduct);
 
-  // Filter features based on product type
+  // Filter features based on product type and screen size
+  const [isMobile, setIsMobile] = useState(false);
+
   const filteredFeatures = allFeatures.filter((feature) => {
     // Remove Silent Sleep Mode for Storm products
     if (feature.title === 'Silent Sleep Mode' && currentProduct === 'storm') {
       return false;
     }
+    // Remove Ambient Air Quality Display for mobile view
+    if (feature.title === 'Ambient Air Quality Display' && isMobile) {
+      return false;
+    }
     return true;
   });
 
-  const [visibleFeatures, setVisibleFeatures] = useState<boolean[]>(new Array(filteredFeatures.length).fill(false));
+  const [visibleFeatures, setVisibleFeatures] = useState<boolean[]>(() =>
+    new Array(filteredFeatures.length).fill(isMobile)
+  );
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const newIsMobile = window.innerWidth < 1024;
+      setIsMobile(newIsMobile);
+      // Update visibility immediately when switching to mobile
+      if (newIsMobile) {
+        setVisibleFeatures(new Array(filteredFeatures.length).fill(true));
+      }
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, [filteredFeatures.length]);
   const [ambientCarouselIndex, setAmbientCarouselIndex] = useState(0);
   const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
   const lastScrollY = useRef(0);
 
+  // Handle manual carousel navigation for mobile
+  const nextAmbientImage = () => {
+    setAmbientCarouselIndex(prev => (prev + 1) % ambientLightImages.length);
+  };
+
+  const prevAmbientImage = () => {
+    setAmbientCarouselIndex(prev => (prev - 1 + ambientLightImages.length) % ambientLightImages.length);
+  };
+
   useEffect(() => {
+    // On mobile, make all features visible immediately for faster loading
+    if (isMobile) {
+      setVisibleFeatures(new Array(filteredFeatures.length).fill(true));
+      return;
+    }
+
+    // Desktop: use intersection observer for animations
     const observers = filteredFeatures.map((_, index) => {
       const observer = new IntersectionObserver(
         ([entry]) => {
@@ -136,13 +176,13 @@ export function ProductFeatures() {
 
           setVisibleFeatures(prev => {
             const newVisible = [...prev];
-            
+
             // Only animate when scrolling down and element becomes visible
             if (entry.intersectionRatio >= 0.4 && isScrollingDown && !newVisible[index]) {
               newVisible[index] = true;
             }
             // Keep visible state when scrolling up (no animation reset)
-            
+
             return newVisible;
           });
         },
@@ -162,20 +202,26 @@ export function ProductFeatures() {
     return () => {
       observers.forEach(observer => observer.disconnect());
     };
-  }, []);
+  }, [isMobile, filteredFeatures.length]);
 
-  // Ambient light carousel effect - starts after feature becomes visible
+  // Ambient light carousel effect - desktop only (since mobile hides this feature)
   useEffect(() => {
-    const ambientFeatureIndex = 2; // Ambient Air Quality Display is the 3rd feature (index 2)
-    
-    if (!visibleFeatures[ambientFeatureIndex]) return;
+    // Find the actual index of the Ambient Air Quality Display feature
+    const ambientFeatureIndex = filteredFeatures.findIndex(feature =>
+      feature.title === 'Ambient Air Quality Display'
+    );
+
+    // Only start carousel on desktop when feature is visible
+    if (ambientFeatureIndex === -1 || isMobile) return;
 
     const carouselInterval = setInterval(() => {
       setAmbientCarouselIndex(prev => (prev + 1) % ambientLightImages.length);
-    }, 3000); // Change image every 3 seconds
+    }, 3000);
 
-    return () => clearInterval(carouselInterval);
-  }, [visibleFeatures]);
+    return () => {
+      clearInterval(carouselInterval);
+    };
+  }, [currentProduct, isMobile, filteredFeatures.length]); // Include isMobile to restart when screen size changes
 
   return (
     <section className="w-full py-12 sm:py-16 lg:py-20 xl:py-24 bg-white">
@@ -195,57 +241,97 @@ export function ProductFeatures() {
           {/* Features List */}
           <div className="space-y-16 sm:space-y-24 lg:space-y-32 xl:space-y-40">
             {filteredFeatures.map((feature, index) => (
-              <div 
+              <div
                 key={index}
                 ref={el => featureRefs.current[index] = el}
-                className={`flex flex-col lg:flex-row items-center ${feature.title === 'Silent Sleep Mode' ? 'gap-6 sm:gap-8 lg:gap-12' : 'gap-8 sm:gap-12 lg:gap-16'} min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] transition-all duration-1000 ease-out ${
+                className={`flex flex-col lg:flex-row items-center ${feature.title === 'Silent Sleep Mode' ? 'gap-6 sm:gap-8 lg:gap-12' : 'gap-8 sm:gap-12 lg:gap-16'} min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] ${
                   (index % 2 === 1 && feature.title !== 'Silent Sleep Mode') ? 'lg:flex-row-reverse' : ''
                 } ${
-                  visibleFeatures[index] 
-                    ? 'opacity-100 translate-y-0 scale-100' 
-                    : 'opacity-5 translate-y-12 scale-97'
+                  // Mobile: always visible, no animations
+                  // Desktop: animated based on visibility
+                  visibleFeatures[index]
+                    ? 'opacity-100 sm:transition-all sm:duration-1000 sm:ease-out sm:translate-y-0 sm:scale-100'
+                    : 'opacity-100 sm:opacity-5 sm:transition-all sm:duration-1000 sm:ease-out sm:translate-y-12 sm:scale-97'
                 }`}
                 style={{
-                  transitionProperty: 'opacity, transform',
-                  willChange: 'opacity, transform'
+                  // Only apply animation properties on desktop
+                  ...(typeof window !== 'undefined' && window.innerWidth >= 640 && {
+                    transitionProperty: 'opacity, transform',
+                    willChange: 'opacity, transform'
+                  })
                 }}
               >
                 {/* Feature Image */}
-                <div className={`${feature.title === 'Silent Sleep Mode' ? 'flex-none w-full max-w-2xl' : 'flex-1 max-w-lg'} relative transition-all duration-1000 ease-out p-4 sm:p-6 lg:p-8 ${
-                  visibleFeatures[index] 
-                    ? 'opacity-100 translate-x-0 scale-100' 
-                    : `opacity-0 scale-95 ${index % 2 === 1 ? 'translate-x-12' : '-translate-x-12'}`
+                <div className={`${feature.title === 'Silent Sleep Mode' ? 'flex-none w-full max-w-2xl' : 'flex-1 max-w-lg'} relative p-4 sm:p-6 lg:p-8 ${
+                  // Mobile: always visible, no animations
+                  // Desktop: animated based on visibility
+                  visibleFeatures[index]
+                    ? 'opacity-100 sm:transition-all sm:duration-1000 sm:ease-out sm:translate-x-0 sm:scale-100'
+                    : `opacity-100 sm:opacity-0 sm:transition-all sm:duration-1000 sm:ease-out sm:scale-95 ${index % 2 === 1 ? 'sm:translate-x-12' : 'sm:-translate-x-12'}`
                 }`}>
-                  {visibleFeatures[index] ? (
-                    feature.title === 'Ambient Air Quality Display' ? (
-                      // Carousel for Ambient Air Quality Display
-                      <div className="relative w-full max-w-full h-48 sm:h-64 md:h-80 lg:h-96">
-                        {ambientLightImages.map((img, imgIndex) => (
-                          <img 
-                            key={imgIndex}
-                            src={img} 
-                            alt={`${feature.title} - View ${imgIndex + 1}`}
-                            className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${
-                              imgIndex === ambientCarouselIndex ? 'opacity-100' : 'opacity-0'
+                  {feature.title === 'Ambient Air Quality Display' && visibleFeatures[index] ? (
+                    // Carousel for Ambient Air Quality Display
+                    <div className="relative w-full max-w-full h-48 sm:h-64 md:h-80 lg:h-96 overflow-hidden rounded-lg">
+
+                      {ambientLightImages.map((img, imgIndex) => (
+                        <img
+                          key={imgIndex}
+                          src={img}
+                          alt={`${feature.title} - View ${imgIndex + 1}`}
+                          className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${
+                            imgIndex === ambientCarouselIndex ? 'opacity-100' : 'opacity-0'
+                          }`}
+                          style={{
+                            filter: 'drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15))',
+                            maxHeight: '100%',
+                            height: 'auto',
+                            aspectRatio: 'auto',
+                            transformOrigin: 'center center',
+                            // Simple responsive transform - smaller for mobile
+                            transform: img === ambientLight1
+                              ? 'scale(1.05) translateY(-1%)'
+                              : 'scale(1.05)'
+                          }}
+                          loading={isMobile ? "eager" : "lazy"}
+                        />
+                      ))}
+
+
+                      {/* Touch areas for mobile navigation */}
+                      <div
+                        className="absolute left-0 top-0 w-1/3 h-full z-20 cursor-pointer touch-manipulation"
+                        onClick={prevAmbientImage}
+                        aria-label="Previous ambient light image"
+                      />
+                      <div
+                        className="absolute right-0 top-0 w-1/3 h-full z-20 cursor-pointer touch-manipulation"
+                        onClick={nextAmbientImage}
+                        aria-label="Next ambient light image"
+                      />
+
+                      {/* Carousel indicators */}
+                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1 sm:gap-2 z-10">
+                        {ambientLightImages.map((_, indicatorIndex) => (
+                          <div
+                            key={indicatorIndex}
+                            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 cursor-pointer ${
+                              indicatorIndex === ambientCarouselIndex
+                                ? 'bg-green-600 scale-110'
+                                : 'bg-gray-300 hover:bg-gray-400'
                             }`}
-                            style={{ 
-                              filter: 'drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15))',
-                              maxHeight: '100%',
-                              height: 'auto',
-                              aspectRatio: 'auto',
-                              transform: img === ambientLight1 ? 'scale(1.8) translateY(-1%)' : 'scale(1.8)'
-                            }}
-                            loading="lazy"
+                            onClick={() => setAmbientCarouselIndex(indicatorIndex)}
+                            aria-label={`Go to ambient light image ${indicatorIndex + 1}`}
                           />
                         ))}
                       </div>
-                    ) : (
+                    </div>
+                  ) : visibleFeatures[index] ? (
                       // Regular single image for other features
-                      <img 
-                        src={feature.image} 
+                      <img
+                        src={feature.image}
                         alt={feature.title}
                         className={`w-full max-w-full ${feature.title === 'Silent Sleep Mode' ? 'object-cover object-right h-64 sm:h-80 md:h-96 lg:h-[32rem]' : 'object-contain h-48 sm:h-64 md:h-80 lg:h-96'}`}
-                        style={{ 
+                        style={{
                           filter: 'drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15))',
                           maxHeight: '100%',
                           height: 'auto',
@@ -255,9 +341,8 @@ export function ProductFeatures() {
                             transform: 'scale(1.25) translateX(-20%)'
                           })
                         }}
-                        loading="lazy"
+                        loading={isMobile ? "eager" : "lazy"}
                       />
-                    )
                   ) : (
                     <div 
                       className={`w-full max-w-full ${feature.title === 'Silent Sleep Mode' ? 'h-64 sm:h-80 md:h-96 lg:h-[32rem]' : 'h-48 sm:h-64 md:h-80 lg:h-96'} bg-gray-100 rounded-lg animate-pulse flex items-center justify-center`}
@@ -269,35 +354,43 @@ export function ProductFeatures() {
                 </div>
 
                 {/* Feature Content */}
-                <div className={`flex-1 space-y-6 transition-all duration-1000 ease-out ${feature.title === 'Silent Sleep Mode' ? 'p-4 sm:p-6 lg:p-8 lg:pl-0' : 'p-4 sm:p-6 lg:p-8'} ${
-                  visibleFeatures[index] 
-                    ? 'opacity-100 translate-x-0' 
-                    : `opacity-0 ${index % 2 === 1 ? '-translate-x-12' : 'translate-x-12'}`
+                <div className={`flex-1 space-y-6 ${feature.title === 'Silent Sleep Mode' ? 'p-4 sm:p-6 lg:p-8 lg:pl-0' : 'p-4 sm:p-6 lg:p-8'} ${
+                  // Mobile: always visible, no animations
+                  // Desktop: animated based on visibility
+                  visibleFeatures[index]
+                    ? 'opacity-100 sm:transition-all sm:duration-1000 sm:ease-out sm:translate-x-0'
+                    : `opacity-100 sm:opacity-0 sm:transition-all sm:duration-1000 sm:ease-out ${index % 2 === 1 ? 'sm:-translate-x-12' : 'sm:translate-x-12'}`
                 }`}>
 
                   {/* Title */}
-                  <h3 className={`text-2xl md:text-3xl font-montserrat text-brand-grey-green leading-tight transition-all duration-1000 ${
-                    visibleFeatures[index] 
-                      ? 'opacity-100 translate-y-0' 
-                      : 'opacity-0 translate-y-6'
+                  <h3 className={`text-2xl md:text-3xl font-montserrat text-brand-grey-green leading-tight ${
+                    // Mobile: always visible, no animations
+                    // Desktop: animated based on visibility
+                    visibleFeatures[index]
+                      ? 'opacity-100 sm:transition-all sm:duration-1000 sm:translate-y-0'
+                      : 'opacity-100 sm:opacity-0 sm:transition-all sm:duration-1000 sm:translate-y-6'
                   }`}>
                     {feature.title}
                   </h3>
 
                   {/* Description */}
-                  <p className={`text-brand-dark-grey font-montserrat leading-relaxed text-lg transition-all duration-1000 ${
-                    visibleFeatures[index] 
-                      ? 'opacity-100 translate-y-0' 
-                      : 'opacity-0 translate-y-6'
+                  <p className={`text-brand-dark-grey font-montserrat leading-relaxed text-lg ${
+                    // Mobile: always visible, no animations
+                    // Desktop: animated based on visibility
+                    visibleFeatures[index]
+                      ? 'opacity-100 sm:transition-all sm:duration-1000 sm:translate-y-0'
+                      : 'opacity-100 sm:opacity-0 sm:transition-all sm:duration-1000 sm:translate-y-6'
                   }`}>
                     {feature.description}
                   </p>
 
                   {/* Technical Specs */}
-                  <div className={`transition-all duration-1000 ${
-                    visibleFeatures[index] 
-                      ? 'opacity-100 translate-y-0' 
-                      : 'opacity-0 translate-y-6'
+                  <div className={`${
+                    // Mobile: always visible, no animations
+                    // Desktop: animated based on visibility
+                    visibleFeatures[index]
+                      ? 'opacity-100 sm:transition-all sm:duration-1000 sm:translate-y-0'
+                      : 'opacity-100 sm:opacity-0 sm:transition-all sm:duration-1000 sm:translate-y-6'
                   }`}>
                     <div className="text-brand-dark-grey text-sm">
                       {feature.technical}
