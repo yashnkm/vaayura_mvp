@@ -14,8 +14,8 @@ const contactMethods: ContactMethod[] = [
   {
     icon: <Phone className="h-12 w-12" />,
     title: "Call us",
-    subtitle: "+91-XXXX-XXXX",
-    action: "tel:+91XXXXXXXXXX"
+    subtitle: "+91-98710 91717",
+    action: "tel:+919871091717"
   },
   {
     icon: <Mail className="h-12 w-12" />,

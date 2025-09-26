@@ -55,6 +55,8 @@ export function HeroVideoScroll() {
   }, []);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
       if (!containerRef.current) return;
       
@@ -77,16 +79,32 @@ export function HeroVideoScroll() {
       targetProgressRef.current = progress;
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    const requestTick = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Use passive scroll events with throttling for mobile
+    window.addEventListener('scroll', requestTick, { passive: true });
     handleScroll();
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', requestTick);
     };
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-[200vh] lg:h-[250vh] bg-white">
+    <section ref={containerRef} className="relative h-[200vh] lg:h-[250vh] bg-white" style={{
+      ...(window.innerWidth < 1024 && {
+        WebkitOverflowScrolling: 'touch',
+        transform: 'translateZ(0)'
+      })
+    }}>
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <div className="relative flex items-center justify-center w-full h-full">
           
@@ -157,7 +175,8 @@ export function HeroVideoScroll() {
                   maxHeight: '1000px',
                   minWidth: '320px',
                   minHeight: '400px',
-                  transform: window.innerWidth < 1024 ? 'scale(2.7) translateY(20%) translateX(1%)' : 'scale(1.0)'
+                  transform: window.innerWidth < 1024 ? 'scale(2.7) translateY(20%) translateX(1%)' : 'scale(1.0)',
+                  willChange: window.innerWidth < 1024 ? 'transform' : 'auto'
                 }}
                 rendererSettings={{
                   preserveAspectRatio: 'xMidYMid meet',

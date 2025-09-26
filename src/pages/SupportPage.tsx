@@ -138,7 +138,7 @@ export function SupportPage() {
                 <h3 className="font-sora font-semibold text-[#36454F] mb-2">Call Support</h3>
                 <p className="text-sm text-[#36454F] mb-3">Mon-Fri 9AM-6PM</p>
                 <Button className="bg-green-800 hover:bg-green-900 text-white">
-                  +91-XXXX-XXXX
+                  +91-98710 91717
                 </Button>
               </Card>
               
@@ -147,7 +147,7 @@ export function SupportPage() {
                 <h3 className="font-sora font-semibold text-[#36454F] mb-2">Email Us</h3>
                 <p className="text-sm text-[#36454F] mb-3">Response within 24hrs</p>
                 <Button className="bg-green-800 hover:bg-green-900 text-white">
-                  support@vaayura.com
+                  info@vaayura.com
                 </Button>
               </Card>
               

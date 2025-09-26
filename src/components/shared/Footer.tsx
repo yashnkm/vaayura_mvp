@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import logoImage from "@/assets/sections/shared/logos/logo_2.png";
 
@@ -27,17 +28,17 @@ const defaultSections = [
     title: "Products",
     links: [
       { name: "All Products", href: "/products" },
-      { name: "Vaayura Storm", href: "/products" },
-      { name: "Vaayura Nest", href: "/products" },
+      { name: "Vaayura Storm", href: "/products/storm" },
+      { name: "Vaayura Nest", href: "/products/nest" },
     ],
   },
   {
     title: "Support",
     links: [
-      { name: "Help Center", href: "#" },
-      { name: "Installation Guide", href: "#" },
-      { name: "Warranty", href: "#" },
-      { name: "Contact Us", href: "#" },
+      { name: "Help Center", href: "/support" },
+      { name: "Installation Guide", href: "/contact" },
+      { name: "Warranty", href: "/contact" },
+      { name: "Contact Us", href: "/contact" },
     ],
   },
 ];
@@ -51,7 +52,7 @@ const defaultLegalLinks = [
 export const Footer = ({
   sections = defaultSections,
   description = "Breathe clean, live healthy. Vaayura's advanced air purification technology ensures your home has the cleanest air possible.",
-  copyright = "© 2024 Vaayura. All rights reserved.",
+  copyright = "© 2025 Vaayura. All rights reserved.",
   legalLinks = defaultLegalLinks,
 }: FooterProps) => {
   const fadeInUp = {
@@ -149,14 +150,17 @@ export const Footer = ({
                 <ul className="space-y-3">
                   {sections[0].links.map((item) => (
                     <motion.li key={item.name}>
-                      <motion.a
-                        href={item.href}
-                        className="text-white hover:text-white transition-colors duration-200"
+                      <motion.div
                         whileHover={{ x: 4 }}
                         transition={{ duration: 0.2 }}
                       >
-                        {item.name}
-                      </motion.a>
+                        <Link
+                          to={item.href}
+                          className="text-white hover:text-white transition-colors duration-200"
+                        >
+                          {item.name}
+                        </Link>
+                      </motion.div>
                     </motion.li>
                   ))}
                 </ul>
@@ -168,14 +172,17 @@ export const Footer = ({
                 <ul className="space-y-3">
                   {sections[1].links.map((item) => (
                     <motion.li key={item.name}>
-                      <motion.a
-                        href={item.href}
-                        className="text-white hover:text-white transition-colors duration-200"
+                      <motion.div
                         whileHover={{ x: 4 }}
                         transition={{ duration: 0.2 }}
                       >
-                        {item.name}
-                      </motion.a>
+                        <Link
+                          to={item.href}
+                          className="text-white hover:text-white transition-colors duration-200"
+                        >
+                          {item.name}
+                        </Link>
+                      </motion.div>
                     </motion.li>
                   ))}
                 </ul>
@@ -188,14 +195,17 @@ export const Footer = ({
               <ul className="space-y-3">
                 {sections[2].links.map((item) => (
                   <motion.li key={item.name}>
-                    <motion.a
-                      href={item.href}
-                      className="text-white hover:text-white transition-colors duration-200"
+                    <motion.div
                       whileHover={{ x: 4 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {item.name}
-                    </motion.a>
+                      <Link
+                        to={item.href}
+                        className="text-white hover:text-white transition-colors duration-200"
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
                   </motion.li>
                 ))}
               </ul>
@@ -270,14 +280,17 @@ export const Footer = ({
               <ul className="space-y-3">
                 {section.links.map((item) => (
                   <motion.li key={item.name}>
-                    <motion.a
-                      href={item.href}
-                      className="text-white hover:text-white transition-colors duration-200"
+                    <motion.div
                       whileHover={{ x: 4 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {item.name}
-                    </motion.a>
+                      <Link
+                        to={item.href}
+                        className="text-white hover:text-white transition-colors duration-200"
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
                   </motion.li>
                 ))}
               </ul>
@@ -296,15 +309,24 @@ export const Footer = ({
             
             <div className="flex space-x-6 text-sm">
               {legalLinks.map((link) => (
-                <motion.a
+                <motion.div
                   key={link.name}
-                  href={link.href}
-                  className="text-white hover:text-white transition-colors duration-200"
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {link.name}
-                </motion.a>
+                  {link.href === "#" ? (
+                    <span className="text-white cursor-not-allowed opacity-60">
+                      {link.name}
+                    </span>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className="text-white hover:text-white transition-colors duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
+                </motion.div>
               ))}
             </div>
           </div>

@@ -309,21 +309,6 @@ export function ProductFeatures() {
                         aria-label="Next ambient light image"
                       />
 
-                      {/* Carousel indicators */}
-                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1 sm:gap-2 z-10">
-                        {ambientLightImages.map((_, indicatorIndex) => (
-                          <div
-                            key={indicatorIndex}
-                            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 cursor-pointer ${
-                              indicatorIndex === ambientCarouselIndex
-                                ? 'bg-green-600 scale-110'
-                                : 'bg-gray-300 hover:bg-gray-400'
-                            }`}
-                            onClick={() => setAmbientCarouselIndex(indicatorIndex)}
-                            aria-label={`Go to ambient light image ${indicatorIndex + 1}`}
-                          />
-                        ))}
-                      </div>
                     </div>
                   ) : visibleFeatures[index] ? (
                       // Regular single image for other features

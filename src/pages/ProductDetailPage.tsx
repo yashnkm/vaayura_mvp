@@ -96,12 +96,44 @@ export function ProductDetailPage() {
     fetchProduct();
   }, [slug]);
 
-  // Initialize Lenis smooth scrolling and scroll to top
+  // Scroll to top on route change - happens before content loads
   useEffect(() => {
-    // Force scroll to exact top with multiple methods
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // Multiple methods for immediate scroll to top
+    window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
+
+    // Force scroll after a brief delay to handle React Router timing
+    const timeoutId = setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 10);
+
+    return () => clearTimeout(timeoutId);
+  }, [slug]);
+
+  // Initialize Lenis smooth scrolling after content loads
+  useEffect(() => {
+    if (loading || !product) return;
+
+    // Ensure we're at the top after product loads - more aggressive
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+
+      // Additional method for stubborn cases
+      if (document.scrollingElement) {
+        document.scrollingElement.scrollTop = 0;
+      }
+    };
+
+    scrollToTop();
+
+    // Execute again after a short delay to handle any timing issues
+    setTimeout(scrollToTop, 50);
 
     const lenis = new Lenis({
       duration: 1.2,
@@ -119,7 +151,7 @@ export function ProductDetailPage() {
     return () => {
       lenis.destroy();
     };
-  }, [slug]);
+  }, [product, loading]);
 
   if (loading) {
     return (
