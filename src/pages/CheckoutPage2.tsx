@@ -56,25 +56,85 @@ export function CheckoutPage2() {
   const [couponError, setCouponError] = useState('')
   const [applyingCoupon, setApplyingCoupon] = useState(false)
   
-  // Cart system - initialize with both Storm and Nest products
-  const initialItems = [
-    {
-      id: '51f1a996-6e38-42a3-a952-b62a40436735', // Storm product UUID
-      name: 'Storm', // Match database name
-      price: 15000, // Match database price
-      quantity: location.state?.item?.id === '51f1a996-6e38-42a3-a952-b62a40436735' ? (location.state.item.quantity || 1) : 0,
-      image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'
-    },
-    {
-      id: '719171bd-7b50-482f-9ee5-fc8c946c8b15', // Nest product UUID
-      name: 'Nest', // Match database name
-      price: 10000, // Match database price
-      quantity: location.state?.item?.id === '719171bd-7b50-482f-9ee5-fc8c946c8b15' ? (location.state.item.quantity || 1) : 0,
-      image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755666606/vaayura/products/tsbzsxd55ya5hrequbm9.png'
+  // State for cart items - will be populated with actual backend prices
+  const [cartItems, setCartItems] = useState<CheckoutItem[]>([])
+
+  // Fetch actual product prices from backend on component mount
+  useEffect(() => {
+    // Only initialize when products are loaded
+    if (!products || products.length === 0) {
+      return
     }
-  ]
-  
-  const [cartItems, setCartItems] = useState<CheckoutItem[]>(initialItems)
+
+    const initializeCartWithBackendPrices = async () => {
+      try {
+        // Find Storm and Nest products from the products hook
+        const stormProduct = products.find(p =>
+          p.id === '51f1a996-6e38-42a3-a952-b62a40436735' ||
+          p.name.toLowerCase().includes('storm')
+        )
+        const nestProduct = products.find(p =>
+          p.id === '719171bd-7b50-482f-9ee5-fc8c946c8b15' ||
+          p.name.toLowerCase().includes('nest')
+        )
+
+
+        const initialItems = [
+          {
+            id: '51f1a996-6e38-42a3-a952-b62a40436735',
+            name: 'Storm',
+            price: stormProduct?.price || 15999, // Always use backend price
+            quantity: location.state?.item?.id === '51f1a996-6e38-42a3-a952-b62a40436735' ? (location.state.item.quantity || 1) : 0,
+            image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'
+          },
+          {
+            id: '719171bd-7b50-482f-9ee5-fc8c946c8b15',
+            name: 'Nest',
+            price: nestProduct?.price || 7999, // Always use backend price
+            quantity: location.state?.item?.id === '719171bd-7b50-482f-9ee5-fc8c946c8b15' ? (location.state.item.quantity || 1) : 0,
+            image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755666606/vaayura/products/tsbzsxd55ya5hrequbm9.png'
+          }
+        ]
+
+        // If coming from product page, use quantity but keep backend prices
+        if (location.state?.item) {
+          const incomingItem = location.state.item
+          const itemIndex = initialItems.findIndex(item => item.id === incomingItem.id)
+          if (itemIndex !== -1) {
+            initialItems[itemIndex] = {
+              ...initialItems[itemIndex],
+              // Keep backend price, only update quantity
+              quantity: incomingItem.quantity || 1
+            }
+          }
+        }
+
+        setCartItems(initialItems)
+      } catch (error) {
+        console.error('Error initializing cart with backend prices:', error)
+        // Fallback to hardcoded values if backend fetch fails
+        const fallbackItems = [
+          {
+            id: '51f1a996-6e38-42a3-a952-b62a40436735',
+            name: 'Storm',
+            price: 15999,
+            quantity: location.state?.item?.id === '51f1a996-6e38-42a3-a952-b62a40436735' ? (location.state.item.quantity || 1) : 0,
+            image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'
+          },
+          {
+            id: '719171bd-7b50-482f-9ee5-fc8c946c8b15',
+            name: 'Nest',
+            price: 7999,
+            quantity: location.state?.item?.id === '719171bd-7b50-482f-9ee5-fc8c946c8b15' ? (location.state.item.quantity || 1) : 0,
+            image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755666606/vaayura/products/tsbzsxd55ya5hrequbm9.png'
+          }
+        ]
+        setCartItems(fallbackItems)
+      }
+    }
+
+    initializeCartWithBackendPrices()
+  }, [products, location.state])
 
   const [customerData, setCustomerData] = useState<CustomerData>({
     name: '',
@@ -475,6 +535,19 @@ export function CheckoutPage2() {
                         <div className="text-lg sm:text-xl font-semibold text-gray-900">
                           ₹{item.price.toLocaleString()}
                         </div>
+                        {/* Show MRP and discount for Storm and Nest */}
+                        {(item.name.toLowerCase().includes('storm') || item.name.toLowerCase().includes('nest')) && (
+                          <div className="flex items-center gap-2">
+                            <div className="text-sm text-gray-500 line-through">
+                              ₹{item.name.toLowerCase().includes('storm') ? '24,999' : '11,999'}
+                            </div>
+                            <div className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-semibold">
+                              {item.name.toLowerCase().includes('storm') ?
+                                Math.round(((24999 - item.price) / 24999) * 100) :
+                                Math.round(((11999 - item.price) / 11999) * 100)}% OFF
+                            </div>
+                          </div>
+                        )}
                       </div>
 
                       {/* Quantity Controls */}
@@ -703,10 +776,44 @@ export function CheckoutPage2() {
 
               {/* Price Breakdown */}
               <div className="space-y-4 pb-6 border-b border-gray-200">
+                {/* Show MRP total for comparison */}
+                {cartItems.some(item => item.quantity > 0 && (item.name.toLowerCase().includes('storm') || item.name.toLowerCase().includes('nest'))) && (
+                  <div className="flex justify-between text-gray-500">
+                    <span>MRP Total</span>
+                    <span className="line-through">
+                      ₹{cartItems.reduce((sum, item) => {
+                        if (item.quantity > 0) {
+                          const mrp = item.name.toLowerCase().includes('storm') ? 24999 :
+                                     item.name.toLowerCase().includes('nest') ? 11999 : item.price;
+                          return sum + (mrp * item.quantity);
+                        }
+                        return sum;
+                      }, 0).toLocaleString()}
+                    </span>
+                  </div>
+                )}
+
                 <div className="flex justify-between text-gray-700">
                   <span>Subtotal ({cartItems.filter(item => item.quantity > 0).length} item{cartItems.filter(item => item.quantity > 0).length !== 1 ? 's' : ''})</span>
                   <span>₹{totalAmount.toLocaleString()}</span>
                 </div>
+
+                {/* Show product discount savings */}
+                {cartItems.some(item => item.quantity > 0 && (item.name.toLowerCase().includes('storm') || item.name.toLowerCase().includes('nest'))) && (
+                  <div className="flex justify-between text-green-600">
+                    <span>Product Savings</span>
+                    <span>
+                      -₹{cartItems.reduce((sum, item) => {
+                        if (item.quantity > 0 && (item.name.toLowerCase().includes('storm') || item.name.toLowerCase().includes('nest'))) {
+                          const mrp = item.name.toLowerCase().includes('storm') ? 24999 : 11999;
+                          return sum + ((mrp - item.price) * item.quantity);
+                        }
+                        return sum;
+                      }, 0).toLocaleString()}
+                    </span>
+                  </div>
+                )}
+
                 {appliedCoupon && (
                   <div className="flex justify-between text-gray-700">
                     <span className="flex items-center gap-1">

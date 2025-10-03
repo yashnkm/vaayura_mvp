@@ -1,15 +1,27 @@
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useAdminProducts } from "@/hooks/useProducts"
 import stormFrontImg from "@/assets/sections/products/product-images/stormfrontview.png"
 import stormSideImg from "@/assets/sections/products/product-images/stormsideview.png"
 import nestFrontImg from "@/assets/sections/products/product-images/nestfrontview.png"
 import nestSideImg from "@/assets/sections/products/product-images/nestsideview.png"
 
 export function ProductsShowcase() {
+  const { products } = useAdminProducts()
   const [stormImageIndex, setStormImageIndex] = useState(0)
   const [nestImageIndex, setNestImageIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
+
+  // Get actual product data from backend
+  const stormProduct = products.find(p =>
+    p.id === '51f1a996-6e38-42a3-a952-b62a40436735' ||
+    p.name.toLowerCase().includes('storm')
+  )
+  const nestProduct = products.find(p =>
+    p.id === '719171bd-7b50-482f-9ee5-fc8c946c8b15' ||
+    p.name.toLowerCase().includes('nest')
+  )
 
   const stormImages = [stormFrontImg, stormSideImg]
   const nestImages = [nestFrontImg, nestSideImg]
@@ -121,11 +133,11 @@ export function ProductsShowcase() {
                 <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center w-full">
                   <Link to="/checkout" state={{
                     item: {
-                      id: '51f1a996-6e38-42a3-a952-b62a40436735',
-                      name: 'Strom',
-                      price: 15000,
+                      id: stormProduct?.id || '51f1a996-6e38-42a3-a952-b62a40436735',
+                      name: stormProduct?.name || 'Storm',
+                      price: stormProduct?.price || 15999,
                       quantity: 1,
-                      image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'
+                      image: stormProduct?.images?.[0] || 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'
                     }
                   }} className="w-full sm:w-[140px]">
                     <Button
@@ -221,11 +233,11 @@ export function ProductsShowcase() {
                 <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center w-full">
                   <Link to="/checkout" state={{
                     item: {
-                      id: '719171bd-7b50-482f-9ee5-fc8c946c8b15',
-                      name: 'Nest',
-                      price: 10000,
+                      id: nestProduct?.id || '719171bd-7b50-482f-9ee5-fc8c946c8b15',
+                      name: nestProduct?.name || 'Nest',
+                      price: nestProduct?.price || 7999,
                       quantity: 1,
-                      image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/nestfrontview.png'
+                      image: nestProduct?.images?.[0] || 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755666606/vaayura/products/tsbzsxd55ya5hrequbm9.png'
                     }
                   }} className="w-full sm:w-[140px]">
                     <Button
