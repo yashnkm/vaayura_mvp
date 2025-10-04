@@ -3,8 +3,10 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatePresence, motion } from "framer-motion";
 import nestFrontView from "@/assets/sections/products/product-images/nestfrontview.png";
 import nestSideView from "@/assets/sections/products/product-images/nestsideview.png";
+import leftSideViewNest from "@/assets/sections/products/product-images/leftsidenest.png";
 import stormFrontView from "@/assets/sections/products/product-images/stormfrontview.png";
 import stormSideView from "@/assets/sections/products/product-images/stormsideview.png";
+import leftSideViewStorm from "@/assets/sections/products/product-images/leftsideviewstorm.png";
 
 // Define types locally to avoid import issues
 interface ProductFeature {
@@ -74,16 +76,18 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
   // Get product-specific images for carousel
   const getProductImages = () => {
     const productName = product.name.toLowerCase();
-    
+
     if (productName.includes('nest')) {
       return [
+        { src: nestFrontView, alt: 'Nest Front View' },
         { src: product.images[0] || nestSideView, alt: 'Nest Side View' },
-        { src: nestFrontView, alt: 'Nest Front View' }
+        { src: leftSideViewNest, alt: 'Nest Left Side View' }
       ];
     } else if (productName.includes('storm') || productName.includes('strom')) {
       return [
         { src: stormFrontView, alt: 'Storm Front View' },
-        { src: product.images[0] || stormSideView, alt: 'Storm Side View' }
+        { src: product.images[0] || stormSideView, alt: 'Storm Side View' },
+        { src: leftSideViewStorm, alt: 'Storm Left Side View' }
       ];
     } else {
       // Default fallback
@@ -205,15 +209,17 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
                     exit={{ opacity: 0, x: -50 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <img 
+                    <img
                       src={productImages[currentImageIndex].src}
                       alt={productImages[currentImageIndex].alt}
                       className="object-contain w-full h-full"
-                      style={{ 
+                      style={{
                         maxWidth: '100%',
                         maxHeight: '100%',
                         transform: productImages[currentImageIndex].alt.includes('Front View')
-                          ? 'scale(1.5) translateY(-10px)' 
+                          ? 'scale(1.5) translateY(-10px)'
+                          : productImages[currentImageIndex].alt.includes('Left Side View')
+                          ? 'scale(1.3) translateY(-5px)'
                           : 'none'
                       }}
                       onError={(e) => {

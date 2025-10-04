@@ -67,7 +67,7 @@ export function ContactSupport() {
               viewport={{ once: true }}
               className="w-full"
             >
-              <Card 
+              <Card
                 className="bg-white border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-full flex flex-col cursor-pointer"
                 onClick={() => navigate('/support')}
               >
@@ -100,7 +100,7 @@ export function ContactSupport() {
               viewport={{ once: true }}
               className="w-full"
             >
-              <Card 
+              <Card
                 className="bg-white border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-full flex flex-col cursor-pointer"
                 onClick={() => navigate('/support')}
               >
@@ -133,7 +133,7 @@ export function ContactSupport() {
               viewport={{ once: true }}
               className="w-full"
             >
-              <Card 
+              <Card
                 className="bg-white border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-full flex flex-col cursor-pointer"
                 onClick={() => navigate('/contact')}
               >

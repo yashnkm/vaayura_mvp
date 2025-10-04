@@ -9,7 +9,7 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Menu, MoveRight, X } from "lucide-react";
+import { Menu, MoveRight, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logoImage from "@/assets/sections/shared/logos/logo_2.png";
@@ -115,12 +115,17 @@ function Header1() {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
-                <div className="flex justify-end gap-4">
+                <div className="flex justify-end gap-4 items-center">
                     <Button variant="ghost" className="hidden xl:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
                         <Link to="/bulk-order">Corporate Queries</Link>
                     </Button>
                     <Button variant="ghost" className="hidden xl:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
                         <Link to="/contact">Contact</Link>
+                    </Button>
+                    <Button variant="ghost" size="icon" className="text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
+                        <Link to="/checkout">
+                            <ShoppingCart className="h-5 w-5" />
+                        </Link>
                     </Button>
                 </div>
                 <div className="flex w-10 sm:w-12 shrink xl:hidden items-end justify-end">

@@ -64,15 +64,15 @@ export function ProductsShowcase() {
           <div className="flex flex-col items-center space-y-6 sm:space-y-8">
             {/* Storm Image */}
             <div className="flex justify-center sm:translate-y-[-20px]">
-              <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg group mx-auto">
+              <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl group mx-auto">
                 <div className="aspect-square flex items-center justify-center">
                   <img
                     src={stormImages[stormImageIndex]}
                     alt="Vaayura Storm"
                     className="object-contain"
-                    style={{ 
-                      width: stormImageIndex === 0 ? '85%' : '70%',
-                      height: stormImageIndex === 0 ? '85%' : '70%',
+                    style={{
+                      width: stormImageIndex === 0 ? '100%' : '70%',
+                      height: stormImageIndex === 0 ? '100%' : '70%',
                       transform: stormImageIndex === 1 ? 'translateY(15px)' : 'none',
                       transition: 'width 0.3s ease, height 0.3s ease, transform 0.3s ease'
                     }}
@@ -165,15 +165,15 @@ export function ProductsShowcase() {
           <div className="flex flex-col items-center space-y-6 sm:space-y-8">
             {/* Nest Image */}
             <div className="flex justify-center">
-              <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg group mx-auto">
+              <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl group mx-auto">
                 <div className="aspect-square flex items-center justify-center">
                   <img
                     src={nestImages[nestImageIndex]}
                     alt="Vaayura Nest"
                     className="object-contain"
-                    style={{ 
-                      width: nestImageIndex === 0 ? '85%' : '70%',
-                      height: nestImageIndex === 0 ? '85%' : '70%',
+                    style={{
+                      width: nestImageIndex === 0 ? '100%' : '70%',
+                      height: nestImageIndex === 0 ? '100%' : '70%',
                       transition: 'width 0.3s ease, height 0.3s ease'
                     }}
                     loading="lazy"

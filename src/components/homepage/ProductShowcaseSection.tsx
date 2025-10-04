@@ -316,7 +316,7 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
                         src={stormSideView}
                         alt="Vaayura Storm"
                         className="product-image h-80 lg:h-96 w-auto object-contain"
-                        style={{ 
+                        style={{
                           filter: 'drop-shadow(0 25px 60px rgba(0, 0, 0, 0.4))',
                           transform: 'translate3d(0, 0, 0)' // GPU acceleration
                         }}
@@ -327,12 +327,12 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
                     <h4 className="text-[#36454F] font-sora font-semibold text-2xl mb-4">Storm</h4>
                     <div className="flex gap-4 justify-center">
                       <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
-                        <div className="text-gray-600 text-sm font-subheading font-medium">Area Coverage</div>
-                        <div className="text-green-800 font-sora font-bold text-lg">1000 sq. ft.</div>
+                        <div className="text-gray-600 text-sm font-subheading font-medium">CADR</div>
+                        <div className="text-green-800 font-sora font-bold text-lg">400 m³/hr</div>
                       </div>
                       <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
-                        <div className="text-gray-600 text-sm font-subheading font-medium">CADR</div>
-                        <div className="text-green-800 font-sora font-bold text-lg">600m³/h</div>
+                        <div className="text-gray-600 text-sm font-subheading font-medium">Coverage</div>
+                        <div className="text-green-800 font-sora font-bold text-lg">600+ sq ft</div>
                       </div>
                     </div>
                   </div>
@@ -348,7 +348,7 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
                         src={nestFrontView}
                         alt="Vaayura Nest"
                         className="product-image h-80 lg:h-96 w-auto object-contain"
-                        style={{ 
+                        style={{
                           filter: 'drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3))',
                           transform: 'translate3d(0, 0, 0)' // GPU acceleration
                         }}
@@ -359,12 +359,12 @@ export function ProductShowcaseSection({ productFilter }: ProductShowcaseSection
                     <h4 className="text-[#36454F] font-sora font-semibold text-2xl mb-2 -mt-18">Nest</h4>
                     <div className="flex gap-4 justify-center mt-8">
                       <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
-                        <div className="text-gray-600 text-sm font-subheading font-medium">Area Coverage</div>
-                        <div className="text-green-800 font-sora font-bold text-lg">600 sq. ft.</div>
+                        <div className="text-gray-600 text-sm font-subheading font-medium">CADR</div>
+                        <div className="text-green-800 font-sora font-bold text-lg">190 m³/hr</div>
                       </div>
                       <div className="bg-white border border-gray-200 rounded-lg px-6 py-4 text-center shadow-md">
-                        <div className="text-gray-600 text-sm font-subheading font-medium">CADR</div>
-                        <div className="text-green-800 font-sora font-bold text-lg">450m³/h</div>
+                        <div className="text-gray-600 text-sm font-subheading font-medium">Coverage</div>
+                        <div className="text-green-800 font-sora font-bold text-lg">300 sq ft</div>
                       </div>
                     </div>
                   </div>

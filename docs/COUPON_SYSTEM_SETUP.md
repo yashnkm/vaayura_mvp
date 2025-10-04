@@ -8,14 +8,14 @@ This guide explains how to set up the complete coupon system for the Vaayura web
 Run the SQL script to create the coupons table and sample data:
 
 ```sql
--- Execute the contents of: create_coupons_table.sql
+-- Execute the contents of: database/create_coupons_table.sql
 ```
 
-### 2. Update Orders Table  
+### 2. Update Orders Table
 Run the SQL script to add coupon support to the orders table:
 
 ```sql
--- Execute the contents of: update_orders_table_for_coupons.sql
+-- Execute the contents of: database/update_orders_table_for_coupons.sql
 ```
 
 ## 🚀 Backend API Endpoints

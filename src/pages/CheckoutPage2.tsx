@@ -84,14 +84,14 @@ export function CheckoutPage2() {
             id: '51f1a996-6e38-42a3-a952-b62a40436735',
             name: 'Storm',
             price: stormProduct?.price || 15999, // Always use backend price
-            quantity: location.state?.item?.id === '51f1a996-6e38-42a3-a952-b62a40436735' ? (location.state.item.quantity || 1) : 0,
+            quantity: location.state?.item?.id === '51f1a996-6e38-42a3-a952-b62a40436735' ? (location.state.item.quantity || 1) : 0, // Start at 0 if no item passed
             image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755672081/vaayura/products/zhncsmnmogny6bpioldf.png'
           },
           {
             id: '719171bd-7b50-482f-9ee5-fc8c946c8b15',
             name: 'Nest',
             price: nestProduct?.price || 7999, // Always use backend price
-            quantity: location.state?.item?.id === '719171bd-7b50-482f-9ee5-fc8c946c8b15' ? (location.state.item.quantity || 1) : 0,
+            quantity: location.state?.item?.id === '719171bd-7b50-482f-9ee5-fc8c946c8b15' ? (location.state.item.quantity || 1) : 0, // Start at 0 if no item passed
             image: 'https://res.cloudinary.com/dmdhhrgme/image/upload/v1755666606/vaayura/products/tsbzsxd55ya5hrequbm9.png'
           }
         ]

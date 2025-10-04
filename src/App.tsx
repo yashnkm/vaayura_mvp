@@ -24,12 +24,36 @@ function LenisScrollProvider({ children }: { children: React.ReactNode }) {
   const location = useLocation()
 
   useEffect(() => {
-    // Scroll to top on route change
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    // Force scroll to top immediately on route change - CRITICAL
+    // Use multiple methods and multiple timings to ensure it works
+    const scrollToTop = () => {
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+    }
+
+    // Immediate scroll
+    scrollToTop()
+
+    // Multiple delayed scrolls to catch async rendering at different stages
+    const timeouts: NodeJS.Timeout[] = []
+    timeouts.push(setTimeout(scrollToTop, 0))
+    timeouts.push(setTimeout(scrollToTop, 10))
+    timeouts.push(setTimeout(scrollToTop, 50))
+    timeouts.push(setTimeout(scrollToTop, 100))
+
+    // Also use requestAnimationFrame for next paint
+    let rafId = requestAnimationFrame(() => {
+      scrollToTop()
+      rafId = requestAnimationFrame(scrollToTop)
+    })
 
     // Initialize Lenis on main content pages, not auth pages
-    const contentPages = ['/', '/home2', '/home3', '/about', '/products', '/contact', '/blog', '/3d-demo', '/support']
-    const isContentPage = contentPages.includes(location.pathname) || location.pathname.startsWith('/blog/') || location.pathname.startsWith('/support/') || location.pathname.startsWith('/products/')
+    const contentPages = ['/', '/home2', '/home3', '/about', '/products', '/contact', '/blog', '/3d-demo', '/support', '/bulk-order']
+    const isContentPage = contentPages.includes(location.pathname) ||
+                          location.pathname.startsWith('/blog/') ||
+                          location.pathname.startsWith('/support/') ||
+                          location.pathname.startsWith('/products/')
 
     if (isContentPage) {
       const lenis = new Lenis({
@@ -46,8 +70,15 @@ function LenisScrollProvider({ children }: { children: React.ReactNode }) {
       requestAnimationFrame(raf)
 
       return () => {
+        timeouts.forEach(timeout => clearTimeout(timeout))
+        cancelAnimationFrame(rafId)
         lenis.destroy()
       }
+    }
+
+    return () => {
+      timeouts.forEach(timeout => clearTimeout(timeout))
+      cancelAnimationFrame(rafId)
     }
   }, [location.pathname])
 

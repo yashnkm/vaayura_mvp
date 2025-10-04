@@ -6,9 +6,10 @@ import smartTechImg from "@/assets/sections/products/features/int_sensor.jpg";
 import smartAutoImg from "@/assets/sections/homepage/specs/gg v1.png";
 import advancedFiltrationImg from "@/assets/Advance filter homepage/advance hepa filtration.jpg";
 import stormImg from "@/assets/sections/shared/products/storm.png";
-import aromaImg from "@/assets/Advance filter homepage/Built-in aromatherapy.png";
-import ambientImg from "@/assets/Advance filter homepage/Generated.png";
+import aromaImg from "@/assets/sections/products/features/aromatherapy_new.png";
+import ambientImg from "@/assets/Advance filter homepage/live_aqi_sensor.png";
 import silentSleepModeImg from "@/assets/Advance filter homepage/Silentsleepmode.jpg";
+import extraLargeCoverageImg from "@/assets/Advance filter homepage/extra_large_coverage.png";
 
 // Define types locally to avoid import issues
 interface ProductFeature {
@@ -99,6 +100,9 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
     // Match features to relevant images - using local assets where appropriate
     if (title.toLowerCase().includes('hepa') || title.toLowerCase().includes('filtration')) {
       return advancedFiltrationImg; // Use our advanced filtration cutaway image
+    }
+    if (title.toLowerCase().includes('coverage') || title.toLowerCase().includes('cadr') || title.toLowerCase().includes('large')) {
+      return extraLargeCoverageImg; // Use the extra large coverage image
     }
     if (title.toLowerCase().includes('ambient') || title.toLowerCase().includes('light') || title.toLowerCase().includes('display') || title.toLowerCase().includes('aqi')) {
       return ambientImg; // Use the green ambient lighting image

@@ -3,7 +3,7 @@
 ## Step 1: Secure Database (DO THIS FIRST)
 1. Go to your Supabase dashboard: https://sycayvesxlhljlbgafbx.supabase.co
 2. Navigate to SQL Editor
-3. Copy and run the SQL from `production_security.sql`
+3. Copy and run the SQL from `database/production_security.sql`
 4. This will secure your orders table for production
 
 ## Step 2: Get Razorpay Live Keys

@@ -132,7 +132,7 @@ export function SupportPage() {
             <h2 className="text-2xl font-sora font-bold text-[#36454F] text-center mb-8">
               Need immediate help?
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
               <Card className="p-6 text-center hover:shadow-lg transition-shadow">
                 <Phone className="w-8 h-8 text-green-800 mx-auto mb-3" />
                 <h3 className="font-sora font-semibold text-[#36454F] mb-2">Call Support</h3>
@@ -141,22 +141,13 @@ export function SupportPage() {
                   +91-98710 91717
                 </Button>
               </Card>
-              
+
               <Card className="p-6 text-center hover:shadow-lg transition-shadow">
                 <Mail className="w-8 h-8 text-green-800 mx-auto mb-3" />
                 <h3 className="font-sora font-semibold text-[#36454F] mb-2">Email Us</h3>
                 <p className="text-sm text-[#36454F] mb-3">Response within 24hrs</p>
                 <Button className="bg-green-800 hover:bg-green-900 text-white">
                   info@vaayura.com
-                </Button>
-              </Card>
-              
-              <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-                <MessageCircle className="w-8 h-8 text-green-800 mx-auto mb-3" />
-                <h3 className="font-sora font-semibold text-[#36454F] mb-2">Live Chat</h3>
-                <p className="text-sm text-[#36454F] mb-3">Available 24/7</p>
-                <Button className="bg-green-800 hover:bg-green-900 text-white">
-                  Start Chat
                 </Button>
               </Card>
             </div>

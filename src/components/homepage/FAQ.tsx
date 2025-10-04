@@ -21,11 +21,11 @@ export function FAQ() {
     },
     {
       question: "Are your purifiers compatible with all rooms?",
-      answer: "Yes, we offer different models for various room sizes. The Vaayura Zen is ideal for larger spaces up to 800 sq. ft, while the Vaayura Mini is perfect for personal spaces like bedrooms and offices up to 300 sq. ft."
+      answer: "Yes, we offer different models for various room sizes. The Vaayura Storm is ideal for larger spaces up to 600+ sq. ft, while the Vaayura Nest is perfect for personal spaces like bedrooms and offices up to 300 sq. ft."
     },
     {
       question: "How long does the filter last?",
-      answer: "Our high-efficiency filters are designed to last approximately 6-12 months, depending on usage and air quality. The smart app will notify you when it's time for a replacement."
+      answer: "Our high-efficiency filters are designed to last approximately 9000 hrs, depending on usage and air quality. The smart app will notify you when it's time for a replacement."
     },
     {
       question: "Are the purifiers silent at night?",
@@ -33,15 +33,15 @@ export function FAQ() {
     },
     {
       question: "Do you offer a warranty?",
-      answer: "Yes, all Vaayura air purifiers come with a comprehensive 3-year warranty covering any manufacturing defects and performance issues."
+      answer: "Yes, all Vaayura air purifiers come with a comprehensive 2-year warranty covering any manufacturing defects and performance issues."
     },
     {
       question: "How much electricity does it consume?",
-      answer: "Vaayura air purifiers are Energy Star certified and highly efficient. The Mini uses only 25-35W on average (less than a light bulb), while the Zen uses 35-55W. Running 24/7, your monthly electricity cost will typically be under $5."
+      answer: "Vaayura air purifiers are Energy Star certified and highly efficient. The Nest uses only 34 watts (less than a light bulb), while the Storm uses 35 watts."
     },
     {
       question: "Can I control it with my smartphone?",
-      answer: "Yes! The Vaayura Zen model includes full app connectivity, allowing you to monitor air quality, adjust settings, schedule operation, and receive filter replacement notifications."
+      answer: "Yes! The Vaayura Storm model includes full app connectivity, allowing you to monitor air quality, adjust settings, schedule operation, and receive filter replacement notifications."
     },
     {
       question: "Is it safe for children and pets?",

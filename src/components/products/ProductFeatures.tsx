@@ -91,8 +91,8 @@ const getFeatures = (currentProduct: string): Feature[] => {
 
 // Ambient light carousel images
 const ambientLightImages = [
-  ambientLight2,
   ambientLight1,
+  ambientLight2,
   ambientLight3
 ];
 
@@ -271,7 +271,7 @@ export function ProductFeatures() {
                 }`}>
                   {feature.title === 'Ambient Air Quality Display' && visibleFeatures[index] ? (
                     // Carousel for Ambient Air Quality Display
-                    <div className="relative w-full max-w-full h-48 sm:h-64 md:h-80 lg:h-96 overflow-hidden rounded-lg">
+                    <div className="relative w-full max-w-full h-64 sm:h-80 md:h-96 lg:h-[32rem] overflow-hidden rounded-lg">
 
                       {ambientLightImages.map((img, imgIndex) => (
                         <img
@@ -289,8 +289,8 @@ export function ProductFeatures() {
                             transformOrigin: 'center center',
                             // Simple responsive transform - smaller for mobile
                             transform: img === ambientLight1
-                              ? 'scale(1.05) translateY(-1%)'
-                              : 'scale(1.05)'
+                              ? 'scale(1.2) translateY(-1%)'
+                              : 'scale(1.2)'
                           }}
                           loading={isMobile ? "eager" : "lazy"}
                         />
