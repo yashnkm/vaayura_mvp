@@ -6,11 +6,27 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+
+# Environment Variables (NEVER COMMIT!)
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.production
+vercel_backend/.env
+vercel_backend/.env.local
+vercel_backend/.env.production
+
+# Dependencies
 node_modules
+vercel_backend/node_modules
+
+# Build outputs
 dist
 dist-ssr
 *.local
+.vercel
 
 # Editor directories and files
 .vscode/*
@@ -22,5 +38,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.env
-.vercel
+
+# OS Files
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+.cache

@@ -6,6 +6,7 @@ import { couponService } from '@/services/couponService'
 import { AppliedCoupon } from '@/types/coupon'
 import { useAdminProducts } from '@/hooks/useProducts'
 import logoImage from '@/assets/sections/shared/logos/logo_2.png'
+import { formatInvoiceDate, formatPaymentDate, generateInvoiceNumber } from '@/utils/invoiceGeneratorV2'
 
 // Declare Razorpay types
 declare global {
@@ -409,19 +410,22 @@ export function CheckoutPage2() {
         throw new Error('No items in cart')
       }
 
-      // For now, handle the first item with quantity > 0 (backend limitation)
-      const firstItem = itemsWithQuantity[0]
-      
+      // Prepare cart items for backend
       const requestPayload = {
-        productId: firstItem.id,
-        quantity: firstItem.quantity,
+        cartItems: itemsWithQuantity.map(item => ({
+          id: item.id,
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price
+        })),
         customerData: customerData,
         coupon: appliedCoupon
       }
 
       console.log('Sending payment request:', JSON.stringify(requestPayload, null, 2))
+      console.log(`Cart has ${itemsWithQuantity.length} item(s)`)
 
-      const response = await fetch('http://localhost:3000/api/create-order', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/create-order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -447,9 +451,145 @@ export function CheckoutPage2() {
         name: 'Vaayura',
         description: `Payment for ${itemsWithQuantity.length} item(s)`,
         order_id: orderData.razorpay_order.id,
-        handler: async function (response: any) {
-          setShowConfirmation(true)
-          setLoading(false)
+        handler: async function (razorpayResponse: any) {
+          try {
+            console.log('Payment successful, verifying signature...')
+
+            // Verify payment with backend
+            const verifyResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/verify-payment`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                razorpay_order_id: razorpayResponse.razorpay_order_id,
+                razorpay_payment_id: razorpayResponse.razorpay_payment_id,
+                razorpay_signature: razorpayResponse.razorpay_signature,
+                order_id: orderData.order_id,
+                customerData: customerData
+              })
+            })
+
+            const verifyResult = await verifyResponse.json()
+            console.log('Verification result:', verifyResult)
+
+            if (verifyResult.verified && verifyResult.success) {
+              // Payment verified successfully
+              console.log('Payment verified successfully!')
+
+              // Generate and download invoice from backend
+              try {
+                console.log('Starting invoice generation...');
+                const now = new Date();
+                const invoiceData = {
+                  invoiceNumber: generateInvoiceNumber(orderData.order_id),
+                  invoiceDate: formatInvoiceDate(now),
+                  orderId: orderData.order_id,
+                  customerName: customerData.name,
+                  customerEmail: customerData.email,
+                  customerPhone: customerData.phone,
+                  shippingAddress: customerData.address,
+                  items: orderData.line_items || itemsWithQuantity.map(item => ({
+                    product_name: item.name,
+                    quantity: item.quantity,
+                    unit_price: item.price,
+                    subtotal: item.price * item.quantity
+                  })),
+                  baseAmount: totalAmount,
+                  discountAmount: couponDiscount,
+                  totalAmount: finalAmount,
+                  couponCode: appliedCoupon?.coupon?.code,
+                  paymentId: razorpayResponse.razorpay_payment_id,
+                  paymentDate: formatPaymentDate(now),
+                  paymentMethod: 'Razorpay'
+                };
+
+                console.log('Requesting invoice PDF from backend...');
+
+                // Call backend to generate PDF
+                const invoiceResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/generate-invoice`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(invoiceData)
+                });
+
+                if (!invoiceResponse.ok) {
+                  throw new Error('Failed to generate invoice PDF');
+                }
+
+                // Download the PDF
+                const blob = await invoiceResponse.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `Vaayura_Invoice_${invoiceData.invoiceNumber}.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+
+                console.log('✅ Invoice downloaded successfully!');
+
+                // Send invoice via email
+                try {
+                  console.log('Sending invoice email...');
+
+                  // Convert blob to base64 for email transmission
+                  const reader = new FileReader();
+                  const pdfBase64Promise = new Promise<string>((resolve, reject) => {
+                    reader.onloadend = () => {
+                      const base64String = (reader.result as string).split(',')[1];
+                      resolve(base64String);
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                  });
+
+                  const pdfBase64 = await pdfBase64Promise;
+
+                  const emailResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/send-invoice-email`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      customerEmail: customerData.email,
+                      customerName: customerData.name,
+                      invoiceNumber: invoiceData.invoiceNumber,
+                      pdfBuffer: pdfBase64
+                    })
+                  });
+
+                  if (emailResponse.ok) {
+                    console.log('✅ Invoice email sent successfully!');
+                  } else {
+                    console.warn('⚠️ Failed to send invoice email, but payment was successful');
+                  }
+                } catch (emailError) {
+                  console.error('❌ Error sending invoice email:', emailError);
+                  // Don't block success flow if email fails
+                }
+              } catch (invoiceError) {
+                console.error('❌ Error generating invoice:', invoiceError);
+                console.error('Invoice error details:', invoiceError);
+                alert('Invoice generation failed, but payment was successful. Error: ' + (invoiceError as Error).message);
+                // Don't block success flow if invoice fails
+              }
+
+              setShowConfirmation(true)
+            } else {
+              // Verification failed
+              console.error('Payment verification failed:', verifyResult)
+              alert('Payment verification failed. Please contact support with your payment ID: ' + razorpayResponse.razorpay_payment_id)
+            }
+          } catch (error) {
+            console.error('Error verifying payment:', error)
+            alert('Failed to verify payment. Please contact support with your payment ID: ' + razorpayResponse.razorpay_payment_id)
+          } finally {
+            setLoading(false)
+          }
         },
         prefill: {
           name: customerData.name,
@@ -460,7 +600,27 @@ export function CheckoutPage2() {
           color: '#16a34a'
         },
         modal: {
-          ondismiss: function() {
+          ondismiss: async function() {
+            // Handle payment cancellation/failure
+            console.log('Payment modal dismissed')
+
+            try {
+              // Notify backend about payment failure
+              await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/payment-failed`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  order_id: orderData.order_id,
+                  razorpay_order_id: orderData.razorpay_order.id,
+                  reason: 'Payment cancelled by user'
+                })
+              })
+            } catch (error) {
+              console.error('Error logging payment failure:', error)
+            }
+
             setLoading(false)
           }
         }

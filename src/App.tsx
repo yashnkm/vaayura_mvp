@@ -19,6 +19,7 @@ import { AdminPage } from './pages/AdminPage'
 import { ThreeDemoPage } from './pages/3DemoPage'
 import { SupportPage } from './pages/SupportPage'
 import { ProductSupportPage } from './pages/ProductSupportPage'
+import { InvoicePreviewPage } from './pages/InvoicePreviewPage'
 
 function LenisScrollProvider({ children }: { children: React.ReactNode }) {
   const location = useLocation()
@@ -108,6 +109,7 @@ function App() {
           <Route path="/3d-demo" element={<ThreeDemoPage />} />
           <Route path="/support" element={<SupportPage />} />
           <Route path="/support/:slug" element={<ProductSupportPage />} />
+          <Route path="/invoice-preview" element={<InvoicePreviewPage />} />
         </Routes>
       </LenisScrollProvider>
     </Router>
