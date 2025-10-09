@@ -66,6 +66,16 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
     "Sound level": "20 dB"
   };
 
+  // Helper function to get specification value with fallback
+  const getSpecValue = (keys: string[], fallback: string): string => {
+    if (!product.specifications) return fallback;
+    for (const key of keys) {
+      const value = product.specifications[key];
+      if (value) return value;
+    }
+    return fallback;
+  };
+
   let specifications = (product.specifications && Object.keys(product.specifications).length > 0)
     ? product.specifications
     : defaultSpecifications;
@@ -111,59 +121,59 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
   // Get dynamic dimensions based on product
   const getDimensions = () => {
     const productName = product.name.toLowerCase();
-    if (productName.includes('storm') || productName.includes('strom')) {
-      return [
-        { label: "Height", value: "447 mm" },
-        { label: "Width", value: "254 mm" },
-        { label: "Length", value: "254 mm" },
-        { label: "Weight", value: "4 kg" }
-      ];
-    } else if (productName.includes('nest')) {
-      return [
-        { label: "Height", value: "317 mm" },
-        { label: "Width", value: "213 mm" },
-        { label: "Length", value: "210 mm" },
-        { label: "Weight", value: "3.2 kg" }
-      ];
+    const isStorm = productName.includes('storm') || productName.includes('strom');
+    const isNest = productName.includes('nest');
+
+    // Default fallback values based on product type
+    let fallbacks;
+    if (isStorm) {
+      fallbacks = { height: "447 mm", width: "254 mm", length: "254 mm", weight: "4 kg" };
+    } else if (isNest) {
+      fallbacks = { height: "317 mm", width: "213 mm", length: "210 mm", weight: "3.2 kg" };
     } else {
-      return [
-        { label: "Height", value: "1050 mm" },
-        { label: "Width", value: "220 mm" },
-        { label: "Length", value: "220 mm" },
-        { label: "Weight", value: "4.65 kg" }
-      ];
+      fallbacks = { height: "1050 mm", width: "220 mm", length: "220 mm", weight: "4.65 kg" };
     }
+
+    return [
+      { label: "Height", value: getSpecValue(['height', 'Height'], fallbacks.height) },
+      { label: "Width", value: getSpecValue(['width', 'Width'], fallbacks.width) },
+      { label: "Length", value: getSpecValue(['length', 'Length'], fallbacks.length) },
+      { label: "Weight", value: getSpecValue(['weight', 'Weight'], fallbacks.weight) }
+    ];
   };
 
   // Get power consumption based on product type
   const getPowerConsumption = () => {
     const productName = product.name.toLowerCase();
+    let fallback;
     if (productName.includes('nest')) {
-      return "34W";
+      fallback = "34W";
     } else if (productName.includes('storm') || productName.includes('strom')) {
-      return "35W";
+      fallback = "35W";
+    } else {
+      fallback = "60W";
     }
-    return "60W"; // Default for other products
+    return getSpecValue(['power_consumption', 'Power consumption', 'power'], fallback);
   };
 
   // Detailed technical specifications for popup
   const detailedSpecs = [
     { category: "Physical Dimensions", specs: getDimensions() },
     { category: "Performance", specs: [
-      { label: "Room coverage", value: "81m² (according to POLAR)" },
-      { label: "Sound level", value: "20 dB" },
-      { label: "Warranty", value: "2 year" },
-      { label: "Particle capture", value: "99.97% at 0.1μm" }
+      { label: "Room coverage", value: getSpecValue(['room_coverage', 'Room coverage', 'coverage'], "81m² (according to POLAR)") },
+      { label: "Sound level", value: getSpecValue(['sound_level', 'Sound level', 'noise'], "20 dB") },
+      { label: "Warranty", value: getSpecValue(['warranty', 'Warranty'], "2 year") },
+      { label: "Particle capture", value: getSpecValue(['particle_capture', 'Particle capture'], "99.97% at 0.1μm") }
     ]},
     { category: "Power & Connectivity", specs: [
-      { label: "Cord length", value: "1.8m" },
-      { label: "Standby power consumption", value: "< 0.5W" },
+      { label: "Cord length", value: getSpecValue(['cord_length', 'Cord length'], "1.8m") },
+      { label: "Standby power consumption", value: getSpecValue(['standby_power_consumption', 'Standby power consumption'], "< 0.5W") },
       { label: "Power consumption", value: getPowerConsumption() }
     ]},
     { category: "Filtration System", specs: [
-      { label: "Filter stages", value: product.name.toLowerCase().includes('nest') ? "3-layer system" : "4-layer system" },
-      { label: "HEPA grade", value: "True HEPA 13" },
-      { label: "Activated carbon", value: "Honeycomb structure" }
+      { label: "Filter stages", value: getSpecValue(['filter_stages', 'Filter stages', 'filter'], product.name.toLowerCase().includes('nest') ? "3-layer system" : "4-layer system") },
+      { label: "HEPA grade", value: getSpecValue(['hepa_grade', 'HEPA grade'], "True HEPA 13") },
+      { label: "Activated carbon", value: getSpecValue(['activated_carbon', 'Activated carbon'], "Honeycomb structure") }
     ]}
   ];
 

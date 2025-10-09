@@ -263,39 +263,42 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
                 <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">CADR</div>
                   <div className="text-green-800 font-sora font-bold text-sm">
-                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '400 m³/hr' :
-                     product.name.toLowerCase().includes('nest') ? '190 m³/hr' : '190 m³/hr'}
+                    {product.specifications?.cadr || product.specifications?.CADR ||
+                     ((product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '400 m³/hr' :
+                      product.name.toLowerCase().includes('nest') ? '190 m³/hr' : '190 m³/hr')}
                   </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Coverage</div>
                   <div className="text-green-800 font-sora font-bold text-sm">
-                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '600+ sq ft' :
-                     product.name.toLowerCase().includes('nest') ? '300 sq ft' : '400 sq ft'}
+                    {product.specifications?.coverage || product.specifications?.Coverage ||
+                     ((product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '600+ sq ft' :
+                      product.name.toLowerCase().includes('nest') ? '300 sq ft' : '400 sq ft')}
                   </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
-                  <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">
-                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? 'Particle capture' :
-                     product.name.toLowerCase().includes('nest') ? 'Particle capture' : 'Dimensions'}
-                  </div>
+                  <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Particle capture</div>
                   <div className="text-green-800 font-sora font-bold text-sm">
-                    {(product.name.toLowerCase().includes('storm') || product.name.toLowerCase().includes('strom')) ? '0.1μm' :
-                     product.name.toLowerCase().includes('nest') ? '0.1μm' : 'Compact'}
+                    {product.specifications?.particle_capture || product.specifications?.['Particle capture'] || '0.1μm'}
                   </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Fan Speeds</div>
-                  <div className="text-green-800 font-sora font-bold text-sm">Automatic</div>
+                  <div className="text-green-800 font-sora font-bold text-sm">
+                    {product.specifications?.fan_speeds || product.specifications?.['Fan Speeds'] || 'Automatic'}
+                  </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Sleep Timer</div>
-                  <div className="text-green-800 font-sora font-bold text-sm">3-4 hours</div>
+                  <div className="text-green-800 font-sora font-bold text-sm">
+                    {product.specifications?.sleep_timer || product.specifications?.['Sleep Timer'] || '2,4,6 hours'}
+                  </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Filter</div>
                   <div className="text-green-800 font-sora font-bold text-sm">
-                    {product.name.toLowerCase().includes('nest') ? '3 layer filter' : '4 layer filter'}
+                    {product.specifications?.filter || product.specifications?.Filter ||
+                     (product.name.toLowerCase().includes('nest') ? '3 layer filter' : '4 layer filter')}
                   </div>
                 </div>
               </div>

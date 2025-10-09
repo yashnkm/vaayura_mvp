@@ -115,11 +115,11 @@ function Header1() {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
-                <div className="flex justify-end gap-4 items-center">
-                    <Button variant="ghost" className="hidden xl:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
+                <div className="hidden xl:flex justify-end gap-4 items-center">
+                    <Button variant="ghost" className="text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
                         <Link to="/bulk-order">Corporate Queries</Link>
                     </Button>
-                    <Button variant="ghost" className="hidden xl:inline text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
+                    <Button variant="ghost" className="text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
                         <Link to="/contact">Contact</Link>
                     </Button>
                     <Button variant="ghost" size="icon" className="text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors" asChild>
@@ -128,7 +128,12 @@ function Header1() {
                         </Link>
                     </Button>
                 </div>
-                <div className="flex w-10 sm:w-12 shrink xl:hidden items-end justify-end">
+                <div className="flex xl:hidden items-center justify-end gap-2">
+                    <Button variant="ghost" size="icon" className="text-brand-dark-grey hover:text-brand-grey-green hover:bg-brand-grey-green/5 transition-colors p-2" asChild>
+                        <Link to="/checkout">
+                            <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
+                        </Link>
+                    </Button>
                     <Button variant="ghost" onClick={() => setOpen(!isOpen)} className="text-brand-dark-grey hover:text-brand-grey-green p-2">
                         {isOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
                     </Button>
