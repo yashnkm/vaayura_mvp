@@ -26,7 +26,7 @@ const defaultFeatures: FeatureItem[] = [
     title: "World-class Multi-layer Filtration",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=400&fit=crop&crop=center",
     description:
-      "Advanced HEPA-13 filters combined with activated carbon removing up to 99.97% of harmful airborne particles including dust, pollen, smoke, and microscopic contaminants.",
+      "True HEPA 13 filtration combined with activated carbon removing up to 99.97% of harmful airborne particles including dust, pollen, smoke, and microscopic contaminants.",
   },
   {
     id: 2,

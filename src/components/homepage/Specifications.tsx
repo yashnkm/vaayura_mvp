@@ -18,7 +18,7 @@ export function Specifications() {
         { label: "Height:", value: "1050 mm" },
         { label: "Weight:", value: "4.65kg" },
         { label: "Oscillation /Angle:", value: "350°" },
-        { label: "Filter life:", value: "1 year for HEPA+Carbon filter" },
+        { label: "Filter life:", value: "1 year for True HEPA 13+Carbon filter" },
         { label: "Standby power consumption:", value: "< 0.5W" },
         { label: "Room coverage:", value: "81m² (according to POLAR)" },
         { label: "Sound level:", value: "20dB" }
@@ -34,7 +34,7 @@ export function Specifications() {
         { label: "Height:", value: "650 mm" },
         { label: "Weight:", value: "2.8kg" },
         { label: "Oscillation /Angle:", value: "270°" },
-        { label: "Filter life:", value: "8 months for HEPA+Carbon filter" },
+        { label: "Filter life:", value: "8 months for True HEPA 13+Carbon filter" },
         { label: "Standby power consumption:", value: "< 0.3W" },
         { label: "Room coverage:", value: "45m² (according to POLAR)" },
         { label: "Sound level:", value: "45.2dB" }

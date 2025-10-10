@@ -17,7 +17,7 @@ export function FAQ() {
   const faqs: FAQ[] = [
     {
       question: "What makes your purifiers stand out?",
-      answer: "Our purifiers combine HEPA 13 filtration with smart sensors and a beautiful design, offering superior performance at a more accessible price point than leading brands."
+      answer: "Our purifiers combine True HEPA 13 filtration with smart sensors and a beautiful design, offering superior performance at a more accessible price point than leading brands."
     },
     {
       question: "Are your purifiers compatible with all rooms?",

@@ -36,8 +36,8 @@ FeatureItem.displayName = 'FeatureItem';
 const features: Feature[] = [
   {
     icon: <Shield className="h-auto w-5" />,
-    title: "Advanced Filtration",
-    description: "Multi-stage HEPA filtration technology removes 99.97% of particles and pollutants from your air.",
+    title: "True HEPA 13 Filtration",
+    description: "Multi-stage True HEPA 13 filtration technology removes 99.97% of particles and pollutants from your air.",
   },
   {
     icon: <Leaf className="h-auto w-5" />,

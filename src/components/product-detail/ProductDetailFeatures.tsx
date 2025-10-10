@@ -4,12 +4,12 @@ import natureImg from "@/assets/sections/shared/backgrounds/main.jpg";
 import filtrationImg from "@/assets/sections/homepage/filtration/4 layer filter.jpg";
 import smartTechImg from "@/assets/sections/products/features/int_sensor.jpg";
 import smartAutoImg from "@/assets/sections/homepage/specs/gg v1.png";
-import advancedFiltrationImg from "@/assets/Advance filter homepage/advance hepa filtration.jpg";
+import trueHepaFiltrationImg from "@/assets/Advance filter homepage/advance hepa filtration.jpg";
 import stormImg from "@/assets/sections/shared/products/storm.png";
 import aromaImg from "@/assets/sections/products/features/aromatherapy_new.png";
 import ambientImg from "@/assets/Advance filter homepage/live_aqi_sensor.png";
 import silentSleepModeImg from "@/assets/Advance filter homepage/Silentsleepmode.jpg";
-import extraLargeCoverageImg from "@/assets/Advance filter homepage/extra_large_coverage.png";
+import extraLargeCoverageImg from "@/ref_images/Gemini_Generated_Image_npchv8npchv8npch.png";
 
 // Define types locally to avoid import issues
 interface ProductFeature {
@@ -57,8 +57,8 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
   // Fallback features if none provided - ensure we have exactly 5
   const defaultFeatures = [
     {
-      title: "Advanced HEPA Filtration",
-      description: "Multi-layer HEPA filtration system removes 99.97% of ultra-fine particles including allergens, dust, and pollutants.",
+      title: "True HEPA 13 Filtration",
+      description: "Multi-layer True HEPA 13 filtration system removes 99.97% of ultra-fine particles including allergens, dust, and pollutants.",
       icon: "shield"
     },
     {
@@ -99,7 +99,7 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
   const getFeatureImage = (title: string, index: number) => {
     // Match features to relevant images - using local assets where appropriate
     if (title.toLowerCase().includes('hepa') || title.toLowerCase().includes('filtration')) {
-      return advancedFiltrationImg; // Use our advanced filtration cutaway image
+      return trueHepaFiltrationImg; // Use our True HEPA 13 filtration cutaway image
     }
     if (title.toLowerCase().includes('coverage') || title.toLowerCase().includes('cadr') || title.toLowerCase().includes('large')) {
       return extraLargeCoverageImg; // Use the extra large coverage image
@@ -124,8 +124,8 @@ export function ProductDetailFeatures({ product }: ProductDetailFeaturesProps) {
     }
     // Default nature and air purifier images
     const defaultImages = [
-      advancedFiltrationImg,
-      smartAutoImg, 
+      trueHepaFiltrationImg,
+      smartAutoImg,
       aromaImg,
       natureImg,
       "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&auto=format&fit=crop&q=60"

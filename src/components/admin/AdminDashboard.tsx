@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ProductForm } from './ProductForm'
 import { ProductList } from './ProductList'
 import { CouponManagement } from './CouponManagement'
+import { OrdersManagement } from './OrdersManagement'
 import { useState } from 'react'
 
 export function AdminDashboard() {
@@ -12,7 +13,7 @@ export function AdminDashboard() {
   const { products, loading, refetch } = useAdminProducts()
   const [showProductForm, setShowProductForm] = useState(false)
   const [editingProduct, setEditingProduct] = useState(null)
-  const [currentView, setCurrentView] = useState<'dashboard' | 'products' | 'coupons'>('dashboard')
+  const [currentView, setCurrentView] = useState<'dashboard' | 'products' | 'coupons' | 'orders'>('dashboard')
 
   const handleSignOut = async () => {
     await signOut()
@@ -46,6 +47,10 @@ export function AdminDashboard() {
 
   if (currentView === 'coupons') {
     return <CouponManagement />
+  }
+
+  if (currentView === 'orders') {
+    return <OrdersManagement onBack={() => setCurrentView('dashboard')} />
   }
 
   return (
@@ -104,6 +109,16 @@ export function AdminDashboard() {
               }`}
             >
               Coupons
+            </button>
+            <button
+              onClick={() => setCurrentView('orders')}
+              className={`py-4 px-2 border-b-2 font-medium text-sm ${
+                currentView === 'orders'
+                  ? 'border-brand-pastel-green text-brand-grey-green'
+                  : 'border-transparent text-brand-dark-grey hover:text-brand-grey-green'
+              }`}
+            >
+              Orders
             </button>
           </div>
         </div>

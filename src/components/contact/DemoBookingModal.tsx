@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { X, Calendar, User, Mail, Phone, Package, Hash, Send } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { emailService } from '@/services/emailService'
 
 interface DemoBookingModalProps {
   isOpen: boolean
@@ -82,23 +81,45 @@ export function DemoBookingModal({ isOpen, onClose }: DemoBookingModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateForm()) return
 
     setIsSubmitting(true)
 
     try {
-      // Send demo request to admin via email service
-      const success = await emailService.sendDemoRequest(formData)
-      
-      if (success) {
+      // Get product name for better email formatting
+      const productName = products.find(p => p.id === formData.product)?.name || formData.product
+
+      // Submit form to Formsubmit (free service)
+      const response = await fetch('https://formsubmit.co/founder@vaayura.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company || 'Not provided',
+          product: productName,
+          quantity: formData.quantity,
+          message: formData.message || 'No additional message',
+          _replyto: formData.email,
+          _subject: `Demo Request from ${formData.name} - ${productName}`,
+          _template: 'table',
+          _captcha: 'false'
+        }),
+      })
+
+      if (response.ok) {
         setIsSubmitted(true)
       } else {
         throw new Error('Failed to send demo request')
       }
     } catch (error) {
       console.error('Error submitting demo request:', error)
-      alert('Failed to submit demo request. Please try again.')
+      alert('Failed to submit demo request. Please try again or email us directly at founder@vaayura.com')
     } finally {
       setIsSubmitting(false)
     }

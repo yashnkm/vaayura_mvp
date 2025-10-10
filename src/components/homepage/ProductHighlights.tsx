@@ -42,7 +42,7 @@ const ProductHighlights = ({
         badge: "Compact Power",
         title: "Compact power for personal spaces.",
         description:
-          "Perfect for bedrooms, offices, and small spaces. Advanced HEPA filtration in a sleek, portable design that delivers powerful air purification.",
+          "Perfect for bedrooms, offices, and small spaces. True HEPA 13 filtration in a sleek, portable design that delivers powerful air purification.",
         buttonText: "Learn More",
         imageSrc: product1,
         imageAlt: "Vaayura Mini Air Purifier",

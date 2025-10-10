@@ -156,11 +156,25 @@ export function ProductDetailSpecifications({ product }: ProductDetailSpecificat
     return getSpecValue(['power_consumption', 'Power consumption', 'power'], fallback);
   };
 
+  // Get room coverage based on product type
+  const getRoomCoverage = () => {
+    const productName = product.name.toLowerCase();
+    let fallback;
+    if (productName.includes('nest')) {
+      fallback = "300 sq ft";
+    } else if (productName.includes('storm') || productName.includes('strom')) {
+      fallback = "600+ sq ft";
+    } else {
+      fallback = "600+ sq ft";
+    }
+    return getSpecValue(['room_coverage', 'Room coverage', 'coverage'], fallback);
+  };
+
   // Detailed technical specifications for popup
   const detailedSpecs = [
     { category: "Physical Dimensions", specs: getDimensions() },
     { category: "Performance", specs: [
-      { label: "Room coverage", value: getSpecValue(['room_coverage', 'Room coverage', 'coverage'], "81m² (according to POLAR)") },
+      { label: "Room coverage", value: getRoomCoverage() },
       { label: "Sound level", value: getSpecValue(['sound_level', 'Sound level', 'noise'], "20 dB") },
       { label: "Warranty", value: getSpecValue(['warranty', 'Warranty'], "2 year") },
       { label: "Particle capture", value: getSpecValue(['particle_capture', 'Particle capture'], "99.97% at 0.1μm") }

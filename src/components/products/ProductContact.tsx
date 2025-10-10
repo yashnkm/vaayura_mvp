@@ -20,8 +20,8 @@ const contactMethods: ContactMethod[] = [
   {
     icon: <Mail className="h-12 w-12" />,
     title: "Email us",
-    subtitle: "info@vaayura.com",
-    action: "mailto:info@vaayura.com"
+    subtitle: "founder@vaayura.com",
+    action: "mailto:founder@vaayura.com"
   },
   {
     icon: <Calendar className="h-12 w-12" />,

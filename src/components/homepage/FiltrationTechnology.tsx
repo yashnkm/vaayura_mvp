@@ -19,7 +19,7 @@ export function FiltrationTechnology() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
-            <h3 className="font-sora font-semibold text-emerald-900 mb-2">HEPA-13</h3>
+            <h3 className="font-sora font-semibold text-emerald-900 mb-2">True HEPA 13</h3>
             <p className="text-sm font-montserrat text-gray-600">99.97% efficiency</p>
           </div>
 

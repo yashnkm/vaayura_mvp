@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, CreditCard, Shield, Truck, Plus, Minus, Trash2, ChevronLeft, ChevronRight, Tag } from 'lucide-react'
 import { couponService } from '@/services/couponService'
 import { AppliedCoupon } from '@/types/coupon'
@@ -51,12 +51,25 @@ export function CheckoutPage2() {
   const { products } = useAdminProducts()
   const [loading, setLoading] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
+  const [showVerificationLoading, setShowVerificationLoading] = useState(false)
+  const [verificationStage, setVerificationStage] = useState<'verifying' | 'generating' | 'downloading' | 'emailing'>('verifying')
   const [currentRecommendationIndex, setCurrentRecommendationIndex] = useState(0)
   const [couponCode, setCouponCode] = useState('')
   const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null)
   const [couponError, setCouponError] = useState('')
   const [applyingCoupon, setApplyingCoupon] = useState(false)
-  
+
+  // Validation errors state
+  const [validationErrors, setValidationErrors] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    line1: '',
+    city: '',
+    state: '',
+    zipCode: ''
+  })
+
   // State for cart items - will be populated with actual backend prices
   const [cartItems, setCartItems] = useState<CheckoutItem[]>([])
 
@@ -112,7 +125,6 @@ export function CheckoutPage2() {
 
         setCartItems(initialItems)
       } catch (error) {
-        console.error('Error initializing cart with backend prices:', error)
         // Fallback to hardcoded values if backend fetch fails
         const fallbackItems = [
           {
@@ -177,7 +189,7 @@ export function CheckoutPage2() {
       },
       {
         id: 'hepa-filter',
-        name: 'HEPA Filter Replacement',
+        name: 'True HEPA 13 Filter Replacement',
         price: 1999,
         originalPrice: 2499,
         image: '/src/assets/4 layer filter.jpg',
@@ -359,7 +371,6 @@ export function CheckoutPage2() {
         setAppliedCoupon(null)
       }
     } catch (error) {
-      console.error('Error applying coupon:', error)
       setCouponError('Failed to apply coupon. Please try again.')
     } finally {
       setApplyingCoupon(false)
@@ -372,6 +383,63 @@ export function CheckoutPage2() {
     setCouponError('')
   }
 
+  // Validation helper functions
+  const validateEmail = (email: string): string => {
+    if (!email.trim()) {
+      return 'Email is required'
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return 'Please enter a valid email address'
+    }
+    return ''
+  }
+
+  const validatePhone = (phone: string): string => {
+    if (!phone.trim()) {
+      return 'Phone number is required'
+    }
+    // Remove spaces, dashes, and plus signs for validation
+    const cleanPhone = phone.replace(/[\s\-+]/g, '')
+    const phoneRegex = /^[0-9]{10}$/
+    if (!phoneRegex.test(cleanPhone)) {
+      return 'Please enter a valid 10-digit phone number'
+    }
+    return ''
+  }
+
+  const validateName = (name: string): string => {
+    if (!name.trim()) {
+      return 'Name is required'
+    }
+    if (name.trim().length < 2) {
+      return 'Name must be at least 2 characters'
+    }
+    if (/\d/.test(name)) {
+      return 'Name should not contain numbers'
+    }
+    return ''
+  }
+
+  const validateRequired = (value: string, fieldName: string): string => {
+    if (!value.trim()) {
+      return `${fieldName} is required`
+    }
+    return ''
+  }
+
+  const validateZipCode = (zipCode: string): string => {
+    if (!zipCode.trim()) {
+      return 'ZIP code is required'
+    }
+    // Indian PIN code validation (6 digits)
+    const zipRegex = /^[0-9]{6}$/
+    if (!zipRegex.test(zipCode)) {
+      return 'Please enter a valid 6-digit PIN code'
+    }
+    return ''
+  }
+
   const handleInputChange = (field: string, value: string, isAddress = false) => {
     if (isAddress) {
       setCustomerData(prev => ({
@@ -381,35 +449,138 @@ export function CheckoutPage2() {
           [field]: value
         }
       }))
+
+      // Validate address field on change
+      let error = ''
+      if (field === 'line1') {
+        error = validateRequired(value, 'Address Line 1')
+      } else if (field === 'city') {
+        error = validateRequired(value, 'City')
+      } else if (field === 'state') {
+        error = validateRequired(value, 'State')
+      } else if (field === 'zipCode') {
+        error = validateZipCode(value)
+      }
+
+      setValidationErrors(prev => ({
+        ...prev,
+        [field]: error
+      }))
     } else {
       setCustomerData(prev => ({
         ...prev,
         [field]: value
       }))
+
+      // Validate customer field on change
+      let error = ''
+      if (field === 'name') {
+        error = validateName(value)
+      } else if (field === 'email') {
+        error = validateEmail(value)
+      } else if (field === 'phone') {
+        error = validatePhone(value)
+      }
+
+      setValidationErrors(prev => ({
+        ...prev,
+        [field]: error
+      }))
     }
   }
 
-  const validateForm = () => {
+  const validateForm = (): { isValid: boolean; errors: string[] } => {
     const { name, email, phone, address } = customerData
-    return name && email && phone && address.line1 && address.city && address.state && address.zipCode
+    const errors: string[] = []
+    const newValidationErrors = {
+      name: '',
+      email: '',
+      phone: '',
+      line1: '',
+      city: '',
+      state: '',
+      zipCode: ''
+    }
+
+    // Validate name
+    const nameError = validateName(name)
+    if (nameError) {
+      errors.push(nameError)
+      newValidationErrors.name = nameError
+    }
+
+    // Validate email
+    const emailError = validateEmail(email)
+    if (emailError) {
+      errors.push(emailError)
+      newValidationErrors.email = emailError
+    }
+
+    // Validate phone
+    const phoneError = validatePhone(phone)
+    if (phoneError) {
+      errors.push(phoneError)
+      newValidationErrors.phone = phoneError
+    }
+
+    // Validate address line 1
+    const line1Error = validateRequired(address.line1, 'Address Line 1')
+    if (line1Error) {
+      errors.push(line1Error)
+      newValidationErrors.line1 = line1Error
+    }
+
+    // Validate city
+    const cityError = validateRequired(address.city, 'City')
+    if (cityError) {
+      errors.push(cityError)
+      newValidationErrors.city = cityError
+    }
+
+    // Validate state
+    const stateError = validateRequired(address.state, 'State')
+    if (stateError) {
+      errors.push(stateError)
+      newValidationErrors.state = stateError
+    }
+
+    // Validate ZIP code
+    const zipError = validateZipCode(address.zipCode)
+    if (zipError) {
+      errors.push(zipError)
+      newValidationErrors.zipCode = zipError
+    }
+
+    // Update validation errors state
+    setValidationErrors(newValidationErrors)
+
+    return {
+      isValid: errors.length === 0,
+      errors
+    }
   }
 
   const handlePayment = async () => {
-    if (!validateForm()) {
-      alert('Please fill in all required fields')
+    // Validate form and get detailed errors
+    const validation = validateForm()
+
+    if (!validation.isValid) {
+      // Create a detailed error message
+      const errorMessage = `Please fix the following errors:\n\n${validation.errors.map((error, index) => `${index + 1}. ${error}`).join('\n')}`
+      alert(errorMessage)
+      return
+    }
+
+    // Check if cart has items
+    const itemsWithQuantity = cartItems.filter(item => item.quantity > 0)
+    if (itemsWithQuantity.length === 0) {
+      alert('Your cart is empty. Please add at least one item.')
       return
     }
 
     setLoading(true)
-    
-    try {
-      // Create order via backend API
-      // Filter items with quantity > 0
-      const itemsWithQuantity = cartItems.filter(item => item.quantity > 0)
-      if (itemsWithQuantity.length === 0) {
-        throw new Error('No items in cart')
-      }
 
+    try {
       // Prepare cart items for backend
       const requestPayload = {
         cartItems: itemsWithQuantity.map(item => ({
@@ -422,9 +593,6 @@ export function CheckoutPage2() {
         coupon: appliedCoupon
       }
 
-      console.log('Sending payment request:', JSON.stringify(requestPayload, null, 2))
-      console.log(`Cart has ${itemsWithQuantity.length} item(s)`)
-
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/create-order`, {
         method: 'POST',
         headers: {
@@ -433,12 +601,8 @@ export function CheckoutPage2() {
         body: JSON.stringify(requestPayload)
       })
 
-      console.log('Response status:', response.status)
-      console.log('Response headers:', response.headers)
-
       const orderData = await response.json()
-      console.log('Response data:', JSON.stringify(orderData, null, 2))
-      
+
       if (!response.ok || !orderData.success) {
         throw new Error(orderData.error || orderData.message || `Server error: ${response.status}`)
       }
@@ -453,7 +617,11 @@ export function CheckoutPage2() {
         order_id: orderData.razorpay_order.id,
         handler: async function (razorpayResponse: any) {
           try {
-            console.log('Payment successful, verifying signature...')
+            // Small delay to ensure Razorpay modal closes, then show verification loading popup
+            setTimeout(() => {
+              setShowVerificationLoading(true)
+              setVerificationStage('verifying')
+            }, 300)
 
             // Verify payment with backend
             const verifyResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/verify-payment`, {
@@ -471,15 +639,13 @@ export function CheckoutPage2() {
             })
 
             const verifyResult = await verifyResponse.json()
-            console.log('Verification result:', verifyResult)
 
             if (verifyResult.verified && verifyResult.success) {
               // Payment verified successfully
-              console.log('Payment verified successfully!')
 
               // Generate and download invoice from backend
               try {
-                console.log('Starting invoice generation...');
+                setVerificationStage('generating')
                 const now = new Date();
                 const invoiceData = {
                   invoiceNumber: generateInvoiceNumber(orderData.order_id),
@@ -504,8 +670,6 @@ export function CheckoutPage2() {
                   paymentMethod: 'Razorpay'
                 };
 
-                console.log('Requesting invoice PDF from backend...');
-
                 // Call backend to generate PDF
                 const invoiceResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/generate-invoice`, {
                   method: 'POST',
@@ -520,6 +684,7 @@ export function CheckoutPage2() {
                 }
 
                 // Download the PDF
+                setVerificationStage('downloading')
                 const blob = await invoiceResponse.blob();
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
@@ -530,11 +695,9 @@ export function CheckoutPage2() {
                 document.body.removeChild(a);
                 window.URL.revokeObjectURL(url);
 
-                console.log('✅ Invoice downloaded successfully!');
-
                 // Send invoice via email
                 try {
-                  console.log('Sending invoice email...');
+                  setVerificationStage('emailing')
 
                   // Convert blob to base64 for email transmission
                   const reader = new FileReader();
@@ -562,30 +725,25 @@ export function CheckoutPage2() {
                     })
                   });
 
-                  if (emailResponse.ok) {
-                    console.log('✅ Invoice email sent successfully!');
-                  } else {
-                    console.warn('⚠️ Failed to send invoice email, but payment was successful');
-                  }
+                  // Email sent or failed silently - don't block success flow
                 } catch (emailError) {
-                  console.error('❌ Error sending invoice email:', emailError);
                   // Don't block success flow if email fails
                 }
               } catch (invoiceError) {
-                console.error('❌ Error generating invoice:', invoiceError);
-                console.error('Invoice error details:', invoiceError);
-                alert('Invoice generation failed, but payment was successful. Error: ' + (invoiceError as Error).message);
+                alert('Invoice generation failed, but payment was successful. Please contact support for your invoice.');
                 // Don't block success flow if invoice fails
               }
 
+              // Hide verification loading and show success
+              setShowVerificationLoading(false)
               setShowConfirmation(true)
             } else {
               // Verification failed
-              console.error('Payment verification failed:', verifyResult)
+              setShowVerificationLoading(false)
               alert('Payment verification failed. Please contact support with your payment ID: ' + razorpayResponse.razorpay_payment_id)
             }
           } catch (error) {
-            console.error('Error verifying payment:', error)
+            setShowVerificationLoading(false)
             alert('Failed to verify payment. Please contact support with your payment ID: ' + razorpayResponse.razorpay_payment_id)
           } finally {
             setLoading(false)
@@ -602,8 +760,6 @@ export function CheckoutPage2() {
         modal: {
           ondismiss: async function() {
             // Handle payment cancellation/failure
-            console.log('Payment modal dismissed')
-
             try {
               // Notify backend about payment failure
               await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/payment-failed`, {
@@ -618,7 +774,7 @@ export function CheckoutPage2() {
                 })
               })
             } catch (error) {
-              console.error('Error logging payment failure:', error)
+              // Silent failure - payment was cancelled anyway
             }
 
             setLoading(false)
@@ -634,7 +790,6 @@ export function CheckoutPage2() {
       razorpay.open()
 
     } catch (error) {
-      console.error('Payment error:', error)
       alert('Payment failed. Please try again.')
       setLoading(false)
     }
@@ -760,9 +915,16 @@ export function CheckoutPage2() {
                     type="text"
                     value={customerData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                      validationErrors.name
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-green-500'
+                    }`}
                     placeholder="Enter your full name"
                   />
+                  {validationErrors.name && (
+                    <p className="mt-1 text-sm text-red-600">{validationErrors.name}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -772,9 +934,16 @@ export function CheckoutPage2() {
                     type="email"
                     value={customerData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                      validationErrors.email
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-green-500'
+                    }`}
                     placeholder="Enter your email"
                   />
+                  {validationErrors.email && (
+                    <p className="mt-1 text-sm text-red-600">{validationErrors.email}</p>
+                  )}
                 </div>
                 <div className="sm:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -784,9 +953,16 @@ export function CheckoutPage2() {
                     type="tel"
                     value={customerData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                      validationErrors.phone
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-green-500'
+                    }`}
                     placeholder="Enter your phone number"
                   />
+                  {validationErrors.phone && (
+                    <p className="mt-1 text-sm text-red-600">{validationErrors.phone}</p>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -808,9 +984,16 @@ export function CheckoutPage2() {
                     type="text"
                     value={customerData.address.line1}
                     onChange={(e) => handleInputChange('line1', e.target.value, true)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                      validationErrors.line1
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-green-500'
+                    }`}
                     placeholder="Street address"
                   />
+                  {validationErrors.line1 && (
+                    <p className="mt-1 text-sm text-red-600">{validationErrors.line1}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -833,9 +1016,16 @@ export function CheckoutPage2() {
                       type="text"
                       value={customerData.address.city}
                       onChange={(e) => handleInputChange('city', e.target.value, true)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                        validationErrors.city
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'border-gray-300 focus:ring-green-500'
+                      }`}
                       placeholder="City"
                     />
+                    {validationErrors.city && (
+                      <p className="mt-1 text-sm text-red-600">{validationErrors.city}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -845,9 +1035,16 @@ export function CheckoutPage2() {
                       type="text"
                       value={customerData.address.state}
                       onChange={(e) => handleInputChange('state', e.target.value, true)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                        validationErrors.state
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'border-gray-300 focus:ring-green-500'
+                      }`}
                       placeholder="State"
                     />
+                    {validationErrors.state && (
+                      <p className="mt-1 text-sm text-red-600">{validationErrors.state}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -857,9 +1054,16 @@ export function CheckoutPage2() {
                       type="text"
                       value={customerData.address.zipCode}
                       onChange={(e) => handleInputChange('zipCode', e.target.value, true)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-transparent ${
+                        validationErrors.zipCode
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'border-gray-300 focus:ring-green-500'
+                      }`}
                       placeholder="ZIP"
                     />
+                    {validationErrors.zipCode && (
+                      <p className="mt-1 text-sm text-red-600">{validationErrors.zipCode}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1000,8 +1204,8 @@ export function CheckoutPage2() {
               {/* Proceed Button */}
               <button
                 onClick={handlePayment}
-                disabled={loading || !validateForm()}
-                className="w-full bg-brand-pastel-green hover:bg-green-800 text-brand-grey-green hover:text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg transition-colors text-base sm:text-lg touch-manipulation"
+                disabled={loading}
+                className="w-full bg-brand-pastel-green hover:bg-green-800 text-brand-grey-green hover:text-white disabled:bg-gray-400 disabled:cursor-not-allowed font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg transition-colors text-base sm:text-lg touch-manipulation"
               >
                 {loading ? 'PROCESSING...' : 'PROCEED TO CHECKOUT'}
               </button>
@@ -1029,6 +1233,76 @@ export function CheckoutPage2() {
           </div>
         </div>
       </div>
+
+      {/* Verification & Invoice Loading Popup */}
+      <AnimatePresence>
+        {showVerificationLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 flex items-center justify-center p-4"
+            style={{
+              zIndex: 99999,
+              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+              backdropFilter: 'blur(4px)'
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-2xl"
+              style={{ position: 'relative', zIndex: 100000 }}
+            >
+            {/* Animated Spinner */}
+            <div className="relative w-20 h-20 mx-auto mb-6">
+              <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
+              <div className="absolute inset-0 border-4 border-green-600 rounded-full border-t-transparent animate-spin"></div>
+              {/* Inner pulsing circle */}
+              <div className="absolute inset-3 bg-green-100 rounded-full animate-pulse"></div>
+            </div>
+
+            {/* Status Messages */}
+            <div className="space-y-3">
+              <h3 className="text-2xl font-bold text-gray-900">
+                {verificationStage === 'verifying' && 'Verifying Payment...'}
+                {verificationStage === 'generating' && 'Generating Invoice...'}
+                {verificationStage === 'downloading' && 'Downloading Invoice...'}
+                {verificationStage === 'emailing' && 'Sending Email...'}
+              </h3>
+
+              <p className="text-gray-600 text-base leading-relaxed">
+                {verificationStage === 'verifying' && 'Please wait while we verify your payment with the bank. This usually takes a few seconds.'}
+                {verificationStage === 'generating' && 'We are generating your invoice with all order details.'}
+                {verificationStage === 'downloading' && 'Your invoice is being prepared for download. Please do not close this window.'}
+                {verificationStage === 'emailing' && 'Sending invoice to your email address.'}
+              </p>
+
+              {/* Progress indicator */}
+              <div className="pt-4">
+                <div className="flex justify-center items-center space-x-2 text-sm text-gray-500">
+                  <div className={`w-2 h-2 rounded-full ${verificationStage === 'verifying' ? 'bg-green-600 animate-pulse' : 'bg-green-600'}`}></div>
+                  <div className={`w-2 h-2 rounded-full ${verificationStage === 'generating' ? 'bg-green-600 animate-pulse' : verificationStage === 'verifying' ? 'bg-gray-300' : 'bg-green-600'}`}></div>
+                  <div className={`w-2 h-2 rounded-full ${verificationStage === 'downloading' ? 'bg-green-600 animate-pulse' : ['verifying', 'generating'].includes(verificationStage) ? 'bg-gray-300' : 'bg-green-600'}`}></div>
+                  <div className={`w-2 h-2 rounded-full ${verificationStage === 'emailing' ? 'bg-green-600 animate-pulse' : verificationStage !== 'emailing' ? 'bg-gray-300' : 'bg-green-600'}`}></div>
+                </div>
+              </div>
+
+              {/* Important Notice */}
+              <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <p className="text-sm text-yellow-800 font-medium flex items-center justify-center gap-2">
+                  <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                  Please do not close or refresh this page
+                </p>
+              </div>
+            </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Success Confirmation Popup */}
       {showConfirmation && (

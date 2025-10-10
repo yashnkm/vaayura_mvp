@@ -75,7 +75,7 @@ export function ProductClients() {
                 Join the <span className="text-brand-pastel-green">Clean Air Revolution</span>
               </h2>
               <p className="text-brand-dark-grey font-subheading mx-auto" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', maxWidth: 'clamp(20rem, 60vw, 40rem)', padding: 'clamp(0.5rem, 2vw, 1rem)' }}>
-                Leading organizations trust Vaayura for their air purification needs.
+                Leading organizations that trust our group for their electrification needs.
               </p>
             </div>
 

@@ -59,7 +59,7 @@ const productData: Record<string, ProductData> = {
       },
       {
         question: "What filters does the Storm use?",
-        answer: "The Storm uses a 4-layer filtration system: Pre-filter, HEPA H13, Activated Carbon, and UV-C sterilization layer."
+        answer: "The Storm uses a 4-layer filtration system: Pre-filter, True HEPA 13, Activated Carbon, and UV-C sterilization layer."
       },
       {
         question: "How do I schedule cleaning cycles?",

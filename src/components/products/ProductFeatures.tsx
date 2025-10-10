@@ -25,12 +25,12 @@ interface Feature {
 const getFeatures = (currentProduct: string): Feature[] => {
   const filtrationFeature = currentProduct === 'nest' ? {
     image: threeLayerFilterImg,
-    title: "3-Layer True HEPA Filtration",
+    title: "3-Layer True HEPA 13 Filtration",
     description: "Multi-stage filtration system with pre-filter, True HEPA 13, and activated carbon honeycomb capturing 99.97% of particles as small as 0.1 microns.",
     technical: "HEPA 13 Grade • 99.97% Efficiency • 0.1μm Particle Capture"
   } : {
     image: fourLayerFilterImg,
-    title: "4-Layer True HEPA Filtration",
+    title: "4-Layer True HEPA 13 Filtration",
     description: "Multi-stage filtration system with pre-filter, True HEPA 13, anti-bacterial filter, and activated carbon honeycomb capturing 99.97% of particles as small as 0.1 microns.",
     technical: "HEPA 13 Grade • 99.97% Efficiency • 0.1μm Particle Capture"
   };
@@ -44,8 +44,8 @@ const getFeatures = (currentProduct: string): Feature[] => {
       {
         image: intSensorImg,
         title: "Intelligent Auto Mode",
-        description: "Advanced laser particle sensors continuously monitor air quality and automatically adjust fan speed for optimal performance without manual intervention.",
-        technical: "Laser Sensor Technology • Real-time Detection • Auto Speed Control"
+        description: "Advanced monitor air quality and automatically adjust fan speed for optimal performance without manual intervention.",
+        technical: "Real-time Detection • Auto Speed Control • Smart Adjustment"
       },
       {
         image: ambientLightImg,

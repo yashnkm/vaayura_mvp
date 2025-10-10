@@ -197,6 +197,16 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
   return (
     <div className="min-h-screen bg-slate-50 p-6">
       <div className="max-w-4xl mx-auto">
+        <Button
+          variant="ghost"
+          onClick={onClose}
+          className="mb-4 text-brand-grey-green hover:text-brand-grey-green/80"
+        >
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Dashboard
+        </Button>
         <Card className="bg-white border-slate-200">
           <CardHeader>
             <div className="flex justify-between items-center">

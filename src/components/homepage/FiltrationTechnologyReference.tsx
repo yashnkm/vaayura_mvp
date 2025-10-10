@@ -59,7 +59,7 @@ export function FiltrationTechnologyReference() {
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-                <span className="text-white font-montserrat">HEPA-13 - 99.97% efficiency</span>
+                <span className="text-white font-montserrat">True HEPA 13 - 99.97% efficiency</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
@@ -107,22 +107,22 @@ export function FiltrationTechnologyReference() {
                 </div>
               </motion.div>
 
-              {/* HEPA-13 filter */}
+              {/* True HEPA 13 filter */}
               <motion.div
                 initial={{ opacity: 0, rotateY: -20, x: -80 }}
                 whileInView={{ opacity: 1, rotateY: -10, x: 20 }}
                 transition={{ duration: 1, delay: 0.4 }}
                 viewport={{ once: true }}
                 className="absolute"
-                style={{ 
+                style={{
                   transform: 'rotateY(-10deg) translateZ(100px)',
                   transformStyle: 'preserve-3d'
                 }}
               >
                 <div className="relative">
-                  <img 
-                    src={hepaFilter} 
-                    alt="HEPA-13" 
+                  <img
+                    src={hepaFilter}
+                    alt="True HEPA 13"
                     className="w-52 h-68 object-contain drop-shadow-2xl border-2 border-cyan-400/30 bg-white/10"
                     onError={(e) => {
                       console.log('HEPA filter image failed to load:', hepaFilter)
@@ -130,7 +130,7 @@ export function FiltrationTechnologyReference() {
                     }}
                   />
                   <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/70 px-3 py-1 rounded text-white text-sm font-montserrat whitespace-nowrap">
-                    HEPA-13
+                    True HEPA 13
                   </div>
                 </div>
               </motion.div>

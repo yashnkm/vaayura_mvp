@@ -68,30 +68,54 @@ export function BulkOrderPage() {
     setIsSubmitting(true)
 
     try {
-      // Here you would typically send the form data to your backend
-      // For now, we'll simulate an API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // Show success popup
-      setShowSuccessPopup(true)
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        product: '',
-        quantity: 1,
-        fulfillmentTime: '',
-        notes: ''
+      // Submit form to Formsubmit (free service)
+      const response = await fetch('https://formsubmit.co/founder@vaayura.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company || 'Not specified',
+          product: formData.product,
+          quantity: formData.quantity,
+          fulfillmentTime: formData.fulfillmentTime || 'Not specified',
+          notes: formData.notes || 'No additional notes',
+          _replyto: formData.email,
+          _subject: `New Bulk Order Request from ${formData.name}`,
+          _template: 'table',
+          _captcha: 'false'
+        }),
       })
-      
-      // Hide popup after 5 seconds
-      setTimeout(() => setShowSuccessPopup(false), 5000)
-      
+
+      if (response.ok) {
+        // Show success popup
+        setShowSuccessPopup(true)
+
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          product: '',
+          quantity: 1,
+          fulfillmentTime: '',
+          notes: ''
+        })
+
+        // Hide popup after 5 seconds
+        setTimeout(() => setShowSuccessPopup(false), 5000)
+      } else {
+        throw new Error('Form submission failed')
+      }
+
     } catch (error) {
       console.error('Error submitting form:', error)
+      alert('Failed to submit request. Please try again or email us directly at founder@vaayura.com')
     } finally {
       setIsSubmitting(false)
     }
@@ -474,7 +498,7 @@ export function BulkOrderPage() {
                   <div className="space-y-3">
                     <div className="flex items-center text-gray-600">
                       <Mail className="w-4 h-4 mr-3 flex-shrink-0" />
-                      <span className="font-subheading text-sm">info@vaayura.com</span>
+                      <span className="font-subheading text-sm">founder@vaayura.com</span>
                     </div>
                     <div className="flex items-center text-gray-600">
                       <Phone className="w-4 h-4 mr-3 flex-shrink-0" />

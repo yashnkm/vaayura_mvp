@@ -291,14 +291,14 @@ const ProductDetailHeroComponent = memo(({ product }: ProductDetailHeroProps) =>
                 <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
                   <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Sleep Timer</div>
                   <div className="text-green-800 font-sora font-bold text-sm">
-                    {product.specifications?.sleep_timer || product.specifications?.['Sleep Timer'] || '2,4,6 hours'}
+                    {product.specifications?.sleep_timer || product.specifications?.['Sleep Timer'] || '2,4,8 hours'}
                   </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg px-2 sm:px-3 md:px-4 py-3 text-center shadow-md min-w-0">
-                  <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Filter</div>
+                  <div className="text-gray-600 text-xs font-montserrat font-medium mb-1">Filtration</div>
                   <div className="text-green-800 font-sora font-bold text-sm">
                     {product.specifications?.filter || product.specifications?.Filter ||
-                     (product.name.toLowerCase().includes('nest') ? '3 layer filter' : '4 layer filter')}
+                     (product.name.toLowerCase().includes('nest') ? '3 stage filtration' : '4 stage filtration')}
                   </div>
                 </div>
               </div>

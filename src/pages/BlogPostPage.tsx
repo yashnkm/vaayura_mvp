@@ -119,7 +119,7 @@ const blogPosts = [
             
             <div class="solution-item">
               <h4>4. Invest in Quality Air Purification</h4>
-              <p>HEPA air purifiers can remove 99.97% of airborne particles as small as 0.1 microns. Choose systems with activated carbon filters for comprehensive protection against both particles and gases.</p>
+              <p>True HEPA 13 filtration air purifiers can remove 99.97% of airborne particles as small as 0.1 microns. Choose systems with activated carbon filters for comprehensive protection against both particles and gases.</p>
             </div>
           </div>
           

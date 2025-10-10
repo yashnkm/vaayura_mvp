@@ -77,22 +77,32 @@ export function CouponManagement() {
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
       <header className="bg-white border-b border-slate-200 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-heading text-brand-grey-green">
-              Coupon Management
-            </h1>
-            <p className="text-brand-dark-grey font-body">
-              Create and manage discount coupons
-            </p>
-          </div>
+        <div className="max-w-7xl mx-auto">
           <Button
-            onClick={handleAddCoupon}
-            className="bg-brand-pastel-green hover:bg-brand-pastel-green/90 text-white"
+            variant="ghost"
+            onClick={() => window.location.href = '/admin'}
+            className="mb-4 text-brand-grey-green hover:text-brand-grey-green/80"
           >
-            <Plus className="w-4 h-4 mr-2" />
-            Add Coupon
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Dashboard
           </Button>
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl font-heading text-brand-grey-green">
+                Coupon Management
+              </h1>
+              <p className="text-brand-dark-grey font-body">
+                Create and manage discount coupons
+              </p>
+            </div>
+            <Button
+              onClick={handleAddCoupon}
+              className="bg-brand-pastel-green hover:bg-brand-pastel-green/90 text-white"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Add Coupon
+            </Button>
+          </div>
         </div>
       </header>
 

@@ -7,7 +7,7 @@ const features = [
   {
     id: 'turn-on-off',
     name: 'Turn On/Off',
-    description: 'Enable smart air purification from anywhere with Vaayura App and come back to pure air even when you\'re away from home!',
+    description: 'Enable smart air purification from anywhere with Vaayura App and come back to pure air!',
     appHighlight: 'power-button'
   },
   {
