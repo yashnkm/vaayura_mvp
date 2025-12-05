@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 
 interface FAQ {
   question: string;
-  answer: string;
+  answer: string | React.ReactNode;
 }
 
 export function FAQ() {
@@ -46,6 +46,48 @@ export function FAQ() {
     {
       question: "Is it safe for children and pets?",
       answer: "Absolutely! Our air purifiers are designed with family safety in mind. They produce no harmful ozone, use child-safe materials, and operate with whisper-quiet technology that won't disturb sleep."
+    },
+    {
+      question: "How do I put my Storm air purifier in pairing mode to connect to Wi-Fi or the app?",
+      answer: "Turn on the air purifier. Once it's powered on, long-press the On/Off button for 5 seconds until you hear a beep. After the beep, the Wi-Fi logo will start blinking, showing that the purifier is now in pairing mode and ready to connect."
+    },
+    {
+      question: "What is the name of the app used to control the Storm air purifier?",
+      answer: (
+        <>
+          The app is called <strong>Smart Life</strong>. You can download it here:
+          <br /><br />
+          <span className="flex flex-col gap-2">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.tuya.smartlife"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#3A6B4E] hover:underline inline-flex items-center gap-1"
+            >
+              📱 Android (Google Play)
+            </a>
+            <a
+              href="https://apps.apple.com/us/app/smartlife-smart-living/id1115101477"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#3A6B4E] hover:underline inline-flex items-center gap-1"
+            >
+              🍎 iPhone (App Store)
+            </a>
+          </span>
+          <br />
+          <strong>How to connect after pairing mode:</strong>
+          <br />
+          <a
+            href="https://youtu.be/l0DanGVIJWE?si=dccf_reGO9nmXE5F"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#3A6B4E] hover:underline inline-flex items-center gap-1"
+          >
+            🎬 Watch our step-by-step video here
+          </a>
+        </>
+      )
     }
   ];
 

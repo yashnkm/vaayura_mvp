@@ -125,7 +125,9 @@ export const Footer = ({
               </motion.a>
 
               <motion.a
-                href="#"
+                href="https://www.youtube.com/@VaayuraAirPurifiers"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white hover:text-white transition-colors duration-200"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2 }}
@@ -261,7 +263,9 @@ export const Footer = ({
               </motion.a>
 
               <motion.a
-                href="#"
+                href="https://www.youtube.com/@VaayuraAirPurifiers"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white hover:text-white transition-colors duration-200"
                 whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.2 }}
@@ -273,7 +277,7 @@ export const Footer = ({
               </motion.a>
             </div>
           </motion.div>
-          
+
           {sections.map((section, sectionIdx) => (
             <motion.div key={sectionIdx} variants={fadeInUp} className="col-span-1">
               <h5 className="font-semibold mb-4 text-lg text-white">{section.title}</h5>
