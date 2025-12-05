@@ -6,6 +6,7 @@ import { ProductDetailHero } from '@/components/product-detail/ProductDetailHero
 import { ProductFeatures } from '@/components/products/ProductFeatures';
 import { ProductDetailSpecifications } from '@/components/product-detail/ProductDetailSpecifications';
 import { ProductShowcaseSection } from '@/components/homepage/ProductShowcaseSection';
+import { ProductVideos } from '@/components/product-detail/ProductVideos';
 import { database } from '@/lib/supabase';
 
 // Simple in-memory cache for product data
@@ -201,6 +202,7 @@ export function ProductDetailPage() {
       <ProductDetailHero product={product} />
       <ProductFeatures />
       <ProductDetailSpecifications product={product} />
+      <ProductVideos productType={getProductFilter(product)} />
       <ProductShowcaseSection productFilter={getProductFilter(product)} />
     </Layout>
   );
